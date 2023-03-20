@@ -14,17 +14,17 @@ public class ChuckNorrisCipherEncoder {
             }
             if(input.equals("encode")) {
                 System.out.println("Input string:");
-                String binaryInput = getBinaryString(scanner.nextLine());
+                input = encodeMessage(scanner.nextLine());
                 System.out.println("Encoded string:");
-                System.out.println(binaryToChuckNorrisCipher(binaryInput));
+                System.out.println(input);
                 System.out.println("");
                 continue;
             }
             if(input.equals("decode")) {
                 System.out.println("Input encoded string:");
-                String encoded = scanner.nextLine();
+                input = decodeMessage(scanner.nextLine());
                 System.out.println("Decoded string:");
-                System.out.println(ChuckNorrisCipherToNormal(encoded)); 
+                System.out.println(input); 
                 System.out.println();
             }
         }
@@ -49,13 +49,14 @@ public class ChuckNorrisCipherEncoder {
         return binaryChar.toString();
     }
 
-    public static String binaryToChuckNorrisCipher(String binaryStr) {
+    public static String encodeMessage(String message) {
+        String binaryMsg = getBinaryString(message);
         StringBuilder encoded = new StringBuilder("");
         char currPointer = '\0';
         char prevPointer = '\0';
-        for (int i = 0; i < binaryStr.length(); i++) {
-            currPointer = binaryStr.charAt(i);
-            prevPointer = (i != 0) ? binaryStr.charAt(i - 1) : '\0';
+        for (int i = 0; i < binaryMsg.length(); i++) {
+            currPointer = binaryMsg.charAt(i);
+            prevPointer = (i != 0) ? binaryMsg.charAt(i - 1) : '\0';
 
             if (currPointer != prevPointer) {
                 encoded.append(" ");
@@ -74,7 +75,7 @@ public class ChuckNorrisCipherEncoder {
         return encoded.deleteCharAt(0).toString();
     }
 
-    public static String ChuckNorrisCipherToNormal(String cipher) {
+    public static String decodeMessage(String cipher) {
         boolean onSeries = false;
         int counter = -1;
 
