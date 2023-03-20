@@ -5,20 +5,57 @@ public class ChuckNorrisCipherEncoder {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Input string:");
-        String input = scanner.nextLine();
-        System.out.println("");
-        System.out.println("The result:");
-        System.out.println(ChuckNorrisCipherToBinary(input));
+        while (true) {
+            System.out.println("Please input operation "
+                    + "(encode/decode/exit):");
+            String input = scanner.nextLine();
+            if(input.equals("exit")) {
+                break;
+            }
+            if(input.equals("encode")) {
+                System.out.println("Input string:");
+                String binaryInput = getBinaryString(scanner.nextLine());
+                System.out.println("Encoded string:");
+                System.out.println(binaryToChuckNorrisCipher(binaryInput));
+                System.out.println("");
+                continue;
+            }
+            if(input.equals("decode")) {
+                System.out.println("Input encoded string:");
+                String encoded = scanner.nextLine();
+                System.out.println("Decoded string:");
+                System.out.println(ChuckNorrisCipherToNormal(encoded)); 
+                System.out.println();
+            }
+        }
+
+    }
+    
+    public static String getBinaryString(String string) {
+        StringBuilder binaryString = new StringBuilder("");
+        for(int i = 0; i < string.length(); i++) {
+            char currChar = string.charAt(i);
+            String binaryChar = getBinaryChar(currChar);
+            binaryString.append(binaryChar);
+        }
+        return binaryString.toString();
+    }
+    
+    public static String getBinaryChar(char ch) {
+        StringBuilder binaryChar = new StringBuilder(Integer.toBinaryString(ch));
+        while(binaryChar.length() != 7) {
+                binaryChar.insert(0, '0');
+        }
+        return binaryChar.toString();
     }
 
-    public static String binaryToChuckNorrisCipher(String binaryChar) {
+    public static String binaryToChuckNorrisCipher(String binaryStr) {
         StringBuilder encoded = new StringBuilder("");
         char currPointer = '\0';
         char prevPointer = '\0';
-        for (int i = 0; i < binaryChar.length(); i++) {
-            currPointer = binaryChar.charAt(i);
-            prevPointer = (i != 0) ? binaryChar.charAt(i - 1) : '\0';
+        for (int i = 0; i < binaryStr.length(); i++) {
+            currPointer = binaryStr.charAt(i);
+            prevPointer = (i != 0) ? binaryStr.charAt(i - 1) : '\0';
 
             if (currPointer != prevPointer) {
                 encoded.append(" ");
@@ -37,7 +74,7 @@ public class ChuckNorrisCipherEncoder {
         return encoded.deleteCharAt(0).toString();
     }
 
-    public static String ChuckNorrisCipherToBinary(String cipher) {
+    public static String ChuckNorrisCipherToNormal(String cipher) {
         boolean onSeries = false;
         int counter = -1;
 
