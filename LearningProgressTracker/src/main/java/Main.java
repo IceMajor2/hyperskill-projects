@@ -1,5 +1,6 @@
+package tracker;
 
-public class LearningProgressTracker {
+public class Main {
 
     public static void main(String[] args) {
         System.out.println("Learning Progress Tracker");
