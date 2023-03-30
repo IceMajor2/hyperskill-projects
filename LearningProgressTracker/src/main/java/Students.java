@@ -19,8 +19,8 @@ public class Students {
     }
 
     public Student get(int id) {
-        for(Student student : students) {
-            if(student.getId() == id) {
+        for (Student student : students) {
+            if (student.getId() == id) {
                 return student;
             }
         }
@@ -28,8 +28,8 @@ public class Students {
     }
 
     public boolean isEmailInDatabase(String email) {
-        for(Student student : students) {
-            if(student.getEmail().equals(email)) {
+        for (Student student : students) {
+            if (student.getEmail().equals(email)) {
                 return true;
             }
         }

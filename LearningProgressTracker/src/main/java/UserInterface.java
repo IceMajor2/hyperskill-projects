@@ -133,7 +133,7 @@ public class UserInterface {
     }
 
     private void addPoints() {
-        String inputRegex = "";
+        String inputRegex = "//d+ //d+ //d+ //d+ //d+";
 
         while (true) {
             String input = scanner.nextLine();

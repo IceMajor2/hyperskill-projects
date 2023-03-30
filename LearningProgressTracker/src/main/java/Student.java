@@ -54,7 +54,7 @@ public class Student {
     public void addPoints(int java, int dsa, int databases, int spring) {
         this.javaPts += java;
         this.dsaPts += dsa;
-        this. databasesPts += databases;
+        this.databasesPts += databases;
         this.springPts += spring;
     }
 
