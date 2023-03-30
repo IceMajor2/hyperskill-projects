@@ -1,6 +1,10 @@
 package tracker;
 
+import java.util.ArrayList;
+
 public class Main {
+
+    public static Students students;
 
     public static void main(String[] args) {
         System.out.println("Learning Progress Tracker");
