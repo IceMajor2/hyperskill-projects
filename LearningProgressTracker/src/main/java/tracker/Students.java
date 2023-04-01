@@ -39,4 +39,8 @@ public class Students {
     public ArrayList<Student> getStudents() {
         return this.students;
     }
+    
+    public boolean contains(Student student) {
+        return this.students.contains(student);
+    }
 }

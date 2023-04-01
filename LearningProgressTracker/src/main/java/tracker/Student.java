@@ -51,6 +51,22 @@ public class Student {
         return false;
     }*/
 
+    public int getDatabasesPts() {
+        return databasesPts;
+    }
+
+    public int getDsaPts() {
+        return dsaPts;
+    }
+
+    public int getSpringPts() {
+        return springPts;
+    }
+
+    public int getJavaPts() {
+        return javaPts;
+    }
+
     public void addPoints(int java, int dsa, int databases, int spring) {
         this.javaPts += java;
         this.dsaPts += dsa;

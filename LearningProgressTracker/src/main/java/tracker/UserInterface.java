@@ -45,11 +45,37 @@ public class UserInterface {
             if ("find".equals(usrCommand)) {
                 System.out.println("Enter an id or 'back' to return");
                 outputStudent();
+                continue;
+            }
+            if("statistics".equals(usrCommand)) {
+                System.out.println("Type the name of a course to see details"
+                        + " or 'back' to quit");
+                printStatistics();
+                continue;
             }
             System.out.println("Error: unknown command!");
         }
     }
 
+    private void printStatistics() {
+        System.out.println("Most popular: ");
+        System.out.println("Least popular: ");
+        System.out.println("Highest activity: ");
+        System.out.println("Lowest activity: ");
+        System.out.println("Easiest course: ");
+        System.out.println("Hardest course: ");
+        
+        System.out.println(courses.get(0).toString());
+        
+        /*(while(true) {
+            String input = scanner.nextLine();
+            if("back".equals(input)) {
+                break;
+            }
+            // if(nazwaKursu == kurs) statystyki kursu; else "Unknown course"
+        }*/
+    }
+    
     private void outputStudent() {
         while (true) {
             String input = scanner.nextLine();
@@ -132,7 +158,7 @@ public class UserInterface {
     }
 
     private void addPoints() {
-        String inputRegex = "//d+ //d+ //d+ //d+ //d+";
+        // String inputRegex = "//d+ //d+ //d+ //d+ //d+";
 
         while (true) {
             String input = scanner.nextLine();
@@ -171,7 +197,35 @@ public class UserInterface {
                 continue;
             }
             student.addPoints(javaPts, dsaPts, databasesPts, springPts);
+            addStudentToCourses(student);
             System.out.println("Points updated.");
+        }
+    }
+    
+    private void addStudentToCourses(Student student) {
+        if(student.getJavaPts() > 0) {
+            Course java = courses.get(Courses.JAVA.ordinal());
+            if(!java.contains(student)) {
+                java.add(student);
+            }
+        }
+        if(student.getDsaPts()> 0) {
+            Course dsa = courses.get(Courses.DSA.ordinal());
+            if(!dsa.contains(student)) {
+                dsa.add(student);
+            }
+        }
+        if(student.getDatabasesPts()> 0) {
+            Course databases = courses.get(Courses.DATABASES.ordinal());
+            if(!databases.contains(student)) {
+                databases.add(student);
+            }
+        }
+        if(student.getSpringPts() > 0) {
+            Course spring = courses.get(Courses.SPRING.ordinal());
+            if(!spring.contains(student)) {
+                spring.add(student);
+            }
         }
     }
 }

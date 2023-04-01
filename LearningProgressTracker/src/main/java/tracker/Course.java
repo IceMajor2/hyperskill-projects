@@ -1,15 +1,60 @@
 package tracker;
 
 public class Course {
-
+    
+    private Students students;
+    private Courses name;
+    
+    public Course(String name) {
+        String lcName = name.toLowerCase();
+        if(lcName.equals("java")) {
+            this.name = Courses.JAVA;
+        } else if(lcName.equals("dsa")) {
+            this.name = Courses.DSA;
+        } else if(lcName.equals("databases")) {
+            this.name = Courses.DATABASES;
+        } else if(lcName.equals("spring")) {
+            this.name = Courses.SPRING;
+        }
+        this.students = new Students();
+    }
+    
+    public int studentsSize() {
+        return students.size();
+    }
+    
+    public boolean contains(Student student) {
+        return this.students.contains(student);
+    }
+    
+    public void add(Student student) {
+        this.students.add(student);
+    }
+    
+    public String toString() {
+        StringBuilder toReturn = new StringBuilder(this.name.toString());
+        toReturn.append("id\tpoints\tcompleted");
+        toReturn.append("\n");
+        for(Student student : students.getStudents()) {
+            toReturn.append(student.getId());
+            toReturn.append("\t");
+            toReturn.append(student.getJavaPts()); // points to change, obv
+            toReturn.append("\n");
+        }
+        return toReturn.toString();
+    }
 }
 
-enum CourseNames { 
+enum Courses { 
     JAVA(600), DSA(400), DATABASES(480), SPRING(550);
     
     private int totalPts;
     
-    CourseNames(int pts) {
+    Courses(int pts) {
         this.totalPts = pts;
+    }
+    
+    public int getTotalPoints() {
+        return this.totalPts;
     }
 }
