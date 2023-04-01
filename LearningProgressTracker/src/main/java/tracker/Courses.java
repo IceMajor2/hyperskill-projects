@@ -24,34 +24,88 @@ public class Courses {
         return this.courses.get(index);
     }
     
-    public Course mostPopular() {
+    public List<Course> mostPopular() {
         courses.sort(new CourseStudentsSizeComparator());
-        return courses.get(courses.size() - 1);
+        List<Course> mostPopular = new ArrayList<>();
+        mostPopular.add(courses.get(courses.size() - 1));
+        for(int i = courses.size() - 2; i >= 0; i--) {
+            Course course = courses.get(i);
+            if(course.studentsSize() != mostPopular.get(0).studentsSize()) {
+                return mostPopular;
+            }
+            mostPopular.add(course);
+        }
+        return mostPopular;
     }
     
-    public Course leastPopular() {
+    public List<Course> leastPopular() {
         courses.sort(new CourseStudentsSizeComparator());
-        return courses.get(0);
+        List<Course> leastPopular = new ArrayList<>();
+        leastPopular.add(courses.get(0));
+        for(int i = 1; i < courses.size(); i++) {
+            Course course = courses.get(i);
+            if(course.studentsSize() != leastPopular.get(0).studentsSize()) {
+                return leastPopular;
+            }
+            leastPopular.add(course);
+        }
+        return leastPopular;
     }
     
-    public Course mostActive() {
+    public List<Course> mostActive() {
         courses.sort(new CourseCompletedTasksComparator());
-        return courses.get(courses.size() - 1);
+        List<Course> mostActive = new ArrayList<>();
+        mostActive.add(courses.get(courses.size() - 1));
+        for(int i = courses.size() - 2; i >= 0; i--) {
+            Course course = courses.get(i);
+            if(course.getTasksCompleted() != mostActive.get(0).getTasksCompleted()) {
+                return mostActive;
+            }
+            mostActive.add(course);
+        }
+        return mostActive;
     }
     
-    public Course leastActive() {
+    public List<Course> leastActive() {
         courses.sort(new CourseCompletedTasksComparator());
-        return courses.get(0);
+        List<Course> leastActive = new ArrayList<>();
+        leastActive.add(courses.get(0));
+        for(int i = 1; i < courses.size(); i++) {
+            Course course = courses.get(i);
+            if(course.getTasksCompleted() != leastActive.get(0).getTasksCompleted()) {
+                return leastActive;
+            }
+            leastActive.add(course);
+        }
+        return leastActive;
     }
     
-    public Course easiest() {
+    public List<Course> easiest() {
         courses.sort(new CourseAvgScoreComparator());
-        return courses.get(courses.size() - 1);
+        List<Course> easiest = new ArrayList<>();
+        easiest.add(courses.get(courses.size() - 1));
+        for(int i = courses.size() - 2; i >= 0; i--) {
+            Course course = courses.get(i);
+            if(course.averageScore() != easiest.get(0).averageScore()) {
+                return easiest;
+            }
+            easiest.add(course);
+        }
+        return easiest;
     }
     
-    public Course hardest() {
+    public List<Course> hardest() {
         courses.sort(new CourseAvgScoreComparator());
-        return courses.get(0);
+        List<Course> hardest = new ArrayList<>();
+        hardest.add(courses.get(0));
+        for(int i = 1; i < courses.size(); i++) {
+            Course course = courses.get(i);
+            if(course.averageScore() != hardest.get(0).averageScore()) {
+                return hardest;
+            }
+            hardest.add(course);
+        }
+        return hardest;
     }
 }
 

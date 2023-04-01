@@ -245,8 +245,8 @@ public class UserInterface {
         incrementCompletedTasks(0, 5, 2, 10);
         addStudentToCourses(students.get(1));
         
-        students.get(2).addPoints(0, 3, 0, 0);
-        incrementCompletedTasks(0, 3, 0, 0);
+        students.get(2).addPoints(9, 3, 0, 0);
+        incrementCompletedTasks(9, 3, 0, 0);
         addStudentToCourses(students.get(2));
         
         students.get(3).addPoints(9, 0, 10, 15);
