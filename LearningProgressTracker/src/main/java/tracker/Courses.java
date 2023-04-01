@@ -43,6 +43,16 @@ public class Courses {
         courses.sort(new CourseCompletedTasksComparator());
         return courses.get(0);
     }
+    
+    public Course easiest() {
+        courses.sort(new CourseAvgScoreComparator());
+        return courses.get(courses.size() - 1);
+    }
+    
+    public Course hardest() {
+        courses.sort(new CourseAvgScoreComparator());
+        return courses.get(0);
+    }
 }
 
 class CourseStudentsSizeComparator implements Comparator<Course> {
@@ -59,5 +69,13 @@ class CourseCompletedTasksComparator implements Comparator<Course> {
     public int compare(Course c1, Course c2) {
         return Integer.valueOf(c1.getTasksCompleted())
                 .compareTo(c2.getTasksCompleted());
+    }
+}
+
+class CourseAvgScoreComparator implements Comparator<Course> {
+    
+    @Override
+    public int compare(Course c1, Course c2) {
+        return Double.valueOf(c1.averageScore()).compareTo(c2.averageScore());
     }
 }

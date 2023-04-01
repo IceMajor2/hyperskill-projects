@@ -5,6 +5,7 @@ public class Course {
     private Students students;
     private CourseType name;
     private int tasksCompleted;
+    private int totalPointsGotByStudents;
 
     public Course(String name) {
         String lcName = name.toLowerCase();
@@ -19,18 +20,24 @@ public class Course {
         }
         this.students = new Students();
         this.tasksCompleted = 0;
+        this.totalPointsGotByStudents = 0;
     }
 
     public int studentsSize() {
         return students.size();
     }
     
-    public void completeTask() {
+    public void completeTask(int points) {
+        this.totalPointsGotByStudents += points;
         this.tasksCompleted++;
     }
 
     public int getTasksCompleted() {
         return tasksCompleted;
+    }
+    
+    public double averageScore() {
+        return 1.0 * this.totalPointsGotByStudents / this.tasksCompleted;
     }
 
     public boolean contains(Student student) {

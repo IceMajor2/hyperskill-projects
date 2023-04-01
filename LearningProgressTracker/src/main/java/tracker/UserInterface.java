@@ -63,8 +63,8 @@ public class UserInterface {
         System.out.println("Least popular: " + courses.leastPopular());
         System.out.println("Highest activity: " + courses.mostActive());
         System.out.println("Lowest activity: " + courses.leastActive());
-        System.out.println("Easiest course: ");
-        System.out.println("Hardest course: ");
+        System.out.println("Easiest course: " + courses.easiest());
+        System.out.println("Hardest course: " + courses.hardest());
     }
     
     private void outputStudent() {
@@ -223,16 +223,16 @@ public class UserInterface {
     
     private void incrementCompletedTasks(int javaPts, int dsaPts, int databasesPts, int springPts) {
         if(javaPts > 0) {
-            courses.get(0).completeTask();
+            courses.get(0).completeTask(javaPts);
         }
         if(dsaPts > 0) {
-            courses.get(1).completeTask();
+            courses.get(1).completeTask(dsaPts);
         }
         if(databasesPts > 0) {
-            courses.get(2).completeTask();
+            courses.get(2).completeTask(databasesPts);
         }
         if(springPts > 0) {
-            courses.get(3).completeTask();
+            courses.get(3).completeTask(springPts);
         }
     }
     

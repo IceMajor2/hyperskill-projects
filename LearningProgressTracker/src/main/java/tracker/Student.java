@@ -34,7 +34,7 @@ public class Student {
         return this.email;
     }
 
-    /*public boolean equals(Object o) {
+    public boolean equals(Object o) {
         if(o == this) {
             return true;
         }
@@ -49,7 +49,7 @@ public class Student {
             return true;
         }
         return false;
-    }*/
+    }
 
     public int getDatabasesPts() {
         return databasesPts;
