@@ -1,12 +1,9 @@
 package tracker;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class Main {
 
-    public static Students students;
-    public static List<Course> courses = new ArrayList<>();
+    public static Students students = new Students();
+    public static Courses courses = new Courses();
 
     public static void main(String[] args) {
         System.out.println("Learning Progress Tracker");

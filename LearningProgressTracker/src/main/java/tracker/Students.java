@@ -1,10 +1,11 @@
 package tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Students {
 
-    private ArrayList<Student> students;
+    private List<Student> students;
 
     public Students() {
         this.students = new ArrayList<>();
@@ -36,7 +37,7 @@ public class Students {
         return false;
     }
 
-    public ArrayList<Student> getStudents() {
+    public List<Student> getStudents() {
         return this.students;
     }
     

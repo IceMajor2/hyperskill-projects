@@ -10,7 +10,6 @@ public class UserInterface {
 
     public UserInterface() {
         this.scanner = new Scanner(System.in);
-        students = new Students();
     }
 
     public void run() {
@@ -59,10 +58,9 @@ public class UserInterface {
     }
 
     private void printStatistics() {
-        courses.sort(new CourseStudentsSizeComparator());
         System.out.println("");
-        System.out.println("Most popular: " + courses.get(courses.size() - 1));
-        System.out.println("Least popular: " + courses.get(0));
+        System.out.println("Most popular: " + courses.mostPopular());
+        System.out.println("Least popular: " + courses.leastPopular());
         System.out.println("Highest activity: ");
         System.out.println("Lowest activity: ");
         System.out.println("Easiest course: ");
@@ -197,25 +195,25 @@ public class UserInterface {
     
     private void addStudentToCourses(Student student) {
         if(student.getJavaPts() > 0) {
-            Course java = courses.get(Courses.JAVA.ordinal());
+            Course java = courses.get(CourseType.JAVA.ordinal());
             if(!java.contains(student)) {
                 java.add(student);
             }
         }
         if(student.getDsaPts()> 0) {
-            Course dsa = courses.get(Courses.DSA.ordinal());
+            Course dsa = courses.get(CourseType.DSA.ordinal());
             if(!dsa.contains(student)) {
                 dsa.add(student);
             }
         }
         if(student.getDatabasesPts()> 0) {
-            Course databases = courses.get(Courses.DATABASES.ordinal());
+            Course databases = courses.get(CourseType.DATABASES.ordinal());
             if(!databases.contains(student)) {
                 databases.add(student);
             }
         }
         if(student.getSpringPts() > 0) {
-            Course spring = courses.get(Courses.SPRING.ordinal());
+            Course spring = courses.get(CourseType.SPRING.ordinal());
             if(!spring.contains(student)) {
                 spring.add(student);
             }
@@ -231,6 +229,8 @@ public class UserInterface {
         students.get(2).addPoints(0, 3, 0, 0);
         addStudentToCourses(students.get(2));
         students.get(3).addPoints(9, 0, 10, 15);
+        addStudentToCourses(students.get(3));
+        students.get(3).addPoints(0, 12, 0, 0);
         addStudentToCourses(students.get(3));
     }
 }

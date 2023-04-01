@@ -5,18 +5,18 @@ import java.util.Comparator;
 public class Course {
 
     private Students students;
-    private Courses name;
+    private CourseType name;
 
     public Course(String name) {
         String lcName = name.toLowerCase();
         if (lcName.equals("java")) {
-            this.name = Courses.JAVA;
+            this.name = CourseType.JAVA;
         } else if (lcName.equals("dsa")) {
-            this.name = Courses.DSA;
+            this.name = CourseType.DSA;
         } else if (lcName.equals("databases")) {
-            this.name = Courses.DATABASES;
+            this.name = CourseType.DATABASES;
         } else if (lcName.equals("spring")) {
-            this.name = Courses.SPRING;
+            this.name = CourseType.SPRING;
         }
         this.students = new Students();
     }
@@ -59,12 +59,12 @@ class CourseStudentsSizeComparator implements Comparator<Course> {
     }
 }
 
-enum Courses {
+enum CourseType {
     JAVA(600), DSA(400), DATABASES(480), SPRING(550);
 
     private int totalPts;
 
-    Courses(int pts) {
+    CourseType(int pts) {
         this.totalPts = pts;
     }
 
