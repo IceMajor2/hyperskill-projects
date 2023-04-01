@@ -14,6 +14,7 @@ public class UserInterface {
     }
 
     public void run() {
+        createTestDB();
         while (true) {
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
@@ -58,22 +59,14 @@ public class UserInterface {
     }
 
     private void printStatistics() {
-        System.out.println("Most popular: ");
-        System.out.println("Least popular: ");
+        courses.sort(new CourseStudentsSizeComparator());
+        System.out.println("");
+        System.out.println("Most popular: " + courses.get(courses.size() - 1));
+        System.out.println("Least popular: " + courses.get(0));
         System.out.println("Highest activity: ");
         System.out.println("Lowest activity: ");
         System.out.println("Easiest course: ");
         System.out.println("Hardest course: ");
-        
-        System.out.println(courses.get(0).toString());
-        
-        /*(while(true) {
-            String input = scanner.nextLine();
-            if("back".equals(input)) {
-                break;
-            }
-            // if(nazwaKursu == kurs) statystyki kursu; else "Unknown course"
-        }*/
     }
     
     private void outputStudent() {
@@ -150,7 +143,7 @@ public class UserInterface {
                 continue;
             }
             Student student = new Student(firstName, lastName.toString(), email);
-            Main.students.add(student);
+            students.add(student);
             System.out.println("The student has been added.");
             counter++;
         }
@@ -227,5 +220,17 @@ public class UserInterface {
                 spring.add(student);
             }
         }
+    }
+    
+    private void createTestDB() {
+        students.add(new Student("John", "White", "jw@ny.com"));
+        students.add(new Student("Winston", "Smith", "orwell1984@gmail.com"));
+        students.add(new Student("George", "Carlin", "gc@ca.com"));
+        students.get(1).addPoints(0, 5, 2, 10);
+        addStudentToCourses(students.get(1));
+        students.get(2).addPoints(0, 3, 0, 0);
+        addStudentToCourses(students.get(2));
+        students.get(3).addPoints(9, 0, 10, 15);
+        addStudentToCourses(students.get(3));
     }
 }
