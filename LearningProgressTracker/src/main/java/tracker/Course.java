@@ -1,11 +1,10 @@
 package tracker;
 
-import java.util.Comparator;
-
 public class Course {
 
     private Students students;
     private CourseType name;
+    private int tasksCompleted;
 
     public Course(String name) {
         String lcName = name.toLowerCase();
@@ -19,10 +18,19 @@ public class Course {
             this.name = CourseType.SPRING;
         }
         this.students = new Students();
+        this.tasksCompleted = 0;
     }
 
     public int studentsSize() {
         return students.size();
+    }
+    
+    public void completeTask() {
+        this.tasksCompleted++;
+    }
+
+    public int getTasksCompleted() {
+        return tasksCompleted;
     }
 
     public boolean contains(Student student) {
@@ -31,6 +39,10 @@ public class Course {
 
     public void add(Student student) {
         this.students.add(student);
+    }
+
+    public CourseType getName() {
+        return name;
     }
 
     public String listStudents() {
@@ -48,14 +60,6 @@ public class Course {
 
     public String toString() {
         return this.name.toString();
-    }
-}
-
-class CourseStudentsSizeComparator implements Comparator<Course> {
-
-    @Override
-    public int compare(Course c1, Course c2) {
-        return Integer.valueOf(c1.studentsSize()).compareTo(c2.studentsSize());
     }
 }
 

@@ -61,8 +61,8 @@ public class UserInterface {
         System.out.println("");
         System.out.println("Most popular: " + courses.mostPopular());
         System.out.println("Least popular: " + courses.leastPopular());
-        System.out.println("Highest activity: ");
-        System.out.println("Lowest activity: ");
+        System.out.println("Highest activity: " + courses.mostActive());
+        System.out.println("Lowest activity: " + courses.leastActive());
         System.out.println("Easiest course: ");
         System.out.println("Hardest course: ");
     }
@@ -189,6 +189,7 @@ public class UserInterface {
             }
             student.addPoints(javaPts, dsaPts, databasesPts, springPts);
             addStudentToCourses(student);
+            incrementCompletedTasks(javaPts, dsaPts, databasesPts, springPts);
             System.out.println("Points updated.");
         }
     }
@@ -220,17 +221,45 @@ public class UserInterface {
         }
     }
     
+    private void incrementCompletedTasks(int javaPts, int dsaPts, int databasesPts, int springPts) {
+        if(javaPts > 0) {
+            courses.get(0).completeTask();
+        }
+        if(dsaPts > 0) {
+            courses.get(1).completeTask();
+        }
+        if(databasesPts > 0) {
+            courses.get(2).completeTask();
+        }
+        if(springPts > 0) {
+            courses.get(3).completeTask();
+        }
+    }
+    
     private void createTestDB() {
         students.add(new Student("John", "White", "jw@ny.com"));
         students.add(new Student("Winston", "Smith", "orwell1984@gmail.com"));
         students.add(new Student("George", "Carlin", "gc@ca.com"));
+        
         students.get(1).addPoints(0, 5, 2, 10);
+        incrementCompletedTasks(0, 5, 2, 10);
         addStudentToCourses(students.get(1));
+        
         students.get(2).addPoints(0, 3, 0, 0);
+        incrementCompletedTasks(0, 3, 0, 0);
         addStudentToCourses(students.get(2));
+        
         students.get(3).addPoints(9, 0, 10, 15);
+        incrementCompletedTasks(9, 0, 10, 15);
         addStudentToCourses(students.get(3));
+        
         students.get(3).addPoints(0, 12, 0, 0);
+        incrementCompletedTasks(0, 12, 0, 0);
         addStudentToCourses(students.get(3));
+        
+        students.get(1).addPoints(0, 0, 5, 0);
+        incrementCompletedTasks(0, 0, 5, 0);
+        students.get(1).addPoints(0, 0, 3, 0);
+        incrementCompletedTasks(0, 0, 3, 0);
     }
 }
