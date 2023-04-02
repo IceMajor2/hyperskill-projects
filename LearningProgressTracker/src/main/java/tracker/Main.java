@@ -7,11 +7,10 @@ public class Main {
     
     /*  TODO:
             completion in percents
-            exclude opposite categories
-            print "n/a" if data is null or not retrievable
+            reverse printStatistics so that it outputs in the ordinal order
     */
 
-    public static void main(String[] args) {   
+    public static void main(String[] args) {    
         System.out.println("Learning Progress Tracker");
         initializeCourses();
         UserInterface UI = new UserInterface();

@@ -53,6 +53,9 @@ public class Courses {
             }
             leastPopular.add(course);
         }
+        if(leastPopular.equals(courses)) {
+            return null;
+        }
         return leastPopular;
     }
     
@@ -80,6 +83,9 @@ public class Courses {
                 return leastActive;
             }
             leastActive.add(course);
+        }
+        if(leastActive.equals(courses)) {
+            return null;
         }
         return leastActive;
     }
@@ -120,6 +126,9 @@ public class Courses {
                 return hardest;
             }
             hardest.add(course);
+        }
+        if(hardest.equals(null) || hardest.equals(easiest())) {
+            return null;
         }
         return hardest;
     }

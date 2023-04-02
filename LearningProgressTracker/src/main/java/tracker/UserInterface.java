@@ -14,7 +14,7 @@ public class UserInterface {
     }
 
     public void run() {
-        createTestDB();
+        //createTestDB();
         while (true) {
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
@@ -91,7 +91,7 @@ public class UserInterface {
         System.out.println(course);
         System.out.println("id\tpoints\tcompleted");
         List<Student> leaders = courses.get(course.ordinal()).leaders();
-        for(int i = leaders.size() - 1; i >= 0; i--) {
+        for (int i = leaders.size() - 1; i >= 0; i--) {
             Student student = leaders.get(i);
             System.out.println(student.getId() + "\t"
                     + student.getPoints()[course.ordinal()] + "\t"
@@ -100,25 +100,46 @@ public class UserInterface {
     }
 
     private void printStatistics() {
+        if (students.size() == 0) {
+            System.out.println("Most popular: n/a\n"
+                    + "Least popular: n/a\n"
+                    + "Highest activity: n/a\n"
+                    + "Lowest activity: n/a\n"
+                    + "Easiest course: n/a\n"
+                    + "Hardest course: n/a");
+            return;
+        }
         var mostPopular = courses.mostPopular();
         var leastPopular = courses.leastPopular();
         var mostActive = courses.mostActive();
         var leastActive = courses.leastActive();
         var easiest = courses.easiest();
         var hardest = courses.hardest();
-        
+
         System.out.println("Most popular: " + new StringBuilder(mostPopular.toString()
-        .substring(1, mostPopular.toString().length() - 1)));
-        System.out.println("Least popular: " + new StringBuilder(leastPopular.toString()
-        .substring(1, leastPopular.toString().length() - 1)));
+                .substring(1, mostPopular.toString().length() - 1)));
+        if (leastPopular != null) {
+            System.out.println("Least popular: " + new StringBuilder(leastPopular.toString()
+                    .substring(1, leastPopular.toString().length() - 1)));
+        } else {
+            System.out.println("Least popular: n/a");
+        }
         System.out.println("Highest activity: " + new StringBuilder(mostActive.toString()
-        .substring(1, mostActive.toString().length() - 1)));
-        System.out.println("Lowest activity: " + new StringBuilder(leastActive.toString()
-        .substring(1, leastActive.toString().length() - 1)));
+                .substring(1, mostActive.toString().length() - 1)));
+        if (leastActive != null) {
+            System.out.println("Lowest activity: " + new StringBuilder(leastActive.toString()
+                    .substring(1, leastActive.toString().length() - 1)));
+        } else {
+            System.out.println("Least active: n/a");
+        }
         System.out.println("Easiest course: " + new StringBuilder(easiest.toString()
-        .substring(1, easiest.toString().length() - 1)));
-        System.out.println("Hardest course: " + new StringBuilder(hardest.toString()
-        .substring(1, hardest.toString().length() - 1)));
+                .substring(1, easiest.toString().length() - 1)));
+        if (hardest != null) {
+            System.out.println("Hardest course: " + new StringBuilder(hardest.toString()
+                    .substring(1, hardest.toString().length() - 1)));
+        } else {
+            System.out.println("Hardest course: n/a");
+        }
     }
 
     private void outputStudent() {
@@ -249,25 +270,25 @@ public class UserInterface {
     }
 
     private void addStudentToCourses(Student student) {
-        if (student.getJavaPts() > 0) {
+        if (student.getPoints()[CourseType.JAVA.ordinal()] > 0) {
             Course java = courses.get(CourseType.JAVA.ordinal());
             if (!java.contains(student)) {
                 java.add(student);
             }
         }
-        if (student.getDsaPts() > 0) {
+        if (student.getPoints()[CourseType.DSA.ordinal()] > 0) {
             Course dsa = courses.get(CourseType.DSA.ordinal());
             if (!dsa.contains(student)) {
                 dsa.add(student);
             }
         }
-        if (student.getDatabasesPts() > 0) {
+        if (student.getPoints()[CourseType.DATABASES.ordinal()] > 0) {
             Course databases = courses.get(CourseType.DATABASES.ordinal());
             if (!databases.contains(student)) {
                 databases.add(student);
             }
         }
-        if (student.getSpringPts() > 0) {
+        if (student.getPoints()[CourseType.SPRING.ordinal()] > 0) {
             Course spring = courses.get(CourseType.SPRING.ordinal());
             if (!spring.contains(student)) {
                 spring.add(student);
@@ -295,25 +316,25 @@ public class UserInterface {
         students.add(new Student("Winston", "Smith", "orwell1984@gmail.com"));
         students.add(new Student("George", "Carlin", "gc@ca.com"));
 
-        students.get(1).addPoints(0, 5, 2, 10);
-        incrementCompletedTasks(0, 5, 2, 10);
+        students.get(1).addPoints(0, 4, 0, 4);
+        incrementCompletedTasks(0, 4, 0, 4);
         addStudentToCourses(students.get(1));
 
-        students.get(2).addPoints(0, 3, 0, 0);
-        incrementCompletedTasks(0, 3, 0, 0);
+        students.get(2).addPoints(4, 4, 4, 0);
+        incrementCompletedTasks(4, 4, 4, 0);
         addStudentToCourses(students.get(2));
 
-        students.get(3).addPoints(0, 0, 10, 15);
-        incrementCompletedTasks(0, 0, 10, 15);
+        students.get(3).addPoints(4, 0, 4, 4);
+        incrementCompletedTasks(4, 0, 4, 4);
         addStudentToCourses(students.get(3));
 
-        students.get(3).addPoints(0, 12, 0, 0);
-        incrementCompletedTasks(0, 12, 0, 0);
+        /*students.get(3).addPoints(7, 0, 0, 0);
+        incrementCompletedTasks(7, 0, 0, 0);
         addStudentToCourses(students.get(3));
 
-        students.get(1).addPoints(0, 0, 5, 0);
-        incrementCompletedTasks(0, 0, 5, 0);
-        students.get(1).addPoints(0, 0, 3, 0);
-        incrementCompletedTasks(0, 0, 3, 0);
+        students.get(1).addPoints(0, 2, 0, 0);
+        incrementCompletedTasks(0, 2, 0, 0);
+        students.get(1).addPoints(0, 1, 0, 7);
+        incrementCompletedTasks(0, 1, 0, 7);*/
     }
 }

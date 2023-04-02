@@ -57,19 +57,6 @@ public class Course {
         return name;
     }
 
-    public String listStudents() {
-        StringBuilder toReturn = new StringBuilder(this.name.toString());
-        toReturn.append("id\tpoints\tcompleted");
-        toReturn.append("\n");
-        for (Student student : students.getStudents()) {
-            toReturn.append(student.getId());
-            toReturn.append("\t");
-            toReturn.append(student.getJavaPts()); // points to change, obv
-            toReturn.append("\n");
-        }
-        return toReturn.toString();
-    }
-
     public String toString() {
         return this.name.toString();
     }

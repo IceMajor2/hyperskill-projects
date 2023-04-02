@@ -46,22 +46,6 @@ public class Student {
         return false;
     }
 
-    public int getDatabasesPts() {
-        return this.points[CourseType.DATABASES.ordinal()];
-    }
-
-    public int getDsaPts() {
-        return this.points[CourseType.DSA.ordinal()];
-    }
-
-    public int getSpringPts() {
-        return this.points[CourseType.SPRING.ordinal()];
-    }
-
-    public int getJavaPts() {
-        return this.points[CourseType.JAVA.ordinal()];
-    }
-
     public int[] getPoints() {
         return points;
     }
@@ -72,11 +56,4 @@ public class Student {
         this.points[CourseType.DATABASES.ordinal()] += databases;
         this.points[CourseType.SPRING.ordinal()] += spring;
     }
-
-    public String toString() {
-        return this.id + " points: " + "Java=" + getJavaPts()
-                + "; DSA=" + getDsaPts() + "; Databases=" + getDatabasesPts()
-                + "; Spring=" + getSpringPts();
-    }
-
 }
