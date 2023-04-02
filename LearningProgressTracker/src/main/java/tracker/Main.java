@@ -5,7 +5,7 @@ public class Main {
     public static Students students = new Students();
     public static Courses courses = new Courses();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {   
         System.out.println("Learning Progress Tracker");
         initializeCourses();
         UserInterface UI = new UserInterface();

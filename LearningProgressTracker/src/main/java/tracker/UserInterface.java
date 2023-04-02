@@ -99,13 +99,25 @@ public class UserInterface {
     }
 
     private void printStatistics() {
-        System.out.println("");
-        System.out.println("Most popular: " + courses.mostPopular());
-        System.out.println("Least popular: " + courses.leastPopular());
-        System.out.println("Highest activity: " + courses.mostActive());
-        System.out.println("Lowest activity: " + courses.leastActive());
-        System.out.println("Easiest course: " + courses.easiest());
-        System.out.println("Hardest course: " + courses.hardest());
+        var mostPopular = courses.mostPopular();
+        var leastPopular = courses.leastPopular();
+        var mostActive = courses.mostActive();
+        var leastActive = courses.leastActive();
+        var easiest = courses.easiest();
+        var hardest = courses.hardest();
+        
+        System.out.println("Most popular: " + new StringBuilder(mostPopular.toString()
+        .substring(1, mostPopular.toString().length() - 1)));
+        System.out.println("Least popular: " + new StringBuilder(leastPopular.toString()
+        .substring(1, leastPopular.toString().length() - 1)));
+        System.out.println("Highest activity: " + new StringBuilder(mostActive.toString()
+        .substring(1, mostActive.toString().length() - 1)));
+        System.out.println("Lowest activity: " + new StringBuilder(leastActive.toString()
+        .substring(1, leastActive.toString().length() - 1)));
+        System.out.println("Easiest course: " + new StringBuilder(easiest.toString()
+        .substring(1, easiest.toString().length() - 1)));
+        System.out.println("Hardest course: " + new StringBuilder(hardest.toString()
+        .substring(1, hardest.toString().length() - 1)));
     }
 
     private void outputStudent() {

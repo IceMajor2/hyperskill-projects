@@ -87,15 +87,23 @@ public class Course {
 }
 
 enum CourseType {
-    JAVA(600), DSA(400), DATABASES(480), SPRING(550);
+    JAVA("Java", 600), DSA("DSA", 400), DATABASES("Databases", 480),
+    SPRING("Spring", 550);
 
+    private String name;
     private int totalPts;
 
-    CourseType(int pts) {
+    CourseType(String name, int pts) {
         this.totalPts = pts;
+        this.name = name;
     }
 
     public int getTotalPoints() {
         return this.totalPts;
+    }
+    
+    @Override
+    public String toString() {
+        return name;
     }
 }
