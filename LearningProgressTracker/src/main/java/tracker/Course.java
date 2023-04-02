@@ -39,6 +39,9 @@ public class Course {
     }
     
     public double averageScore() {
+        if(this.tasksCompleted == 0 || this.totalPointsGotByStudents == 0) {
+            return -1;
+        }
         return 1.0 * this.totalPointsGotByStudents / this.tasksCompleted;
     }
 

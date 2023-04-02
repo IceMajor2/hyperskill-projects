@@ -4,6 +4,12 @@ public class Main {
 
     public static Students students = new Students();
     public static Courses courses = new Courses();
+    
+    /*  TODO:
+            completion in percents
+            exclude opposite categories
+            print "n/a" if data is null or not retrievable
+    */
 
     public static void main(String[] args) {   
         System.out.println("Learning Progress Tracker");

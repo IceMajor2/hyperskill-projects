@@ -87,8 +87,14 @@ public class Courses {
     public List<Course> easiest() {
         courses.sort(new CourseAvgScoreComparator());
         List<Course> easiest = new ArrayList<>();
-        easiest.add(courses.get(courses.size() - 1));
-        for(int i = courses.size() - 2; i >= 0; i--) {
+        
+        int index = courses.size() - 1;
+        while(courses.get(index).averageScore() == -1) {
+            index--;
+        }
+        
+        easiest.add(courses.get(index));
+        for(int i = index - 1; i >= 0; i--) {
             Course course = courses.get(i);
             if(course.averageScore() != easiest.get(0).averageScore()) {
                 return easiest;
@@ -101,8 +107,14 @@ public class Courses {
     public List<Course> hardest() {
         courses.sort(new CourseAvgScoreComparator());
         List<Course> hardest = new ArrayList<>();
-        hardest.add(courses.get(0));
-        for(int i = 1; i < courses.size(); i++) {
+        
+        int index = 0;
+        while(courses.get(index).averageScore() == -1) {
+            index++;
+        }
+        
+        hardest.add(courses.get(index));
+        for(int i = index + 1; i < courses.size(); i++) {
             Course course = courses.get(i);
             if(course.averageScore() != hardest.get(0).averageScore()) {
                 return hardest;
