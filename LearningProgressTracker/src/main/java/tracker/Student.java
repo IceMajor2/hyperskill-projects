@@ -1,5 +1,7 @@
 package tracker;
 
+import static tracker.Main.*;
+
 public class Student {
 
     public static int studentCount = 0;
@@ -7,21 +9,14 @@ public class Student {
     private String lastName;
     private String email;
     private int id;
-    private int javaPts;
-    private int dsaPts;
-    private int databasesPts;
-    private int springPts;
+    private int[] points;
 
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.id = studentCount + 1;
-
-        this.javaPts = 0;
-        this.databasesPts = 0;
-        this.dsaPts = 0;
-        this.springPts = 0;
+        this.points = new int[courses.size()];
 
         studentCount++;
     }
@@ -52,31 +47,36 @@ public class Student {
     }
 
     public int getDatabasesPts() {
-        return databasesPts;
+        return this.points[CourseType.DATABASES.ordinal()];
     }
 
     public int getDsaPts() {
-        return dsaPts;
+        return this.points[CourseType.DSA.ordinal()];
     }
 
     public int getSpringPts() {
-        return springPts;
+        return this.points[CourseType.SPRING.ordinal()];
     }
 
     public int getJavaPts() {
-        return javaPts;
+        return this.points[CourseType.JAVA.ordinal()];
+    }
+
+    public int[] getPoints() {
+        return points;
     }
 
     public void addPoints(int java, int dsa, int databases, int spring) {
-        this.javaPts += java;
-        this.dsaPts += dsa;
-        this.databasesPts += databases;
-        this.springPts += spring;
+        this.points[CourseType.JAVA.ordinal()] += java;
+        this.points[CourseType.DSA.ordinal()] += dsa;
+        this.points[CourseType.DATABASES.ordinal()] += databases;
+        this.points[CourseType.SPRING.ordinal()] += spring;
     }
 
     public String toString() {
-        return this.id + " points: " + "Java=" + javaPts + "; DSA=" + dsaPts + "; Databases=" + databasesPts
-                + "; Spring=" + springPts;
+        return this.id + " points: " + "Java=" + getJavaPts()
+                + "; DSA=" + getDsaPts() + "; Databases=" + getDatabasesPts()
+                + "; Spring=" + getSpringPts();
     }
 
 }

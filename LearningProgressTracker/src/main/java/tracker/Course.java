@@ -1,5 +1,7 @@
 package tracker;
 
+import java.util.List;
+
 public class Course {
 
     private Students students;
@@ -67,6 +69,20 @@ public class Course {
 
     public String toString() {
         return this.name.toString();
+    }
+    
+    public List<Student> leaders() {
+        students.getStudents().sort((s1, s2) -> {
+            int s1CoursePoints = s1.getPoints()[this.name.ordinal()];
+            int s2CoursePoints = s2.getPoints()[this.name.ordinal()];
+            if(Integer.valueOf(s1CoursePoints).compareTo(s2CoursePoints) == 0) {
+                int s1Id = s1.getId();
+                int s2Id = s2.getId();
+                return Integer.valueOf(s2Id).compareTo(s1Id); // reversed
+            } 
+            return Integer.valueOf(s1CoursePoints).compareTo(s2CoursePoints);
+        });
+        return students.getStudents();
     }
 }
 

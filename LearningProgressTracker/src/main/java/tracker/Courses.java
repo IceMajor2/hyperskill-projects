@@ -24,6 +24,10 @@ public class Courses {
         return this.courses.get(index);
     }
     
+    public int size() {
+        return this.courses.size();
+    }
+    
     public List<Course> mostPopular() {
         courses.sort(new CourseStudentsSizeComparator());
         List<Course> mostPopular = new ArrayList<>();

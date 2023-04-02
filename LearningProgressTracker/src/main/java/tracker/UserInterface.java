@@ -1,6 +1,7 @@
 package tracker;
 
 import java.util.Scanner;
+import java.util.List;
 
 import static tracker.Main.*;
 
@@ -47,13 +48,53 @@ public class UserInterface {
                 outputStudent();
                 continue;
             }
-            if("statistics".equals(usrCommand)) {
+            if ("statistics".equals(usrCommand)) {
                 System.out.println("Type the name of a course to see details"
                         + " or 'back' to quit");
-                printStatistics();
+                statistics();
                 continue;
             }
             System.out.println("Error: unknown command!");
+        }
+    }
+
+    private void statistics() {
+        printStatistics();
+        while (true) {
+            String usrCommand = scanner.nextLine();
+            if ("back".equals(usrCommand)) {
+                break;
+            }
+            if ("java".equals(usrCommand)) {
+                printCourseDetails(usrCommand);
+                continue;
+            }
+            if ("dsa".equals(usrCommand)) {
+                printCourseDetails(usrCommand);
+                continue;
+            }
+            if ("databases".equals(usrCommand)) {
+                printCourseDetails(usrCommand);
+                continue;
+            }
+            if ("spring".equals(usrCommand)) {
+                printCourseDetails(usrCommand);
+                continue;
+            }
+        }
+
+    }
+
+    private void printCourseDetails(String courseName) {
+        CourseType course = CourseType.valueOf(courseName.toUpperCase());
+        System.out.println(course);
+        System.out.println("id\tpoints\tcompleted");
+        List<Student> leaders = courses.get(course.ordinal()).leaders();
+        for(int i = leaders.size() - 1; i >= 0; i--) {
+            Student student = leaders.get(i);
+            System.out.println(student.getId() + "\t"
+                    + student.getPoints()[course.ordinal()] + "\t"
+                    + "100%");
         }
     }
 
@@ -66,7 +107,7 @@ public class UserInterface {
         System.out.println("Easiest course: " + courses.easiest());
         System.out.println("Hardest course: " + courses.hardest());
     }
-    
+
     private void outputStudent() {
         while (true) {
             String input = scanner.nextLine();
@@ -193,70 +234,70 @@ public class UserInterface {
             System.out.println("Points updated.");
         }
     }
-    
+
     private void addStudentToCourses(Student student) {
-        if(student.getJavaPts() > 0) {
+        if (student.getJavaPts() > 0) {
             Course java = courses.get(CourseType.JAVA.ordinal());
-            if(!java.contains(student)) {
+            if (!java.contains(student)) {
                 java.add(student);
             }
         }
-        if(student.getDsaPts()> 0) {
+        if (student.getDsaPts() > 0) {
             Course dsa = courses.get(CourseType.DSA.ordinal());
-            if(!dsa.contains(student)) {
+            if (!dsa.contains(student)) {
                 dsa.add(student);
             }
         }
-        if(student.getDatabasesPts()> 0) {
+        if (student.getDatabasesPts() > 0) {
             Course databases = courses.get(CourseType.DATABASES.ordinal());
-            if(!databases.contains(student)) {
+            if (!databases.contains(student)) {
                 databases.add(student);
             }
         }
-        if(student.getSpringPts() > 0) {
+        if (student.getSpringPts() > 0) {
             Course spring = courses.get(CourseType.SPRING.ordinal());
-            if(!spring.contains(student)) {
+            if (!spring.contains(student)) {
                 spring.add(student);
             }
         }
     }
-    
+
     private void incrementCompletedTasks(int javaPts, int dsaPts, int databasesPts, int springPts) {
-        if(javaPts > 0) {
+        if (javaPts > 0) {
             courses.get(0).completeTask(javaPts);
         }
-        if(dsaPts > 0) {
+        if (dsaPts > 0) {
             courses.get(1).completeTask(dsaPts);
         }
-        if(databasesPts > 0) {
+        if (databasesPts > 0) {
             courses.get(2).completeTask(databasesPts);
         }
-        if(springPts > 0) {
+        if (springPts > 0) {
             courses.get(3).completeTask(springPts);
         }
     }
-    
+
     private void createTestDB() {
         students.add(new Student("John", "White", "jw@ny.com"));
         students.add(new Student("Winston", "Smith", "orwell1984@gmail.com"));
         students.add(new Student("George", "Carlin", "gc@ca.com"));
-        
+
         students.get(1).addPoints(0, 5, 2, 10);
         incrementCompletedTasks(0, 5, 2, 10);
         addStudentToCourses(students.get(1));
-        
+
         students.get(2).addPoints(9, 3, 0, 0);
         incrementCompletedTasks(9, 3, 0, 0);
         addStudentToCourses(students.get(2));
-        
+
         students.get(3).addPoints(9, 0, 10, 15);
         incrementCompletedTasks(9, 0, 10, 15);
         addStudentToCourses(students.get(3));
-        
+
         students.get(3).addPoints(0, 12, 0, 0);
         incrementCompletedTasks(0, 12, 0, 0);
         addStudentToCourses(students.get(3));
-        
+
         students.get(1).addPoints(0, 0, 5, 0);
         incrementCompletedTasks(0, 0, 5, 0);
         students.get(1).addPoints(0, 0, 3, 0);
