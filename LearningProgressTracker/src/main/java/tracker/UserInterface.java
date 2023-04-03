@@ -14,7 +14,7 @@ public class UserInterface {
     }
 
     public void run() {
-        createTestDB();
+        //createTestDB();
         while (true) {
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
@@ -44,13 +44,13 @@ public class UserInterface {
                 continue;
             }
             if ("find".equals(usrCommand)) {
-                System.out.println("Enter an id or 'back' to return");
+                System.out.println("Enter an id or 'back' to return:");
                 outputStudent();
                 continue;
             }
             if ("statistics".equals(usrCommand)) {
                 System.out.println("Type the name of a course to see details"
-                        + " or 'back' to quit");
+                        + " or 'back' to quit:");
                 statistics();
                 continue;
             }
@@ -62,6 +62,7 @@ public class UserInterface {
         printStatistics();
         while (true) {
             String usrCommand = scanner.nextLine();
+            usrCommand = usrCommand.toLowerCase();
             if ("back".equals(usrCommand)) {
                 break;
             }
@@ -118,7 +119,7 @@ public class UserInterface {
 
         System.out.println("Most popular: " + new StringBuilder
                 (Main.reverse(mostPopular).toString()
-                .substring(1, mostPopular.toString().length() - 1)));
+                        .substring(1, mostPopular.toString().length() - 1)));
         if (leastPopular != null) {
             System.out.println("Least popular: " + new StringBuilder(leastPopular.toString()
                     .substring(1, leastPopular.toString().length() - 1)));
@@ -127,7 +128,7 @@ public class UserInterface {
         }
         System.out.println("Highest activity: " + new StringBuilder
                 (Main.reverse(mostActive).toString()
-                .substring(1, mostActive.toString().length() - 1)));
+                        .substring(1, mostActive.toString().length() - 1)));
         if (leastActive != null) {
             System.out.println("Lowest activity: " + new StringBuilder(leastActive.toString()
                     .substring(1, leastActive.toString().length() - 1)));
@@ -136,7 +137,7 @@ public class UserInterface {
         }
         System.out.println("Easiest course: " + new StringBuilder
                 (Main.reverse(easiest).toString()
-                .substring(1, easiest.toString().length() - 1)));
+                        .substring(1, easiest.toString().length() - 1)));
         if (hardest != null) {
             System.out.println("Hardest course: " + new StringBuilder(hardest.toString()
                     .substring(1, hardest.toString().length() - 1)));

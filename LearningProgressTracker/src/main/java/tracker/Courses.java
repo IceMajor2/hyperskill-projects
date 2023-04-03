@@ -5,17 +5,17 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Courses {
-    
+
     private List<Course> courses;
-    
+
     public Courses() {
         this.courses = new ArrayList<>();
     }
-    
+
     public void add(Course c) {
         this.courses.add(c);
     }
-    
+
     public Course get(int index) {
         courses.sort((c1, c2) -> {
             return Integer.valueOf(c1.getName().ordinal())
@@ -23,11 +23,11 @@ public class Courses {
         });
         return this.courses.get(index);
     }
-    
+
     public int size() {
         return this.courses.size();
     }
-    
+
     public List<Course> mostPopular() {
         courses.sort(new CourseStudentsSizeComparator());
         List<Course> mostPopular = new ArrayList<>();
@@ -41,7 +41,7 @@ public class Courses {
         }
         return mostPopular;
     }
-    
+
     public List<Course> leastPopular() {
         courses.sort(new CourseStudentsSizeComparator());
         List<Course> leastPopular = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Courses {
         }
         return leastPopular;
     }
-    
+
     public List<Course> mostActive() {
         courses.sort(new CourseCompletedTasksComparator());
         List<Course> mostActive = new ArrayList<>();
@@ -72,7 +72,7 @@ public class Courses {
         }
         return mostActive;
     }
-    
+
     public List<Course> leastActive() {
         courses.sort(new CourseCompletedTasksComparator());
         List<Course> leastActive = new ArrayList<>();
@@ -89,16 +89,16 @@ public class Courses {
         }
         return leastActive;
     }
-    
+
     public List<Course> easiest() {
         courses.sort(new CourseAvgScoreComparator());
         List<Course> easiest = new ArrayList<>();
-        
+
         int index = courses.size() - 1;
         while(courses.get(index).averageScore() == -1) {
             index--;
         }
-        
+
         easiest.add(courses.get(index));
         for(int i = index - 1; i >= 0; i--) {
             Course course = courses.get(i);
@@ -109,16 +109,16 @@ public class Courses {
         }
         return easiest;
     }
-    
+
     public List<Course> hardest() {
         courses.sort(new CourseAvgScoreComparator());
         List<Course> hardest = new ArrayList<>();
-        
+
         int index = 0;
         while(courses.get(index).averageScore() == -1) {
             index++;
         }
-        
+
         hardest.add(courses.get(index));
         for(int i = index + 1; i < courses.size(); i++) {
             Course course = courses.get(i);
@@ -143,7 +143,7 @@ class CourseStudentsSizeComparator implements Comparator<Course> {
 }
 
 class CourseCompletedTasksComparator implements Comparator<Course> {
-    
+
     @Override
     public int compare(Course c1, Course c2) {
         return Integer.valueOf(c1.getTasksCompleted())
@@ -152,7 +152,7 @@ class CourseCompletedTasksComparator implements Comparator<Course> {
 }
 
 class CourseAvgScoreComparator implements Comparator<Course> {
-    
+
     @Override
     public int compare(Course c1, Course c2) {
         return Double.valueOf(c1.averageScore()).compareTo(c2.averageScore());

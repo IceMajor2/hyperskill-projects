@@ -28,7 +28,7 @@ public class Course {
     public int studentsSize() {
         return students.size();
     }
-    
+
     public void completeTask(int points) {
         this.totalPointsGotByStudents += points;
         this.tasksCompleted++;
@@ -37,7 +37,7 @@ public class Course {
     public int getTasksCompleted() {
         return tasksCompleted;
     }
-    
+
     public double averageScore() {
         if(this.tasksCompleted == 0 || this.totalPointsGotByStudents == 0) {
             return -1;
@@ -60,7 +60,7 @@ public class Course {
     public String toString() {
         return this.name.toString();
     }
-    
+
     public List<Student> leaders() {
         students.getStudents().sort((s1, s2) -> {
             int s1CoursePoints = s1.getPoints()[this.name.ordinal()];
@@ -69,7 +69,7 @@ public class Course {
                 int s1Id = s1.getId();
                 int s2Id = s2.getId();
                 return Integer.valueOf(s2Id).compareTo(s1Id); // reversed
-            } 
+            }
             return Integer.valueOf(s1CoursePoints).compareTo(s2CoursePoints);
         });
         return students.getStudents();
@@ -91,7 +91,7 @@ enum CourseType {
     public int getTotalPoints() {
         return this.totalPts;
     }
-    
+
     @Override
     public String toString() {
         return name;

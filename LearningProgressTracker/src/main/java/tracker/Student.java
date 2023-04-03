@@ -51,15 +51,15 @@ public class Student {
     public int[] getPoints() {
         return points;
     }
-    
+
     public String getPercentCompletion(int courseOrdinal) {
         int points = this.getPoints()[courseOrdinal];
         int totalPoints = courses.get(courseOrdinal).getName().getTotalPoints();
-        
+
         double percent = (double) points / totalPoints * 100;
         BigDecimal bd = BigDecimal.valueOf(percent);
         bd = bd.setScale(1, RoundingMode.HALF_UP);
-        
+
         return bd + "%";
     }
 
@@ -68,5 +68,20 @@ public class Student {
         this.points[CourseType.DSA.ordinal()] += dsa;
         this.points[CourseType.DATABASES.ordinal()] += databases;
         this.points[CourseType.SPRING.ordinal()] += spring;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder("");
+        sb.append(this.id);
+        sb.append(" points: ");
+        sb.append("Java=");
+        sb.append(this.points[CourseType.JAVA.ordinal()]);
+        sb.append("; DSA=");
+        sb.append(this.points[CourseType.DSA.ordinal()]);
+        sb.append("; Databases=");
+        sb.append(this.points[CourseType.DATABASES.ordinal()]);
+        sb.append("; Spring=");
+        sb.append(this.points[CourseType.SPRING.ordinal()]);
+        return sb.toString();
     }
 }

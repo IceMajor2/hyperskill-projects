@@ -6,10 +6,6 @@ public class Main {
 
     public static Students students = new Students();
     public static Courses courses = new Courses();
-    
-    /*  TODO:
-            
-    */
 
     public static void main(String[] args) {
         System.out.println("Learning Progress Tracker");
@@ -24,7 +20,7 @@ public class Main {
         courses.add(new Course("databases"));
         courses.add(new Course("spring"));
     }
-    
+
     public static List<Course> reverse(List<Course> list) {
         list.sort((c1, c2) -> {
             return Integer.valueOf(c1.getName().ordinal())
