@@ -14,7 +14,7 @@ public class UserInterface {
     }
 
     public void run() {
-        //createTestDB();
+        createTestDB();
         while (true) {
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
@@ -95,7 +95,7 @@ public class UserInterface {
             Student student = leaders.get(i);
             System.out.println(student.getId() + "\t"
                     + student.getPoints()[course.ordinal()] + "\t"
-                    + "100%");
+                    + student.getPercentCompletion(course.ordinal()));
         }
     }
 

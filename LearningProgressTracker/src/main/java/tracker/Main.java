@@ -6,11 +6,11 @@ public class Main {
     public static Courses courses = new Courses();
     
     /*  TODO:
-            completion in percents
+            fix hardest opposite category output
             reverse printStatistics so that it outputs in the ordinal order
     */
 
-    public static void main(String[] args) {    
+    public static void main(String[] args) {
         System.out.println("Learning Progress Tracker");
         initializeCourses();
         UserInterface UI = new UserInterface();

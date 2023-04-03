@@ -1,5 +1,7 @@
 package tracker;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import static tracker.Main.*;
 
 public class Student {
@@ -48,6 +50,17 @@ public class Student {
 
     public int[] getPoints() {
         return points;
+    }
+    
+    public String getPercentCompletion(int courseOrdinal) {
+        int points = this.getPoints()[courseOrdinal];
+        int totalPoints = courses.get(courseOrdinal).getName().getTotalPoints();
+        
+        double percent = (double) points / totalPoints * 100;
+        BigDecimal bd = BigDecimal.valueOf(percent);
+        bd = bd.setScale(1, RoundingMode.HALF_UP);
+        
+        return bd + "%";
     }
 
     public void addPoints(int java, int dsa, int databases, int spring) {
