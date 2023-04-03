@@ -132,6 +132,10 @@ public class Courses {
         }
         return hardest;
     }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
 }
 
 class CourseStudentsSizeComparator implements Comparator<Course> {

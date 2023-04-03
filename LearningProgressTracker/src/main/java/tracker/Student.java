@@ -31,6 +31,14 @@ public class Student {
         return this.email;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
     public boolean equals(Object o) {
         if(o == this) {
             return true;

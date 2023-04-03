@@ -54,6 +54,10 @@ public class UserInterface {
                 statistics();
                 continue;
             }
+            if ("notify".equals(usrCommand)) {
+                notifyStudents();
+                continue;
+            }
             System.out.println("Error: unknown command!");
         }
     }
@@ -117,27 +121,24 @@ public class UserInterface {
         var easiest = courses.easiest();
         var hardest = courses.hardest();
 
-        System.out.println("Most popular: " + new StringBuilder
-                (Main.reverse(mostPopular).toString()
-                        .substring(1, mostPopular.toString().length() - 1)));
+        System.out.println("Most popular: " + new StringBuilder(Main.reverse(mostPopular).toString()
+                .substring(1, mostPopular.toString().length() - 1)));
         if (leastPopular != null) {
             System.out.println("Least popular: " + new StringBuilder(leastPopular.toString()
                     .substring(1, leastPopular.toString().length() - 1)));
         } else {
             System.out.println("Least popular: n/a");
         }
-        System.out.println("Highest activity: " + new StringBuilder
-                (Main.reverse(mostActive).toString()
-                        .substring(1, mostActive.toString().length() - 1)));
+        System.out.println("Highest activity: " + new StringBuilder(Main.reverse(mostActive).toString()
+                .substring(1, mostActive.toString().length() - 1)));
         if (leastActive != null) {
             System.out.println("Lowest activity: " + new StringBuilder(leastActive.toString()
                     .substring(1, leastActive.toString().length() - 1)));
         } else {
             System.out.println("Least active: n/a");
         }
-        System.out.println("Easiest course: " + new StringBuilder
-                (Main.reverse(easiest).toString()
-                        .substring(1, easiest.toString().length() - 1)));
+        System.out.println("Easiest course: " + new StringBuilder(Main.reverse(easiest).toString()
+                .substring(1, easiest.toString().length() - 1)));
         if (hardest != null) {
             System.out.println("Hardest course: " + new StringBuilder(hardest.toString()
                     .substring(1, hardest.toString().length() - 1)));
@@ -340,5 +341,30 @@ public class UserInterface {
         incrementCompletedTasks(0, 2, 0, 0);
         students.get(1).addPoints(0, 1, 0, 7);
         incrementCompletedTasks(0, 1, 0, 7);*/
+    }
+
+    private void notifyStudents() {
+        int newGraduatesTotal = 0;
+        Students allNewGraduates = new Students();
+        for (Course course : courses.getCourses()) {
+            Students newGraduates = course.newGraduates();
+            for (Student graduate : newGraduates.getStudents()) {
+                printCongratulations(graduate.getEmail(),
+                        graduate.getFirstName(), graduate.getLastName(), course);
+                if (!allNewGraduates.contains(graduate)) {
+                    newGraduatesTotal++;
+                }
+                allNewGraduates.add(graduate);
+            }
+        }
+        System.out.println("Total " + newGraduatesTotal
+                + " students have been notified.");
+    }
+
+    private void printCongratulations(String email, String firstName, String lastName, Course course) {
+        System.out.println("To: " + email);
+        System.out.println("Re: Your Learning Progress");
+        System.out.println("Hello, " + firstName + " " + lastName + "!"
+                + " You have accomplished our " + course.getName() + " course!");
     }
 }

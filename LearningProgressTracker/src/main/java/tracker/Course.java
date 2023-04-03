@@ -5,6 +5,7 @@ import java.util.List;
 public class Course {
 
     private Students students;
+    private Students graduates;
     private CourseType name;
     private int tasksCompleted;
     private int totalPointsGotByStudents;
@@ -23,6 +24,7 @@ public class Course {
         this.students = new Students();
         this.tasksCompleted = 0;
         this.totalPointsGotByStudents = 0;
+        this.graduates = new Students();
     }
 
     public int studentsSize() {
@@ -55,6 +57,20 @@ public class Course {
 
     public CourseType getName() {
         return name;
+    }
+    
+    public Students newGraduates() {
+        Students newGraduates = new Students();
+        for(Student student : students.getStudents()) {
+            if(graduates.contains(student)) {
+                continue;
+            }
+            if(student.getPoints()[name.ordinal()] == name.getTotalPoints()) {
+                graduates.add(student);
+                newGraduates.add(student);
+            }
+        }
+        return newGraduates;
     }
 
     public String toString() {
