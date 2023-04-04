@@ -3,6 +3,8 @@ package mealplanner;
 
 public class Meal {
 
+    public static int mealCount = 0;
+    private int mealId;
     private String name;
     private String[] ingredients;
     private String category;
@@ -11,6 +13,25 @@ public class Meal {
         this.name = name;
         this.category = category;
         this.ingredients = ingredients;
+        
+        mealCount++;
+        this.mealId = mealCount;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getMealId() {
+        return mealId;
+    }
+
+    public String[] getIngredients() {
+        return ingredients;
+    }
+
+    public String getCategory() {
+        return category;
     }
     
     public String toString() {

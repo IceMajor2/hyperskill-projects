@@ -2,6 +2,7 @@ package mealplanner;
 
 import java.util.Scanner;
 import static mealplanner.Main.*;
+import java.sql.SQLException;
 
 public class UserInterface {
 
@@ -17,6 +18,11 @@ public class UserInterface {
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
                 System.out.println("Bye!");
+                try {
+                    db.close();
+                } catch(SQLException e) {
+                    System.out.println(e);
+                }
                 break;
             }
             if ("add".equals(usrCommand)) {
@@ -56,7 +62,13 @@ public class UserInterface {
 
         Meal meal = new Meal(category, name, ingredients);
         meals.add(meal);
-
+        try {
+            db.addMealToDb(meal);
+        db.addIngredientsToDb(meal);
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
+        
         System.out.println("The meal has been added!");
     }
 
