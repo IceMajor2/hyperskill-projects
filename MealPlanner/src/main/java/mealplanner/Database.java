@@ -7,20 +7,18 @@ public class Database {
     private Connection connection;
 
     public Database() throws SQLException {
+        this.connection = this.establishConnection();
         this.initializeTables();
     }
 
-    private void establishConnection() {
+    private Connection establishConnection() throws SQLException {
         String DB_URL = "jdbc:postgresql:meals_db";
         String USER = "postgres";
         String PASS = "1111";
-        try {
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            System.out.println(e);
-            return;
-        }
+        connection = DriverManager.getConnection(DB_URL, USER, PASS);
+        connection.setAutoCommit(true);
+        System.out.println(e);
+        return connection;
     }
 
     private void initializeTables() throws SQLException {
