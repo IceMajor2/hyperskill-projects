@@ -10,12 +10,20 @@ public class Meal {
     private String category;
     
     public Meal(String category, String name, String[] ingredients) {
-        this.name = name;
-        this.category = category;
+        this(category, name);
         this.ingredients = ingredients;
+    }
+    
+    public Meal(String category, String name) {
+        this.category = category;
+        this.name = name;
         
         mealCount++;
         this.mealId = mealCount;
+    }
+    
+    public void setIngredients(String[] ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getName() {

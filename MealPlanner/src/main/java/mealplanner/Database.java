@@ -1,6 +1,9 @@
 package mealplanner;
 
 import java.sql.*;
+import java.util.List;
+import java.util.ArrayList;
+import static mealplanner.Main.meals;
 
 public class Database {
 
@@ -9,7 +12,15 @@ public class Database {
     public Database() throws SQLException {
         this.connection = this.establishConnection();
         this.initializeTables();
+        this.loadDb();
     }
+    
+    /*            meals
+        |  CATEGORY  |     MEAL      | MEAL_ID |
+    
+                  ingredients
+        | INGREDIENT | INGREDIENT_ID | MEAL_ID |
+    */
 
     private Connection establishConnection() throws SQLException {
         String DB_URL = "jdbc:postgresql:meals_db";
@@ -33,16 +44,55 @@ public class Database {
                 + ")");
         statement.executeUpdate("CREATE TABLE IF NOT EXISTS ingredients ("
                 + "ingredient VARCHAR(20),"
-                + "ingredient_id DECIMAL,"
+                + "ingredient_id INTEGER,"
                 + "meal_id INTEGER"
                 + ")");
         statement.close();
+    }
+    
+    private void loadDb() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT * FROM meals");
+        // loading data from meals table
+        while(rs.next()) {
+            String category = rs.getString("category");
+            String name = rs.getString("meal");
+            
+            Meal meal = new Meal(category, name);
+            meals.add(meal);
+        }
+        // loading data from ingredients table
+        rs = statement.executeQuery("SELECT * FROM ingredients");
+        
+        List<String> ingredients = new ArrayList<>();
+        int previousMealId = -1;
+        while(rs.next()) {
+            String ingredient = rs.getString("ingredient");
+            int mealId = rs.getInt("meal_id");
+            
+            if((previousMealId != -1 && previousMealId != mealId) || rs.isLast()) {
+                String[] ingredientsArr = new String[ingredients.size()];
+                ingredients.toArray(ingredientsArr);
+                meals.getId(previousMealId).setIngredients(ingredientsArr);
+                
+                if(rs.isLast()) {
+                    break;
+                }
+                
+                ingredients = new ArrayList<>();
+            }
+            
+            ingredients.add(ingredient);
+            previousMealId = mealId;
+        }
+        statement.close();
+        rs.close();
     }
 
     public void addMealToDb(Meal meal) throws SQLException {
         String category = meal.getCategory();
         String name = meal.getName();
-        int id = meal.getMealId() / 1000;
+        int id = meal.getMealId();
 
         Statement statement = connection.createStatement();
         statement.executeUpdate(String.format("INSERT INTO meals (category, meal, meal_id) "
@@ -57,7 +107,7 @@ public class Database {
         Statement statement = connection.createStatement();
         for (int i = 0; i < ingredients.length; i++) {
             String ingredient = ingredients[i];
-            long ingredientId = ingredient.hashCode();
+            long ingredientId = ingredient.hashCode() / 100;
             
             statement.executeUpdate(String.format("INSERT INTO ingredients (ingredient, ingredient_id, meal_id) "
                     + "VALUES ('%s', %d, %d)", ingredient, ingredientId, mealId));

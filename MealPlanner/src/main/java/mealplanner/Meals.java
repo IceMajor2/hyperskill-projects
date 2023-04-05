@@ -25,4 +25,16 @@ public class Meals {
         }
     }
     
+    public Meal getId(int id) {
+        for(Meal meal : meals) {
+            if(meal.getMealId() == id) {
+                return meal;
+            }
+        }
+        return null;
+    }
+    
+    public Meal get(int index) {
+        return this.get(index);
+    }
 }
