@@ -33,6 +33,10 @@ public class UserInterface {
                 show();
                 continue;
             }
+            if("drop".equals(usrCommand)) {
+                dropDbTables();
+                continue;
+            }
         }
 
     }
@@ -78,6 +82,14 @@ public class UserInterface {
             return;
         }
         meals.printMeals();
+    }
+    
+    private void dropDbTables() {
+        try {
+            db.dropTables();
+        } catch(SQLException e) {
+            System.out.println(e);
+        }
     }
 
     private boolean isRegexValid(String input) {

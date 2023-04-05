@@ -14,14 +14,13 @@ public class Database {
         this.initializeTables();
         this.loadDb();
     }
-    
+
     /*            meals
         |  CATEGORY  |     MEAL      | MEAL_ID |
     
                   ingredients
         | INGREDIENT | INGREDIENT_ID | MEAL_ID |
-    */
-
+     */
     private Connection establishConnection() throws SQLException {
         String DB_URL = "jdbc:postgresql:meals_db";
         String USER = "postgres";
@@ -30,7 +29,7 @@ public class Database {
         connection.setAutoCommit(true);
         return connection;
     }
-    
+
     public void close() throws SQLException {
         this.connection.close();
     }
@@ -49,44 +48,54 @@ public class Database {
                 + ")");
         statement.close();
     }
-    
+
     private void loadDb() throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery("SELECT * FROM meals");
         // loading data from meals table
-        while(rs.next()) {
+        while (rs.next()) {
             String category = rs.getString("category");
             String name = rs.getString("meal");
-            
+
             Meal meal = new Meal(category, name);
             meals.add(meal);
         }
         // loading data from ingredients table
         rs = statement.executeQuery("SELECT * FROM ingredients");
-        
+
         List<String> ingredients = new ArrayList<>();
         int previousMealId = -1;
-        while(rs.next()) {
+        while (rs.next()) {
             String ingredient = rs.getString("ingredient");
             int mealId = rs.getInt("meal_id");
-            
-            if((previousMealId != -1 && previousMealId != mealId) || rs.isLast()) {
+
+            if ((previousMealId != -1 && previousMealId != mealId) || rs.isLast()) {
+                if (rs.isLast()) {
+                    ingredients.add(ingredient);
+                    String[] ingredientsArr = new String[ingredients.size()];
+                    ingredients.toArray(ingredientsArr);
+                    meals.getId(previousMealId).setIngredients(ingredientsArr);
+                    break;
+                }
                 String[] ingredientsArr = new String[ingredients.size()];
                 ingredients.toArray(ingredientsArr);
                 meals.getId(previousMealId).setIngredients(ingredientsArr);
-                
-                if(rs.isLast()) {
-                    break;
-                }
-                
+
                 ingredients = new ArrayList<>();
             }
-            
+
             ingredients.add(ingredient);
             previousMealId = mealId;
         }
         statement.close();
         rs.close();
+    }
+
+    public void dropTables() throws SQLException {
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate("DROP TABLE meals");
+        statement.executeUpdate("DROP TABLE ingredients");
     }
 
     public void addMealToDb(Meal meal) throws SQLException {
@@ -108,7 +117,7 @@ public class Database {
         for (int i = 0; i < ingredients.length; i++) {
             String ingredient = ingredients[i];
             long ingredientId = ingredient.hashCode() / 100;
-            
+
             statement.executeUpdate(String.format("INSERT INTO ingredients (ingredient, ingredient_id, meal_id) "
                     + "VALUES ('%s', %d, %d)", ingredient, ingredientId, mealId));
         }
