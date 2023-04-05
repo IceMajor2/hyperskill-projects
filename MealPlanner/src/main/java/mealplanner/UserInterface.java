@@ -3,6 +3,7 @@ package mealplanner;
 import java.util.Scanner;
 import static mealplanner.Main.*;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserInterface {
 
@@ -20,7 +21,7 @@ public class UserInterface {
                 System.out.println("Bye!");
                 try {
                     db.close();
-                } catch(SQLException e) {
+                } catch (SQLException e) {
                     System.out.println(e);
                 }
                 break;
@@ -30,10 +31,13 @@ public class UserInterface {
                 continue;
             }
             if ("show".equals(usrCommand)) {
-                show();
+                System.out.println("Which category do you want to print "
+                        + "(breakfast, lunch, dinner)?");
+                String category = scanner.nextLine();
+                show(category);
                 continue;
             }
-            if("drop".equals(usrCommand)) {
+            if ("drop".equals(usrCommand)) {
                 dropDbTables();
                 continue;
             }
@@ -68,11 +72,11 @@ public class UserInterface {
         meals.add(meal);
         try {
             db.addMealToDb(meal);
-        db.addIngredientsToDb(meal);
-        } catch(SQLException e) {
+            db.addIngredientsToDb(meal);
+        } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         System.out.println("The meal has been added!");
     }
 
@@ -83,11 +87,34 @@ public class UserInterface {
         }
         meals.printMeals();
     }
-    
+
+    private void show(String category) {
+        while (!isCategoryValid(category)) {
+            category = scanner.nextLine();
+        }
+        List<Meal> catMeals = meals.getMeals(category);
+
+        if (catMeals.isEmpty()) {
+            System.out.println("No meals found.");
+            return;
+        }
+
+        System.out.println(String.format("Category: %s", category));
+        System.out.println();
+        for (Meal meal : catMeals) {
+            System.out.println(String.format("Name: %s", meal.getName()));
+            System.out.println("Ingredients:");
+            for(String ingredient : meal.getIngredients()) {
+                System.out.println(ingredient);
+            }
+            System.out.println("");
+        }
+    }
+
     private void dropDbTables() {
         try {
             db.dropTables();
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -111,7 +138,7 @@ public class UserInterface {
         if (!isRegexValid(category)) {
             return false;
         }
-        if(category.isEmpty()) {
+        if (category.isEmpty()) {
             System.out.println("Wrong format. Use letters only!");
             return false;
         }
@@ -119,7 +146,7 @@ public class UserInterface {
     }
 
     private boolean isNameValid(String name) {
-        if(name.isEmpty()) {
+        if (name.isEmpty()) {
             System.out.println("Wrong format. Use letters only!");
             return false;
         }
@@ -131,7 +158,7 @@ public class UserInterface {
             if (!isRegexValid(ingredient)) {
                 return false;
             }
-            if(ingredient.trim().isEmpty()) {
+            if (ingredient.trim().isEmpty()) {
                 System.out.println("Wrong format. Use letters only!");
                 return false;
             }

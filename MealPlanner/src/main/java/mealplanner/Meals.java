@@ -37,4 +37,14 @@ public class Meals {
     public Meal get(int index) {
         return this.get(index);
     }
+    
+    public List<Meal> getMeals(String category) {
+        List<Meal> categoryMeals = new ArrayList<>();
+        for(Meal meal : meals) {
+            if(meal.getCategory().equals(category)) {
+                categoryMeals.add(meal);
+            }
+        }
+        return categoryMeals;
+    }
 }
