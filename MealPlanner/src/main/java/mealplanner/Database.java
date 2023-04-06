@@ -17,7 +17,7 @@ public class Database {
 
     /*            meals
         |  CATEGORY  |     MEAL      | MEAL_ID |
-    
+
                   ingredients
         | INGREDIENT | INGREDIENT_ID | MEAL_ID |
      */

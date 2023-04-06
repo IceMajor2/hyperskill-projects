@@ -1,7 +1,7 @@
 package mealplanner;
 
 import java.util.Scanner;
-import static mealplanner.Main.*;
+import static mealplanner.MealPlanner.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -55,9 +55,8 @@ public class UserInterface {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        List<String> weekDays = List.of("Monday");
-        //List<String> weekDays = List.of("Monday", "Tuesday", "Wednesday", "Thursday",
-        //        "Friday", "Saturday", "Sunday");
+        List<String> weekDays = List.of("Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Sunday");
         List<String> categories = List.of("breakfast", "lunch", "dinner");
 
         for (String weekDay : weekDays) {
@@ -76,7 +75,7 @@ public class UserInterface {
 
                 String nameInput = scanner.nextLine();
                 while (!meals.contains(nameInput)) {
-                    System.out.println("This meal doesn't exist. "
+                    System.out.println("This meal doesn’t exist. "
                             + "Choose a meal from the list above.");
                     nameInput = scanner.nextLine();
                 }
@@ -92,14 +91,13 @@ public class UserInterface {
         System.out.println("");
         for (String weekDay : weekDays) {
             System.out.println(weekDay);
-            
+
             for (String cat : categories) {
                 try {
                     Meal planned = db.getPlannedMeal(weekDay, cat);
                     char chAt0 = cat.charAt(0);
                     cat = cat.replace(chAt0, (char) (chAt0 - 32));
                     System.out.print(cat + ": " + planned.getName() + "\n");
-                    System.out.println("");
                 } catch (SQLException e) {
                     System.out.println(e);
                 }
@@ -124,10 +122,16 @@ public class UserInterface {
         }
 
         System.out.println("Input the ingredients:");
-        String[] ingredients = scanner.nextLine().split(", ");
+        String[] ingredients = scanner.nextLine().split(",");
+        for(String ingredient : ingredients) {
+            ingredient = ingredient.trim();
+        }
 
         while (!areIngredientsValid(ingredients)) {
             ingredients = scanner.nextLine().split(",");
+            for(String ingredient : ingredients) {
+                ingredient = ingredient.trim();
+            }
         }
 
         Meal meal = new Meal(category, name, ingredients);
