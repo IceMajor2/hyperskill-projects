@@ -15,7 +15,7 @@ public class UserInterface {
 
     public void run() {
         while (true) {
-            System.out.println("What would you like to do (add, show, exit)?");
+            System.out.println("What would you like to do (add, show, plan, exit)?");
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
                 System.out.println("Bye!");
@@ -41,8 +41,70 @@ public class UserInterface {
                 dropDbTables();
                 continue;
             }
+            if ("plan".equals(usrCommand)) {
+                plan();
+                continue;
+            }
         }
 
+    }
+
+    private void plan() {
+        try {
+            db.initPlan();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        List<String> weekDays = List.of("Monday");
+        //List<String> weekDays = List.of("Monday", "Tuesday", "Wednesday", "Thursday",
+        //        "Friday", "Saturday", "Sunday");
+        List<String> categories = List.of("breakfast", "lunch", "dinner");
+
+        for (String weekDay : weekDays) {
+            System.out.println(weekDay);
+
+            for (String category : categories) {
+                List<Meal> catMeals = meals.getMeals(category);
+                catMeals.sort((c1, c2) -> {
+                    return c1.getName().compareTo(c2.getName());
+                });
+                for(Meal catMeal : catMeals) {
+                    System.out.println(catMeal.getName());
+                }
+
+                System.out.println(String.format("Choose the %s for %s from the list above:", category, weekDay));
+
+                String nameInput = scanner.nextLine();
+                while (!meals.contains(nameInput)) {
+                    System.out.println("This meal doesn't exist. "
+                            + "Choose a meal from the list above.");
+                    nameInput = scanner.nextLine();
+                }
+                Meal chosenMeal = meals.get(nameInput);
+                try {
+                    db.addMealToPlan(chosenMeal, weekDay);
+                } catch(SQLException e) {
+                    System.out.println(e);
+                }
+            }
+            System.out.println(String.format("Yeah! We planned the meals for %s.", weekDay));
+        }
+        System.out.println("");
+        for (String weekDay : weekDays) {
+            System.out.println(weekDay);
+            
+            for (String cat : categories) {
+                try {
+                    Meal planned = db.getPlannedMeal(weekDay, cat);
+                    char chAt0 = cat.charAt(0);
+                    cat = cat.replace(chAt0, (char) (chAt0 - 32));
+                    System.out.print(cat + ": " + planned.getName() + "\n");
+                    System.out.println("");
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            }
+        }
     }
 
     private void addMeal() {
@@ -104,7 +166,7 @@ public class UserInterface {
         for (Meal meal : catMeals) {
             System.out.println(String.format("Name: %s", meal.getName()));
             System.out.println("Ingredients:");
-            for(String ingredient : meal.getIngredients()) {
+            for (String ingredient : meal.getIngredients()) {
                 System.out.println(ingredient);
             }
             System.out.println("");

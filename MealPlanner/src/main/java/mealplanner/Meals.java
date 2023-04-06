@@ -34,6 +34,15 @@ public class Meals {
         return null;
     }
     
+    public Meal get(String name) {
+        for(Meal meal : meals) {
+            if(meal.getName().equals(name)) {
+                return meal;
+            }
+        }
+        return null;
+    }
+    
     public Meal get(int index) {
         return this.get(index);
     }
@@ -46,5 +55,14 @@ public class Meals {
             }
         }
         return categoryMeals;
+    }
+    
+    public boolean contains(String name) {
+        for(Meal meal : meals) {
+            if(meal.getName().equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

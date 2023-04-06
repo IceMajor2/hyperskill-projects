@@ -91,11 +91,52 @@ public class Database {
         rs.close();
     }
 
+    public Meal getPlannedMeal(String day, String category) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery("SELECT meal_id "
+                + "FROM plan "
+                + "WHERE category = '" + category + "' AND "
+                + "day = '" + day + "'");
+        Meal meal = null;
+        while(rs.next()) {
+            int mealId = rs.getInt("meal_id");
+            meal = meals.getId(mealId);
+        }
+        return meal;
+    }
+
     public void dropTables() throws SQLException {
         Statement statement = connection.createStatement();
 
         statement.executeUpdate("DROP TABLE meals");
         statement.executeUpdate("DROP TABLE ingredients");
+        statement.executeUpdate("DROP TABLE plan");
+
+        statement.close();
+    }
+
+    public void initPlan() throws SQLException {
+        Statement statement = connection.createStatement();
+
+        statement.executeUpdate("DROP TABLE IF EXISTS plan");
+        statement.executeUpdate("CREATE TABLE plan ("
+                + "meal_option VARCHAR(30),"
+                + "category VARCHAR(20),"
+                + "meal_id INTEGER,"
+                + "day VARCHAR(10)"
+                + ")");
+        statement.close();
+    }
+
+    public void addMealToPlan(Meal meal, String day) throws SQLException {
+        String mealOption = meal.getName();
+        String category = meal.getCategory();
+        int mealId = meal.getMealId();
+
+        Statement statement = connection.createStatement();
+        statement.executeUpdate(String.format("INSERT INTO plan (meal_option, category, meal_id, day) "
+                + "VALUES ('%s', '%s', %d, '%s')", mealOption, category, mealId, day));
+        statement.close();
     }
 
     public void addMealToDb(Meal meal) throws SQLException {
