@@ -1,7 +1,7 @@
 package mealplanner;
 
 import java.util.Scanner;
-import static mealplanner.MealPlanner.*;
+import static mealplanner.Main.*;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,7 +15,8 @@ public class UserInterface {
 
     public void run() {
         while (true) {
-            System.out.println("What would you like to do (add, show, plan, exit)?");
+            System.out.println("What would you like to do "
+                    + "(add, show, plan, save, exit)?");
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
                 System.out.println("Bye!");
@@ -45,6 +46,10 @@ public class UserInterface {
                 plan();
                 continue;
             }
+            if ("save".equals(usrCommand)) {
+                save();
+                continue;
+            }
         }
 
     }
@@ -67,7 +72,7 @@ public class UserInterface {
                 catMeals.sort((c1, c2) -> {
                     return c1.getName().compareTo(c2.getName());
                 });
-                for(Meal catMeal : catMeals) {
+                for (Meal catMeal : catMeals) {
                     System.out.println(catMeal.getName());
                 }
 
@@ -82,7 +87,7 @@ public class UserInterface {
                 Meal chosenMeal = meals.get(nameInput);
                 try {
                     db.addMealToPlan(chosenMeal, weekDay);
-                } catch(SQLException e) {
+                } catch (SQLException e) {
                     System.out.println(e);
                 }
             }
@@ -123,13 +128,13 @@ public class UserInterface {
 
         System.out.println("Input the ingredients:");
         String[] ingredients = scanner.nextLine().split(",");
-        for(String ingredient : ingredients) {
+        for (String ingredient : ingredients) {
             ingredient = ingredient.trim();
         }
 
         while (!areIngredientsValid(ingredients)) {
             ingredients = scanner.nextLine().split(",");
-            for(String ingredient : ingredients) {
+            for (String ingredient : ingredients) {
                 ingredient = ingredient.trim();
             }
         }
@@ -175,6 +180,21 @@ public class UserInterface {
             }
             System.out.println("");
         }
+    }
+
+    private void save() {
+        if (!db.planExists()) {
+            System.out.println("Unable to save. Plan your meals first.");
+            return;
+        }
+        System.out.println("Input a filename:");
+        String file = scanner.nextLine();
+        try {
+            db.saveShoppingList(file);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        System.out.println("Saved!");
     }
 
     private void dropDbTables() {

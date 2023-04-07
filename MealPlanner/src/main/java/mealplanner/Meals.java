@@ -65,4 +65,8 @@ public class Meals {
         }
         return false;
     }
+
+    public List<Meal> getMeals() {
+        return meals;
+    }
 }

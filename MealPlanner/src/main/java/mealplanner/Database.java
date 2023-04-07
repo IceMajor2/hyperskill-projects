@@ -4,6 +4,10 @@ import java.sql.*;
 import java.util.List;
 import java.util.ArrayList;
 import static mealplanner.Main.meals;
+import java.util.Map;
+import java.util.HashMap;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Database {
 
@@ -98,7 +102,7 @@ public class Database {
                 + "WHERE category = '" + category + "' AND "
                 + "day = '" + day + "'");
         Meal meal = null;
-        while(rs.next()) {
+        while (rs.next()) {
             int mealId = rs.getInt("meal_id");
             meal = meals.getId(mealId);
         }
@@ -163,5 +167,66 @@ public class Database {
                     + "VALUES ('%s', %d, %d)", ingredient, ingredientId, mealId));
         }
         statement.close();
+    }
+
+    public boolean planExists() {
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT count(*) FROM plan");
+
+            int count = 0;
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+            if (count == 0) {
+                return false;
+            }
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    public void saveShoppingList(String file) throws SQLException {
+        Map<String, Integer> ingredients = new HashMap<>();
+        List<String> weekDays = List.of("Monday", "Tuesday", "Wednesday", "Thursday",
+                "Friday", "Saturday", "Sunday");
+        List<String> categories = List.of("breakfast", "lunch", "dinner");
+        List<Meal> planned = new ArrayList<>();
+                
+        for(String day : weekDays) {
+            for(String category : categories) {
+                Meal mealPlanned = this.getPlannedMeal(day, category);
+                planned.add(mealPlanned);
+            }
+        }
+
+        for (Meal meal : planned) {
+            for (String ingredient : meal.getIngredients()) {
+                ingredient = ingredient.trim();
+                if (ingredients.containsKey(ingredient)) {
+                    ingredients.put(ingredient, ingredients.get(ingredient) + 1);
+                    continue;
+                }
+                ingredients.put(ingredient, 1);
+            }
+        }
+
+        try (FileWriter writer = new FileWriter(file)) {
+            ingredients.entrySet().stream().forEach((entry) -> {
+                try {
+                    writer.append(entry.getKey());
+                    if (entry.getValue() != 1) {
+                        writer.append(" x" + entry.getValue());
+                    }
+                    writer.append("\n");
+                } catch (IOException e) {
+                    System.out.println(e);
+                }
+            });
+        } catch (IOException e) {
+            System.out.println(e);
+        }
     }
 }
