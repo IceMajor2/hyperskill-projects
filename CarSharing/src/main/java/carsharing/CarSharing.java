@@ -9,11 +9,9 @@ public class CarSharing {
 
     // JDBC driver name and database URL
     static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL = "jdbc:h2:~/test";
-
-    // Database credentials
-    static final String USER = "sa";
-    static final String PASS = "";
+    static final String DB_URL =
+            //"jdbc:h2:./src/carsharing/db/carsharing";
+            "jdbc:h2:./src/main/java/carsharing/db/carsharing";
 
     public static void main(String[] args) {
         Connection conn = null;
@@ -23,11 +21,17 @@ public class CarSharing {
             Class.forName(JDBC_DRIVER);
 
             // Open a connection
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            conn = DriverManager.getConnection(DB_URL);
+            conn.setAutoCommit(true);
 
             // Execute a query
-                stmt = conn.createStatement();
-            
+            stmt = conn.createStatement();
+            String query = "CREATE TABLE IF NOT EXISTS company ("
+                    + "id INTEGER,"
+                    + "name VARCHAR(30)"
+                    + ")";
+            stmt.executeUpdate(query);
+
             // Clean-up environment
             stmt.close();
             conn.close();
