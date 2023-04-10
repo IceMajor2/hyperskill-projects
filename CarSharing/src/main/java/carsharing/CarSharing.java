@@ -15,6 +15,6 @@ public class CarSharing {
             e.printStackTrace();
         }
         UserInterface UI = new UserInterface();
-        UI.run();
+        UI.startMenu();
     }
 }

@@ -2,7 +2,7 @@ package carsharing;
 
 public class Company {
     
-    public static int AUTO_INCREMENT_AT = 1;
+    private static int AUTO_INCREMENT_AT = 1;
     private int id;
     private String name;
     
