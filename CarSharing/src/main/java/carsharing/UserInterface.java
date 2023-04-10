@@ -1,13 +1,21 @@
 package carsharing;
 
+import static carsharing.CarSharing.dbLogic;
+import static carsharing.CarSharing.companies;
+import carsharing.logic.ProgramLogic;
+
+import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
 
     private Scanner scanner;
+    private ProgramLogic logic;
 
     public UserInterface() {
         this.scanner = new Scanner(System.in);
+        this.logic = new ProgramLogic();
     }
 
     public void run() {
@@ -19,6 +27,10 @@ public class UserInterface {
             if (choice.equals("0")) {
                 break;
             }
+            if(choice.equals("drop")) {
+                dropTable();
+                continue;
+            }
             if (choice.equals("1")) {
                 runManager();
                 continue;
@@ -26,16 +38,59 @@ public class UserInterface {
         }
     }
 
-    public void runManager() {
+    private void runManager() {
         while (true) {
             System.out.println("1. Company list");
             System.out.println("2. Create a company");
             System.out.println("0. Back");
             String choice = this.scanner.nextLine();
-            
-            if(choice.equals("0")) {
+
+            if (choice.equals("0")) {
                 break;
             }
+            if (choice.equals("1")) {
+                printCompanies();
+                continue;
+            }
+            if (choice.equals("2")) {
+                createCompany();
+                continue;
+            }
+        }
+    }
+
+    private void createCompany() {
+        System.out.println("Enter the company name:");
+        String name = scanner.nextLine();
+        Company company = new Company(name);   
+        try {
+            companies.add(company);
+            dbLogic.addCompany(company);
+            System.out.println("The company was created!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void printCompanies() {
+        if(companies.size() == 0) {
+            System.out.println("The company list is empty!");
+            return;
+        }
+        System.out.println("Company list:");
+        
+        for(Company company : companies.getCompanies()) {
+            int id = company.getId();
+            String name = company.getName();
+            System.out.println(String.format("%d. %s", id, name));
+        }
+    }
+    
+    private void dropTable() {
+        try {
+            dbLogic.dropTable(this.scanner.nextLine());
+        } catch(SQLException e) {
+            e.printStackTrace();
         }
     }
 }
