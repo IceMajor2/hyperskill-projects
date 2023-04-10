@@ -1,6 +1,5 @@
 package carsharing.logic;
 
-import carsharing.Companies;
 import carsharing.Company;
 import static carsharing.CarSharing.companies;
 
@@ -76,6 +75,7 @@ public class DBLogic {
             // and that we do not want while initializing db
             companies.getCompanies().add(company);
         }
+        ProgramLogic.orderCompaniesById();
         stmt.close();
         rs.close();
     }

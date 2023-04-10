@@ -1,21 +1,16 @@
 package carsharing;
 
-import static carsharing.CarSharing.dbLogic;
 import static carsharing.CarSharing.companies;
 import carsharing.logic.ProgramLogic;
-
-import java.sql.SQLException;
-import java.util.List;
 import java.util.Scanner;
+import java.sql.SQLException;
 
 public class UserInterface {
 
     private Scanner scanner;
-    private ProgramLogic logic;
 
     public UserInterface() {
         this.scanner = new Scanner(System.in);
-        this.logic = new ProgramLogic();
     }
 
     public void run() {
@@ -64,8 +59,7 @@ public class UserInterface {
         String name = scanner.nextLine();
         Company company = new Company(name);   
         try {
-            companies.add(company);
-            dbLogic.addCompany(company);
+            ProgramLogic.completeAdd(company);
             System.out.println("The company was created!");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,7 +82,7 @@ public class UserInterface {
     
     private void dropTable() {
         try {
-            dbLogic.dropTable(this.scanner.nextLine());
+            ProgramLogic.dropTable(this.scanner.nextLine());
         } catch(SQLException e) {
             e.printStackTrace();
         }

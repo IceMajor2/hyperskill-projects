@@ -15,6 +15,10 @@ public class Companies {
         return this.companies;
     }
 
+    public void setCompanies(List<Company> companies) {
+        this.companies = companies;
+    }
+
     public void add(Company company) {
         this.companies.add(company);
     }
