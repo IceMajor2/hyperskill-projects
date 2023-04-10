@@ -15,14 +15,14 @@ public class DBLogic {
     private Connection conn;
 
     public DBLogic() throws SQLException {
-        this.establishConnection();
+        conn = this.establishConnection();
         this.establishDatabase();
     }
 
-    public void establishConnection() throws SQLException {
-        Connection conn = null;
-        conn = DriverManager.getConnection(DB_URL);
-        conn.setAutoCommit(true);
+    public Connection establishConnection() throws SQLException {
+        Connection connection = DriverManager.getConnection(DB_URL);
+        connection.setAutoCommit(true);
+        return connection;
     }
 
     public void closeConnection() throws SQLException {
@@ -36,10 +36,6 @@ public class DBLogic {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        // Open a connection
-        conn = DriverManager.getConnection(DB_URL);
-        conn.setAutoCommit(true);
 
         // Execute a query that initializes a table "company"
         Statement stmt = conn.createStatement();
