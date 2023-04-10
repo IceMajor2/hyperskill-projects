@@ -51,11 +51,12 @@ public class DBLogic {
         // creating table 'car' with foreign key referencing to table 'company'
         String tableCar = "CREATE TABLE IF NOT EXISTS car ("
                 + "id INT AUTO_INCREMENT PRIMARY KEY,"
-                + "name VARCHAR(25) NOT NULL UNIQUE"
-                + "company_id INT NOT NULL"
+                + "name VARCHAR(25) NOT NULL UNIQUE,"
+                + "company_id INT NOT NULL,"
                 + "CONSTRAINT car_fk FOREIGN KEY (company_id) "
-                + "REFERENECES company (id)";
+                + "REFERENCES company (id))";
         stmt.executeUpdate(tableCompany);
+        stmt.executeUpdate(tableCar);
 
         // Clean-up environment
         stmt.close();
