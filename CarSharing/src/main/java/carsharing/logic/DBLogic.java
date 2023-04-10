@@ -44,11 +44,18 @@ public class DBLogic {
 
         // Execute a query that initializes a table "company"
         Statement stmt = conn.createStatement();
-        String query = "CREATE TABLE IF NOT EXISTS company ("
+        String tableCompany = "CREATE TABLE IF NOT EXISTS company ("
                 + "id INTEGER AUTO_INCREMENT PRIMARY KEY,"
                 + "name VARCHAR(30) NOT NULL UNIQUE"
                 + ")";
-        stmt.executeUpdate(query);
+        // creating table 'car' with foreign key referencing to table 'company'
+        String tableCar = "CREATE TABLE IF NOT EXISTS car ("
+                + "id INT AUTO_INCREMENT PRIMARY KEY,"
+                + "name VARCHAR(25) NOT NULL UNIQUE"
+                + "company_id INT NOT NULL"
+                + "CONSTRAINT car_fk FOREIGN KEY (company_id) "
+                + "REFERENECES company (id)";
+        stmt.executeUpdate(tableCompany);
 
         // Clean-up environment
         stmt.close();
