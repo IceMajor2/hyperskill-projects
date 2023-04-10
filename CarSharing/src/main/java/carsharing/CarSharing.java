@@ -1,44 +1,21 @@
 package carsharing;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import carsharing.logic.DBLogic;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class CarSharing {
-
-    // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "org.h2.Driver";
-    static final String DB_URL =
-            //"jdbc:h2:./src/carsharing/db/carsharing";
-            "jdbc:h2:./src/main/java/carsharing/db/carsharing";
-
+    
     public static void main(String[] args) {
-        Connection conn = null;
-        Statement stmt = null;
+        DBLogic dbLogic = null;
         try {
-            // Register JDBC driver
-            Class.forName(JDBC_DRIVER);
-
-            // Open a connection
-            conn = DriverManager.getConnection(DB_URL);
-            conn.setAutoCommit(true);
-
-            // Execute a query
-            stmt = conn.createStatement();
-            String query = "CREATE TABLE IF NOT EXISTS company ("
-                    + "id INTEGER,"
-                    + "name VARCHAR(30)"
-                    + ")";
-            stmt.executeUpdate(query);
-
-            // Clean-up environment
-            stmt.close();
-            conn.close();
-        } catch (SQLException se) {
-            se.printStackTrace();
-        } catch (Exception e) {
+            dbLogic = new DBLogic();
+            dbLogic.executeQuery("ALTER TABLE company "
+                + "CHANGE id id INTEGER AUTO_INCREMENT PRIMARY KEY,"
+                + "MODIFY name VARCHAR(30) NOT NULL,"
+                + "ADD UNIQUE (name);");
+        } catch (SQLException e) {
             e.printStackTrace();
         }
+        UserInterface UI = new UserInterface();
     }
 }
