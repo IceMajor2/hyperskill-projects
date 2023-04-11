@@ -92,8 +92,9 @@ public class DBLogic {
         
         Statement stmt = conn.createStatement();
         String query = String.format("UPDATE customer "
-                + "SET rented_car_id = %s"
+                + "SET rented_car_id = %s "
                 + "WHERE id = %d", toSet, customerId);
+        stmt.executeUpdate(query);
         stmt.close();
     }
 

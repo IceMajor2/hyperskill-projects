@@ -135,31 +135,43 @@ public class UserInterface {
     }
 
     private void customerMenu(Customer customer) {
-        while(true) {
+        while (true) {
             System.out.println("1. Rent a car");
             System.out.println("2. Return a rented car");
             System.out.println("3. My rented car");
             System.out.println("0. Back");
             String choice = scanner.nextLine();
-            
-            if(choice.equals("0")) {
+
+            if (choice.equals("0")) {
                 break;
             }
-            if(choice.equals("2")) {
-                if(customer.getRentedCarId() == -1) {
+            if (choice.equals("1")) {
+                if (companies.size() == 0) {
+                    System.out.println("The company list is empty!");
+                    continue;
+                }
+                if (customer.getRentedCarId() != -1) {
+                    System.out.println("You've already rented a car!");
+                    continue;
+                }
+                rentCar(customer);
+                continue;
+            }
+            if (choice.equals("2")) {
+                if (customer.getRentedCarId() == -1) {
                     System.out.println("You didn't rent a car!");
                     continue;
                 }
                 try {
                     dbLogic.setRentedCarId(customer, -1);
                     customer.setRentedCarId(-1);
-                } catch(SQLException e) {
+                } catch (SQLException e) {
                     e.printStackTrace();
                 }
                 continue;
             }
-            if(choice.equals("3")) {
-                if(customer.getRentedCarId() == -1) {
+            if (choice.equals("3")) {
+                if (customer.getRentedCarId() == -1) {
                     System.out.println("You didn't rent a car!");
                     continue;
                 }
@@ -207,6 +219,51 @@ public class UserInterface {
         }
     }
 
+    private void rentCar(Customer customer) {
+        while (true) {
+            System.out.println("Choose a company:");
+            printCompanies();
+            System.out.println("0. Back");
+            
+            String companyChoice = scanner.nextLine();
+            if (companyChoice.equals("0")) {
+                break;
+            }
+            
+            int companyId = Integer.valueOf(companyChoice);
+            try {
+                Company company = companies.get(companyId - 1);
+                var carsOfComp = cars.carsOf(company);
+                
+                System.out.println("Choose a car:");
+                printCarsOf(company);
+                System.out.println("0. Back");
+
+                String carChoice = scanner.nextLine();
+                if (carChoice.equals("0")) {
+                    continue;
+                }
+                int carId = Integer.valueOf(carChoice);
+                Car car = null;
+                try {
+                    car = carsOfComp.get(carId - 1);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(String.format("No car of %d id.", carId));
+                    continue;
+                }
+                customer.setRentedCarId(car.getId());
+                dbLogic.setRentedCarId(customer, car.getId()); // <- important it's car.getId(), not carId because the method refers to an id in DATABASE, while carId refers to an id of a car in a given company
+                System.out.println(String.format("You rented '%s'", car));
+                break;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(String.format("No company of %d id.", companyId));
+                continue;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private void printCompanies() {
         for (Company company : companies.getCompanies()) {
             int id = company.getId();
@@ -235,12 +292,12 @@ public class UserInterface {
             index++;
         }
     }
-    
+
     private void printRentedCar(Customer customer) {
         int rentedCarId = customer.getRentedCarId();
         Car car = cars.get(rentedCarId - 1);
         Company company = companies.get(car.getCompanyId() - 1);
-        
+
         System.out.println(String.format("Your rented car:%n%s%nCompany:%n%s",
                 car, company));
     }
