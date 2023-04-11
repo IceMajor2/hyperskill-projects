@@ -134,10 +134,11 @@ public class UserInterface {
     }
 
     private void printCarsOf(Company company) {
+        int index = 1;
         for (Car car : cars.carsOf(company)) {
-            int id = car.getId();
             String name = car.getName();
-            System.out.println(String.format("%d. %s", id, name));
+            System.out.println(String.format("%d. %s", index, name));
+            index++;
         }
     }
 
