@@ -432,3 +432,41 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajo
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO car (id, name, company_id) VALUES (1, 'Toyota Corolla', 4[*]"; oczekiwano "[, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
 Syntax error in SQL statement "INSERT INTO car (id, name, company_id) VALUES (1, 'Toyota Corolla', 4[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
 INSERT INTO car (id, name, company_id) VALUES (1, 'Toyota Corolla', 4 [42001-214]
+2023-04-11 14:18:29 database: flush
+org.h2.message.DbException: Błąd ogólny: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	at carsharing.logic.DBLogic.establishConnection(DBLogic.java:30)
+	at carsharing.logic.DBLogic.<init>(DBLogic.java:24)
+	at carsharing.CarSharing.main(CarSharing.java:16)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd ogólny: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 14 more
+2023-04-11 14:19:14 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabela "CUSTOMER" nie istnieje
+Table "CUSTOMER" not found; SQL statement:
+SELECT * FROM customer [42102-214]

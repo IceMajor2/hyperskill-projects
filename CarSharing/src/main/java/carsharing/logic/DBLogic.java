@@ -44,23 +44,42 @@ public class DBLogic {
             e.printStackTrace();
         }
 
-        // Execute a query that initializes a table "company"
+        this.createCompanyTable();
+        this.createCarTable();
+        this.createCustomerTable();
+    }
+    
+    private void createCompanyTable() throws SQLException {
         Statement stmt = conn.createStatement();
-        String tableCompany = "CREATE TABLE IF NOT EXISTS company ("
+        String table = "CREATE TABLE IF NOT EXISTS company ("
                 + "id INTEGER AUTO_INCREMENT PRIMARY KEY,"
                 + "name VARCHAR(30) NOT NULL UNIQUE"
                 + ")";
-        // creating table 'car' with foreign key referencing to table 'company'
-        String tableCar = "CREATE TABLE IF NOT EXISTS car ("
+        stmt.executeUpdate(table);
+        stmt.close();
+    }
+    
+    private void createCarTable() throws SQLException {
+        Statement stmt = conn.createStatement();
+        String table = "CREATE TABLE IF NOT EXISTS car ("
                 + "id INT AUTO_INCREMENT PRIMARY KEY,"
                 + "name VARCHAR(25) NOT NULL UNIQUE,"
                 + "company_id INT NOT NULL,"
                 + "CONSTRAINT car_fk FOREIGN KEY (company_id) "
                 + "REFERENCES company (id))";
-        stmt.executeUpdate(tableCompany);
-        stmt.executeUpdate(tableCar);
-
-        // Clean-up environment
+        stmt.executeUpdate(table);
+        stmt.close();
+    }
+    
+    private void createCustomerTable() throws SQLException {
+        Statement stmt = conn.createStatement();
+        String table = "CREATE TABLE IF NOT EXISTS customer ("
+                + "id INT AUTO_INCREMENT PRIMARY KEY,"
+                + "name VARCHAR(30) NOT NULL UNIQUE,"
+                + "rented_car_id INT,"
+                + "CONSTRAINT customer_fk FOREIGN KEY (rented_car_id) "
+                + "REFERENCES car (id))";
+        stmt.executeUpdate(table);
         stmt.close();
     }
 
