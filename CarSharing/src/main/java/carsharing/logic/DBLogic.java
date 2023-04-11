@@ -11,6 +11,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
 
 public class DBLogic {
 
@@ -163,6 +165,27 @@ public class DBLogic {
                 + "VALUES ('%s', %s)", name, rentedCar);
         stmt.executeUpdate(query);
         stmt.close();
+    }
+    
+    public List<Customer> getCustomers() throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM customer "
+                + "ORDER BY id");
+        
+        List<Customer> customers = new ArrayList<>();
+        while(rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            String rentedNullCheck = rs.getString("rented_car_id");
+            int rentedCarId = rentedNullCheck == null ? -1
+                    : Integer.valueOf(rentedNullCheck);
+            
+            Customer customer = new Customer(id, name, rentedCarId);
+            customers.add(customer);
+        }
+        stmt.close();
+        rs.close();
+        return customers;
     }
 
     public void dropTable(String table) throws SQLException {

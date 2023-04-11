@@ -1,4 +1,4 @@
 /ChuckNorrisCipherEncoder/target/
 /CarSharing/target/
 /CarSharing/nb-configuration.xml
-/CarSharing/src/main/java/carsharing/db/
+/CarSharing/src/main/java/carsharing/db/*

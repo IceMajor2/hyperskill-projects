@@ -2,11 +2,12 @@ package carsharing;
 
 import static carsharing.CarSharing.cars;
 import static carsharing.CarSharing.companies;
+import static carsharing.CarSharing.dbLogic;
 import carsharing.entities.Company;
 import carsharing.entities.Car;
 import carsharing.entities.Customer;
-import carsharing.logic.ProgramLogic;
 import java.util.Scanner;
+import java.util.List;
 import java.sql.SQLException;
 
 public class UserInterface {
@@ -36,7 +37,32 @@ public class UserInterface {
                 managerMenu();
                 continue;
             }
-            if(choice.equals("3")) {
+            if (choice.equals("2")) {
+                List<Customer> customers = null;
+                try {
+                    customers = dbLogic.getCustomers();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                if (customers.size() == 0) {
+                    System.out.println("The customer list is empty!");
+                    continue;
+                }
+                System.out.println("Choose a customer:");
+                printCustomers();
+                System.out.println("0. Back");
+                int id = Integer.valueOf(scanner.nextLine());
+                if (id == 0) {
+                    continue;
+                }
+                try {
+                    customerMenu(customers.get(id - 1));
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println(String.format("No customer of %d id.", id));
+                }
+                continue;
+            }
+            if (choice.equals("3")) {
                 createCustomer();
                 continue;
             }
@@ -62,12 +88,12 @@ public class UserInterface {
                 printCompanies();
                 System.out.println("0. Back");
                 int id = Integer.valueOf(scanner.nextLine());
-                if(id == 0) {
+                if (id == 0) {
                     continue;
                 }
                 try {
                     companyMenu(companies.get(id - 1));
-                } catch(IndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException e) {
                     System.out.println(String.format("No company of %d id.", id));
                     continue;
                 }
@@ -108,12 +134,38 @@ public class UserInterface {
         }
     }
 
+    private void customerMenu(Customer customer) {
+        while(true) {
+            System.out.println("1. Rent a car");
+            System.out.println("2. Return a rented car");
+            System.out.println("3. My rented car");
+            System.out.println("0. Back");
+            String choice = scanner.nextLine();
+            
+            if(choice.equals("0")) {
+                break;
+            }
+            if(choice.equals("2")) {
+                continue;
+            }
+            if(choice.equals("3")) {
+                if(customer.getRentedCarId() == -1) {
+                    System.out.println("You didn't rent a car!");
+                    continue;
+                }
+                printRentedCar(customer);
+                continue;
+            }
+        }
+    }
+
     private void createCompany() {
         System.out.println("Enter the company name:");
         String name = scanner.nextLine();
         Company company = new Company(name);
         try {
-            ProgramLogic.completeAdd(company);
+            companies.add(company);
+            dbLogic.addCompany(company);
             System.out.println("The company was created!");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -125,19 +177,20 @@ public class UserInterface {
         String name = scanner.nextLine();
         Car car = new Car(name, companyId);
         try {
-            ProgramLogic.completeAdd(car);
+            cars.add(car);
+            dbLogic.addCar(car);
             System.out.println("The car was added!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     private void createCustomer() {
         System.out.println("Enter the customer name:");
         String name = scanner.nextLine();
-        Customer customer = new Customer(name, -1);
+        Customer customer = new Customer(name);
         try {
-            ProgramLogic.completeAdd(customer);
+            dbLogic.addCustomer(customer);
             System.out.println("The customer was added!");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -152,6 +205,18 @@ public class UserInterface {
         }
     }
 
+    private void printCustomers() {
+        try {
+            for (Customer customer : dbLogic.getCustomers()) {
+                int id = customer.getId();
+                String name = customer.getName();
+                System.out.println(String.format("%d. %s", id, name));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void printCarsOf(Company company) {
         int index = 1;
         for (Car car : cars.carsOf(company)) {
@@ -160,10 +225,19 @@ public class UserInterface {
             index++;
         }
     }
+    
+    private void printRentedCar(Customer customer) {
+        int rentedCarId = customer.getRentedCarId();
+        Car car = cars.get(rentedCarId - 1);
+        Company company = companies.get(car.getCompanyId() - 1);
+        
+        System.out.println(String.format("Your rented car:%n%s%nCompany:%n%s",
+                car, company));
+    }
 
     private void dropTable() {
         try {
-            ProgramLogic.dropTable(this.scanner.nextLine());
+            dbLogic.dropTable(scanner.nextLine());
         } catch (SQLException e) {
             e.printStackTrace();
         }

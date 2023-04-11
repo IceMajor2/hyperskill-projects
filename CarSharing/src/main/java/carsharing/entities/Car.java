@@ -32,4 +32,8 @@ public class Car {
     public int getCompanyId() {
         return companyId;
     }
+    
+    public String toString() {
+        return this.name;
+    }
 }
