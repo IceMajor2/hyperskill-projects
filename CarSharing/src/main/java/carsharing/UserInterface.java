@@ -146,6 +146,16 @@ public class UserInterface {
                 break;
             }
             if(choice.equals("2")) {
+                if(customer.getRentedCarId() == -1) {
+                    System.out.println("You didn't rent a car!");
+                    continue;
+                }
+                try {
+                    dbLogic.setRentedCarId(customer, -1);
+                    customer.setRentedCarId(-1);
+                } catch(SQLException e) {
+                    e.printStackTrace();
+                }
                 continue;
             }
             if(choice.equals("3")) {

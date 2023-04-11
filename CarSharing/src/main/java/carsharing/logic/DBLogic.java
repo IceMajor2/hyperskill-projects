@@ -85,6 +85,17 @@ public class DBLogic {
         stmt.executeUpdate(table);
         stmt.close();
     }
+    
+    public void setRentedCarId(Customer customer, int carId) throws SQLException {
+        int customerId = customer.getId();
+        String toSet = carId == -1 ? "NULL" : Integer.toString(carId);
+        
+        Statement stmt = conn.createStatement();
+        String query = String.format("UPDATE customer "
+                + "SET rented_car_id = %s"
+                + "WHERE id = %d", toSet, customerId);
+        stmt.close();
+    }
 
     public void executeQuery(String query) throws SQLException {
         Statement stmt = conn.createStatement();

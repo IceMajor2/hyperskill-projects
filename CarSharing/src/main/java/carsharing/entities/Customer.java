@@ -40,4 +40,8 @@ public class Customer {
     public int getId() {
         return id;
     }
+
+    public void setRentedCarId(int rentedCarId) {
+        this.rentedCarId = rentedCarId;
+    }
 }
