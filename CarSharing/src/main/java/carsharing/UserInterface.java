@@ -49,12 +49,21 @@ public class UserInterface {
             if (choice.equals("1")) {
                 if (companies.size() == 0) {
                     System.out.println("The company list is empty!");
-                    return;
+                    continue;
                 }
                 System.out.println("Choose the company:");
                 printCompanies();
+                System.out.println("0. Back");
                 int id = Integer.valueOf(scanner.nextLine());
-                companyMenu(companies.get(id - 1));
+                if(id == 0) {
+                    continue;
+                }
+                try {
+                    companyMenu(companies.get(id - 1));
+                } catch(IndexOutOfBoundsException e) {
+                    System.out.println(String.format("No company of %d id.", id));
+                    continue;
+                }
                 continue;
             }
             if (choice.equals("2")) {
@@ -78,7 +87,7 @@ public class UserInterface {
             if (choice.equals("1")) {
                 if (cars.carCountOf(company) == 0) {
                     System.out.println("The car list is empty!");
-                    return;
+                    continue;
                 }
                 System.out.println("Car list:");
                 printCarsOf(company);
