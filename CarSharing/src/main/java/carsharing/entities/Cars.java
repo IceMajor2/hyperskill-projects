@@ -19,12 +19,30 @@ public class Cars {
         return cars;
     }
     
+    public List<Car> carsOf(Company company) {
+        List<Car> companyCars = new ArrayList<>();
+        int companyId = company.getId();
+        for(Car car : cars) {
+            if(car.getCompanyId() == companyId) {
+                companyCars.add(car);
+            }
+        }
+        return companyCars;
+    }
+    
     public void add(Car car) {
         this.cars.add(car);
     }
     
-    public int size() {
-        return this.cars.size();
+    public int carCountOf(Company company) {
+        int companyId = company.getId();
+        int size = 0;
+        for(Car car : cars) {
+            if(car.getCompanyId() == companyId) {
+                size++;
+            }
+        }
+        return size;
     }
     
     public Car get(int index) {

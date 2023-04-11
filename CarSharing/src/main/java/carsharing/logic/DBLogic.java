@@ -120,6 +120,18 @@ public class DBLogic {
         stmt.executeUpdate(query);
         stmt.close();
     }
+    
+    public void addCar(Car car) throws SQLException {
+        int id = car.getId();
+        String name = car.getName();
+        int companyId = car.getCompanyId();
+        
+        Statement stmt = conn.createStatement();
+        String query = String.format("INSERT INTO car (id, name, company_id) "
+                + "VALUES (%d, '%s', %d)", id, name, companyId);
+        stmt.executeUpdate(query);
+        stmt.close();
+    }
 
     public void dropTable(String table) throws SQLException {
         Statement stmt = conn.createStatement();

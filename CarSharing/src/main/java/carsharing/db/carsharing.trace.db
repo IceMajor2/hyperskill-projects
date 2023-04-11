@@ -428,3 +428,7 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajo
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 14 more
+2023-04-11 13:16:24 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "INSERT INTO car (id, name, company_id) VALUES (1, 'Toyota Corolla', 4[*]"; oczekiwano "[, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"
+Syntax error in SQL statement "INSERT INTO car (id, name, company_id) VALUES (1, 'Toyota Corolla', 4[*]"; expected "[, ::, AT, FORMAT, *, /, %, +, -, ||, NOT, IS, ILIKE, REGEXP, AND, OR, ,, )"; SQL statement:
+INSERT INTO car (id, name, company_id) VALUES (1, 'Toyota Corolla', 4 [42001-214]
