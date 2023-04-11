@@ -1,7 +1,9 @@
 package carsharing.logic;
 
-import carsharing.Company;
+import carsharing.entities.Company;
+import carsharing.entities.Car;
 import static carsharing.CarSharing.companies;
+import static carsharing.CarSharing.cars;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +26,7 @@ public class DBLogic {
         this.loadDataToProgram();
     }
 
-    public Connection establishConnection() throws SQLException {
+    private Connection establishConnection() throws SQLException {
         Connection connection = DriverManager.getConnection(DB_URL);
         connection.setAutoCommit(true);
         return connection;
@@ -34,7 +36,7 @@ public class DBLogic {
         this.conn.close();
     }
 
-    public void establishDatabase() throws SQLException {
+    private void establishDatabase() throws SQLException {
         // Register JDBC driver
         try {
             Class.forName(JDBC_DRIVER);
@@ -67,38 +69,58 @@ public class DBLogic {
         stmt.executeUpdate(query);
         stmt.close();
     }
-    
-    public void loadDataToProgram() throws SQLException {
+
+    private void loadDataToProgram() throws SQLException {
+        this.loadCompanies();
+        this.loadCars();
+    }
+
+    private void loadCompanies() throws SQLException {
         Statement stmt = conn.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM company");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM company "
+                + "ORDER BY id");
         
-        while(rs.next()) {
+        while (rs.next()) {
             int id = rs.getInt("id");
             String name = rs.getString("name");
-            
+
             Company company = new Company(id, name);
-            // loading directly through List interface
-            // because add command of Companies
-            // executes DB queries as well
-            // and that we do not want while initializing db
             companies.getCompanies().add(company);
         }
-        ProgramLogic.orderCompaniesById();
+
         stmt.close();
         rs.close();
     }
-    
+
+    private void loadCars() throws SQLException {
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM car "
+                + "ORDER BY id");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            int companyId = rs.getInt("company_id");
+
+            Car car = new Car(id, name, companyId);
+            cars.getCars().add(car);
+        }
+
+        stmt.close();
+        rs.close();
+    }
+
     public void addCompany(Company company) throws SQLException {
         int id = company.getId();
         String name = company.getName();
-        
+
         Statement stmt = conn.createStatement();
         String query = String.format("INSERT INTO company (id, name) "
                 + "VALUES (%d, '%s')", id, name);
         stmt.executeUpdate(query);
         stmt.close();
     }
-    
+
     public void dropTable(String table) throws SQLException {
         Statement stmt = conn.createStatement();
         String query = String.format("DROP TABLE %s", table);

@@ -265,3 +265,166 @@ CREATE TABLE IF NOT EXISTS car (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(2
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "CREATE TABLE IF NOT EXISTS car (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(25) NOT NULL UNIQUE,company_id INT NOT NULL,CONSTRAINT car_fk FOREIGN KEY (company_id) REFERENCES company (id)[*]"; oczekiwano "INDEX, ON, NOT DEFERRABLE, DEFERRABLE, NOCHECK, CHECK, ,, )"
 Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS car (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(25) NOT NULL UNIQUE,company_id INT NOT NULL,CONSTRAINT car_fk FOREIGN KEY (company_id) REFERENCES company (id)[*]"; expected "INDEX, ON, NOT DEFERRABLE, DEFERRABLE, NOCHECK, CHECK, ,, )"; SQL statement:
 CREATE TABLE IF NOT EXISTS car (id INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR(25) NOT NULL UNIQUE,company_id INT NOT NULL,CONSTRAINT car_fk FOREIGN KEY (company_id) REFERENCES company (id) [42001-214]
+2023-04-11 12:40:02 database: wrong user or password; user: "SA"
+org.h2.message.DbException: Nieprawidłowy użytkownik/hasło
+Wrong user name or password [28000-214]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.Engine.openSession(Engine.java:154)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:229)
+	at carsharing.logic.DBLogic.establishConnection(DBLogic.java:30)
+	at carsharing.logic.DBLogic.<init>(DBLogic.java:24)
+	at carsharing.CarSharing.main(CarSharing.java:16)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
+Wrong user name or password [28000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:510)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 14 more
+2023-04-11 12:41:28 database: wrong user or password; user: "SA"
+org.h2.message.DbException: Nieprawidłowy użytkownik/hasło
+Wrong user name or password [28000-214]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.Engine.openSession(Engine.java:154)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:229)
+	at carsharing.logic.DBLogic.establishConnection(DBLogic.java:30)
+	at carsharing.logic.DBLogic.<init>(DBLogic.java:24)
+	at carsharing.CarSharing.main(CarSharing.java:16)
+Caused by: org.h2.jdbc.JdbcSQLInvalidAuthorizationSpecException: Nieprawidłowy użytkownik/hasło
+Wrong user name or password [28000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:510)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 14 more
+2023-04-11 12:42:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Metoda nie jest dozwolona w kwerendzie
+Method is not allowed for a query. Use execute or executeQuery instead of executeUpdate; SQL statement:
+SELECT * FROM company ORDER BY id [90001-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Prepared.update(Prepared.java:244)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:190)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:143)
+	at carsharing.logic.DBLogic.loadCompanies(DBLogic.java:84)
+	at carsharing.logic.DBLogic.loadDataToProgram(DBLogic.java:74)
+	at carsharing.logic.DBLogic.<init>(DBLogic.java:26)
+	at carsharing.CarSharing.main(CarSharing.java:16)
+2023-04-11 12:42:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Metoda nie jest dozwolona w kwerendzie
+Method is not allowed for a query. Use execute or executeQuery instead of executeUpdate; SQL statement:
+SELECT * FROM company ORDER BY id [90001-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.command.Prepared.update(Prepared.java:244)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:190)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:143)
+	at carsharing.logic.DBLogic.loadCompanies(DBLogic.java:84)
+	at carsharing.logic.DBLogic.loadDataToProgram(DBLogic.java:74)
+	at carsharing.logic.DBLogic.<init>(DBLogic.java:26)
+	at carsharing.CarSharing.main(CarSharing.java:16)
+2023-04-11 12:43:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-04-11 12:44:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-04-11 12:45:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-04-11 12:59:02 database: flush
+org.h2.message.DbException: Błąd ogólny: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.util.JdbcUtils.getConnection(JdbcUtils.java:288)
+	at org.h2.server.web.WebServer.getConnection(WebServer.java:808)
+	at org.h2.server.web.WebApp.login(WebApp.java:1033)
+	at org.h2.server.web.WebApp.process(WebApp.java:226)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.WebThread.process(WebThread.java:152)
+	at org.h2.server.web.WebThread.run(WebThread.java:101)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd ogólny: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 22 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 16 more
+2023-04-11 13:00:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "SELECT * FROM[*]"; oczekiwano "identifier"
+Syntax error in SQL statement "SELECT * FROM[*]"; expected "identifier"; SQL statement:
+SELECT * FROM [42001-214]
+2023-04-11 13:01:06 database: flush
+org.h2.message.DbException: Błąd ogólny: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.message.DbException.convert(DbException.java:395)
+	at org.h2.mvstore.db.Store.lambda$new$0(Store.java:125)
+	at org.h2.mvstore.MVStore.handleException(MVStore.java:3318)
+	at org.h2.mvstore.MVStore.panic(MVStore.java:593)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:469)
+	at org.h2.mvstore.MVStore$Builder.open(MVStore.java:4082)
+	at org.h2.mvstore.db.Store.<init>(Store.java:136)
+	at org.h2.engine.Database.<init>(Database.java:324)
+	at org.h2.engine.Engine.openSession(Engine.java:92)
+	at org.h2.engine.Engine.openSession(Engine.java:222)
+	at org.h2.engine.Engine.createSession(Engine.java:201)
+	at org.h2.engine.SessionRemote.connectEmbeddedOrServer(SessionRemote.java:338)
+	at org.h2.jdbc.JdbcConnection.<init>(JdbcConnection.java:122)
+	at org.h2.Driver.connect(Driver.java:59)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:252)
+	at carsharing.logic.DBLogic.establishConnection(DBLogic.java:30)
+	at carsharing.logic.DBLogic.<init>(DBLogic.java:24)
+	at carsharing.CarSharing.main(CarSharing.java:16)
+Caused by: org.h2.jdbc.JdbcSQLNonTransientException: Błąd ogólny: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]"
+General error: "org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]" [50000-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:554)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	... 20 more
+Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/IceMajor/Documents/Programowanie/JetBrains_course/CarSharing/src/main/java/carsharing/db/carsharing.mv.db [2.1.214/7]
+	at org.h2.mvstore.DataUtils.newMVStoreException(DataUtils.java:1004)
+	at org.h2.mvstore.FileStore.open(FileStore.java:178)
+	at org.h2.mvstore.FileStore.open(FileStore.java:128)
+	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
+	... 14 more

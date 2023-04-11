@@ -1,4 +1,4 @@
-package carsharing;
+package carsharing.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,12 @@ public class Companies {
         this.companies = new ArrayList<>();
     }
 
-    public List<Company> getCompanies() {
-        return this.companies;
-    }
-
     public void setCompanies(List<Company> companies) {
         this.companies = companies;
+    }
+
+    public List<Company> getCompanies() {
+        return companies;
     }
 
     public void add(Company company) {

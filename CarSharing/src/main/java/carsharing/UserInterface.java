@@ -1,5 +1,6 @@
 package carsharing;
 
+import carsharing.entities.Company;
 import static carsharing.CarSharing.companies;
 import carsharing.logic.ProgramLogic;
 import java.util.Scanner;

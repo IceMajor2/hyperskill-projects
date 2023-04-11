@@ -1,4 +1,4 @@
-package carsharing;
+package carsharing.entities;
 
 public class Company {
     
