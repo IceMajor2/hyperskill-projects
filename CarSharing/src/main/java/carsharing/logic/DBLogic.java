@@ -2,6 +2,7 @@ package carsharing.logic;
 
 import carsharing.entities.Company;
 import carsharing.entities.Car;
+import carsharing.entities.Customer;
 import static carsharing.CarSharing.companies;
 import static carsharing.CarSharing.cars;
 
@@ -48,7 +49,7 @@ public class DBLogic {
         this.createCarTable();
         this.createCustomerTable();
     }
-    
+
     private void createCompanyTable() throws SQLException {
         Statement stmt = conn.createStatement();
         String table = "CREATE TABLE IF NOT EXISTS company ("
@@ -58,7 +59,7 @@ public class DBLogic {
         stmt.executeUpdate(table);
         stmt.close();
     }
-    
+
     private void createCarTable() throws SQLException {
         Statement stmt = conn.createStatement();
         String table = "CREATE TABLE IF NOT EXISTS car ("
@@ -70,7 +71,7 @@ public class DBLogic {
         stmt.executeUpdate(table);
         stmt.close();
     }
-    
+
     private void createCustomerTable() throws SQLException {
         Statement stmt = conn.createStatement();
         String table = "CREATE TABLE IF NOT EXISTS customer ("
@@ -98,7 +99,7 @@ public class DBLogic {
         Statement stmt = conn.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM company "
                 + "ORDER BY id");
-        
+
         while (rs.next()) {
             int id = rs.getInt("id");
             String name = rs.getString("name");
@@ -139,15 +140,27 @@ public class DBLogic {
         stmt.executeUpdate(query);
         stmt.close();
     }
-    
+
     public void addCar(Car car) throws SQLException {
         int id = car.getId();
         String name = car.getName();
         int companyId = car.getCompanyId();
-        
+
         Statement stmt = conn.createStatement();
         String query = String.format("INSERT INTO car (id, name, company_id) "
                 + "VALUES (%d, '%s', %d)", id, name, companyId);
+        stmt.executeUpdate(query);
+        stmt.close();
+    }
+
+    public void addCustomer(Customer customer) throws SQLException {
+        String name = customer.getName();
+        String rentedCar = customer.getRentedCarId() == -1 ? "NULL"
+                : Integer.toString(customer.getRentedCarId());
+
+        Statement stmt = conn.createStatement();
+        String query = String.format("INSERT INTO customer (name, rented_car_id) "
+                + "VALUES ('%s', %s)", name, rentedCar);
         stmt.executeUpdate(query);
         stmt.close();
     }

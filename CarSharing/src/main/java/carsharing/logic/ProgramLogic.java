@@ -5,6 +5,7 @@ import static carsharing.CarSharing.cars;
 import static carsharing.CarSharing.dbLogic;
 import carsharing.entities.Car;
 import carsharing.entities.Company;
+import carsharing.entities.Customer;
 import java.sql.SQLException;
 
 public class ProgramLogic {
@@ -21,6 +22,10 @@ public class ProgramLogic {
     public static void completeAdd(Car car) throws SQLException {
         cars.add(car);
         dbLogic.addCar(car);
+    }
+    
+    public static void completeAdd(Customer customer) throws SQLException {
+        dbLogic.addCustomer(customer);
     }
 
     public static void dropTable(String table) throws SQLException {

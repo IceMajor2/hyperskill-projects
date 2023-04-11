@@ -4,6 +4,7 @@ import static carsharing.CarSharing.cars;
 import static carsharing.CarSharing.companies;
 import carsharing.entities.Company;
 import carsharing.entities.Car;
+import carsharing.entities.Customer;
 import carsharing.logic.ProgramLogic;
 import java.util.Scanner;
 import java.sql.SQLException;
@@ -33,6 +34,10 @@ public class UserInterface {
             }
             if (choice.equals("1")) {
                 managerMenu();
+                continue;
+            }
+            if(choice.equals("3")) {
+                createCustomer();
                 continue;
             }
         }
@@ -122,6 +127,18 @@ public class UserInterface {
         try {
             ProgramLogic.completeAdd(car);
             System.out.println("The car was added!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    private void createCustomer() {
+        System.out.println("Enter the customer name:");
+        String name = scanner.nextLine();
+        Customer customer = new Customer(name, -1);
+        try {
+            ProgramLogic.completeAdd(customer);
+            System.out.println("The customer was added!");
         } catch (SQLException e) {
             e.printStackTrace();
         }
