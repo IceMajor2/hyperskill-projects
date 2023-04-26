@@ -17,6 +17,6 @@ public class Runner implements CommandLineRunner {
     @Override
     public void run(String... args) {
         System.out.println(String.format("We run! (Password is: '%s')",
-                generator.generate(10)));
+                generator.generate(20)));
     }
 }
