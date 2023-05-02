@@ -1,0 +1,67 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>We live in a fast world, and our plans may change very quickly. Let's add the ability to refund a ticket if a customer can't come and watch a movie. We will use tokens to secure the ticket refund process.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Change the JSON response when a customer purchases a ticket by making a <code class="java">POST</code> request to the <code class="java">/purchase</code> endpoint. Turn it into the following format:</p>
+<pre><code class="java">{
+    "token": "00ae15f2-1ab6-4a02-a01f-07810b42c0ee",
+    "ticket": {
+        "row": 1,
+        "column": 1,
+        "price": 10
+    }
+}</code></pre>
+<p>We recommend using the <code class="java">randomUUID()</code> method of the <code class="java">UUID</code> class to generate tokens. Take a look at this <a href="https://www.baeldung.com/java-uuid" rel="noopener noreferrer nofollow" target="_blank">UUID Guide</a> by Baeldung if you're interested in more detail.</p>
+<p>Implement the <code class="java">/return</code> endpoint, which will handle <code class="java">POST</code> requests and allow customers to refund their tickets.</p>
+<p>The request should have the <code class="java">token</code> feature that identifies the ticket in the request body. Once you have the token, you need to identify the ticket it relates to and mark it as available. The response body should be as follows:</p>
+<pre><code class="java">{
+    "returned_ticket": {
+        "row": 1,
+        "column": 1,
+        "price": 10
+    }
+}</code></pre>
+<p> The <code class="java">returned_ticket</code> should contain the information about the returned ticket.</p>
+<p>If you cannot identify the ticket by the token, make your program respond with a <code class="java">400</code> status code and the following response body:</p>
+<pre><code class="java">{
+    "error": "Wrong token!"
+}</code></pre>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1</strong>: <em>a correct</em> <code class="java">POST /purchase</code><em> request</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="java">{
+    "row": 3,
+    "column": 4
+}</code></pre>
+<p><em>Response body:</em></p>
+<pre><code class="java">{
+    "token": "e739267a-7031-4eed-a49c-65d8ac11f556",
+    "ticket": {
+        "row": 3,
+        "column": 4,
+        "price": 10
+    }
+}</code></pre>
+<p><strong>Example 2</strong>: <code class="java">POST /return</code> <em>with the correct token</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="java">{
+    "token": "e739267a-7031-4eed-a49c-65d8ac11f556"
+}</code></pre>
+<p><em>Response body:</em></p>
+<pre><code class="java">{
+    "returned_ticket": {
+        "row": 1,
+        "column": 2,
+        "price": 10
+    }
+}</code></pre>
+<p><strong>Example 3</strong>: <code class="java">POST /return</code> <em>with an expired token</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="java">{
+    "token": "e739267a-7031-4eed-a49c-65d8ac11f556"
+}</code></pre>
+<p><em>Response body:</em></p>
+<pre><code class="java">{
+    "error": "Wrong token!"
+}</code></pre>
+</div>

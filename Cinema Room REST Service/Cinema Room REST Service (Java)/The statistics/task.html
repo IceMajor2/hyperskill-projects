@@ -1,0 +1,34 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Your REST service knows how to show available tickets, sell them, and make a refund. Let's add statistics available only to the theatre managers.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Implement the <code class="java">/stats</code> endpoint that will handle <code class="java">POST</code> requests with URL parameters. If the URL parameters contain a <code class="java">password</code> key with a <code class="java">super_secret</code> value, return the movie theatre statistics in the following format:</p>
+<pre><code class="java">{
+    "current_income": 0,
+    "number_of_available_seats": 81,
+    "number_of_purchased_tickets": 0
+}</code></pre>
+<p>Take a look at the description of keys:</p>
+<ul>
+<li><code class="java">current_income</code> — shows the total income of sold tickets.</li>
+<li><code class="java">number_of_available_seats</code> — shows how many seats are available.</li>
+<li><code class="java">number_of_purchased_tickets</code> — shows how many tickets were purchased.</li>
+</ul>
+<p>If the parameters don't contain a password key or a wrong value has been passed, respond with a <code class="java">401</code> status code. The response body should contain the following:</p>
+<pre><code class="java">{
+    "error": "The password is wrong!"
+}</code></pre>
+<h5 id="examples">Examples</h5>
+<p><strong> Example 1: </strong><em>a</em><strong> </strong><code class="java">POST /stats</code><em> request with no parameters</em></p>
+<p><em>Response body:</em></p>
+<pre><code class="java">{
+    "error": "The password is wrong!"
+}</code></pre>
+<p><strong>Example 2: </strong><em>a</em><strong> </strong><code class="java">POST /stats</code><em> request with the correct password</em></p>
+<p><em>Response body:</em></p>
+<pre><code class="java">{
+    "current_income": 30,
+    "number_of_available_seats": 78,
+    "number_of_purchased_tickets": 3
+}</code></pre>
+</div>
