@@ -16,4 +16,8 @@ public class CinemaRoomController {
     public CinemaRoom getAvailableSeats() {
         return cinema;
     }
+
+    public void buySeat(int row, int column) {
+
+    }
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Seat {
     private int row;
     private int column;
+    private int price;
     @JsonIgnore
     private boolean taken;
 
@@ -15,6 +16,8 @@ public class Seat {
         this.row = row;
         this.column = column;
         this.taken = false;
+
+        this.price = row <= 4 ? 10 : 8;
     }
 
     public void take() {
@@ -55,5 +58,9 @@ public class Seat {
 
     public int getRow() {
         return row;
+    }
+
+    public int getPrice() {
+        return price;
     }
 }
