@@ -35,14 +35,31 @@ public class CinemaRoom {
     }
 
     public void purchaseSeat(int row, int column) {
-        Seat seat = this.getSeat(row, column);
+        Seat seat = null;
+        try {
+            seat = this.getSeat(row, column);
+        } catch(Exception e) {
+            // handle some exception
+            return;
+        }
 
-        if(seat.isTaken()) {
-            // throw some exception
+        seat.take();
+        this.removeSeatFromAvailable(seat);
+    }
+
+    private void removeSeatFromAvailable(Seat seat) {
+        for(Seat avSeat : availableSeats) {
+            if(avSeat.equals(seat)) {
+                availableSeats.remove(avSeat);
+                return;
+            }
         }
     }
 
     private int seatListPosition(int row, int column) {
+        if(row <= 0 || column <= 0 || row > rows || column > columns) {
+            // throw some exception
+        }
         return ((row - 1) * this.columns) + column - 1;
     }
 
@@ -50,9 +67,11 @@ public class CinemaRoom {
         return this.seats.get(seatListPosition(row, column));
     }
 
-    public int totalSeats() {
-        return availableSeats.size();
+    private int totalSeats() {
+        return seats.size();
     }
+
+    private int availableSeatsNumber() { return availableSeats.size(); }
 
     @JsonProperty(value = "total_columns")
     public int getTotalColumns() {

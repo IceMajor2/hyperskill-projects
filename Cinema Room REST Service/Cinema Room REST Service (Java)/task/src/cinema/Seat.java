@@ -8,7 +8,8 @@ public class Seat {
     @JsonIgnore
     private boolean taken;
 
-    public Seat() {}
+    public Seat() {
+    }
 
     public Seat(int row, int column) {
         this.row = row;
@@ -16,8 +17,28 @@ public class Seat {
         this.taken = false;
     }
 
-    public void purchase() {
+    public void take() {
+        if (this.taken) {
+            // throw some exception
+        }
+        taken = true;
+    }
 
+    @Override
+    public boolean equals(Object compare) {
+        if (this == compare) {
+            return true;
+        }
+
+        if (!(compare instanceof Seat)) {
+            return false;
+        }
+
+        Seat compareSeat = (Seat) compare;
+
+        return this.row == compareSeat.row
+                && this.column == compareSeat.column
+                && this.taken == compareSeat.taken;
     }
 
     public void setTaken(boolean taken) {

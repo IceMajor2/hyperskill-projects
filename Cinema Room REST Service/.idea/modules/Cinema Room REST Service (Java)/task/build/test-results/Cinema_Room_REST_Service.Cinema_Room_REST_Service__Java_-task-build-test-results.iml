@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":Cinema_Room_REST_Service__Java_-task-build-test-results" external.linked.project.path="$MODULE_DIR$/../../../../../../Cinema Room REST Service (Java)/task/build/test-results" external.root.project.path="$MODULE_DIR$/../../../../../.." external.system.id="GRADLE" external.system.module.group="Cinema Room REST Service" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../../../Cinema Room REST Service (Java)/task/build/test-results">
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../../Cinema Room REST Service (Java)/task/build/test-results/.gradle" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../../Cinema Room REST Service (Java)/task/build/test-results/build" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../../Cinema Room REST Service (Java)/task/build/test-results/out" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
