@@ -11,6 +11,7 @@ public class CinemaRoom {
 
     private int rows;
     private int columns;
+    private List<Seat> seats;
     private List<Seat> availableSeats;
 
     public CinemaRoom() {}
@@ -29,6 +30,24 @@ public class CinemaRoom {
                 availableSeats.add(seat);
             }
         }
+
+        this.seats = new ArrayList<>(availableSeats);
+    }
+
+    public void purchaseSeat(int row, int column) {
+        Seat seat = this.getSeat(row, column);
+
+        if(seat.isTaken()) {
+            // throw some exception
+        }
+    }
+
+    private int seatListPosition(int row, int column) {
+        return ((row - 1) * this.columns) + column - 1;
+    }
+
+    private Seat getSeat(int row, int column) {
+        return this.seats.get(seatListPosition(row, column));
     }
 
     public int totalSeats() {

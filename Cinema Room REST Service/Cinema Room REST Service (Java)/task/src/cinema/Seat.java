@@ -16,6 +16,10 @@ public class Seat {
         this.taken = false;
     }
 
+    public void purchase() {
+
+    }
+
     public void setTaken(boolean taken) {
         this.taken = taken;
     }

@@ -119,6 +119,9 @@ files:
 - name: src/cinema/Seat.java
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/189/stages/945/implement#comment
-status: Failed
-record: -1
+feedback_link: https://hyperskill.org/learn/step/13375#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Tue, 02 May 2023 15:47:22 UTC"
+record: 1
