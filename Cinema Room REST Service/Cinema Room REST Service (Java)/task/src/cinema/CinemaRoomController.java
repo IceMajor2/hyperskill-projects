@@ -1,11 +1,15 @@
 package cinema;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Map;
 
 @RestController
 public class CinemaRoomController {
@@ -21,17 +25,19 @@ public class CinemaRoomController {
         return cinema;
     }
 
-    @PostMapping("/seats")
-    public Seat buySeat(@RequestParam int row, @RequestParam int column) {
+    @PostMapping(path = "/purchase", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> buySeat(@RequestParam int row, @RequestParam int column) {
         try {
             Seat bought = cinema.purchaseSeat(row, column);
-            return bought;
+            return new ResponseEntity<>(bought, HttpStatus.OK);
         } catch(IndexOutOfBoundsException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "The number of a row or a column is out of bounds!");
+            return new ResponseEntity<>(Map.of("error",
+                    "The number of a row or a column is out of bounds!"),
+                    HttpStatus.BAD_REQUEST);
         } catch(IllegalStateException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-                    "The ticket has been already purchased!");
+            return new ResponseEntity<>(Map.of("error",
+                    "The ticket has been already purchased!"),
+                    HttpStatus.BAD_REQUEST);
         }
     }
 }
