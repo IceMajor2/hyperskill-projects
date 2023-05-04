@@ -34,17 +34,17 @@ public class CinemaRoom {
         this.seats = new ArrayList<>(availableSeats);
     }
 
-    public void purchaseSeat(int row, int column) {
+    public Seat purchaseSeat(int row, int column) {
         Seat seat = null;
         try {
             seat = this.getSeat(row, column);
-        } catch(Exception e) {
-            // handle some exception
-            return;
+        } catch(IndexOutOfBoundsException e) {
+            throw e;
         }
 
         seat.take();
         this.removeSeatFromAvailable(seat);
+        return seat;
     }
 
     private void removeSeatFromAvailable(Seat seat) {
@@ -54,17 +54,23 @@ public class CinemaRoom {
                 return;
             }
         }
+        throw new RuntimeException();
     }
 
-    private int seatListPosition(int row, int column) {
+    private int seatListPosition(int row, int column) throws IndexOutOfBoundsException {
         if(row <= 0 || column <= 0 || row > rows || column > columns) {
-            // throw some exception
+            throw new IndexOutOfBoundsException();
         }
         return ((row - 1) * this.columns) + column - 1;
     }
 
-    private Seat getSeat(int row, int column) {
-        return this.seats.get(seatListPosition(row, column));
+    private Seat getSeat(int row, int column) throws IndexOutOfBoundsException {
+        try {
+            int seatPos = seatListPosition(row, column);
+            return this.seats.get(seatPos);
+        } catch(IndexOutOfBoundsException e) {
+            throw e;
+        }
     }
 
     private int totalSeats() {

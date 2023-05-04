@@ -1,7 +1,11 @@
 package cinema;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class CinemaRoomController {
@@ -17,7 +21,17 @@ public class CinemaRoomController {
         return cinema;
     }
 
-    public void buySeat(int row, int column) {
-
+    @PostMapping("/seats")
+    public Seat buySeat(@RequestParam int row, @RequestParam int column) {
+        try {
+            Seat bought = cinema.purchaseSeat(row, column);
+            return bought;
+        } catch(IndexOutOfBoundsException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The number of a row or a column is out of bounds!");
+        } catch(IllegalStateException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "The ticket has been already purchased!");
+        }
     }
 }

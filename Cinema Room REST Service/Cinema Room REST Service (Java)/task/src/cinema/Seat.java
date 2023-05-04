@@ -20,9 +20,9 @@ public class Seat {
         this.price = row <= 4 ? 10 : 8;
     }
 
-    public void take() {
+    public void take() throws IllegalStateException {
         if (this.taken) {
-            // throw some exception
+            throw new IllegalStateException();
         }
         taken = true;
     }
