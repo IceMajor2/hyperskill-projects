@@ -34,7 +34,7 @@ public class CinemaRoom {
         this.seats = new ArrayList<>(availableSeats);
     }
 
-    public Seat purchaseSeat(int row, int column) {
+    public Seat purchaseSeat(int row, int column) throws IllegalStateException, IndexOutOfBoundsException {
         Seat seat = null;
         try {
             seat = this.getSeat(row, column);
@@ -42,8 +42,13 @@ public class CinemaRoom {
             throw e;
         }
 
+        if (seat.isTaken()) {
+            throw new IllegalStateException();
+        }
+
         seat.take();
         this.removeSeatFromAvailable(seat);
+
         return seat;
     }
 
@@ -57,8 +62,37 @@ public class CinemaRoom {
         throw new RuntimeException();
     }
 
-    private int seatListPosition(int row, int column) throws IndexOutOfBoundsException {
+    private void addSeatToAvailable(Seat seat) {
+        int seatPos = this.seatListPosition(seat.getRow(), seat.getColumn());
+        this.availableSeats.add(seatPos, seat);
+    }
+
+    private Seat returnSeat(int row, int column) throws IndexOutOfBoundsException {
+        Seat seat = null;
+        try {
+            seat = this.getSeat(row, column);
+        } catch(IndexOutOfBoundsException e) {
+            throw e;
+        }
+
+        if(!seat.isTaken()) {
+            throw new IllegalStateException();
+        }
+
+        seat.vacate();
+        this.addSeatToAvailable(seat);
+        return seat;
+    }
+
+    private boolean seatExists(int row, int column) {
         if(row <= 0 || column <= 0 || row > rows || column > columns) {
+            return false;
+        }
+        return true;
+    }
+
+    private int seatListPosition(int row, int column) throws IndexOutOfBoundsException {
+        if(!seatExists(row, column)) {
             throw new IndexOutOfBoundsException();
         }
         return ((row - 1) * this.columns) + column - 1;

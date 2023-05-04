@@ -20,12 +20,11 @@ public class Seat {
         this.price = row <= 4 ? 10 : 8;
     }
 
-    public void take() throws IllegalStateException {
-        if (this.taken) {
-            throw new IllegalStateException();
-        }
+    public void take() {
         taken = true;
     }
+
+    public void vacate() { taken = false; }
 
     @Override
     public boolean equals(Object compare) {

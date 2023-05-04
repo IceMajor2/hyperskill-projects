@@ -414,6 +414,9 @@ files:
         };
     }
   learner_created: false
+- name: src/cinema/Ticket.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13377#comment
 status: Unchecked
 record: -1

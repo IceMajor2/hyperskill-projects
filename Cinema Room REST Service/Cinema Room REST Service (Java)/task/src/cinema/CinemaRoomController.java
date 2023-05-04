@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 public class CinemaRoomController {
@@ -20,13 +21,21 @@ public class CinemaRoomController {
         return cinema;
     }
 
+    @PostMapping("/return")
+    public ResponseEntity<?> returnTicket(UUID token) {
+        return null;
+    }
+
     @PostMapping("/purchase")
     public ResponseEntity<?> buySeat(@RequestBody Seat seat) {
         int row = seat.getRow();
         int column = seat.getColumn();
         try {
             Seat bought = cinema.purchaseSeat(row, column);
-            return new ResponseEntity<>(bought, HttpStatus.OK);
+            UUID token = UUID.randomUUID();
+
+            return new ResponseEntity<>(Map.of("ticket", bought,
+                    "token", token.toString()), HttpStatus.OK);
         } catch(IndexOutOfBoundsException e) {
             return new ResponseEntity<>(Map.of("error",
                     "The number of a row or a column is out of bounds!"),
