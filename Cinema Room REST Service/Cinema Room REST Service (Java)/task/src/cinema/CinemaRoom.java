@@ -67,7 +67,7 @@ public class CinemaRoom {
         this.availableSeats.add(seatPos, seat);
     }
 
-    private Seat returnSeat(int row, int column) throws IndexOutOfBoundsException {
+    public void returnSeat(int row, int column) throws IndexOutOfBoundsException {
         Seat seat = null;
         try {
             seat = this.getSeat(row, column);
@@ -81,7 +81,6 @@ public class CinemaRoom {
 
         seat.vacate();
         this.addSeatToAvailable(seat);
-        return seat;
     }
 
     private boolean seatExists(int row, int column) {

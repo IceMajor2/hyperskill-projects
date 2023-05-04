@@ -25,8 +25,23 @@ public class CinemaRoomController {
     }
 
     @PostMapping("/return")
-    public ResponseEntity<?> returnTicket(UUID token) {
-        return null;
+    public ResponseEntity<?> returnTicket(@RequestBody Token token) {
+        if(!tickets.containsKey(token.getToken())) {
+            return new ResponseEntity<>(Map.of("error",
+                    "Wrong token!"), HttpStatus.BAD_REQUEST);
+        }
+        Ticket ticket = tickets.get(token.getToken());
+        Seat seat = ticket.getSeat();
+
+        try {
+            cinema.returnSeat(seat.getRow(), seat.getColumn());
+            tickets.remove(token.getToken());
+
+            return new ResponseEntity<>(Map.of("returned_ticket",
+                    seat), HttpStatus.BAD_REQUEST);
+        } catch(Exception e) {
+            throw new RuntimeException("Weird stuff.");
+        }
     }
 
     @PostMapping("/purchase")
@@ -59,5 +74,24 @@ public class CinemaRoomController {
     private void saveTicket(UUID token, Seat seat) {
         Ticket newTicket = new Ticket(token, seat);
         tickets.put(token, newTicket);
+    }
+}
+
+class Token {
+    UUID token;
+
+    public Token() {
+    }
+
+    public Token(UUID token) {
+        this.token = token;
+    }
+
+    public UUID getToken() {
+        return token;
+    }
+
+    public void setToken(UUID token) {
+        this.token = token;
     }
 }
