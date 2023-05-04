@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="CinemaTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-02T15:47:18" hostname="DESKTOP-OGGJ8AB" time="4.184">
+<testsuite name="CinemaTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-04T13:21:03" hostname="DESKTOP-OGGJ8AB" time="3.975">
   <properties/>
-  <testcase name="start" classname="CinemaTests" time="4.184"/>
+  <testcase name="start" classname="CinemaTests" time="3.975"/>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 ?[0;34m
@@ -13,14 +13,14 @@ Start test 1?[0m
 ?[0m?[0;34m =========|_|==============|___/=/_/_/_/
 ?[0m?[0;34m :: Spring Boot ::                (v3.0.2)
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:18.860+02:00  INFO 16996 --- [    Test worker] cinema.Main                              : Starting Main using Java 17.0.6 with PID 16996 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Cinema Room REST Service\Cinema Room REST Service (Java)\task)
-?[0m?[0;34m2023-05-02T17:47:18.866+02:00  INFO 16996 --- [    Test worker] cinema.Main                              : No active profile set, falling back to 1 default profile: "default"
-?[0m?[0;34m2023-05-02T17:47:20.336+02:00  INFO 16996 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-?[0m?[0;34m2023-05-02T17:47:20.349+02:00  INFO 16996 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-?[0m?[0;34m2023-05-02T17:47:20.349+02:00  INFO 16996 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
-?[0m?[0;34m2023-05-02T17:47:20.446+02:00  INFO 16996 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-?[0m?[0;34m2023-05-02T17:47:20.451+02:00  INFO 16996 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1527 ms
-?[0m?[0;34m2023-05-02T17:47:20.637+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:04.152+02:00  INFO 7408 --- [    Test worker] cinema.Main                              : Starting Main using Java 17.0.6 with PID 7408 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Cinema Room REST Service\Cinema Room REST Service (Java)\task)
+?[0m?[0;34m2023-05-04T15:21:04.157+02:00  INFO 7408 --- [    Test worker] cinema.Main                              : No active profile set, falling back to 1 default profile: "default"
+?[0m?[0;34m2023-05-04T15:21:05.578+02:00  INFO 7408 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+?[0m?[0;34m2023-05-04T15:21:05.590+02:00  INFO 7408 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+?[0m?[0;34m2023-05-04T15:21:05.591+02:00  INFO 7408 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+?[0m?[0;34m2023-05-04T15:21:05.674+02:00  INFO 7408 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+?[0m?[0;34m2023-05-04T15:21:05.676+02:00  INFO 7408 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1464 ms
+?[0m?[0;34m2023-05-04T15:21:05.856+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -114,7 +114,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0;34m2023-05-02T17:47:20.654+02:00  WARN 16996 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0;34m2023-05-04T15:21:05.872+02:00  WARN 7408 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -141,8 +141,8 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
 ?[0m?[0;34m	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.267+02:00  INFO 16996 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-?[0m?[0;34m2023-05-02T17:47:21.331+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.464+02:00  INFO 7408 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+?[0m?[0;34m2023-05-04T15:21:06.517+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -237,7 +237,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.341+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.527+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -332,7 +332,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.354+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.538+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -427,7 +427,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.371+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.548+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -522,7 +522,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.389+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.558+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -617,7 +617,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.408+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.567+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -712,7 +712,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.423+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.576+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -807,7 +807,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.436+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.585+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -902,7 +902,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.447+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.593+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -997,7 +997,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.461+02:00  WARN 16996 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-04T15:21:06.602+02:00  WARN 7408 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1092,13 +1092,19 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-02T17:47:21.483+02:00  INFO 16996 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-?[0m?[0;34m2023-05-02T17:47:21.507+02:00  INFO 16996 --- [    Test worker] cinema.Main                              : Started Main in 3.1 seconds (process running for 3.928)
-?[0;34m2023-05-02T17:47:22.087+02:00  INFO 16996 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-02T17:47:22.088+02:00  INFO 16996 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-02T17:47:22.090+02:00  INFO 16996 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+?[0m?[0;34m2023-05-04T15:21:06.623+02:00  INFO 7408 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+?[0m?[0;34m2023-05-04T15:21:06.644+02:00  INFO 7408 --- [    Test worker] cinema.Main                              : Started Main in 2.945 seconds (process running for 3.838)
+?[0;34m2023-05-04T15:21:07.084+02:00  INFO 7408 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-04T15:21:07.085+02:00  INFO 7408 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-04T15:21:07.086+02:00  INFO 7408 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 ?[0m?[1;31m
 Start test 2?[0m
+?[1;31m
+Start test 3?[0m
+?[1;31m
+Start test 4?[0m
+?[1;31m
+Start test 5?[0m
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

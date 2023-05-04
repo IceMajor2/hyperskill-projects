@@ -1,5 +1,6 @@
 import cinema.Main;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.hyperskill.hstest.dynamic.DynamicTest;
 import org.hyperskill.hstest.dynamic.input.DynamicTesting;
 import org.hyperskill.hstest.exception.outcomes.WrongAnswer;
@@ -8,6 +9,7 @@ import org.hyperskill.hstest.stage.SpringTest;
 import org.hyperskill.hstest.testcase.CheckResult;
 
 import java.util.Map;
+import java.util.UUID;
 
 import static org.hyperskill.hstest.testing.expect.Expectation.expect;
 import static org.hyperskill.hstest.testing.expect.json.JsonChecker.*;
@@ -16,6 +18,7 @@ public class CinemaTests extends SpringTest {
 
     private static final String ALREADY_PURCHASED_ERROR_MESSAGE = "The ticket has been already purchased!";
     private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "The number of a row or a column is out of bounds!";
+    private static final String WRONG_TOKEN_ERROR_MESSAGE = "Wrong token!";
 
     private static final Gson gson = new Gson();
 
@@ -74,9 +77,13 @@ public class CinemaTests extends SpringTest {
         expect(response.getContent()).asJson()
             .check(
                 isObject()
-                    .value("row", 1)
-                    .value("column", 1)
-                    .value("price", 10)
+                    .value("token", isString())
+                    .value("ticket",
+                        isObject()
+                            .value("row", 1)
+                            .value("column", 1)
+                            .value("price", 10)
+                    )
             );
         return CheckResult.correct();
     }
@@ -157,12 +164,79 @@ public class CinemaTests extends SpringTest {
         return CheckResult.correct();
     }
 
+    CheckResult testReturnTicket() {
+
+        HttpResponse response = post(
+            "/purchase",
+            gson.toJson(Map.of(
+                "row", 2,
+                "column", 5
+            ))
+        ).send();
+
+        checkStatusCode(response, 200);
+
+        expect(response.getContent()).asJson()
+            .check(
+                isObject()
+                    .value("token", isString())
+                    .value("ticket",
+                        isObject()
+                            .value("row", 2)
+                            .value("column", 5)
+                            .value("price", 10)
+                    )
+            );
+
+        JsonObject jsonResponse = gson.fromJson(response.getContent(), JsonObject.class);
+
+        String tokenFromResponse = jsonResponse.get("token").getAsString();
+        String wrongToken = UUID.randomUUID().toString();
+
+        response = post(
+            "/return",
+            gson.toJson(Map.of(
+                "token", wrongToken
+            ))
+        ).send();
+
+        checkStatusCode(response, 400);
+
+        expect(response.getContent()).asJson().check(
+            isObject()
+                .value("error", WRONG_TOKEN_ERROR_MESSAGE)
+                .anyOtherValues()
+        );
+
+        response = post(
+            "/return",
+            gson.toJson(Map.of(
+                "token", tokenFromResponse
+            ))
+        ).send();
+
+        checkStatusCode(response, 200);
+
+        expect(response.getContent()).asJson().check(
+            isObject()
+                .value("returned_ticket",
+                    isObject()
+                        .value("row", 2)
+                        .value("column", 5)
+                        .value("price", 10)
+                )
+        );
+
+        return CheckResult.correct();
+    }
+
     @DynamicTest
     DynamicTesting[] dynamicTests = new DynamicTesting[]{
         this::testEndpoint,
         this::testEndpointAvailableSeats,
         this::testPurchaseTicket,
         this::testErrorMessageThatTicketHasBeenPurchased,
-        this::testErrorMessageThatNumbersOutOfBounds
+        this::testErrorMessageThatNumbersOutOfBounds,
+        this::testReturnTicket
     };
 }

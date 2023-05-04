@@ -1,13 +1,8 @@
 package cinema;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -25,8 +20,10 @@ public class CinemaRoomController {
         return cinema;
     }
 
-    @PostMapping(path = "/purchase", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> buySeat(@RequestParam int row, @RequestParam int column) {
+    @PostMapping("/purchase")
+    public ResponseEntity<?> buySeat(@RequestBody Seat seat) {
+        int row = seat.getRow();
+        int column = seat.getColumn();
         try {
             Seat bought = cinema.purchaseSeat(row, column);
             return new ResponseEntity<>(bought, HttpStatus.OK);
