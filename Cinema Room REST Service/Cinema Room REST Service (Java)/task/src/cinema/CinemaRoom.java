@@ -55,7 +55,7 @@ public class CinemaRoom {
         Seat toRefund = ticket.getSeat();
 
         this.returnSeat(toRefund.getRow(), toRefund.getColumn());
-        tickets.remove(ticket);
+        tickets.remove(token);
         return ticket;
     }
 
