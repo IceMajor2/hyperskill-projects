@@ -1,5 +1,6 @@
 package cinema;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,11 +13,13 @@ import java.util.UUID;
 public class CinemaRoomController {
 
     private CinemaRoom cinema;
-    private Map<Token, Ticket> tickets;
+    private Map<String, String> adminCredentials;
 
     public CinemaRoomController() {
         this.cinema = new CinemaRoom(9 ,9);
-        this.tickets = new HashMap<>();
+
+        this.adminCredentials = new HashMap<>();
+        adminCredentials.put("admin", "1234");
     }
 
     @GetMapping("/seats")
@@ -26,19 +29,15 @@ public class CinemaRoomController {
 
     @PostMapping("/return")
     public ResponseEntity<?> returnTicket(@RequestBody Token token) {
-        if(!tickets.containsKey(token)) {
+        if(!cinema.ticketExists(token)) {
             return new ResponseEntity<>(Map.of("error",
                     "Wrong token!"), HttpStatus.BAD_REQUEST);
         }
-        Ticket ticket = tickets.get(token);
-        Seat seat = ticket.getSeat();
 
         try {
-            cinema.returnSeat(seat.getRow(), seat.getColumn());
-            tickets.remove(token);
-
+            Ticket refunded = cinema.returnTicket(token);
             return new ResponseEntity<>(Map.of("returned_ticket",
-                    seat), HttpStatus.OK);
+                    refunded.getSeat()), HttpStatus.OK);
         } catch(Exception e) {
             throw new RuntimeException("Weird stuff.");
         }
@@ -50,10 +49,8 @@ public class CinemaRoomController {
         int column = seat.getColumn();
 
         try {
-
-            Seat bought = cinema.purchaseSeat(row, column);
             Token token = new Token(UUID.randomUUID());
-            saveTicket(token, bought);
+            Seat bought = cinema.purchaseSeat(row, column, token);
 
             return new ResponseEntity<>(Map.of("ticket", bought,
                     "token", token.toString()), HttpStatus.OK);
@@ -72,13 +69,13 @@ public class CinemaRoomController {
     }
 
     @PostMapping("/stats")
-    public ResponseEntity<?> statistics() {
+    public ResponseEntity<?> getStatistics(@RequestParam String password,
+                                        @RequestParam @JsonProperty("super_secret") String superSecret) {
+        if(!adminCredentials.containsKey(password) ||!adminCredentials.get(password).equals(superSecret)) {
+            return new ResponseEntity<>(Map.of("error",
+                    "The password is wrong!"), HttpStatus.UNAUTHORIZED);
+        }
         return null;
-    }
-
-    private void saveTicket(Token token, Seat seat) {
-        Ticket newTicket = new Ticket(token, seat);
-        tickets.put(token, newTicket);
     }
 }
 

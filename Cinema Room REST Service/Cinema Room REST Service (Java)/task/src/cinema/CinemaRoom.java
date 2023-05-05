@@ -4,41 +4,38 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @JsonPropertyOrder({"total_rows", "total_columns", "available_seats"})
 public class CinemaRoom {
 
     private int rows;
     private int columns;
+
     private List<Seat> seats;
     private List<Seat> availableSeats;
 
-    public CinemaRoom() {}
+    private Map<Token, Ticket> tickets;
+    private Statistics stats;
+
+    public CinemaRoom() {
+    }
 
     public CinemaRoom(int rows, int cols) {
         this.rows = rows;
         this.columns = cols;
+        this.stats = new Statistics();
+        this.tickets = new HashMap<>();
         this.initSeats();
     }
 
-    private void initSeats() {
-        this.availableSeats = new ArrayList<>();
-        for(int i = 1; i <= rows; i++) {
-            for(int y = 1; y <= columns; y++) {
-                Seat seat = new Seat(i, y);
-                availableSeats.add(seat);
-            }
-        }
-
-        this.seats = new ArrayList<>(availableSeats);
-    }
-
-    public Seat purchaseSeat(int row, int column) throws IllegalStateException, IndexOutOfBoundsException {
+    public Seat purchaseSeat(int row, int column, Token token) throws IllegalStateException, IndexOutOfBoundsException {
         Seat seat = null;
         try {
             seat = this.getSeat(row, column);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw e;
         }
 
@@ -46,15 +43,41 @@ public class CinemaRoom {
             throw new IllegalStateException();
         }
 
+        saveTicket(token, seat);
         seat.take();
         this.removeSeatFromAvailable(seat);
 
         return seat;
     }
 
+    public Ticket returnTicket(Token token) throws IndexOutOfBoundsException {
+        Ticket ticket = this.tickets.get(token);
+        Seat toRefund = ticket.getSeat();
+
+        this.returnSeat(toRefund.getRow(), toRefund.getColumn());
+        tickets.remove(ticket);
+        return ticket;
+    }
+
+    private void returnSeat(int row, int column) throws IndexOutOfBoundsException {
+        Seat seat = null;
+        try {
+            seat = this.getSeat(row, column);
+        } catch (IndexOutOfBoundsException e) {
+            throw e;
+        }
+
+        if (!seat.isTaken()) {
+            throw new IllegalStateException();
+        }
+
+        seat.vacate();
+        this.addSeatToAvailable(seat);
+    }
+
     private void removeSeatFromAvailable(Seat seat) {
-        for(Seat avSeat : availableSeats) {
-            if(avSeat.equals(seat)) {
+        for (Seat avSeat : availableSeats) {
+            if (avSeat.equals(seat)) {
                 availableSeats.remove(avSeat);
                 return;
             }
@@ -67,31 +90,19 @@ public class CinemaRoom {
         this.availableSeats.add(seatPos, seat);
     }
 
-    public void returnSeat(int row, int column) throws IndexOutOfBoundsException {
-        Seat seat = null;
-        try {
-            seat = this.getSeat(row, column);
-        } catch(IndexOutOfBoundsException e) {
-            throw e;
-        }
-
-        if(!seat.isTaken()) {
-            throw new IllegalStateException();
-        }
-
-        seat.vacate();
-        this.addSeatToAvailable(seat);
-    }
-
     private boolean seatExists(int row, int column) {
-        if(row <= 0 || column <= 0 || row > rows || column > columns) {
+        if (row <= 0 || column <= 0 || row > rows || column > columns) {
             return false;
         }
         return true;
     }
 
+    public boolean ticketExists(Token token) {
+        return this.tickets.containsKey(token);
+    }
+
     private int seatListPosition(int row, int column) throws IndexOutOfBoundsException {
-        if(!seatExists(row, column)) {
+        if (!seatExists(row, column)) {
             throw new IndexOutOfBoundsException();
         }
         return ((row - 1) * this.columns) + column - 1;
@@ -101,16 +112,12 @@ public class CinemaRoom {
         try {
             int seatPos = seatListPosition(row, column);
             return this.seats.get(seatPos);
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw e;
         }
     }
 
-    private int totalSeats() {
-        return seats.size();
-    }
-
-    private int availableSeatsNumber() { return availableSeats.size(); }
+    // getters and setters + more
 
     @JsonProperty(value = "total_columns")
     public int getTotalColumns() {
@@ -125,5 +132,34 @@ public class CinemaRoom {
     @JsonProperty(value = "available_seats")
     public List<Seat> getAvailableSeats() {
         return availableSeats;
+    }
+
+    private void initSeats() {
+        this.availableSeats = new ArrayList<>();
+        for (int i = 1; i <= rows; i++) {
+            for (int y = 1; y <= columns; y++) {
+                Seat seat = new Seat(i, y);
+                availableSeats.add(seat);
+            }
+        }
+
+        this.seats = new ArrayList<>(availableSeats);
+    }
+
+    public int availableSeatsNumber() {
+        return availableSeats.size();
+    }
+
+    public int totalSeats() {
+        return seats.size();
+    }
+
+    public Ticket getTicket(Token token) {
+        return this.tickets.get(token);
+    }
+
+    private void saveTicket(Token token, Seat seat) {
+        Ticket ticket = new Ticket(token, seat);
+        this.tickets.put(token, ticket);
     }
 }
