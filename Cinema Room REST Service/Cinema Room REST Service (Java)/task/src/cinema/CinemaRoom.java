@@ -1,5 +1,6 @@
 package cinema;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -16,6 +17,7 @@ public class CinemaRoom {
 
     private List<Seat> seats;
     private List<Seat> availableSeats;
+    private List<Seat> orderedSeats;
 
     private Map<Token, Ticket> tickets;
     private Statistics stats;
@@ -45,7 +47,8 @@ public class CinemaRoom {
 
         saveTicket(token, seat);
         seat.take();
-        this.removeSeatFromAvailable(seat);
+        this.availableSeats.remove(seat);
+        this.orderedSeats.add(seat);
 
         return seat;
     }
@@ -54,6 +57,7 @@ public class CinemaRoom {
         Ticket ticket = this.tickets.get(token);
         Seat toRefund = ticket.getSeat();
 
+        this.orderedSeats.remove(toRefund);
         this.returnSeat(toRefund.getRow(), toRefund.getColumn());
         tickets.remove(token);
         return ticket;
@@ -73,16 +77,6 @@ public class CinemaRoom {
 
         seat.vacate();
         this.addSeatToAvailable(seat);
-    }
-
-    private void removeSeatFromAvailable(Seat seat) {
-        for (Seat avSeat : availableSeats) {
-            if (avSeat.equals(seat)) {
-                availableSeats.remove(avSeat);
-                return;
-            }
-        }
-        throw new RuntimeException();
     }
 
     private void addSeatToAvailable(Seat seat) {
@@ -136,6 +130,7 @@ public class CinemaRoom {
 
     private void initSeats() {
         this.availableSeats = new ArrayList<>();
+        this.orderedSeats = new ArrayList<>();
         for (int i = 1; i <= rows; i++) {
             for (int y = 1; y <= columns; y++) {
                 Seat seat = new Seat(i, y);
@@ -158,8 +153,17 @@ public class CinemaRoom {
         return this.tickets.get(token);
     }
 
+    @JsonIgnore
+    public List<Seat> getOrderedSeats() {
+        return orderedSeats;
+    }
+
     private void saveTicket(Token token, Seat seat) {
         Ticket ticket = new Ticket(token, seat);
         this.tickets.put(token, ticket);
+    }
+
+    public int ticketsNumber() {
+        return this.tickets.size();
     }
 }

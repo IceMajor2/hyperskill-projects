@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Statistics {
 
+    private CinemaRoom cinema;
     private int currentIncome;
     private int availableSeats;
     private int purchasedTickets;
@@ -13,8 +14,10 @@ public class Statistics {
     }
 
     public Statistics(CinemaRoom room) {
+        this.cinema = room;
         this.currentIncome = 0;
         this.availableSeats = room.availableSeatsNumber();
+        this.purchasedTickets = room.ticketsNumber();
     }
 
     public Statistics(int currentIncome, int availableSeats, int purchasedSeats) {
@@ -25,6 +28,11 @@ public class Statistics {
 
     @JsonProperty("current_income")
     public int getCurrentIncome() {
+        int sum = 0;
+        for(Seat seat : cinema.getOrderedSeats()) {
+            sum += seat.getPrice();
+        }
+        this.currentIncome = sum;
         return currentIncome;
     }
 
@@ -34,7 +42,7 @@ public class Statistics {
 
     @JsonProperty("number_of_available_seats")
     public int getAvailableSeats() {
-        return availableSeats;
+        return cinema.availableSeatsNumber();
     }
 
     public void setAvailableSeats(int availableSeats) {
@@ -43,7 +51,7 @@ public class Statistics {
 
     @JsonProperty("number_of_purchased_tickets")
     public int getPurchasedTickets() {
-        return purchasedTickets;
+        return cinema.ticketsNumber();
     }
 
     public void setPurchasedTickets(int purchasedTickets) {
