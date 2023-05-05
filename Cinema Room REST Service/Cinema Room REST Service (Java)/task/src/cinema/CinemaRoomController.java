@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CinemaRoomController {
 
     private CinemaRoom cinema;
-    private Map<UUID, Ticket> tickets;
+    private Map<Token, Ticket> tickets;
 
     public CinemaRoomController() {
         this.cinema = new CinemaRoom(9 ,9);
@@ -26,19 +26,19 @@ public class CinemaRoomController {
 
     @PostMapping("/return")
     public ResponseEntity<?> returnTicket(@RequestBody Token token) {
-        if(!tickets.containsKey(token.getToken())) {
+        if(!tickets.containsKey(token)) {
             return new ResponseEntity<>(Map.of("error",
                     "Wrong token!"), HttpStatus.BAD_REQUEST);
         }
-        Ticket ticket = tickets.get(token.getToken());
+        Ticket ticket = tickets.get(token);
         Seat seat = ticket.getSeat();
 
         try {
             cinema.returnSeat(seat.getRow(), seat.getColumn());
-            tickets.remove(token.getToken());
+            tickets.remove(token);
 
             return new ResponseEntity<>(Map.of("returned_ticket",
-                    seat), HttpStatus.BAD_REQUEST);
+                    seat), HttpStatus.OK);
         } catch(Exception e) {
             throw new RuntimeException("Weird stuff.");
         }
@@ -52,7 +52,7 @@ public class CinemaRoomController {
         try {
 
             Seat bought = cinema.purchaseSeat(row, column);
-            UUID token = UUID.randomUUID();
+            Token token = new Token(UUID.randomUUID());
             saveTicket(token, bought);
 
             return new ResponseEntity<>(Map.of("ticket", bought,
@@ -71,7 +71,7 @@ public class CinemaRoomController {
 
     }
 
-    private void saveTicket(UUID token, Seat seat) {
+    private void saveTicket(Token token, Seat seat) {
         Ticket newTicket = new Ticket(token, seat);
         tickets.put(token, newTicket);
     }
@@ -93,5 +93,25 @@ class Token {
 
     public void setToken(UUID token) {
         this.token = token;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Token)) {
+            return false;
+        }
+
+        Token other = (Token) obj;
+
+        return this.token.equals(other.token);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.token.hashCode();
+    }
+
+    public String toString() {
+        return this.token.toString();
     }
 }

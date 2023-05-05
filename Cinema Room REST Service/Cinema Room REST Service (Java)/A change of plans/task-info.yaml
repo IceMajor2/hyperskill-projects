@@ -418,15 +418,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/13377#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Wrong answer in test #6
-
-    POST /return should respond with status code 200, responded: 400
-
-    Response body:
-
-    {&quot;returned_ticket&quot;:{&quot;row&quot;:2,&quot;column&quot;:5,&quot;price&quot;:10}}
-  time: "Thu, 04 May 2023 14:26:43 UTC"
+  message: Congratulations!
+  time: "Fri, 05 May 2023 07:43:37 UTC"
 record: -1

@@ -4,14 +4,14 @@ import java.util.UUID;
 
 public class Ticket {
 
-    private UUID token;
+    private Token token;
     private Seat seat;
 
     public Ticket() {
 
     }
 
-    public Ticket(UUID token, Seat seat) {
+    public Ticket(Token token, Seat seat) {
         this.token = token;
         this.seat = seat;
     }
@@ -20,7 +20,7 @@ public class Ticket {
         this.seat = seat;
     }
 
-    public void setToken(UUID token) {
+    public void setToken(Token token) {
         this.token = token;
     }
 
@@ -28,7 +28,7 @@ public class Ticket {
         return seat;
     }
 
-    public UUID getToken() {
+    public Token getToken() {
         return token;
     }
 }
