@@ -28,9 +28,11 @@ public class CinemaRoom {
     public CinemaRoom(int rows, int cols) {
         this.rows = rows;
         this.columns = cols;
-        this.stats = new Statistics();
+
         this.tickets = new HashMap<>();
         this.initSeats();
+
+        this.stats = new Statistics(this);
     }
 
     public Seat purchaseSeat(int row, int column, Token token) throws IllegalStateException, IndexOutOfBoundsException {
@@ -165,5 +167,10 @@ public class CinemaRoom {
 
     public int ticketsNumber() {
         return this.tickets.size();
+    }
+
+    @JsonIgnore
+    public Statistics getStats() {
+        return stats;
     }
 }

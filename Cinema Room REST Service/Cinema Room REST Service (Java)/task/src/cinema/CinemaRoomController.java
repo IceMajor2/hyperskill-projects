@@ -1,12 +1,12 @@
 package cinema;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -19,7 +19,7 @@ public class CinemaRoomController {
         this.cinema = new CinemaRoom(9 ,9);
 
         this.adminCredentials = new HashMap<>();
-        adminCredentials.put("admin", "1234");
+        adminCredentials.put("password", "super_secret");
     }
 
     @GetMapping("/seats")
@@ -69,13 +69,12 @@ public class CinemaRoomController {
     }
 
     @PostMapping("/stats")
-    public ResponseEntity<?> getStatistics(@RequestParam String password,
-                                        @RequestParam @JsonProperty("super_secret") String superSecret) {
-        if(!adminCredentials.containsKey(password) ||!adminCredentials.get(password).equals(superSecret)) {
+    public ResponseEntity<?> getStatistics(@RequestParam Optional<String> password) {
+        if(!password.isPresent() || !adminCredentials.get("password").equals(password.get())) {
             return new ResponseEntity<>(Map.of("error",
                     "The password is wrong!"), HttpStatus.UNAUTHORIZED);
         }
-        return null;
+        return new ResponseEntity<>(this.cinema.getStats(), HttpStatus.OK);
     }
 }
 
