@@ -71,6 +71,11 @@ public class CinemaRoomController {
 
     }
 
+    @PostMapping("/stats")
+    public ResponseEntity<?> statistics() {
+        return null;
+    }
+
     private void saveTicket(Token token, Seat seat) {
         Ticket newTicket = new Ticket(token, seat);
         tickets.put(token, newTicket);
@@ -111,6 +116,7 @@ class Token {
         return this.token.hashCode();
     }
 
+    @Override
     public String toString() {
         return this.token.toString();
     }

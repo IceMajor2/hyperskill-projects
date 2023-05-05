@@ -19,8 +19,11 @@ public class CinemaTests extends SpringTest {
     private static final String ALREADY_PURCHASED_ERROR_MESSAGE = "The ticket has been already purchased!";
     private static final String OUT_OF_BOUNDS_ERROR_MESSAGE = "The number of a row or a column is out of bounds!";
     private static final String WRONG_TOKEN_ERROR_MESSAGE = "Wrong token!";
+    private static final String WRONG_PASSWORD_MESSAGE = "The password is wrong!";
 
     private static final Gson gson = new Gson();
+
+    private static String token = "";
 
     public CinemaTests() {
         super(Main.class);
@@ -85,6 +88,10 @@ public class CinemaTests extends SpringTest {
                             .value("price", 10)
                     )
             );
+
+        JsonObject object = gson.fromJson(response.getContent(), JsonObject.class);
+        token = object.get("token").getAsString();
+
         return CheckResult.correct();
     }
 
@@ -230,6 +237,86 @@ public class CinemaTests extends SpringTest {
         return CheckResult.correct();
     }
 
+    CheckResult testStatsEndpoint() {
+
+        HttpResponse response = post("/stats", "").send();
+        checkStatusCode(response, 401);
+
+        expect(response.getContent()).asJson().check(
+            isObject()
+                .value("error", WRONG_PASSWORD_MESSAGE)
+                .anyOtherValues()
+        );
+
+
+        return CheckResult.correct();
+    }
+
+    CheckResult testStats(int numberOfPurchasedTickets, int currentIncome, int availableSeats) {
+        Map<String, String> requestParams = Map.of("password", "super_secret");
+        HttpResponse response = post("/stats", requestParams).send();
+        checkStatusCode(response, 200);
+
+        expect(response.getContent()).asJson().check(
+            isObject()
+                .value("number_of_purchased_tickets", numberOfPurchasedTickets)
+                .value("current_income", currentIncome)
+                .value("number_of_available_seats", availableSeats)
+        );
+
+        return CheckResult.correct();
+    }
+
+    CheckResult returnTicket() {
+        HttpResponse response = post(
+            "/return",
+            gson.toJson(Map.of(
+                "token", token
+            ))
+        ).send();
+
+        expect(response.getContent()).asJson().check(
+            isObject()
+                .value("returned_ticket",
+                    isObject()
+                        .value("row", 7)
+                        .value("column", 4)
+                        .value("price", 8)
+                )
+        );
+
+        return CheckResult.correct();
+    }
+
+    CheckResult testPurchaseAnotherTicket() {
+        HttpResponse response = post(
+            "/purchase",
+            gson.toJson(Map.of(
+                "row", "7",
+                "column", "4"
+            ))
+        ).send();
+
+        checkStatusCode(response, 200);
+
+        expect(response.getContent()).asJson()
+            .check(
+                isObject()
+                    .value("token", isString())
+                    .value("ticket",
+                        isObject()
+                            .value("row", 7)
+                            .value("column", 4)
+                            .value("price", 8)
+                    )
+            );
+
+        JsonObject object = gson.fromJson(response.getContent(), JsonObject.class);
+        token = object.get("token").getAsString();
+
+        return CheckResult.correct();
+    }
+
     @DynamicTest
     DynamicTesting[] dynamicTests = new DynamicTesting[]{
         this::testEndpoint,
@@ -237,6 +324,12 @@ public class CinemaTests extends SpringTest {
         this::testPurchaseTicket,
         this::testErrorMessageThatTicketHasBeenPurchased,
         this::testErrorMessageThatNumbersOutOfBounds,
-        this::testReturnTicket
+        this::testReturnTicket,
+        this::testStatsEndpoint,
+        () -> testStats(1, 10, 80),
+        this::testPurchaseAnotherTicket,
+        () -> testStats(2, 18, 79),
+        this::returnTicket,
+        () -> testStats(1, 10, 80),
     };
 }
