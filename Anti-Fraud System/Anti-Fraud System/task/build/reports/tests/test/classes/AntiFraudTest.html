@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class AntiFraudTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class AntiFraudTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/default-package.html">default-package</a> &gt; AntiFraudTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">3.684s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">start</td>
+<td class="success">3.684s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>?[1;31m
+Start test 1?[0m
+?[0;34m
+?[0m?[0;34m  .   ____          _            __ _ _
+?[0m?[0;34m /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+?[0m?[0;34m( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+?[0m?[0;34m \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+?[0m?[0;34m  '  |____| .__|_| |_|_| |_\__, | / / / /
+?[0m?[0;34m =========|_|==============|___/=/_/_/_/
+?[0m?[0;34m :: Spring Boot ::                (v2.7.0)
+?[0m?[0;34m
+?[0m?[0;34m2023-05-16 16:57:25.535  INFO 16256 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 on DESKTOP-OGGJ8AB with PID 16256 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
+?[0m?[0;34m2023-05-16 16:57:25.540  INFO 16256 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: &quot;default&quot;
+?[0m?[0;34m2023-05-16 16:57:26.966  INFO 16256 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+?[0m?[0;34m2023-05-16 16:57:26.979  INFO 16256 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+?[0m?[0;34m2023-05-16 16:57:26.980  INFO 16256 --- [    Test worker] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.63]
+?[0m?[0;34m2023-05-16 16:57:27.078  INFO 16256 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+?[0m?[0;34m2023-05-16 16:57:27.079  INFO 16256 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1487 ms
+?[0m?[0;34m2023-05-16 16:57:27.840  INFO 16256 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+?[0m?[0;34m2023-05-16 16:57:27.882  INFO 16256 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+?[0m?[0;34m2023-05-16 16:57:27.899  INFO 16256 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 2.795 seconds (JVM running for 3.703)
+?[0m?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 1'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'ALLOWED''
+?[0m?[0;34m-----
+?[0;34m2023-05-16 16:57:28.265  INFO 16256 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-16 16:57:28.265  INFO 16256 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-16 16:57:28.266  INFO 16256 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+?[0m?[1;31m
+Start test 2?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 199'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'ALLOWED''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 3?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 200'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'ALLOWED''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 4?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 201'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'MANUAL_PROCESSING''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 5?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 1499'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'MANUAL_PROCESSING''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 6?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 1500'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'MANUAL_PROCESSING''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 7?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 1501'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'PROHIBITED''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 8?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 2000'
+?[0m?[0;34mExpectations: 'Result validating of Transaction must be 'PROHIBITED''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 9?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = -1'
+?[0m?[0;34mExpectations: 'Response status must be 'Bad request''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 10?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = 0'
+?[0m?[0;34mExpectations: 'Response status must be 'Bad request''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 11?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = null'
+?[0m?[0;34mExpectations: 'Response status must be 'Bad request''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 12?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = &quot;&quot;'
+?[0m?[0;34mExpectations: 'Response status must be 'Bad request''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 13?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'amount = &quot; &quot;'
+?[0m?[0;34mExpectations: 'Response status must be 'Bad request''
+?[0m?[0;34m-----
+?[0m?[1;31m
+Start test 14?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mrequest: 'empty body'
+?[0m?[0;34mExpectations: 'Response status must be 'Bad request''
+?[0m?[0;34m-----
+?[0m</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 7.3.3</a> at 16 maj 2023, 16:57:28</p>
+</div>
+</div>
+</body>
+</html>

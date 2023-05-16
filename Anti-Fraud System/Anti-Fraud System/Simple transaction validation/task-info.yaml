@@ -219,6 +219,15 @@ files:
         implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
     }
   learner_created: false
-feedback_link: https://hyperskill.org/projects/232/stages/1161/implement#comment
-status: Unchecked
+- name: src/antifraud/AntiFraudController.java
+  visible: true
+  learner_created: true
+- name: src/antifraud/Transaction.java
+  visible: true
+  learner_created: true
+feedback_link: https://hyperskill.org/learn/step/18067#comment
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Tue, 16 May 2023 14:57:28 UTC"
 record: -1

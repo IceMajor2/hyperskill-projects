@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Anti-Fraud System.iml" filepath="$PROJECT_DIR$/.idea/Anti-Fraud System.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Anti-Fraud_System.iml" filepath="$PROJECT_DIR$/.idea/modules/Anti-Fraud_System.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Anti-Fraud System/task/Anti-Fraud_System.Anti-Fraud_System-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Anti-Fraud System/task/Anti-Fraud_System.Anti-Fraud_System-task.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Anti-Fraud System/task/Anti-Fraud_System.Anti-Fraud_System-task.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Anti-Fraud System/task/Anti-Fraud_System.Anti-Fraud_System-task.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Anti-Fraud System/task/Anti-Fraud_System.Anti-Fraud_System-task.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Anti-Fraud System/task/Anti-Fraud_System.Anti-Fraud_System-task.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Anti-Fraud_System.util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Anti-Fraud_System.util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Anti-Fraud_System.util.main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Anti-Fraud_System.util.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Anti-Fraud_System.util.test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Anti-Fraud_System.util.test.iml" />
     </modules>
   </component>
 </project>
