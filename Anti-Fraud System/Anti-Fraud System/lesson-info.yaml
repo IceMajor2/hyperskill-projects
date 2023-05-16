@@ -1,0 +1,9 @@
+type: framework
+content:
+- Simple transaction validation
+- Authentication
+- Authorization
+- Stolen cards   suspicious IPs
+- Rule-based system
+- Feedback
+current_task: 0
