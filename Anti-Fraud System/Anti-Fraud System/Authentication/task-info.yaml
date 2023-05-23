@@ -491,6 +491,71 @@ files:
         };
     }
   learner_created: false
+- name: src/antifraud/model/Transaction.java
+  visible: true
+  text: |
+    package antifraud;
+
+    public class Transaction {
+
+        private Long amount;
+
+        public Transaction() {}
+
+        public Transaction(Long amount) {
+            this.amount = amount;
+        }
+
+        public Long getAmount() {
+            return amount;
+        }
+
+        public void setAmount(Long amount) {
+            this.amount = amount;
+        }
+    }
+  learner_created: true
+- name: src/antifraud/web/AntiFraudController.java
+  visible: true
+  text: |-
+    package antifraud;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RequestParam;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import java.util.Map;
+
+    @RestController
+    public class AntiFraudController {
+
+        public AntiFraudController() {
+        }
+
+        @PostMapping("/api/antifraud/transaction")
+        public ResponseEntity makeTransaction(@RequestBody Transaction transaction) {
+            if (transaction == null || transaction.getAmount() == null || transaction.getAmount() <= 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (transaction.getAmount() > 1500) {
+                return new ResponseEntity<>(Map.of("result", "PROHIBITED"), HttpStatus.OK);
+            }
+            if (transaction.getAmount() > 200) {
+                return new ResponseEntity<>(Map.of("result", "MANUAL_PROCESSING"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(Map.of("result", "ALLOWED"), HttpStatus.OK);
+        }
+    }
+  learner_created: true
+- name: src/antifraud/security/SecurityConfig.java
+  visible: true
+  learner_created: true
+- name: src/antifraud/security/RestAuthenticationEntryPoint.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18068#comment
 status: Unchecked
 record: -1

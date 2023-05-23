@@ -5,12 +5,18 @@
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
         <option name="delegatedBuild" value="false" />
-        <option name="distributionType" value="WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../../Gradle/gradle-8.0.2" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Anti-Fraud System/task" />
+            <option value="$PROJECT_DIR$/Anti-Fraud System/task/build/classes/java" />
+            <option value="$PROJECT_DIR$/Anti-Fraud System/task/build/generated/sources/annotationProcessor/java" />
+            <option value="$PROJECT_DIR$/Anti-Fraud System/task/build/generated/sources/headers/java" />
+            <option value="$PROJECT_DIR$/Anti-Fraud System/task/build/reports/tests" />
+            <option value="$PROJECT_DIR$/Anti-Fraud System/task/build/test-results" />
+            <option value="$PROJECT_DIR$/Anti-Fraud System/task/build/tmp" />
             <option value="$PROJECT_DIR$/util" />
           </set>
         </option>
