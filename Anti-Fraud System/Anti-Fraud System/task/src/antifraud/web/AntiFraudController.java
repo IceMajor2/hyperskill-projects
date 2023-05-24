@@ -29,8 +29,8 @@ public class AntiFraudController {
         return new ResponseEntity<>(Map.of("result", "ALLOWED"), HttpStatus.OK);
     }
 
-    @PostMapping("/api/auth/user")
-    public void createUser(@RequestBody User user) {
-
-    }
+//    @PostMapping("/api/auth/user")
+//    public void createUser(@RequestBody User user) {
+//
+//    }
 }
