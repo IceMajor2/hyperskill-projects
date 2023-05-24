@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
@@ -28,17 +30,14 @@ public class SecurityConfig {
         http
                 .httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer
                         .authenticationEntryPoint(restAuthenticationEntryPoint)
-                ).csrf((csrf) -> csrf.disable())
-                .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
+                ).csrf((csrf) -> csrf.disable()
+                ).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
                         frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
-                )
-                .authorizeHttpRequests((authz) -> authz
-                        .requestMatchers(HttpMethod.POST, "/api/auth/user").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/antifraud/transaction").permitAll()
+                ).authorizeHttpRequests((authz) -> authz
+                        .requestMatchers(HttpMethod.POST, "/api/auth/user").permitAll()
                         .requestMatchers("/actuator/shutdown").permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(sessionManagement -> sessionManagement
+                        .requestMatchers(toH2Console()).permitAll()
+                ).sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
         return http.build();
