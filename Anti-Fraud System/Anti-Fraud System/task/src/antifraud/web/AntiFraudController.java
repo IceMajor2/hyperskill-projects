@@ -1,6 +1,7 @@
 package antifraud.web;
 
 import antifraud.model.Transaction;
+import antifraud.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +30,8 @@ public class AntiFraudController {
         return new ResponseEntity<>(Map.of("result", "ALLOWED"), HttpStatus.OK);
     }
 
-//    @PostMapping("/api/auth/user")
-//    public void createUser(@RequestBody User user) {
-//
-//    }
+    @PostMapping("/api/auth/user")
+    public void createUser(@RequestBody User user) {
+
+    }
 }
