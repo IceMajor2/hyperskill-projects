@@ -2,8 +2,10 @@ package antifraud.web;
 
 import antifraud.model.Transaction;
 import antifraud.model.User;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,9 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
+@ComponentScan
 public class AntiFraudController {
 
     public AntiFraudController() {
+    }
+
+    @GetMapping("/api/antifraud/test")
+    public String test() {
+        return "WORKS";
+    }
+
+    @GetMapping("/api/antifraud/transaction")
+    public String test2() {
+        return "WORKSSSSS";
     }
 
     @PostMapping("/api/antifraud/transaction")
@@ -28,10 +41,5 @@ public class AntiFraudController {
             return new ResponseEntity<>(Map.of("result", "MANUAL_PROCESSING"), HttpStatus.OK);
         }
         return new ResponseEntity<>(Map.of("result", "ALLOWED"), HttpStatus.OK);
-    }
-
-    @PostMapping("/api/auth/user")
-    public void createUser(@RequestBody User user) {
-
     }
 }
