@@ -8,26 +8,34 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/auth")
 @ComponentScan
-public class UserController {
+public class AuthController {
 
     @Autowired
     UserRepository userRepository;
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public UserController() {}
+    public AuthController() {
+    }
 
-    @PostMapping("/api/auth/user")
+    @GetMapping("/list")
+    public ResponseEntity listUsers() {
+        List<User> users = userRepository.findAllByOrderByIdAsc();
+        return ResponseEntity.ok(users);
+    }
+
+    @PostMapping("/user")
     public ResponseEntity createUser(@Valid @RequestBody User user) throws URISyntaxException {
         if (userRepository.findByUsernameIgnoreCase(user.getUsername()).isPresent()) {
             //throw new ResponseStatusException(HttpStatus.CONFLICT);
@@ -37,5 +45,15 @@ public class UserController {
         User createdUser = userRepository.save(user);
         return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
                 .body(createdUser);
+    }
+
+    @DeleteMapping("/user/{username}")
+    public ResponseEntity deleteUser(@PathVariable String username) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+            return ResponseEntity.ok(Map.of("username", username, "status", "Deleted successfully!"));
+        }
+        return ResponseEntity.notFound().build();
     }
 }

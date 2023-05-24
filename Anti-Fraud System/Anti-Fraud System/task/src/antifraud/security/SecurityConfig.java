@@ -34,9 +34,12 @@ public class SecurityConfig {
                 ).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
                         frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
                 ).authorizeHttpRequests((authz) -> authz
-                        .requestMatchers(HttpMethod.POST, "/api/auth/user").permitAll()
-                        .requestMatchers("/actuator/shutdown").permitAll()
-                        .requestMatchers(toH2Console()).permitAll()
+//                                .requestMatchers(HttpMethod.POST, "/api/auth/user").permitAll()
+//                                .requestMatchers("/api/**").authenticated()
+//                                .requestMatchers("/actuator/shutdown").permitAll()
+//                                .requestMatchers(toH2Console()).permitAll()
+//                                .requestMatchers("/error").permitAll()
+                        .anyRequest().permitAll()
                 ).sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );

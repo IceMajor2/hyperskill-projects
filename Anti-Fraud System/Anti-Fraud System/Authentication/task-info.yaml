@@ -568,7 +568,7 @@ files:
 - name: src/antifraud/security/UserDetailsServiceImpl.java
   visible: true
   learner_created: true
-- name: src/antifraud/web/UserController.java
+- name: src/antifraud/web/AuthController.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18068#comment
