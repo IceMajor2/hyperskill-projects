@@ -28,10 +28,10 @@ public class UserController {
     public UserController() {}
 
     @PostMapping("/api/auth/user")
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user) throws URISyntaxException {
-        if(userRepository.findByUsernameIgnoreCase(user.getUsername()) != null) {
-            throw new ResponseStatusException(HttpStatus.CONFLICT, "Username '%s' already exists"
-                    .formatted(user.getUsername()));
+    public ResponseEntity createUser(@Valid @RequestBody User user) throws URISyntaxException {
+        if (userRepository.findByUsernameIgnoreCase(user.getUsername()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+            //return new ResponseEntity(HttpStatus.CONFLICT);
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User createdUser = userRepository.save(user);
