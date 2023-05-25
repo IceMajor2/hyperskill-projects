@@ -1117,6 +1117,15 @@ files:
 - name: src/antifraud/DTO/ResultDTO.java
   visible: true
   learner_created: true
+- name: db/service_db.mv.db
+  visible: true
+  learner_created: true
+- name: db/service_db.trace.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18069#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 25 May 2023 14:43:38 UTC"
 record: -1

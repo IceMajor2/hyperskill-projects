@@ -4,25 +4,23 @@ import antifraud.DTO.ResultDTO;
 import antifraud.model.Transaction;
 import antifraud.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
 @RestController
-@ComponentScan
+@RequestMapping("/api/antifraud")
 public class AntiFraudController {
 
     @Autowired
     private TransactionService transactionService;
 
-    @PostMapping("/api/antifraud/transaction")
+    @RequestMapping(value = {"/transaction", "/transaction/"}, method = RequestMethod.POST)
+    // made 2 endpoints with and w/o trailing slash at the end
     @PreAuthorize("hasAuthority('ROLE_MERCHANT')")
     public ResponseEntity makeTransaction(@RequestBody Transaction transaction) {
         try {

@@ -36,11 +36,14 @@ public class SecurityConfig {
                 ).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
                         frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
                 ).authorizeHttpRequests((authz) -> authz
-//                                .requestMatchers(HttpMethod.POST, "/api/auth/user").permitAll()
-//                                .requestMatchers("/api/**").authenticated()
-//                                .requestMatchers("/actuator/shutdown").permitAll()
-//                                .requestMatchers(toH2Console()).permitAll()
-//                                .requestMatchers("/error").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/auth/user/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/**").authenticated()
+                        .requestMatchers(toH2Console()).permitAll()
+                        .requestMatchers("/actuator/shutdown").permitAll()
+                        .requestMatchers("/api/auth/access/**").authenticated()
+                        .requestMatchers("/api/auth/role/**").authenticated()
+                        .requestMatchers("/api/antifraud/**").authenticated()
+                        .requestMatchers("/api/auth/user/**").authenticated()
                         .anyRequest().permitAll()
                 ).sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -7,7 +7,6 @@ import antifraud.model.User;
 import antifraud.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,7 +19,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-@ComponentScan
 public class AuthController {
 
     @Autowired
@@ -65,7 +63,7 @@ public class AuthController {
             return ResponseEntity.ok(Map.of("status", "User %s %s!"
                     .formatted(user.getUsername(),
                             operationDTO.getOperation().equals("LOCK") ? "locked" : "unlocked")));
-        } catch(ResponseStatusException exception) {
+        } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());
         }
     }
@@ -82,6 +80,20 @@ public class AuthController {
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());
         }
+    }
 
+    @RequestMapping(value = {"/user", "/user/"}, method = RequestMethod.DELETE)
+    public ResponseEntity dummyDelete() {
+        return new ResponseEntity(HttpStatus.FORBIDDEN);
+    }
+
+    @RequestMapping(value = {"/access/"}, method = RequestMethod.PUT)
+    public ResponseEntity dummyAccess() {
+        return new ResponseEntity(HttpStatus.FORBIDDEN);
+    }
+
+    @RequestMapping(value = {"/role/"}, method = RequestMethod.PUT)
+    public ResponseEntity dummyRole() {
+        return new ResponseEntity(HttpStatus.FORBIDDEN);
     }
 }
