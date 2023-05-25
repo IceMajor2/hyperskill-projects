@@ -1,15 +1,17 @@
 package antifraud.web;
 
+import antifraud.DTO.ResultDTO;
 import antifraud.model.Transaction;
-import antifraud.model.User;
+import antifraud.service.TransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Map;
 
@@ -17,31 +19,17 @@ import java.util.Map;
 @ComponentScan
 public class AntiFraudController {
 
-    public AntiFraudController() {
-    }
-
-//    @GetMapping("/api/antifraud/test")
-//    public String test() {
-//        return "WORKS";
-//    }
-//
-//    @GetMapping("/api/antifraud/transaction")
-//    public String test2() {
-//        return "WORKSSSSS";
-//    }
+    @Autowired
+    private TransactionService transactionService;
 
     @PostMapping("/api/antifraud/transaction")
     @PreAuthorize("hasAuthority('ROLE_MERCHANT')")
     public ResponseEntity makeTransaction(@RequestBody Transaction transaction) {
-        if (transaction == null || transaction.getAmount() == null || transaction.getAmount() <= 0) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        try {
+            ResultDTO result = transactionService.makeTransaction(transaction);
+            return new ResponseEntity(Map.of("result", result.getResult()), HttpStatus.OK);
+        } catch (ResponseStatusException exception) {
+            return new ResponseEntity(exception.getStatusCode());
         }
-        if (transaction.getAmount() > 1500) {
-            return new ResponseEntity<>(Map.of("result", "PROHIBITED"), HttpStatus.OK);
-        }
-        if (transaction.getAmount() > 200) {
-            return new ResponseEntity<>(Map.of("result", "MANUAL_PROCESSING"), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(Map.of("result", "ALLOWED"), HttpStatus.OK);
     }
 }
