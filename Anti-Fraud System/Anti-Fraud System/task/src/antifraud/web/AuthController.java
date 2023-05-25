@@ -4,7 +4,6 @@ import antifraud.DTO.OperationDTO;
 import antifraud.DTO.RoleDTO;
 import antifraud.DTO.UserDTO;
 import antifraud.model.User;
-import antifraud.repository.UserRepository;
 import antifraud.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -44,7 +40,7 @@ public class AuthController {
             return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
                     .body(createdUser);
         } catch (ResponseStatusException exception) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
+            return new ResponseEntity(exception.getStatusCode());
         }
     }
 
@@ -64,7 +60,8 @@ public class AuthController {
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity access(@RequestBody OperationDTO operationDTO) {
         try {
-            UserDTO user = authService.changeLocking(operationDTO);
+            UserDTO user = authService.changeLocking(operationDTO.getUsername(),
+                    operationDTO.getOperation());
             return ResponseEntity.ok(Map.of("status", "User %s %s!"
                     .formatted(user.getUsername(),
                             operationDTO.getOperation().equals("LOCK") ? "locked" : "unlocked")));
@@ -76,22 +73,15 @@ public class AuthController {
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity role(@RequestBody RoleDTO roleDTO) {
-        Optional<User> user = userRepository.findByUsernameIgnoreCase(roleDTO.getUsername());
-        if (user.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        try {
+            UserDTO user = authService.changeRole(roleDTO.getUsername(), roleDTO.getRole());
+            return ResponseEntity.ok(Map.of("id", user.getId(),
+                    "name", user.getName(),
+                    "username", user.getUsername(),
+                    "role", user.getRole()));
+        } catch (ResponseStatusException exception) {
+            return new ResponseEntity(exception.getStatusCode());
         }
-        User foundUser = user.get();
-        if (!(roleDTO.getRole().equals("SUPPORT") || roleDTO.getRole().equals("MERCHANT"))) {
-            return ResponseEntity.badRequest().build();
-        }
-        if (roleDTO.getRole().equals(foundUser.getRole())) {
-            return new ResponseEntity(HttpStatus.CONFLICT);
-        }
-        foundUser.setRole(roleDTO.getRole());
-        userRepository.save(foundUser);
-        return ResponseEntity.ok(Map.of("id", foundUser.getId(),
-                "name", foundUser.getName(),
-                "username", foundUser.getUsername(),
-                "role", foundUser.getRole()));
+
     }
 }

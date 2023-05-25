@@ -1,12 +1,10 @@
 package antifraud.service;
 
-import antifraud.DTO.OperationDTO;
 import antifraud.DTO.UserDTO;
 import antifraud.model.User;
 import antifraud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -31,7 +29,7 @@ public class AuthService {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
         setUserPassword(user);
-        setUserRole(user);
+        setDefaultUserRole(user);
         userRepository.save(user);
         User createdUser = userRepository.findByUsernameIgnoreCase(user.getUsername()).get();
         return new UserDTO(createdUser);
@@ -41,7 +39,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
     }
 
-    private void setUserRole(User user) {
+    private void setDefaultUserRole(User user) {
         if(userRepository.count() == 0) {
             user.setRole("ADMINISTRATOR");
             user.setAccountNonLocked(true);
@@ -59,8 +57,8 @@ public class AuthService {
         return new UserDTO(user.get());
     }
 
-    public UserDTO changeLocking(OperationDTO operationDTO) {
-        Optional<User> user = userRepository.findByUsernameIgnoreCase(operationDTO.getUsername());
+    public UserDTO changeLocking(String username, String operation) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
         if(user.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
@@ -68,8 +66,25 @@ public class AuthService {
         if(foundUser.getRole().toLowerCase().equals("administrator")) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        boolean lock = operationDTO.equals("LOCK") ? true : false;
+        boolean lock = operation.equals("LOCK") ? true : false;
         foundUser.setAccountNonLocked(!lock);
+        userRepository.save(foundUser);
+        return new UserDTO(foundUser);
+    }
+
+    public UserDTO changeRole(String username, String newRole) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
+        if(user.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        User foundUser = user.get();
+        if(!(newRole.equals("SUPPORT") || newRole.equals("MERCHANT"))) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        if(newRole.equals(foundUser.getRole())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT);
+        }
+        foundUser.setRole(newRole);
         userRepository.save(foundUser);
         return new UserDTO(foundUser);
     }
