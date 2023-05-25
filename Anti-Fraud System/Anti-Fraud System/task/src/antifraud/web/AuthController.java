@@ -68,7 +68,9 @@ public class AuthController {
 
     @PutMapping("/access")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public void acces() {}
+    public ResponseEntity acces() {
+        
+    }
 
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
@@ -78,12 +80,14 @@ public class AuthController {
             return ResponseEntity.notFound().build();
         }
         User foundUser = user.get();
-        if(!(foundUser.getRole().equals("SUPPORT") || foundUser.getRole().equals("MERCHANT"))) {
+        if(!(roleDTO.getRole().equals("SUPPORT") || roleDTO.getRole().equals("MERCHANT"))) {
             return ResponseEntity.badRequest().build();
         }
         if(roleDTO.getRole().equals(foundUser.getRole())) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+        foundUser.setRole(roleDTO.getRole());
+        userRepository.save(foundUser);
         return ResponseEntity.ok(Map.of("id", foundUser.getId(),
                 "name", foundUser.getName(),
                 "username", foundUser.getUsername(),
