@@ -22,6 +22,9 @@ public class User implements Serializable {
     private String username;
     @NotNull
     private String password;
+
+    private boolean isAccountNonLocked = false;
+
     private String role;
 
     public User() {
@@ -68,5 +71,14 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
     }
 }

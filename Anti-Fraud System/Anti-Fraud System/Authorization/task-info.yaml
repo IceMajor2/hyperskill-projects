@@ -1102,6 +1102,9 @@ files:
 - name: src/antifraud/DTO/RoleDTO.java
   visible: true
   learner_created: true
+- name: src/antifraud/DTO/OperationDTO.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18069#comment
 status: Unchecked
 record: -1

@@ -1,5 +1,6 @@
 package antifraud.web;
 
+import antifraud.DTO.OperationDTO;
 import antifraud.DTO.RoleDTO;
 import antifraud.model.User;
 import antifraud.repository.UserRepository;
@@ -41,11 +42,11 @@ public class AuthController {
     @PostMapping("/user")
     public ResponseEntity createUser(@Valid @RequestBody User user) throws URISyntaxException {
         if (userRepository.findByUsernameIgnoreCase(user.getUsername()).isPresent()) {
-            //throw new ResponseStatusException(HttpStatus.CONFLICT);
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
         if(userRepository.count() == 0) {
             user.setRole("ADMINISTRATOR");
+            user.setAccountNonLocked(true);
         } else {
             user.setRole("MERCHANT");
         }
@@ -68,8 +69,20 @@ public class AuthController {
 
     @PutMapping("/access")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public ResponseEntity acces() {
-        
+    public ResponseEntity access(@RequestBody OperationDTO operationDTO) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(operationDTO.getUsername());
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User foundUser = user.get();
+        if(foundUser.getRole().toLowerCase().equals("administrator")) {
+            return ResponseEntity.badRequest().build();
+        }
+        boolean lock = operationDTO.equals("LOCK") ? true : false;
+        foundUser.setAccountNonLocked(!lock);
+        userRepository.save(foundUser);
+        return ResponseEntity.ok(Map.of("status", "User %s %s!"
+                .formatted(foundUser.getUsername(), lock == true ? "locked" : "unlocked")));
     }
 
     @PutMapping("/role")

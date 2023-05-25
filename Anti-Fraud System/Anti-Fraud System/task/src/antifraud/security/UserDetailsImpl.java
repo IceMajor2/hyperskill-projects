@@ -14,18 +14,14 @@ public class UserDetailsImpl implements UserDetails {
     private final String ROLE_PREFIX = "ROLE_";
     private final String username;
     private final String password;
-    private boolean locked;
+    private boolean nonLocked;
     private final List<GrantedAuthority> rolesAndAuthorities;
 
     public UserDetailsImpl(User user) {
         this.username = user.getUsername();
         this.password = user.getPassword();
-        this.locked = user.getRole().equals("ADMINISTRATOR") ? false : true;
+        this.nonLocked = user.isAccountNonLocked();
         this.rolesAndAuthorities = List.of(new SimpleGrantedAuthority(ROLE_PREFIX + user.getRole().toUpperCase()));
-    }
-
-    public void unlock() {
-        this.locked = false;
     }
 
     @Override
@@ -50,7 +46,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return !locked;
+        return nonLocked;
     }
 
     @Override
