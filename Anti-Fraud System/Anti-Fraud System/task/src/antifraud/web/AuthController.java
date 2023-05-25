@@ -2,8 +2,10 @@ package antifraud.web;
 
 import antifraud.DTO.OperationDTO;
 import antifraud.DTO.RoleDTO;
+import antifraud.DTO.UserDTO;
 import antifraud.model.User;
 import antifraud.repository.UserRepository;
+import antifraud.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,37 +26,26 @@ import java.util.Optional;
 @RequestMapping("/api/auth")
 @ComponentScan
 public class AuthController {
-
+    
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    public AuthController() {
-    }
+    private AuthService authService;
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('ROLE_SUPPORT') or hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity listUsers() {
-        List<User> users = userRepository.findAllByOrderByIdAsc();
+        var users = authService.listUsers();
         return ResponseEntity.ok(users);
     }
 
     @PostMapping("/user")
     public ResponseEntity createUser(@Valid @RequestBody User user) throws URISyntaxException {
-        if (userRepository.findByUsernameIgnoreCase(user.getUsername()).isPresent()) {
+        try {
+            UserDTO createdUser = authService.createUser(user);
+            return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
+                    .body(createdUser);
+        } catch(ResponseStatusException exception) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
-        if(userRepository.count() == 0) {
-            user.setRole("ADMINISTRATOR");
-            user.setAccountNonLocked(true);
-        } else {
-            user.setRole("MERCHANT");
-        }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User createdUser = userRepository.save(user);
-        return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
-                .body(createdUser);
     }
 
     @DeleteMapping("/user/{username}")
