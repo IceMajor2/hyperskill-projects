@@ -31,7 +31,7 @@ public class AuthController {
     }
 
     @GetMapping("/list")
-    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR', 'ROLE_SUPPORT')")
+    @PreAuthorize("hasAuthority('ROLE_SUPPORT') or hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity listUsers() {
         List<User> users = userRepository.findAllByOrderByIdAsc();
         return ResponseEntity.ok(users);

@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.locked = user.getRole().equals("ADMINISTRATOR") ? false : true;
-        this.rolesAndAuthorities = List.of(new SimpleGrantedAuthority(user.getRole()));
+        this.rolesAndAuthorities = List.of(new SimpleGrantedAuthority(ROLE_PREFIX + user.getRole().toUpperCase()));
     }
 
     public void unlock() {
