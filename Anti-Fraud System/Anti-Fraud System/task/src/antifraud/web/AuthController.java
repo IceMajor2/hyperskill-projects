@@ -26,7 +26,7 @@ import java.util.Optional;
 @RequestMapping("/api/auth")
 @ComponentScan
 public class AuthController {
-    
+
     @Autowired
     private AuthService authService;
 
@@ -43,7 +43,7 @@ public class AuthController {
             UserDTO createdUser = authService.createUser(user);
             return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
                     .body(createdUser);
-        } catch(ResponseStatusException exception) {
+        } catch (ResponseStatusException exception) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
@@ -51,44 +51,40 @@ public class AuthController {
     @DeleteMapping("/user/{username}")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity deleteUser(@PathVariable String username) {
-        Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
-        if (user.isPresent()) {
-            userRepository.delete(user.get());
-            return ResponseEntity.ok(Map.of("username", username, "status", "Deleted successfully!"));
+        try {
+            authService.deleteUser(username);
+            return ResponseEntity.ok(Map.of("username", username,
+                    "status", "Deleted successfully!"));
+        } catch (ResponseStatusException exception) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/access")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity access(@RequestBody OperationDTO operationDTO) {
-        Optional<User> user = userRepository.findByUsernameIgnoreCase(operationDTO.getUsername());
-        if(user.isEmpty()) {
-            return ResponseEntity.notFound().build();
+        try {
+            UserDTO user = authService.changeLocking(operationDTO);
+            return ResponseEntity.ok(Map.of("status", "User %s %s!"
+                    .formatted(user.getUsername(),
+                            operationDTO.getOperation().equals("LOCK") ? "locked" : "unlocked")));
+        } catch(ResponseStatusException exception) {
+            return new ResponseEntity(exception.getStatusCode());
         }
-        User foundUser = user.get();
-        if(foundUser.getRole().toLowerCase().equals("administrator")) {
-            return ResponseEntity.badRequest().build();
-        }
-        boolean lock = operationDTO.equals("LOCK") ? true : false;
-        foundUser.setAccountNonLocked(!lock);
-        userRepository.save(foundUser);
-        return ResponseEntity.ok(Map.of("status", "User %s %s!"
-                .formatted(foundUser.getUsername(), lock == true ? "locked" : "unlocked")));
     }
 
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity role(@RequestBody RoleDTO roleDTO) {
         Optional<User> user = userRepository.findByUsernameIgnoreCase(roleDTO.getUsername());
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         User foundUser = user.get();
-        if(!(roleDTO.getRole().equals("SUPPORT") || roleDTO.getRole().equals("MERCHANT"))) {
+        if (!(roleDTO.getRole().equals("SUPPORT") || roleDTO.getRole().equals("MERCHANT"))) {
             return ResponseEntity.badRequest().build();
         }
-        if(roleDTO.getRole().equals(foundUser.getRole())) {
+        if (roleDTO.getRole().equals(foundUser.getRole())) {
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
         foundUser.setRole(roleDTO.getRole());

@@ -1,15 +1,18 @@
 package antifraud.service;
 
+import antifraud.DTO.OperationDTO;
 import antifraud.DTO.UserDTO;
 import antifraud.model.User;
 import antifraud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -45,5 +48,29 @@ public class AuthService {
             return;
         }
         user.setRole("MERCHANT");
+    }
+
+    public UserDTO deleteUser(String username) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
+        if(user.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        userRepository.delete(user.get());
+        return new UserDTO(user.get());
+    }
+
+    public UserDTO changeLocking(OperationDTO operationDTO) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(operationDTO.getUsername());
+        if(user.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        User foundUser = user.get();
+        if(foundUser.getRole().toLowerCase().equals("administrator")) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        boolean lock = operationDTO.equals("LOCK") ? true : false;
+        foundUser.setAccountNonLocked(!lock);
+        userRepository.save(foundUser);
+        return new UserDTO(foundUser);
     }
 }
