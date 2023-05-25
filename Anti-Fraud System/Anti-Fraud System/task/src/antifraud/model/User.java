@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -21,6 +22,7 @@ public class User implements Serializable {
     private String username;
     @NotNull
     private String password;
+    private String role;
 
     public User() {
 
@@ -58,5 +60,17 @@ public class User implements Serializable {
     @JsonProperty
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void addRole(String role) {
+        this.role += ',' + role;
     }
 }

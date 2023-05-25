@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,7 @@ public class AuthController {
     }
 
     @GetMapping("/list")
+    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR', 'ROLE_SUPPORT')")
     public ResponseEntity listUsers() {
         List<User> users = userRepository.findAllByOrderByIdAsc();
         return ResponseEntity.ok(users);
@@ -41,6 +43,11 @@ public class AuthController {
             //throw new ResponseStatusException(HttpStatus.CONFLICT);
             return new ResponseEntity(HttpStatus.CONFLICT);
         }
+        if(userRepository.count() == 0) {
+            user.setRole("ADMINISTRATOR");
+        } else {
+            user.setRole("MERCHANT");
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User createdUser = userRepository.save(user);
         return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
@@ -48,6 +55,7 @@ public class AuthController {
     }
 
     @DeleteMapping("/user/{username}")
+    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity deleteUser(@PathVariable String username) {
         Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
         if (user.isPresent()) {
@@ -56,4 +64,12 @@ public class AuthController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PutMapping("/access")
+    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+    public void acces() {}
+
+    @PutMapping("/role")
+    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+    public void role() {}
 }

@@ -710,6 +710,395 @@ files:
         };
     }
   learner_created: false
+- name: src/antifraud/security/UserDetailsServiceImpl.java
+  visible: true
+  text: |
+    package antifraud.security;
+
+    import antifraud.model.User;
+    import antifraud.repository.UserRepository;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.security.core.userdetails.UserDetailsService;
+    import org.springframework.security.core.userdetails.UsernameNotFoundException;
+    import org.springframework.stereotype.Service;
+
+    import java.util.Optional;
+
+    @Service
+    public class UserDetailsServiceImpl implements UserDetailsService {
+
+        @Autowired
+        UserRepository userRepository;
+
+        @Override
+        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+            Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
+            return user.map(UserDetailsImpl::new).orElseThrow(() -> new UsernameNotFoundException("User '%s' was not found"
+                    .formatted(username)));
+        }
+    }
+  learner_created: true
+- name: src/antifraud/web/AntiFraudController.java
+  visible: true
+  text: |-
+    package antifraud.web;
+
+    import antifraud.model.Transaction;
+    import antifraud.model.User;
+    import org.springframework.context.annotation.ComponentScan;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import java.util.Map;
+
+    @RestController
+    @ComponentScan
+    public class AntiFraudController {
+
+        public AntiFraudController() {
+        }
+
+    //    @GetMapping("/api/antifraud/test")
+    //    public String test() {
+    //        return "WORKS";
+    //    }
+    //
+    //    @GetMapping("/api/antifraud/transaction")
+    //    public String test2() {
+    //        return "WORKSSSSS";
+    //    }
+
+        @PostMapping("/api/antifraud/transaction")
+        public ResponseEntity makeTransaction(@RequestBody Transaction transaction) {
+            if (transaction == null || transaction.getAmount() == null || transaction.getAmount() <= 0) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            if (transaction.getAmount() > 1500) {
+                return new ResponseEntity<>(Map.of("result", "PROHIBITED"), HttpStatus.OK);
+            }
+            if (transaction.getAmount() > 200) {
+                return new ResponseEntity<>(Map.of("result", "MANUAL_PROCESSING"), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(Map.of("result", "ALLOWED"), HttpStatus.OK);
+        }
+    }
+  learner_created: true
+- name: src/antifraud/security/UserDetailsImpl.java
+  visible: true
+  text: |
+    package antifraud.security;
+
+    import antifraud.model.User;
+    import org.springframework.security.core.GrantedAuthority;
+    import org.springframework.security.core.userdetails.UserDetails;
+
+    import java.util.Collection;
+    import java.util.Collections;
+    import java.util.List;
+
+    public class UserDetailsImpl implements UserDetails {
+        private final String username;
+        private final String password;
+        private final List<GrantedAuthority> rolesAndAuthorities;
+
+        public UserDetailsImpl(User user) {
+            this.username = user.getUsername();
+            this.password = user.getPassword();
+            this.rolesAndAuthorities = Collections.emptyList();
+        }
+
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return rolesAndAuthorities;
+        }
+
+        @Override
+        public String getPassword() {
+            return password;
+        }
+
+        @Override
+        public String getUsername() {
+            return username;
+        }
+
+        @Override
+        public boolean isAccountNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isAccountNonLocked() {
+            return true;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return true;
+        }
+    }
+  learner_created: true
+- name: src/antifraud/security/SecurityConfig.java
+  visible: true
+  text: |
+    package antifraud.security;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.http.HttpMethod;
+    import org.springframework.security.config.Customizer;
+    import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+    import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+    import org.springframework.security.config.http.SessionCreationPolicy;
+    import org.springframework.security.core.userdetails.UserDetailsService;
+    import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+    import org.springframework.security.crypto.password.PasswordEncoder;
+    import org.springframework.security.web.SecurityFilterChain;
+    import org.springframework.security.web.AuthenticationEntryPoint;
+
+    import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+
+    @EnableWebSecurity
+    @Configuration
+    public class SecurityConfig {
+
+        @Autowired
+        private AuthenticationEntryPoint restAuthenticationEntryPoint;
+        @Autowired
+        private UserDetailsService userDetailsService;
+
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            http
+                    .httpBasic(httpSecurityHttpBasicConfigurer -> httpSecurityHttpBasicConfigurer
+                            .authenticationEntryPoint(restAuthenticationEntryPoint)
+                    ).csrf((csrf) -> csrf.disable()
+                    ).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
+                            frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
+                    ).authorizeHttpRequests((authz) -> authz
+    //                                .requestMatchers(HttpMethod.POST, "/api/auth/user").permitAll()
+    //                                .requestMatchers("/api/**").authenticated()
+    //                                .requestMatchers("/actuator/shutdown").permitAll()
+    //                                .requestMatchers(toH2Console()).permitAll()
+    //                                .requestMatchers("/error").permitAll()
+                            .anyRequest().permitAll()
+                    ).sessionManagement(sessionManagement -> sessionManagement
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    );
+            return http.build();
+        }
+
+        @Bean
+        public PasswordEncoder getEncoder() {
+            return new BCryptPasswordEncoder();
+        }
+    }
+  learner_created: true
+- name: src/antifraud/web/AuthController.java
+  visible: true
+  text: |
+    package antifraud.web;
+
+    import antifraud.model.User;
+    import antifraud.repository.UserRepository;
+    import jakarta.validation.Valid;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.context.annotation.ComponentScan;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.security.crypto.password.PasswordEncoder;
+    import org.springframework.web.bind.annotation.*;
+
+    import java.net.URI;
+    import java.net.URISyntaxException;
+    import java.util.List;
+    import java.util.Map;
+    import java.util.Optional;
+
+    @RestController
+    @RequestMapping("/api/auth")
+    @ComponentScan
+    public class AuthController {
+
+        @Autowired
+        UserRepository userRepository;
+        @Autowired
+        PasswordEncoder passwordEncoder;
+
+        public AuthController() {
+        }
+
+        @GetMapping("/list")
+        public ResponseEntity listUsers() {
+            List<User> users = userRepository.findAllByOrderByIdAsc();
+            return ResponseEntity.ok(users);
+        }
+
+        @PostMapping("/user")
+        public ResponseEntity createUser(@Valid @RequestBody User user) throws URISyntaxException {
+            if (userRepository.findByUsernameIgnoreCase(user.getUsername()).isPresent()) {
+                //throw new ResponseStatusException(HttpStatus.CONFLICT);
+                return new ResponseEntity(HttpStatus.CONFLICT);
+            }
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            User createdUser = userRepository.save(user);
+            return ResponseEntity.created(new URI("/api/auth/" + createdUser.getUsername()))
+                    .body(createdUser);
+        }
+
+        @DeleteMapping("/user/{username}")
+        public ResponseEntity deleteUser(@PathVariable String username) {
+            Optional<User> user = userRepository.findByUsernameIgnoreCase(username);
+            if (user.isPresent()) {
+                userRepository.delete(user.get());
+                return ResponseEntity.ok(Map.of("username", username, "status", "Deleted successfully!"));
+            }
+            return ResponseEntity.notFound().build();
+        }
+    }
+  learner_created: true
+- name: src/antifraud/security/RestAuthenticationEntryPoint.java
+  visible: true
+  text: |
+    package antifraud.security;
+
+    import jakarta.servlet.ServletException;
+    import jakarta.servlet.http.HttpServletRequest;
+    import jakarta.servlet.http.HttpServletResponse;
+    import org.springframework.security.core.AuthenticationException;
+    import org.springframework.security.web.AuthenticationEntryPoint;
+    import org.springframework.stereotype.Component;
+
+    import java.io.IOException;
+
+    @Component
+    public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+        @Override
+        public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        }
+    }
+  learner_created: true
+- name: src/antifraud/model/Transaction.java
+  visible: true
+  text: |
+    package antifraud.model;
+
+    public class Transaction {
+
+        private Long amount;
+
+        public Transaction() {}
+
+        public Transaction(Long amount) {
+            this.amount = amount;
+        }
+
+        public Long getAmount() {
+            return amount;
+        }
+
+        public void setAmount(Long amount) {
+            this.amount = amount;
+        }
+    }
+  learner_created: true
+- name: src/antifraud/model/User.java
+  visible: true
+  text: |
+    package antifraud.model;
+
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonProperty;
+    import jakarta.persistence.*;
+    import jakarta.validation.constraints.NotNull;
+
+    import java.io.Serializable;
+
+    @Entity
+    @Table(name = "users")
+    public class User implements Serializable {
+
+        @Id
+        @GeneratedValue
+        private Long id;
+        @NotNull
+        private String name;
+        @NotNull
+        @Column(unique = true)
+        private String username;
+        @NotNull
+        private String password;
+
+        public User() {
+
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        @JsonIgnore
+        public String getPassword() {
+            return password;
+        }
+
+        @JsonProperty
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+  learner_created: true
+- name: src/antifraud/repository/UserRepository.java
+  visible: true
+  text: |
+    package antifraud.repository;
+
+    import antifraud.model.User;
+    import org.springframework.data.repository.CrudRepository;
+
+    import java.util.List;
+    import java.util.Optional;
+
+    public interface UserRepository extends CrudRepository<User, Long> {
+
+        Optional<User> findByUsernameIgnoreCase(String username);
+
+        List<User> findAllByOrderByIdAsc();
+    }
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18069#comment
 status: Unchecked
 record: -1
