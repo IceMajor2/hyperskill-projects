@@ -1,5 +1,6 @@
 package antifraud.web;
 
+import antifraud.DTO.RoleDTO;
 import antifraud.model.User;
 import antifraud.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -71,5 +72,21 @@ public class AuthController {
 
     @PutMapping("/role")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public void role() {}
+    public ResponseEntity role(@RequestBody RoleDTO roleDTO) {
+        Optional<User> user = userRepository.findByUsernameIgnoreCase(roleDTO.getUsername());
+        if(user.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        User foundUser = user.get();
+        if(!(foundUser.getRole().equals("SUPPORT") || foundUser.getRole().equals("MERCHANT"))) {
+            return ResponseEntity.badRequest().build();
+        }
+        if(roleDTO.getRole().equals(foundUser.getRole())) {
+            return new ResponseEntity(HttpStatus.CONFLICT);
+        }
+        return ResponseEntity.ok(Map.of("id", foundUser.getId(),
+                "name", foundUser.getName(),
+                "username", foundUser.getUsername(),
+                "role", foundUser.getRole()));
+    }
 }

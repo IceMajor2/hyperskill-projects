@@ -69,8 +69,4 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
-
-    public void addRole(String role) {
-        this.role += ',' + role;
-    }
 }
