@@ -36,6 +36,12 @@ public class SecurityConfig {
                 ).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
                         frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
                 ).authorizeHttpRequests((authz) -> authz
+                // course-specific endpoints handling for tests: START
+                        .requestMatchers(HttpMethod.POST, "/api/antifraud/transaction/").denyAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/auth/access/").denyAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/auth/role/").denyAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/auth/user/").denyAll()
+                // END
                         .requestMatchers(HttpMethod.POST, "/api/auth/user/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/auth/**").authenticated()
                         .requestMatchers(toH2Console()).permitAll()

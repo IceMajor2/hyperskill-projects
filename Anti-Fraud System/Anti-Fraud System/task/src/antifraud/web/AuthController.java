@@ -45,6 +45,7 @@ public class AuthController {
     @DeleteMapping("/user/{username}")
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity deleteUser(@PathVariable String username) {
+        System.out.println("initializing");
         try {
             authService.deleteUser(username);
             return ResponseEntity.ok(Map.of("username", username,
@@ -82,18 +83,18 @@ public class AuthController {
         }
     }
 
-    @RequestMapping(value = {"/user", "/user/"}, method = RequestMethod.DELETE)
-    public ResponseEntity dummyDelete() {
-        return new ResponseEntity(HttpStatus.FORBIDDEN);
-    }
-
-    @RequestMapping(value = {"/access/"}, method = RequestMethod.PUT)
-    public ResponseEntity dummyAccess() {
-        return new ResponseEntity(HttpStatus.FORBIDDEN);
-    }
-
-    @RequestMapping(value = {"/role/"}, method = RequestMethod.PUT)
-    public ResponseEntity dummyRole() {
-        return new ResponseEntity(HttpStatus.FORBIDDEN);
-    }
+//    @RequestMapping(value = {"/user", "/user/"}, method = RequestMethod.DELETE)
+//    public ResponseEntity dummyDelete() {
+//        return new ResponseEntity(HttpStatus.FORBIDDEN);
+//    }
+//
+//    @RequestMapping(value = {"/access/"}, method = RequestMethod.PUT)
+//    public ResponseEntity dummyAccess() {
+//        return new ResponseEntity(HttpStatus.FORBIDDEN);
+//    }
+//
+//    @RequestMapping(value = {"/role/"}, method = RequestMethod.PUT)
+//    public ResponseEntity dummyRole() {
+//        return new ResponseEntity(HttpStatus.FORBIDDEN);
+//    }
 }
