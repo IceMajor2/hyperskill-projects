@@ -1,6 +1,7 @@
 package antifraud.web;
 
 import antifraud.DTO.ResultDTO;
+import antifraud.model.BankCard;
 import antifraud.model.SuspiciousIp;
 import antifraud.model.Transaction;
 import antifraud.service.TransactionService;
@@ -57,11 +58,23 @@ public class AntiFraudController {
             return new ResponseEntity(exception.getStatusCode());
         }
     }
-    
+
     @GetMapping("/suspicious-ip")
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity listOfSuspiciousIps() {
         var suspiciousIps = transactionService.listOfSuspiciousIps();
         return ResponseEntity.ok(suspiciousIps);
+    }
+
+    @PostMapping("/stolencard")
+    @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
+    public ResponseEntity saveStolenCardInfo(@RequestBody BankCard stolenCard) {
+        try {
+            BankCard savedCard = transactionService.saveBankCardInfo(stolenCard);
+            return new ResponseEntity(Map.of("id", savedCard.getId(), "number", savedCard.getNumber()),
+                    HttpStatus.CREATED);
+        } catch (ResponseStatusException exception) {
+            return new ResponseEntity(exception.getStatusCode());
+        }
     }
 }
