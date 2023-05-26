@@ -77,4 +77,16 @@ public class AntiFraudController {
             return new ResponseEntity(exception.getStatusCode());
         }
     }
+
+    @DeleteMapping("/stolencard/{number}")
+    @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
+    public ResponseEntity deleteStolenCardInfo(@PathVariable Long number) {
+        try {
+            BankCard deletedCard = transactionService.deleteBankCardInfo(number);
+            return ResponseEntity.ok(Map.of("status", "Card %d successfully removed!"
+                    .formatted(deletedCard.getNumber())));
+        } catch (ResponseStatusException exception) {
+            return new ResponseEntity(exception.getStatusCode());
+        }
+    }
 }

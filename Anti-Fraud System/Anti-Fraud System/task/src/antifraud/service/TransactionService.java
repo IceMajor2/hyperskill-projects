@@ -91,4 +91,17 @@ public class TransactionService {
         }
         return sum % 10 == 0;
     }
+
+    public BankCard deleteBankCardInfo(Long number) {
+        if(!this.isCardNumberValid(number)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        Optional<BankCard> optCard = bankCardsRepository.findByNumber(number);
+        if(optCard.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        BankCard card = optCard.get();
+        bankCardsRepository.delete(card);
+        return card;
+    }
 }
