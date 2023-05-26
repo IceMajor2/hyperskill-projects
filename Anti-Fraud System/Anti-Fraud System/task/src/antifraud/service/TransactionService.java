@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @Service
 public class TransactionService {
 
@@ -39,5 +41,18 @@ public class TransactionService {
         }
         suspiciousIpRepository.save(ip);
         return ip;
+    }
+
+    public SuspiciousIp deleteSuspiciousIp(String ip) {
+        if(!ip.matches(IP_REGEX)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        Optional<SuspiciousIp> optSusIp = suspiciousIpRepository.findByIp(ip);
+        if(optSusIp.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        SuspiciousIp susIp = optSusIp.get();
+        suspiciousIpRepository.delete(susIp);
+        return susIp;
     }
 }

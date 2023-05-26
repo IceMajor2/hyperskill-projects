@@ -36,11 +36,23 @@ public class AntiFraudController {
 
     @PostMapping("/suspicious-ip")
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
-    public ResponseEntity suspiciousIp(@Valid @RequestBody SuspiciousIp ip) {
+    public ResponseEntity saveSuspiciousIp(@Valid @RequestBody SuspiciousIp ip) {
         try {
             SuspiciousIp savedIp = transactionService.saveSuspiciousIp(ip);
             return new ResponseEntity(Map.of("id", savedIp.getId(),
                     "ip", savedIp.getIp()), HttpStatus.CREATED);
+        } catch (ResponseStatusException exception) {
+            return new ResponseEntity(exception.getStatusCode());
+        }
+    }
+
+    @DeleteMapping("/suspicious-ip/{ip}")
+    @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
+    public ResponseEntity deleteSuspiciousIp(@PathVariable String ip) {
+        try {
+            SuspiciousIp deletedIp = transactionService.deleteSuspiciousIp(ip);
+            return ResponseEntity.ok(Map.of("status", "IP %s successfully removed!"
+                    .formatted(deletedIp.getIp())));
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());
         }
