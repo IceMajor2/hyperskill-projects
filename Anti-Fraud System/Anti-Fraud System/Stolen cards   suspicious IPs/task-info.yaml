@@ -1811,6 +1811,12 @@ files:
 
     }
   learner_created: true
+- name: src/antifraud/model/SuspiciousIp.java
+  visible: true
+  learner_created: true
+- name: src/antifraud/repository/SuspiciousIpRepository.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18070#comment
 status: Unchecked
 record: -1
