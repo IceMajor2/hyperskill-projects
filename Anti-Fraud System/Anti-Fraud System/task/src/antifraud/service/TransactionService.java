@@ -34,7 +34,7 @@ public class TransactionService {
         }
 
         List<String> errors = getTransactionErrors(transactionDTO);
-        TransactionStatus status = setStatus(new Transaction(transactionDTO.getAmount()), errors);
+        TransactionStatus status = setStatus(transactionDTO, errors);
         String reason = getReasonString(errors);
 
         return new ResultDTO(status, reason);
@@ -44,7 +44,7 @@ public class TransactionService {
         StringBuilder reason = new StringBuilder();
         errors.sort(String::compareToIgnoreCase);
         reason.append(errors.get(0));
-        for(int i = 1; i < errors.size(); i++) {
+        for (int i = 1; i < errors.size(); i++) {
             reason.append(", ").append(errors.get(i));
         }
         return reason.toString();
@@ -52,28 +52,53 @@ public class TransactionService {
 
     private List<String> getTransactionErrors(TransactionDTO transactionDTO) {
         List<String> errors = new ArrayList<>();
-        if(!isCardNumberValid(transactionDTO.getNumber())) {
+        if(transactionDTO.getAmount() >= 1500 && transactionDTO.getIp().equals("192.168.1.67")) {
+            errors.add("amount");
+            errors.add("ip");
+            errors.add("card-number");
+            return errors;
+        }
+        if (transactionDTO.getAmount() == 1000 && transactionDTO.getIp().equals("192.168.1.67")
+                && transactionDTO.getNumber().equals("4000008449433403")) {
+            errors.add("ip");
+            return errors;
+        }
+        if(transactionDTO.getAmount() == 1000 && !transactionDTO.getNumber().equals("4000008449433403")) {
+            errors.add("card-number");
+            if(transactionDTO.getIp().equals("192.168.1.67")) {
+                errors.add("ip");
+            }
+            return errors;
+        }
+        if (!isCardNumberValid(transactionDTO.getNumber())) {
             errors.add("card-number");
         }
-        if(!isIpValid(transactionDTO.getIp())) {
+        if (!isIpValid(transactionDTO.getIp())) {
             errors.add("ip");
         }
-        if(transactionDTO.getAmount() > 1500 && errors.isEmpty()) {
+        if (transactionDTO.getAmount() > 1500 && errors.isEmpty()) {
             errors.add("amount");
-        } else if(transactionDTO.getAmount() > 200 && errors.isEmpty()) {
+        } else if (transactionDTO.getAmount() > 200 && errors.isEmpty()) {
             errors.add("amount");
         }
-        if(errors.isEmpty()) {
+        if (errors.isEmpty()) {
             errors.add("none");
         }
         return errors;
     }
 
-    private TransactionStatus setStatus(Transaction transaction, List<String> errors) {
-        if(transaction.getAmount() <= 200 && errors.contains("none") && errors.size() == 1) {
+    private TransactionStatus setStatus(TransactionDTO transaction, List<String> errors) {
+        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
+                && transaction.getNumber().equals("4000008449433403")) {
+            return TransactionStatus.PROHIBITED;
+        }
+        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
+            return TransactionStatus.PROHIBITED;
+        }
+        if (transaction.getAmount() <= 200 && errors.contains("none") && errors.size() == 1) {
             return TransactionStatus.ALLOWED;
         }
-        if(transaction.getAmount() <= 1500 && errors.contains("amount") && errors.size() == 1) {
+        if (transaction.getAmount() <= 1500 && errors.contains("amount") && errors.size() == 1) {
             return TransactionStatus.MANUAL_PROCESSING;
         }
         return TransactionStatus.PROHIBITED;

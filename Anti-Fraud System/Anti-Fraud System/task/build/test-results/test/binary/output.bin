@@ -9,20 +9,20 @@
 5[0m[0;34m =========|_|==============|___/=/_/_/_/
 7[0m[0;34m :: Spring Boot ::                (v3.1.0)
 [0m[0;34m
-∞[0m[0;34m2023-05-26T13:26:04.917+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 3688 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
-π[0m[0;34m2023-05-26T13:26:04.925+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: "default"
-±[0m[0;34m2023-05-26T13:26:06.169+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-À[0m[0;34m2023-05-26T13:26:06.256+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 3 JPA repository interfaces.
-£[0m[0;34m2023-05-26T13:26:07.064+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-è[0m[0;34m2023-05-26T13:26:07.077+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-•[0m[0;34m2023-05-26T13:26:07.078+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-®[0m[0;34m2023-05-26T13:26:07.177+02:00  INFO 3688 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-µ[0m[0;34m2023-05-26T13:26:07.179+02:00  INFO 3688 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2205 ms
-ê[0m[0;34m2023-05-26T13:26:07.326+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-»[0m[0;34m2023-05-26T13:26:07.631+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
-ï[0m[0;34m2023-05-26T13:26:07.634+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-…[0m[0;34m2023-05-26T13:26:07.653+02:00  INFO 3688 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-Æ[0m[0;34m2023-05-26T13:26:07.799+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+≤[0m[0;34m2023-05-26T14:22:11.488+02:00  INFO 17056 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 17056 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
+∫[0m[0;34m2023-05-26T14:22:11.494+02:00  INFO 17056 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: "default"
+≤[0m[0;34m2023-05-26T14:22:12.752+02:00  INFO 17056 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+Ã[0m[0;34m2023-05-26T14:22:12.837+02:00  INFO 17056 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 76 ms. Found 3 JPA repository interfaces.
+§[0m[0;34m2023-05-26T14:22:13.671+02:00  INFO 17056 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+ê[0m[0;34m2023-05-26T14:22:13.684+02:00  INFO 17056 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+¶[0m[0;34m2023-05-26T14:22:13.684+02:00  INFO 17056 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+©[0m[0;34m2023-05-26T14:22:13.794+02:00  INFO 17056 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+∂[0m[0;34m2023-05-26T14:22:13.797+02:00  INFO 17056 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2252 ms
+ë[0m[0;34m2023-05-26T14:22:13.949+02:00  INFO 17056 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+…[0m[0;34m2023-05-26T14:22:14.259+02:00  INFO 17056 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
+ñ[0m[0;34m2023-05-26T14:22:14.263+02:00  INFO 17056 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+ [0m[0;34m2023-05-26T14:22:14.284+02:00  INFO 17056 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+Ø[0m[0;34m2023-05-26T14:22:14.432+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -116,7 +116,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-™[0;34m2023-05-26T13:26:07.814+02:00  WARN 3688 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+´[0;34m2023-05-26T14:22:14.452+02:00  WARN 17056 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -143,14 +143,14 @@
 â[0m[0;34m	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
 H[0m[0;34m	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
 [0m[0;34m
-Ø[0m[0;34m2023-05-26T13:26:07.920+02:00  INFO 3688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-ß[0m[0;34m2023-05-26T13:26:08.000+02:00  INFO 3688 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
-§[0m[0;34m2023-05-26T13:26:08.003+02:00  INFO 3688 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-£[0m[0;34m2023-05-26T13:26:08.200+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-≠[0m[0;34m2023-05-26T13:26:08.404+02:00  INFO 3688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-¡[0m[0;34m2023-05-26T13:26:08.452+02:00  INFO 3688 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-£[0m[0;34m2023-05-26T13:26:08.739+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-È[0m[0;34m2023-05-26T13:26:09.676+02:00  INFO 3688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+∞[0m[0;34m2023-05-26T14:22:14.569+02:00  INFO 17056 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+®[0m[0;34m2023-05-26T14:22:14.660+02:00  INFO 17056 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
+•[0m[0;34m2023-05-26T14:22:14.663+02:00  INFO 17056 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+§[0m[0;34m2023-05-26T14:22:14.862+02:00  INFO 17056 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Æ[0m[0;34m2023-05-26T14:22:15.081+02:00  INFO 17056 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+¬[0m[0;34m2023-05-26T14:22:15.131+02:00  INFO 17056 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+§[0m[0;34m2023-05-26T14:22:15.410+02:00  INFO 17056 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Í[0m[0;34m2023-05-26T14:22:16.350+02:00  INFO 17056 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 ã[0m[0;34mHibernate: create table bankcards (id bigint generated by default as identity, number varchar(255) not null, primary key (id))
 é[0m[0;34mHibernate: create table "suspicious-ips" (id bigint generated by default as identity, ip varchar(255) not null, primary key (id))
 Ä[0m[0;34mHibernate: create table users (id bigint generated by default as identity, is_account_non_locked boolean not null, name varchar(255) not null, password varchar(255) not null, role varchar(255), username varchar(255) not null, primary key (id))
@@ -158,11 +158,11 @@
 v[0m[0;34mHibernate: alter table if exists "suspicious-ips" add constraint UK_steulyxwxk581j23xxp6u9dej unique (ip)
 j[0m[0;34mHibernate: alter table if exists users drop constraint if exists UK_r43af9ap4edm43mmtq01oddj6
 q[0m[0;34mHibernate: alter table if exists users add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username)
-π[0m[0;34m2023-05-26T13:26:09.753+02:00  INFO 3688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-≠[0m[0;34m2023-05-26T13:26:10.260+02:00  WARN 3688 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-´[0m[0;34m2023-05-26T13:26:10.797+02:00  INFO 3688 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-Ê[0m[0;34m2023-05-26T13:26:10.862+02:00  INFO 3688 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5e352e3a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b26f006, org.springframework.security.web.context.SecurityContextHolderFilter@74cd82f1, org.springframework.security.web.header.HeaderWriterFilter@7cecd959, org.springframework.security.web.authentication.logout.LogoutFilter@2700f556, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3df496d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@66e5441e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1df77353, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38a6ca39, org.springframework.security.web.session.SessionManagementFilter@2f271ae2, org.springframework.security.web.access.ExceptionTranslationFilter@6c165921, org.springframework.security.web.access.intercept.AuthorizationFilter@b89cbf9]
-Æ[0m[0;34m2023-05-26T13:26:11.240+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+∫[0m[0;34m2023-05-26T14:22:16.426+02:00  INFO 17056 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Æ[0m[0;34m2023-05-26T14:22:16.947+02:00  WARN 17056 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+¨[0m[0;34m2023-05-26T14:22:17.432+02:00  INFO 17056 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+Á[0m[0;34m2023-05-26T14:22:17.494+02:00  INFO 17056 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1ffe7c42, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5f72aaed, org.springframework.security.web.context.SecurityContextHolderFilter@3803bc1a, org.springframework.security.web.header.HeaderWriterFilter@8616368, org.springframework.security.web.authentication.logout.LogoutFilter@51aa8c0f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@355da59c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@39a8c08f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c0d876c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1d9295e2, org.springframework.security.web.session.SessionManagementFilter@1f40bb80, org.springframework.security.web.access.ExceptionTranslationFilter@16c6d5a2, org.springframework.security.web.access.intercept.AuthorizationFilter@524241d9]
+Ø[0m[0;34m2023-05-26T14:22:17.868+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -257,7 +257,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.247+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.875+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -352,7 +352,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.255+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.885+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -447,7 +447,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.263+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.893+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -542,7 +542,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.272+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.900+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -637,7 +637,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.280+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.908+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -732,7 +732,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.289+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.916+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -827,7 +827,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.296+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.923+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -922,7 +922,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.303+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.930+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1017,7 +1017,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:11.310+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:17.938+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1112,8 +1112,8 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-≤[0m[0;34m2023-05-26T13:26:11.325+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-æ[0m[0;34m2023-05-26T13:26:11.340+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 6.88 seconds (process running for 7.965)
+≥[0m[0;34m2023-05-26T14:22:17.956+02:00  INFO 17056 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+¿[0m[0;34m2023-05-26T14:22:17.971+02:00  INFO 17056 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 6.931 seconds (process running for 8.119)
 [0m[0;34mTest case
 )[0m[0;34mTesting api: '/api/auth/user'
 [0m[0;34mrequest: '{
@@ -1122,10 +1122,10 @@
 [0m[0;34m}'
 s[0m[0;34mExpectations: 'In case of wrong data in request, endpoint must respond with BAD REQUEST  status (400).'
 [0m[0;34m-----
-´[0;34m2023-05-26T13:26:11.694+02:00  INFO 3688 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-û[0m[0;34m2023-05-26T13:26:11.694+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-ñ[0m[0;34m2023-05-26T13:26:11.695+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-œ[0m[0;34m2023-05-26T13:26:11.894+02:00  WARN 3688 --- [io-28852-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'username': rejected value [null]; codes [NotNull.user.username,NotNull.username,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.username,username]; arguments []; default message [username]]; default message [must not be null]] ]
+¨[0;34m2023-05-26T14:22:18.317+02:00  INFO 17056 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+ü[0m[0;34m2023-05-26T14:22:18.318+02:00  INFO 17056 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+ó[0m[0;34m2023-05-26T14:22:18.319+02:00  INFO 17056 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+–[0m[0;34m2023-05-26T14:22:18.508+02:00  WARN 17056 --- [io-28852-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'username': rejected value [null]; codes [NotNull.user.username,NotNull.username,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.username,username]; arguments []; default message [username]]; default message [must not be null]] ]
 [0m[1;31m
 Start test 2[0m
 [0;34mTest case
@@ -1136,7 +1136,7 @@
 [0m[0;34m}'
 s[0m[0;34mExpectations: 'In case of wrong data in request, endpoint must respond with BAD REQUEST  status (400).'
 [0m[0;34m-----
-À[0;34m2023-05-26T13:26:11.963+02:00  WARN 3688 --- [io-28852-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'password': rejected value [null]; codes [NotNull.user.password,NotNull.password,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.password,password]; arguments []; default message [password]]; default message [must not be null]] ]
+Ã[0;34m2023-05-26T14:22:18.575+02:00  WARN 17056 --- [io-28852-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'password': rejected value [null]; codes [NotNull.user.password,NotNull.password,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.password,password]; arguments []; default message [password]]; default message [must not be null]] ]
 [0m[1;31m
 Start test 3[0m
 [0;34mTest case
@@ -1210,7 +1210,7 @@
 +[0m[0;34mTesting api: '/api/auth/access'
 <[0m[0;34mExpectations: 'A user johndoe1 must be UNLOCKED'
 [0m[0;34m-----
-•[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+°[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 •[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 o[0m[0;34mHibernate: update users set is_account_non_locked=?,name=?,password=?,role=?,username=? where id=?
 [0m[1;31m
@@ -1230,11 +1230,11 @@
 •[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 [0m[1;31m
 Start test 13[0m
-ã[0;34m2023-05-26T13:26:13.848+02:00  INFO 3688 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-¨[0m[0;34m2023-05-26T13:26:13.849+02:00  INFO 3688 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-µ[0m[0;34m2023-05-26T13:26:13.859+02:00  INFO 3688 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-ö[0m[0;34m2023-05-26T13:26:13.861+02:00  INFO 3688 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-ò[0m[0;34m2023-05-26T13:26:13.871+02:00  INFO 3688 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+å[0;34m2023-05-26T14:22:20.444+02:00  INFO 17056 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+≠[0m[0;34m2023-05-26T14:22:20.445+02:00  INFO 17056 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+∂[0m[0;34m2023-05-26T14:22:20.455+02:00  INFO 17056 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+õ[0m[0;34m2023-05-26T14:22:20.457+02:00  INFO 17056 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+ô[0m[0;34m2023-05-26T14:22:20.467+02:00  INFO 17056 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 	[0;34m
 4[0m[0;34m  .   ____          _            __ _ _
 5[0m[0;34m /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -1244,20 +1244,20 @@
 5[0m[0;34m =========|_|==============|___/=/_/_/_/
 7[0m[0;34m :: Spring Boot ::                (v3.1.0)
 [0m[0;34m
-∞[0m[0;34m2023-05-26T13:26:24.279+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 3688 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
-π[0m[0;34m2023-05-26T13:26:24.280+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: "default"
-±[0m[0;34m2023-05-26T13:26:24.599+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-À[0m[0;34m2023-05-26T13:26:24.615+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 3 JPA repository interfaces.
-£[0m[0;34m2023-05-26T13:26:24.705+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-è[0m[0;34m2023-05-26T13:26:24.706+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-•[0m[0;34m2023-05-26T13:26:24.706+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-®[0m[0;34m2023-05-26T13:26:24.735+02:00  INFO 3688 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-¥[0m[0;34m2023-05-26T13:26:24.735+02:00  INFO 3688 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 453 ms
-ê[0m[0;34m2023-05-26T13:26:24.783+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-…[0m[0;34m2023-05-26T13:26:24.806+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
-ï[0m[0;34m2023-05-26T13:26:24.806+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-…[0m[0;34m2023-05-26T13:26:24.807+02:00  INFO 3688 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-Æ[0m[0;34m2023-05-26T13:26:24.828+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+≤[0m[0;34m2023-05-26T14:22:30.885+02:00  INFO 17056 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 17056 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
+∫[0m[0;34m2023-05-26T14:22:30.885+02:00  INFO 17056 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: "default"
+≤[0m[0;34m2023-05-26T14:22:31.207+02:00  INFO 17056 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+Ã[0m[0;34m2023-05-26T14:22:31.225+02:00  INFO 17056 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 3 JPA repository interfaces.
+§[0m[0;34m2023-05-26T14:22:31.333+02:00  INFO 17056 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+ê[0m[0;34m2023-05-26T14:22:31.334+02:00  INFO 17056 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+¶[0m[0;34m2023-05-26T14:22:31.334+02:00  INFO 17056 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+©[0m[0;34m2023-05-26T14:22:31.362+02:00  INFO 17056 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+µ[0m[0;34m2023-05-26T14:22:31.362+02:00  INFO 17056 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 475 ms
+ë[0m[0;34m2023-05-26T14:22:31.411+02:00  INFO 17056 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+ [0m[0;34m2023-05-26T14:22:31.434+02:00  INFO 17056 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
+ñ[0m[0;34m2023-05-26T14:22:31.434+02:00  INFO 17056 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+ [0m[0;34m2023-05-26T14:22:31.434+02:00  INFO 17056 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+Ø[0m[0;34m2023-05-26T14:22:31.461+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1354,7 +1354,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:24.834+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.467+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1446,17 +1446,17 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Ø[0m[0;34m2023-05-26T13:26:24.859+02:00  INFO 3688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-£[0m[0;34m2023-05-26T13:26:24.872+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-≠[0m[0;34m2023-05-26T13:26:24.873+02:00  INFO 3688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-¡[0m[0;34m2023-05-26T13:26:24.875+02:00  INFO 3688 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-£[0m[0;34m2023-05-26T13:26:24.887+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-È[0m[0;34m2023-05-26T13:26:24.988+02:00  INFO 3688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-π[0m[0;34m2023-05-26T13:26:24.992+02:00  INFO 3688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-≠[0m[0;34m2023-05-26T13:26:25.062+02:00  WARN 3688 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-´[0m[0;34m2023-05-26T13:26:25.188+02:00  INFO 3688 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-Ê[0m[0;34m2023-05-26T13:26:25.207+02:00  INFO 3688 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2dfdea3a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b1339bf, org.springframework.security.web.context.SecurityContextHolderFilter@1243ad9a, org.springframework.security.web.header.HeaderWriterFilter@5e774546, org.springframework.security.web.authentication.logout.LogoutFilter@d200d3e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@39fbee74, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@30c085f3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5479abd8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@46f43f50, org.springframework.security.web.session.SessionManagementFilter@6f67291f, org.springframework.security.web.access.ExceptionTranslationFilter@447cdbaa, org.springframework.security.web.access.intercept.AuthorizationFilter@20395afe]
-Æ[0m[0;34m2023-05-26T13:26:25.288+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+∞[0m[0;34m2023-05-26T14:22:31.494+02:00  INFO 17056 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+§[0m[0;34m2023-05-26T14:22:31.509+02:00  INFO 17056 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Æ[0m[0;34m2023-05-26T14:22:31.509+02:00  INFO 17056 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+¬[0m[0;34m2023-05-26T14:22:31.511+02:00  INFO 17056 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+§[0m[0;34m2023-05-26T14:22:31.522+02:00  INFO 17056 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Í[0m[0;34m2023-05-26T14:22:31.617+02:00  INFO 17056 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+∫[0m[0;34m2023-05-26T14:22:31.633+02:00  INFO 17056 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Æ[0m[0;34m2023-05-26T14:22:31.712+02:00  WARN 17056 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+¨[0m[0;34m2023-05-26T14:22:31.844+02:00  INFO 17056 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+Á[0m[0;34m2023-05-26T14:22:31.864+02:00  INFO 17056 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6f67291f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1243ad9a, org.springframework.security.web.context.SecurityContextHolderFilter@6d95b51d, org.springframework.security.web.header.HeaderWriterFilter@6a7eef27, org.springframework.security.web.authentication.logout.LogoutFilter@f57ced1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1d9c18b9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7d2dfe9c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@60b721c9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30c085f3, org.springframework.security.web.session.SessionManagementFilter@1ab6a093, org.springframework.security.web.access.ExceptionTranslationFilter@409a164d, org.springframework.security.web.access.intercept.AuthorizationFilter@5e774546]
+Ø[0m[0;34m2023-05-26T14:22:31.943+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1554,7 +1554,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.294+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.949+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1652,7 +1652,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.300+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.955+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1750,7 +1750,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.305+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.962+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1848,7 +1848,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.316+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.968+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1946,7 +1946,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.322+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.974+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2044,7 +2044,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.330+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.980+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2142,7 +2142,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.337+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.986+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2240,7 +2240,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.344+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.992+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2338,7 +2338,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-26T13:26:25.363+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-26T14:22:31.997+02:00  WARN 17056 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2436,17 +2436,17 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-≤[0m[0;34m2023-05-26T13:26:25.388+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-æ[0m[0;34m2023-05-26T13:26:25.395+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 1.14 seconds (process running for 22.02)
+≥[0m[0;34m2023-05-26T14:22:32.004+02:00  INFO 17056 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+¡[0m[0;34m2023-05-26T14:22:32.010+02:00  INFO 17056 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 1.149 seconds (process running for 22.159)
 [0m[1;31m
 Start test 14[0m
 [0;34mTest case
 )[0m[0;34mTesting api: '/api/auth/list'
 9[0m[0;34mExpectations: 'After restart user must exist'
 [0m[0;34m-----
-´[0;34m2023-05-26T13:26:25.403+02:00  INFO 3688 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-û[0m[0;34m2023-05-26T13:26:25.404+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-ñ[0m[0;34m2023-05-26T13:26:25.405+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+¨[0;34m2023-05-26T14:22:32.018+02:00  INFO 17056 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+ü[0m[0;34m2023-05-26T14:22:32.018+02:00  INFO 17056 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+ó[0m[0;34m2023-05-26T14:22:32.019+02:00  INFO 17056 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 •[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 í[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 order by u1_0.id
 [0m[1;31m
@@ -3067,6 +3067,27 @@
 [0;34mTest case
 5[0m[0;34mTesting api: '/api/antifraud/transaction'
 X[0m[0;34mExpectations: 'Transaction must be PROHIBITED due to - suspicious ip reason'
+[0m[0;34m-----
+•[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+[0m[1;31m
+Start test 92[0m
+[0;34mTest case
+5[0m[0;34mTesting api: '/api/antifraud/transaction'
+V[0m[0;34mExpectations: 'Transaction must be PROHIBITED due to - stolen card reason'
+[0m[0;34m-----
+•[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+[0m[1;31m
+Start test 93[0m
+[0;34mTest case
+5[0m[0;34mTesting api: '/api/antifraud/transaction'
+f[0m[0;34mExpectations: 'Transaction must be PROHIBITED due to - stolen card, suspicious ip reasons'
+[0m[0;34m-----
+•[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+[0m[1;31m
+Start test 94[0m
+[0;34mTest case
+5[0m[0;34mTesting api: '/api/antifraud/transaction'
+n[0m[0;34mExpectations: 'Transaction must be PROHIBITED due to - amount, stolen card, suspicious ip reasons'
 [0m[0;34m-----
 •[0m[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 [0m
