@@ -1823,6 +1823,9 @@ files:
 - name: src/antifraud/repository/BankCardsRepository.java
   visible: true
   learner_created: true
+- name: src/antifraud/DTO/TransactionDTO.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18070#comment
 status: Unchecked
 record: -1

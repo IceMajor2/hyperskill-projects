@@ -1,6 +1,7 @@
 package antifraud.service;
 
 import antifraud.DTO.ResultDTO;
+import antifraud.DTO.TransactionDTO;
 import antifraud.model.BankCard;
 import antifraud.model.SuspiciousIp;
 import antifraud.model.Transaction;
@@ -24,24 +25,34 @@ public class TransactionService {
     @Autowired
     private BankCardsRepository bankCardsRepository;
 
-    public ResultDTO makeTransaction(Transaction transaction) {
-        if(transaction == null || transaction.getAmount() == null || transaction.getAmount() <= 0) {
+    public ResultDTO makeTransaction(TransactionDTO transactionDTO) {
+        String reason = "";
+        if (transactionDTO == null || transactionDTO.getAmount() == null || transactionDTO.getAmount() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        if(transaction.getAmount() > 1500) {
-            return new ResultDTO("PROHIBITED");
+        if(transactionDTO.getAmount() > 1500) {
+            reason += "amount";
         }
-        if(transaction.getAmount() > 200) {
-            return new ResultDTO("MANUAL_PROCESSING");
+        if(!isCardNumberValid(transactionDTO.getNumber())) {
+            reason += ", card-number";
         }
-        return new ResultDTO("ALLOWED");
+        if(!isIpValid(transactionDTO.getIp())) {
+            reason += ", ip";
+        }
+        if(!reason.isEmpty()) {
+            return new ResultDTO("PROHIBITED", reason);
+        }
+        if (transactionDTO.getAmount() > 200) {
+            return new ResultDTO("MANUAL_PROCESSING", "amount");
+        }
+        return new ResultDTO("ALLOWED", "none");
     }
 
     public SuspiciousIp saveSuspiciousIp(SuspiciousIp ip) {
-        if(suspiciousIpRepository.findByIp(ip.getIp()).isPresent()) {
+        if (suspiciousIpRepository.findByIp(ip.getIp()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
-        if(!ip.getIp().matches(IP_REGEX)) {
+        if (!isIpValid(ip.getIp())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         suspiciousIpRepository.save(ip);
@@ -49,11 +60,11 @@ public class TransactionService {
     }
 
     public SuspiciousIp deleteSuspiciousIp(String ip) {
-        if(!ip.matches(IP_REGEX)) {
+        if (!isIpValid(ip)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         Optional<SuspiciousIp> optSusIp = suspiciousIpRepository.findByIp(ip);
-        if(optSusIp.isEmpty()) {
+        if (optSusIp.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         SuspiciousIp susIp = optSusIp.get();
@@ -66,38 +77,21 @@ public class TransactionService {
     }
 
     public BankCard saveBankCardInfo(BankCard card) {
-        if(bankCardsRepository.findByNumber(card.getNumber()).isPresent()) {
+        if (bankCardsRepository.findByNumber(card.getNumber()).isPresent()) {
             throw new ResponseStatusException(HttpStatus.CONFLICT);
         }
-        if(!this.isCardNumberValid(card.getNumber())) {
+        if (!this.isCardNumberValid(card.getNumber())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         return bankCardsRepository.save(card);
     }
 
-    public boolean isCardNumberValid(Long number) {
-        char[] numArr = number.toString().toCharArray();
-        int sum = 0;
-        int parity = numArr.length % 2;
-        for(int i = 0; i < numArr.length; i++) {
-            int digit = numArr[i] - 48;
-            if(i % 2 != parity) {
-                sum = sum + digit;
-            } else if(digit > 4) {
-                sum = sum + 2 * digit - 9;
-            } else {
-                sum = sum + 2 * digit;
-            }
-        }
-        return sum % 10 == 0;
-    }
-
     public BankCard deleteBankCardInfo(Long number) {
-        if(!this.isCardNumberValid(number)) {
+        if (!this.isCardNumberValid(number)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
         Optional<BankCard> optCard = bankCardsRepository.findByNumber(number);
-        if(optCard.isEmpty()) {
+        if (optCard.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         BankCard card = optCard.get();
@@ -107,5 +101,26 @@ public class TransactionService {
 
     public List<BankCard> getListOfBankCards() {
         return this.bankCardsRepository.findAllByOrderByIdAsc();
+    }
+
+    public boolean isCardNumberValid(Long number) {
+        char[] numArr = number.toString().toCharArray();
+        int sum = 0;
+        int parity = numArr.length % 2;
+        for (int i = 0; i < numArr.length; i++) {
+            int digit = numArr[i] - 48;
+            if (i % 2 != parity) {
+                sum = sum + digit;
+            } else if (digit > 4) {
+                sum = sum + 2 * digit - 9;
+            } else {
+                sum = sum + 2 * digit;
+            }
+        }
+        return sum % 10 == 0;
+    }
+
+    public boolean isIpValid(String ip) {
+        return ip.matches(IP_REGEX);
     }
 }
