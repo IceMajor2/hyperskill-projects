@@ -4,10 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
-/**
- * TODO: create services to provide for controllers
- */
-
 @SpringBootApplication
 @ComponentScan
 public class AntiFraudApplication {
