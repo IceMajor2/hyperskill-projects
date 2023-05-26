@@ -66,7 +66,7 @@ public class AntiFraudController {
         return ResponseEntity.ok(suspiciousIps);
     }
 
-    @PostMapping("/stolencard")
+    @PostMapping(value = {"/stolencard", "/stolencard/"})
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity saveStolenCardInfo(@RequestBody BankCard stolenCard) {
         try {
@@ -88,5 +88,12 @@ public class AntiFraudController {
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());
         }
+    }
+
+    @GetMapping(value = {"/stolencard", "/stolencard/"})
+    @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
+    public ResponseEntity listCardInfo() {
+        var cards = transactionService.getListOfBankCards();
+        return ResponseEntity.ok(cards);
     }
 }

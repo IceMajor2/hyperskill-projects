@@ -104,4 +104,8 @@ public class TransactionService {
         bankCardsRepository.delete(card);
         return card;
     }
+
+    public List<BankCard> getListOfBankCards() {
+        return this.bankCardsRepository.findAllByOrderByIdAsc();
+    }
 }
