@@ -57,4 +57,11 @@ public class AntiFraudController {
             return new ResponseEntity(exception.getStatusCode());
         }
     }
+    
+    @GetMapping("/suspicious-ip")
+    @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
+    public ResponseEntity listOfSuspiciousIps() {
+        var suspiciousIps = transactionService.listOfSuspiciousIps();
+        return ResponseEntity.ok(suspiciousIps);
+    }
 }
