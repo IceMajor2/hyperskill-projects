@@ -11,7 +11,7 @@ public class BankCard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
-    private Long number;
+    private String number;
 
     public Long getId() {
         return id;
@@ -21,11 +21,11 @@ public class BankCard {
         this.id = id;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 }

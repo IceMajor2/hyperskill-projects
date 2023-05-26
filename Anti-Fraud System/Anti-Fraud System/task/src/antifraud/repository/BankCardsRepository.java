@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface BankCardsRepository extends CrudRepository<BankCard, Long> {
 
-    Optional<BankCard> findByNumber(Long number);
+    Optional<BankCard> findByNumber(String number);
 
     List<BankCard> findAllByOrderByIdAsc();
 }

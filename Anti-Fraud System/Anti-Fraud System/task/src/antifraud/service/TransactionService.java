@@ -2,6 +2,7 @@ package antifraud.service;
 
 import antifraud.DTO.ResultDTO;
 import antifraud.DTO.TransactionDTO;
+import antifraud.Enum.TransactionStatus;
 import antifraud.model.BankCard;
 import antifraud.model.SuspiciousIp;
 import antifraud.model.Transaction;
@@ -12,13 +13,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TransactionService {
 
-    private final String IP_REGEX = "(\\d{1,3}\\.?\\b){4}";
+    private final String IP_REGEX = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
+    //private final String IP_REGEX = "(\\d{1,3}\\.?\\b){4}";
 
     @Autowired
     private SuspiciousIpRepository suspiciousIpRepository;
@@ -26,26 +29,54 @@ public class TransactionService {
     private BankCardsRepository bankCardsRepository;
 
     public ResultDTO makeTransaction(TransactionDTO transactionDTO) {
-        String reason = "";
         if (transactionDTO == null || transactionDTO.getAmount() == null || transactionDTO.getAmount() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        if(transactionDTO.getAmount() > 1500) {
-            reason += "amount";
+
+        List<String> errors = getTransactionErrors(transactionDTO);
+        TransactionStatus status = setStatus(new Transaction(transactionDTO.getAmount()), errors);
+        String reason = getReasonString(errors);
+
+        return new ResultDTO(status, reason);
+    }
+
+    private String getReasonString(List<String> errors) {
+        StringBuilder reason = new StringBuilder();
+        errors.sort(String::compareToIgnoreCase);
+        reason.append(errors.get(0));
+        for(int i = 1; i < errors.size(); i++) {
+            reason.append(", ").append(errors.get(i));
         }
+        return reason.toString();
+    }
+
+    private List<String> getTransactionErrors(TransactionDTO transactionDTO) {
+        List<String> errors = new ArrayList<>();
         if(!isCardNumberValid(transactionDTO.getNumber())) {
-            reason += ", card-number";
+            errors.add("card-number");
         }
         if(!isIpValid(transactionDTO.getIp())) {
-            reason += ", ip";
+            errors.add("ip");
         }
-        if(!reason.isEmpty()) {
-            return new ResultDTO("PROHIBITED", reason);
+        if(transactionDTO.getAmount() > 1500 && errors.isEmpty()) {
+            errors.add("amount");
+        } else if(transactionDTO.getAmount() > 200 && errors.isEmpty()) {
+            errors.add("amount");
         }
-        if (transactionDTO.getAmount() > 200) {
-            return new ResultDTO("MANUAL_PROCESSING", "amount");
+        if(errors.isEmpty()) {
+            errors.add("none");
         }
-        return new ResultDTO("ALLOWED", "none");
+        return errors;
+    }
+
+    private TransactionStatus setStatus(Transaction transaction, List<String> errors) {
+        if(transaction.getAmount() <= 200 && errors.contains("none") && errors.size() == 1) {
+            return TransactionStatus.ALLOWED;
+        }
+        if(transaction.getAmount() <= 1500 && errors.contains("amount") && errors.size() == 1) {
+            return TransactionStatus.MANUAL_PROCESSING;
+        }
+        return TransactionStatus.PROHIBITED;
     }
 
     public SuspiciousIp saveSuspiciousIp(SuspiciousIp ip) {
@@ -86,7 +117,7 @@ public class TransactionService {
         return bankCardsRepository.save(card);
     }
 
-    public BankCard deleteBankCardInfo(Long number) {
+    public BankCard deleteBankCardInfo(String number) {
         if (!this.isCardNumberValid(number)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -103,8 +134,8 @@ public class TransactionService {
         return this.bankCardsRepository.findAllByOrderByIdAsc();
     }
 
-    public boolean isCardNumberValid(Long number) {
-        char[] numArr = number.toString().toCharArray();
+    public boolean isCardNumberValid(String number) {
+        char[] numArr = number.toCharArray();
         int sum = 0;
         int parity = numArr.length % 2;
         for (int i = 0; i < numArr.length; i++) {

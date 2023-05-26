@@ -1826,6 +1826,24 @@ files:
 - name: src/antifraud/DTO/TransactionDTO.java
   visible: true
   learner_created: true
+- name: db/service_db.mv.db
+  visible: true
+  learner_created: true
+- name: src/antifraud/Enum/TransactionStatus.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18070#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #91
+
+    The JSON object at key result should equal to &quot;PROHIBITED&quot;, found &quot;MANUAL_PROCESSING&quot;
+
+    Full JSON:
+    {
+      &quot;result&quot;: &quot;MANUAL_PROCESSING&quot;,
+      &quot;info&quot;: &quot;amount&quot;
+    }
+  time: "Fri, 26 May 2023 11:26:31 UTC"
 record: -1

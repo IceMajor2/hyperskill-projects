@@ -1,14 +1,16 @@
 package antifraud.DTO;
 
+import antifraud.Enum.TransactionStatus;
+
 public class ResultDTO {
 
-    private String result;
+    private TransactionStatus result;
     private String info;
 
     public ResultDTO() {
     }
 
-    public ResultDTO(String result, String info) {
+    public ResultDTO(TransactionStatus result, String info) {
         this.result = result;
         this.info = info;
     }
@@ -21,11 +23,11 @@ public class ResultDTO {
         this.info = info;
     }
 
-    public String getResult() {
+    public TransactionStatus getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(TransactionStatus result) {
         this.result = result;
     }
 }

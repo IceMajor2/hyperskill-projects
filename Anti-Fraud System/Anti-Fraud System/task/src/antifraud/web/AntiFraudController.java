@@ -40,7 +40,7 @@ public class AntiFraudController {
         try {
             SuspiciousIp savedIp = transactionService.saveSuspiciousIp(ip);
             return new ResponseEntity(Map.of("id", savedIp.getId(),
-                    "ip", savedIp.getIp()), HttpStatus.CREATED);
+                    "ip", savedIp.getIp()), HttpStatus.OK);
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());
         }
@@ -71,7 +71,7 @@ public class AntiFraudController {
         try {
             BankCard savedCard = transactionService.saveBankCardInfo(stolenCard);
             return new ResponseEntity(Map.of("id", savedCard.getId(), "number", savedCard.getNumber()),
-                    HttpStatus.CREATED);
+                    HttpStatus.OK);
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());
         }
@@ -79,10 +79,10 @@ public class AntiFraudController {
 
     @DeleteMapping("/stolencard/{number}")
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
-    public ResponseEntity deleteStolenCardInfo(@PathVariable Long number) {
+    public ResponseEntity deleteStolenCardInfo(@PathVariable String number) {
         try {
             BankCard deletedCard = transactionService.deleteBankCardInfo(number);
-            return ResponseEntity.ok(Map.of("status", "Card %d successfully removed!"
+            return ResponseEntity.ok(Map.of("status", "Card %s successfully removed!"
                     .formatted(deletedCard.getNumber())));
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());

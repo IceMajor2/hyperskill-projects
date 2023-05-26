@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -36,12 +35,18 @@ public class SecurityConfig {
                 ).headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.
                         frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())
                 ).authorizeHttpRequests((authz) -> authz
-                // course-specific endpoints handling for tests: START
+                        // course-specific endpoints handling for tests: START
                         .requestMatchers(HttpMethod.POST, "/api/antifraud/transaction/").denyAll()
                         .requestMatchers(HttpMethod.PUT, "/api/auth/access/").denyAll()
                         .requestMatchers(HttpMethod.PUT, "/api/auth/role/").denyAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/auth/user/").denyAll()
-                // END
+                        .requestMatchers(HttpMethod.POST, "/api/antifraud/suspicious-ip/").denyAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/antifraud/suspicious-ip/").denyAll()
+                        .requestMatchers(HttpMethod.GET, "/api/antifraud/suspicious-ip/").denyAll()
+                        .requestMatchers(HttpMethod.POST, "/api/antifraud/stolencard/").denyAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/antifraud/stolencard/").denyAll()
+                        .requestMatchers(HttpMethod.GET, "/api/antifraud/stolencard/").denyAll()
+                        // END
                         .requestMatchers(HttpMethod.POST, "/api/auth/user/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/auth/**").authenticated()
                         .requestMatchers(toH2Console()).permitAll()

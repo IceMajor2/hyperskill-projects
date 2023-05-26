@@ -4,7 +4,7 @@ public class TransactionDTO {
 
     private Long amount;
     private String ip;
-    private Long number;
+    private String number;
 
     public Long getAmount() {
         return amount;
@@ -22,11 +22,11 @@ public class TransactionDTO {
         this.ip = ip;
     }
 
-    public Long getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(Long number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 }

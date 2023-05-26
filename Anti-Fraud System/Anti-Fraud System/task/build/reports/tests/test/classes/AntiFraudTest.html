@@ -29,7 +29,7 @@
 </td>
 <td>
 <div class="infoBox" id="failures">
-<div class="counter">0</div>
+<div class="counter">1</div>
 <p>failures</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">25.493s</div>
+<div class="counter">27.355s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox success" id="successRate">
-<div class="percent">100%</div>
+<div class="infoBox failures" id="successRate">
+<div class="percent">0%</div>
 <p>successful</p>
 </div>
 </td>
@@ -61,13 +61,81 @@
 <div id="tabs">
 <ul class="tabLinks">
 <li>
-<a href="#tab0">Tests</a>
+<a href="#tab0">Failed tests</a>
 </li>
 <li>
-<a href="#tab1">Standard output</a>
+<a href="#tab1">Tests</a>
+</li>
+<li>
+<a href="#tab2">Standard output</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
+<h2>Failed tests</h2>
+<div class="test">
+<a name="start"></a>
+<h3 class="failures">start</h3>
+<span class="code">
+<pre>java.lang.AssertionError: Wrong answer in test #91
+
+The JSON object at key result should equal to &quot;PROHIBITED&quot;, found &quot;MANUAL_PROCESSING&quot;
+
+Full JSON:
+{
+  &quot;result&quot;: &quot;MANUAL_PROCESSING&quot;,
+  &quot;info&quot;: &quot;amount&quot;
+}
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:203)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</pre>
+</span>
+</div>
+</div>
+<div id="tab1" class="tab">
 <h2>Tests</h2>
 <table>
 <thead>
@@ -78,13 +146,13 @@
 </tr>
 </thead>
 <tr>
-<td class="success">start</td>
-<td class="success">25.493s</td>
-<td class="success">passed</td>
+<td class="failures">start</td>
+<td class="failures">27.355s</td>
+<td class="failures">failed</td>
 </tr>
 </table>
 </div>
-<div id="tab1" class="tab">
+<div id="tab2" class="tab">
 <h2>Standard output</h2>
 <span class="code">
 <pre>?[1;31m
@@ -98,20 +166,20 @@ Start test 1?[0m
 ?[0m?[0;34m =========|_|==============|___/=/_/_/_/
 ?[0m?[0;34m :: Spring Boot ::                (v3.1.0)
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:13.881+02:00  INFO 19368 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 19368 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
-?[0m?[0;34m2023-05-25T16:43:13.886+02:00  INFO 19368 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: &quot;default&quot;
-?[0m?[0;34m2023-05-25T16:43:15.189+02:00  INFO 19368 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-?[0m?[0;34m2023-05-25T16:43:15.271+02:00  INFO 19368 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 1 JPA repository interfaces.
-?[0m?[0;34m2023-05-25T16:43:16.083+02:00  INFO 19368 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-?[0m?[0;34m2023-05-25T16:43:16.099+02:00  INFO 19368 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-?[0m?[0;34m2023-05-25T16:43:16.099+02:00  INFO 19368 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-?[0m?[0;34m2023-05-25T16:43:16.210+02:00  INFO 19368 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-?[0m?[0;34m2023-05-25T16:43:16.213+02:00  INFO 19368 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2278 ms
-?[0m?[0;34m2023-05-25T16:43:16.363+02:00  INFO 19368 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-?[0m?[0;34m2023-05-25T16:43:16.713+02:00  INFO 19368 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
-?[0m?[0;34m2023-05-25T16:43:16.716+02:00  INFO 19368 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-?[0m?[0;34m2023-05-25T16:43:16.741+02:00  INFO 19368 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-?[0m?[0;34m2023-05-25T16:43:16.872+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:04.917+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 3688 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
+?[0m?[0;34m2023-05-26T13:26:04.925+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: &quot;default&quot;
+?[0m?[0;34m2023-05-26T13:26:06.169+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+?[0m?[0;34m2023-05-26T13:26:06.256+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 3 JPA repository interfaces.
+?[0m?[0;34m2023-05-26T13:26:07.064+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+?[0m?[0;34m2023-05-26T13:26:07.077+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+?[0m?[0;34m2023-05-26T13:26:07.078+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+?[0m?[0;34m2023-05-26T13:26:07.177+02:00  INFO 3688 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+?[0m?[0;34m2023-05-26T13:26:07.179+02:00  INFO 3688 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2205 ms
+?[0m?[0;34m2023-05-26T13:26:07.326+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+?[0m?[0;34m2023-05-26T13:26:07.631+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
+?[0m?[0;34m2023-05-26T13:26:07.634+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+?[0m?[0;34m2023-05-26T13:26:07.653+02:00  INFO 3688 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+?[0m?[0;34m2023-05-26T13:26:07.799+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -149,7 +217,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -205,7 +273,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0;34m2023-05-25T16:43:16.890+02:00  WARN 19368 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0;34m2023-05-26T13:26:07.814+02:00  WARN 3688 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -232,22 +300,26 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
 ?[0m?[0;34m	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:17.002+02:00  INFO 19368 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-?[0m?[0;34m2023-05-25T16:43:17.085+02:00  INFO 19368 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
-?[0m?[0;34m2023-05-25T16:43:17.089+02:00  INFO 19368 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-?[0m?[0;34m2023-05-25T16:43:17.280+02:00  INFO 19368 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-25T16:43:17.500+02:00  INFO 19368 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-?[0m?[0;34m2023-05-25T16:43:17.548+02:00  INFO 19368 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-?[0m?[0;34m2023-05-25T16:43:17.808+02:00  INFO 19368 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-25T16:43:18.669+02:00  INFO 19368 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+?[0m?[0;34m2023-05-26T13:26:07.920+02:00  INFO 3688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+?[0m?[0;34m2023-05-26T13:26:08.000+02:00  INFO 3688 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
+?[0m?[0;34m2023-05-26T13:26:08.003+02:00  INFO 3688 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+?[0m?[0;34m2023-05-26T13:26:08.200+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+?[0m?[0;34m2023-05-26T13:26:08.404+02:00  INFO 3688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+?[0m?[0;34m2023-05-26T13:26:08.452+02:00  INFO 3688 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+?[0m?[0;34m2023-05-26T13:26:08.739+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+?[0m?[0;34m2023-05-26T13:26:09.676+02:00  INFO 3688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+?[0m?[0;34mHibernate: create table bankcards (id bigint generated by default as identity, number varchar(255) not null, primary key (id))
+?[0m?[0;34mHibernate: create table &quot;suspicious-ips&quot; (id bigint generated by default as identity, ip varchar(255) not null, primary key (id))
 ?[0m?[0;34mHibernate: create table users (id bigint generated by default as identity, is_account_non_locked boolean not null, name varchar(255) not null, password varchar(255) not null, role varchar(255), username varchar(255) not null, primary key (id))
+?[0m?[0;34mHibernate: alter table if exists &quot;suspicious-ips&quot; drop constraint if exists UK_steulyxwxk581j23xxp6u9dej
+?[0m?[0;34mHibernate: alter table if exists &quot;suspicious-ips&quot; add constraint UK_steulyxwxk581j23xxp6u9dej unique (ip)
 ?[0m?[0;34mHibernate: alter table if exists users drop constraint if exists UK_r43af9ap4edm43mmtq01oddj6
 ?[0m?[0;34mHibernate: alter table if exists users add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username)
-?[0m?[0;34m2023-05-25T16:43:18.746+02:00  INFO 19368 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-?[0m?[0;34m2023-05-25T16:43:19.215+02:00  WARN 19368 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-?[0m?[0;34m2023-05-25T16:43:19.758+02:00  INFO 19368 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-?[0m?[0;34m2023-05-25T16:43:19.836+02:00  INFO 19368 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4a66949a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@57e83608, org.springframework.security.web.context.SecurityContextHolderFilter@7a8dbbf1, org.springframework.security.web.header.HeaderWriterFilter@87cb1d8, org.springframework.security.web.authentication.logout.LogoutFilter@3884e858, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@63893cf6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7a087132, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d8c03cc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@57d8d8e2, org.springframework.security.web.session.SessionManagementFilter@59fa5a39, org.springframework.security.web.access.ExceptionTranslationFilter@41acf2f1, org.springframework.security.web.access.intercept.AuthorizationFilter@1dd01876]
-?[0m?[0;34m2023-05-25T16:43:20.231+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:09.753+02:00  INFO 3688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+?[0m?[0;34m2023-05-26T13:26:10.260+02:00  WARN 3688 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+?[0m?[0;34m2023-05-26T13:26:10.797+02:00  INFO 3688 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+?[0m?[0;34m2023-05-26T13:26:10.862+02:00  INFO 3688 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5e352e3a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1b26f006, org.springframework.security.web.context.SecurityContextHolderFilter@74cd82f1, org.springframework.security.web.header.HeaderWriterFilter@7cecd959, org.springframework.security.web.authentication.logout.LogoutFilter@2700f556, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3df496d9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@66e5441e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1df77353, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38a6ca39, org.springframework.security.web.session.SessionManagementFilter@2f271ae2, org.springframework.security.web.access.ExceptionTranslationFilter@6c165921, org.springframework.security.web.access.intercept.AuthorizationFilter@b89cbf9]
+?[0m?[0;34m2023-05-26T13:26:11.240+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -286,7 +358,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -342,7 +414,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.240+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.247+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -381,7 +453,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -437,7 +509,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.249+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.255+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -476,7 +548,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -532,7 +604,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.258+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.263+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -571,7 +643,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -627,7 +699,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.265+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.272+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -666,7 +738,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -722,7 +794,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.282+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.280+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -761,7 +833,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -817,7 +889,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.293+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.289+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -856,7 +928,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -912,7 +984,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.305+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.296+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -951,7 +1023,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -1007,7 +1079,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.316+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.303+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1046,7 +1118,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -1102,7 +1174,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.324+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:11.310+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1141,7 +1213,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
@@ -1197,8 +1269,8 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:20.341+02:00  INFO 19368 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-?[0m?[0;34m2023-05-25T16:43:20.359+02:00  INFO 19368 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 6.966 seconds (process running for 8.06)
+?[0m?[0;34m2023-05-26T13:26:11.325+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+?[0m?[0;34m2023-05-26T13:26:11.340+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 6.88 seconds (process running for 7.965)
 ?[0m?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/user'
 ?[0m?[0;34mrequest: '{
@@ -1207,10 +1279,10 @@ Start test 1?[0m
 ?[0m?[0;34m}'
 ?[0m?[0;34mExpectations: 'In case of wrong data in request, endpoint must respond with BAD REQUEST  status (400).'
 ?[0m?[0;34m-----
-?[0;34m2023-05-25T16:43:20.712+02:00  INFO 19368 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-25T16:43:20.713+02:00  INFO 19368 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-25T16:43:20.714+02:00  INFO 19368 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-?[0m?[0;34m2023-05-25T16:43:20.904+02:00  WARN 19368 --- [io-28852-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'username': rejected value [null]; codes [NotNull.user.username,NotNull.username,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.username,username]; arguments []; default message [username]]; default message [must not be null]] ]
+?[0;34m2023-05-26T13:26:11.694+02:00  INFO 3688 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-26T13:26:11.694+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-26T13:26:11.695+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+?[0m?[0;34m2023-05-26T13:26:11.894+02:00  WARN 3688 --- [io-28852-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'username': rejected value [null]; codes [NotNull.user.username,NotNull.username,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.username,username]; arguments []; default message [username]]; default message [must not be null]] ]
 ?[0m?[1;31m
 Start test 2?[0m
 ?[0;34mTest case
@@ -1221,7 +1293,7 @@ Start test 2?[0m
 ?[0m?[0;34m}'
 ?[0m?[0;34mExpectations: 'In case of wrong data in request, endpoint must respond with BAD REQUEST  status (400).'
 ?[0m?[0;34m-----
-?[0;34m2023-05-25T16:43:20.969+02:00  WARN 19368 --- [io-28852-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'password': rejected value [null]; codes [NotNull.user.password,NotNull.password,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.password,password]; arguments []; default message [password]]; default message [must not be null]] ]
+?[0;34m2023-05-26T13:26:11.963+02:00  WARN 3688 --- [io-28852-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity antifraud.web.AuthController.createUser(antifraud.model.User) throws java.net.URISyntaxException: [Field error in object 'user' on field 'password': rejected value [null]; codes [NotNull.user.password,NotNull.password,NotNull.java.lang.String,NotNull]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [user.password,password]; arguments []; default message [password]]; default message [must not be null]] ]
 ?[0m?[1;31m
 Start test 3?[0m
 ?[0;34mTest case
@@ -1295,7 +1367,7 @@ Start test 10?[0m
 ?[0m?[0;34mTesting api: '/api/auth/access'
 ?[0m?[0;34mExpectations: 'A user johndoe1 must be UNLOCKED'
 ?[0m?[0;34m-----
-?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[0;34mHibernate: update users set is_account_non_locked=?,name=?,password=?,role=?,username=? where id=?
 ?[0m?[1;31m
@@ -1315,11 +1387,11 @@ Start test 12?[0m
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 13?[0m
-?[0;34m2023-05-25T16:43:22.892+02:00  INFO 19368 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-?[0m?[0;34m2023-05-25T16:43:22.894+02:00  INFO 19368 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-25T16:43:22.903+02:00  INFO 19368 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-?[0m?[0;34m2023-05-25T16:43:22.905+02:00  INFO 19368 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-?[0m?[0;34m2023-05-25T16:43:22.916+02:00  INFO 19368 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+?[0;34m2023-05-26T13:26:13.848+02:00  INFO 3688 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+?[0m?[0;34m2023-05-26T13:26:13.849+02:00  INFO 3688 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-26T13:26:13.859+02:00  INFO 3688 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+?[0m?[0;34m2023-05-26T13:26:13.861+02:00  INFO 3688 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+?[0m?[0;34m2023-05-26T13:26:13.871+02:00  INFO 3688 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 ?[0;34m
 ?[0m?[0;34m  .   ____          _            __ _ _
 ?[0m?[0;34m /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -1329,20 +1401,20 @@ Start test 13?[0m
 ?[0m?[0;34m =========|_|==============|___/=/_/_/_/
 ?[0m?[0;34m :: Spring Boot ::                (v3.1.0)
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:33.350+02:00  INFO 19368 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 19368 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
-?[0m?[0;34m2023-05-25T16:43:33.351+02:00  INFO 19368 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: &quot;default&quot;
-?[0m?[0;34m2023-05-25T16:43:33.715+02:00  INFO 19368 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-?[0m?[0;34m2023-05-25T16:43:33.727+02:00  INFO 19368 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 12 ms. Found 1 JPA repository interfaces.
-?[0m?[0;34m2023-05-25T16:43:33.834+02:00  INFO 19368 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-?[0m?[0;34m2023-05-25T16:43:33.834+02:00  INFO 19368 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-?[0m?[0;34m2023-05-25T16:43:33.834+02:00  INFO 19368 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-?[0m?[0;34m2023-05-25T16:43:33.863+02:00  INFO 19368 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-?[0m?[0;34m2023-05-25T16:43:33.863+02:00  INFO 19368 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 510 ms
-?[0m?[0;34m2023-05-25T16:43:33.900+02:00  INFO 19368 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-?[0m?[0;34m2023-05-25T16:43:33.920+02:00  INFO 19368 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
-?[0m?[0;34m2023-05-25T16:43:33.921+02:00  INFO 19368 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-?[0m?[0;34m2023-05-25T16:43:33.921+02:00  INFO 19368 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-?[0m?[0;34m2023-05-25T16:43:33.947+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:24.279+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Starting AntiFraudApplication using Java 17.0.6 with PID 3688 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Anti-Fraud System\Anti-Fraud System\task)
+?[0m?[0;34m2023-05-26T13:26:24.280+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : No active profile set, falling back to 1 default profile: &quot;default&quot;
+?[0m?[0;34m2023-05-26T13:26:24.599+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+?[0m?[0;34m2023-05-26T13:26:24.615+02:00  INFO 3688 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 16 ms. Found 3 JPA repository interfaces.
+?[0m?[0;34m2023-05-26T13:26:24.705+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+?[0m?[0;34m2023-05-26T13:26:24.706+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+?[0m?[0;34m2023-05-26T13:26:24.706+02:00  INFO 3688 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+?[0m?[0;34m2023-05-26T13:26:24.735+02:00  INFO 3688 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+?[0m?[0;34m2023-05-26T13:26:24.735+02:00  INFO 3688 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 453 ms
+?[0m?[0;34m2023-05-26T13:26:24.783+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+?[0m?[0;34m2023-05-26T13:26:24.806+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
+?[0m?[0;34m2023-05-26T13:26:24.806+02:00  INFO 3688 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+?[0m?[0;34m2023-05-26T13:26:24.807+02:00  INFO 3688 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+?[0m?[0;34m2023-05-26T13:26:24.828+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1380,15 +1452,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1439,7 +1511,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:33.954+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:24.834+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1472,15 +1544,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1531,17 +1603,17 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:33.981+02:00  INFO 19368 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-?[0m?[0;34m2023-05-25T16:43:33.993+02:00  INFO 19368 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-25T16:43:33.994+02:00  INFO 19368 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-?[0m?[0;34m2023-05-25T16:43:33.996+02:00  INFO 19368 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-?[0m?[0;34m2023-05-25T16:43:34.005+02:00  INFO 19368 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-25T16:43:34.069+02:00  INFO 19368 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-?[0m?[0;34m2023-05-25T16:43:34.073+02:00  INFO 19368 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-?[0m?[0;34m2023-05-25T16:43:34.122+02:00  WARN 19368 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-?[0m?[0;34m2023-05-25T16:43:34.260+02:00  INFO 19368 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-?[0m?[0;34m2023-05-25T16:43:34.285+02:00  INFO 19368 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@4702faee, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@576d4810, org.springframework.security.web.context.SecurityContextHolderFilter@7bfc7533, org.springframework.security.web.header.HeaderWriterFilter@662754bb, org.springframework.security.web.authentication.logout.LogoutFilter@1e0d70db, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@38950d4b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@74fa4891, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@28245839, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3609b8f2, org.springframework.security.web.session.SessionManagementFilter@1377b7bf, org.springframework.security.web.access.ExceptionTranslationFilter@3bd69bf6, org.springframework.security.web.access.intercept.AuthorizationFilter@32fccfc2]
-?[0m?[0;34m2023-05-25T16:43:34.372+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:24.859+02:00  INFO 3688 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+?[0m?[0;34m2023-05-26T13:26:24.872+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+?[0m?[0;34m2023-05-26T13:26:24.873+02:00  INFO 3688 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+?[0m?[0;34m2023-05-26T13:26:24.875+02:00  INFO 3688 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+?[0m?[0;34m2023-05-26T13:26:24.887+02:00  INFO 3688 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+?[0m?[0;34m2023-05-26T13:26:24.988+02:00  INFO 3688 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+?[0m?[0;34m2023-05-26T13:26:24.992+02:00  INFO 3688 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+?[0m?[0;34m2023-05-26T13:26:25.062+02:00  WARN 3688 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+?[0m?[0;34m2023-05-26T13:26:25.188+02:00  INFO 3688 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+?[0m?[0;34m2023-05-26T13:26:25.207+02:00  INFO 3688 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2dfdea3a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4b1339bf, org.springframework.security.web.context.SecurityContextHolderFilter@1243ad9a, org.springframework.security.web.header.HeaderWriterFilter@5e774546, org.springframework.security.web.authentication.logout.LogoutFilter@d200d3e, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@39fbee74, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@30c085f3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5479abd8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@46f43f50, org.springframework.security.web.session.SessionManagementFilter@6f67291f, org.springframework.security.web.access.ExceptionTranslationFilter@447cdbaa, org.springframework.security.web.access.intercept.AuthorizationFilter@20395afe]
+?[0m?[0;34m2023-05-26T13:26:25.288+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1580,15 +1652,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1639,7 +1711,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.378+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.294+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1678,15 +1750,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1737,7 +1809,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.384+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.300+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1776,15 +1848,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1835,7 +1907,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.390+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.305+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1874,15 +1946,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1933,7 +2005,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.397+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.316+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1972,15 +2044,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2031,7 +2103,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.404+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.322+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2070,15 +2142,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2129,7 +2201,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.410+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.330+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2168,15 +2240,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2227,7 +2299,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.416+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.337+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2266,15 +2338,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2325,7 +2397,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.425+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.344+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2364,15 +2436,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2423,7 +2495,7 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.432+02:00  WARN 19368 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-26T13:26:25.363+02:00  WARN 3688 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers &quot;private&quot;
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2462,15 +2534,15 @@ Start test 13?[0m
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
 ?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:15) ~[main/:na]
+?[0m?[0;34m	at antifraud.AntiFraudApplication.main(AntiFraudApplication.java:11) ~[main/:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
 ?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:179) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:213) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:147) ~[test/:na]
-?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:437) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.restartApplication(AntiFraudTest.java:286) ~[test/:na]
+?[0m?[0;34m	at AntiFraudTest.lambda$new$17(AntiFraudTest.java:693) ~[test/:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2521,17 +2593,17 @@ Start test 13?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-25T16:43:34.440+02:00  INFO 19368 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-?[0m?[0;34m2023-05-25T16:43:34.447+02:00  INFO 19368 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 1.12 seconds (process running for 22.148)
+?[0m?[0;34m2023-05-26T13:26:25.388+02:00  INFO 3688 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+?[0m?[0;34m2023-05-26T13:26:25.395+02:00  INFO 3688 --- [    Test worker] antifraud.AntiFraudApplication           : Started AntiFraudApplication in 1.14 seconds (process running for 22.02)
 ?[0m?[1;31m
 Start test 14?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/list'
 ?[0m?[0;34mExpectations: 'After restart user must exist'
 ?[0m?[0;34m-----
-?[0;34m2023-05-25T16:43:34.456+02:00  INFO 19368 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-25T16:43:34.456+02:00  INFO 19368 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-25T16:43:34.457+02:00  INFO 19368 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+?[0;34m2023-05-26T13:26:25.403+02:00  INFO 3688 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-26T13:26:25.404+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-26T13:26:25.405+02:00  INFO 3688 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 order by u1_0.id
 ?[0m?[1;31m
@@ -2681,6 +2753,7 @@ Start test 31?[0m
 ?[0m?[0;34mExpectations: 'If a user is not found, respond with HTTP Not Found status (404).'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34minitializing
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 32?[0m
@@ -2690,6 +2763,7 @@ Start test 32?[0m
 ?[0m?[0;34mExpectations: 'The endpoint must delete the user and respond with HTTP OK status (200)'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34minitializing
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[0;34mHibernate: delete from users where id=?
 ?[0m?[1;31m
@@ -2838,136 +2912,318 @@ Start test 49?[0m
 ?[0m?[1;31m
 Start test 50?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/antifraud/transaction/'
-?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to /api/antifraud/transaction/'
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/antifraud/transaction'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 51?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/antifraud/transaction'
-?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/antifraud/transaction'
-?[0m?[0;34m-----
-?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
-?[0m?[1;31m
-Start test 52?[0m
-?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/antifraud/transaction/'
-?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/antifraud/transaction/'
-?[0m?[0;34m-----
-?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
-?[0m?[1;31m
-Start test 53?[0m
-?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/antifraud/transaction'
 ?[0m?[0;34mExpectations: 'A user with role ANONYMOUS must not have access to /api/antifraud/transaction'
 ?[0m?[0;34m-----
 ?[0m?[1;31m
-Start test 54?[0m
+Start test 52?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/user'
 ?[0m?[0;34mExpectations: 'A user with role ANONYMOUS must not have access to DELETE /api/auth/user'
 ?[0m?[0;34m-----
 ?[0m?[1;31m
-Start test 55?[0m
+Start test 53?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/user'
 ?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to DELETE /api/auth/user'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
-Start test 56?[0m
+Start test 54?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/user'
 ?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to DELETE /api/auth/user'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
-Start test 57?[0m
-?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/user'
-?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to DELETE /api/auth/user'
-?[0m?[0;34m-----
-?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
-?[0m?[1;31m
-Start test 58?[0m
+Start test 55?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/list'
 ?[0m?[0;34mExpectations: 'A user with role ANONYMOUS must not have access to /api/auth/list'
 ?[0m?[0;34m-----
 ?[0m?[1;31m
-Start test 59?[0m
+Start test 56?[0m
 ?[0;34mTest case
 ?[0m?[0;34mTesting api: '/api/auth/list'
 ?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to /api/auth/list'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
+Start test 57?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to GET /api/antifraud/suspicious-ip'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[1;31m
+Start test 58?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to GET /api/antifraud/suspicious-ip'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[1;31m
+Start test 59?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to POST /api/antifraud/suspicious-ip'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[1;31m
 Start test 60?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/access'
-?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to /api/auth/access'
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to POST /api/antifraud/suspicious-ip'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 61?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/access'
-?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/auth/access'
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to DELETE /api/antifraud/suspicious-ip'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 62?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/access/'
-?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to /api/auth/access/'
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to DELETE /api/antifraud/suspicious-ip'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 63?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/access/'
-?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/auth/access/'
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to GET /api/antifraud/stolencard'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 64?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/access'
-?[0m?[0;34mExpectations: 'A user with role ANONYMOUS must not have access to /api/auth/access'
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to GET /api/antifraud/stolencard'
 ?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 65?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/role'
-?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/auth/role'
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to POST /api/antifraud/stolencard'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 66?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/role'
-?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to /api/auth/role'
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to POST /api/antifraud/stolencard'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 67?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/role'
-?[0m?[0;34mExpectations: 'A user with role ANONYMOUS must not have access to /api/auth/role'
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A user with role ADMINISTRATOR must not have access to DELETE /api/antifraud/stolencard'
 ?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 68?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/role/'
-?[0m?[0;34mExpectations: 'A user with role SUPPORT must not have access to /api/auth/role/'
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to DELETE /api/antifraud/stolencard'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m?[1;31m
 Start test 69?[0m
 ?[0;34mTest case
-?[0m?[0;34mTesting api: '/api/auth/role/'
-?[0m?[0;34mExpectations: 'A user with role MERCHANT must not have access to /api/auth/role/'
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'Endpoint must respond with empty array'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 order by s1_0.id
+?[0m?[1;31m
+Start test 70?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'IP must be added to Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[0;34mHibernate: insert into &quot;suspicious-ips&quot; (ip,id) values (?,default)
+?[0m?[1;31m
+Start test 71?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'If IP already in database,  endpoint must respond with the HTTP Conflict status (409).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[1;31m
+Start test 72?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'If IP doesn't have right format, respond with HTTP Bad Request status (400)'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[1;31m
+Start test 73?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'If IP doesn't have right format, respond with HTTP Bad Request status (400)'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[1;31m
+Start test 74?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'IP must be added to Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[0;34mHibernate: insert into &quot;suspicious-ips&quot; (ip,id) values (?,default)
+?[0m?[1;31m
+Start test 75?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'Endpoint must responds with Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 order by s1_0.id
+?[0m?[1;31m
+Start test 76?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'IP must be removed from Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[0;34mHibernate: delete from &quot;suspicious-ips&quot; where id=?
+?[0m?[1;31m
+Start test 77?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'If IP not found in database, respond with the HTTP Not Found status (404).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 where s1_0.ip=?
+?[0m?[1;31m
+Start test 78?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'If IP doesn't have right format, respond with HTTP Bad Request status (400)'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[1;31m
+Start test 79?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/suspicious-ip'
+?[0m?[0;34mExpectations: 'IP must be removed from Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select s1_0.id,s1_0.ip from &quot;suspicious-ips&quot; s1_0 order by s1_0.id
+?[0m?[1;31m
+Start test 80?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'Endpoint must respond with empty array'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 order by b1_0.id
+?[0m?[1;31m
+Start test 81?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A card must be added to Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[0;34mHibernate: insert into bankcards (number,id) values (?,default)
+?[0m?[1;31m
+Start test 82?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'If card-number already in database, endpoint must respond with the HTTP Conflict status (409).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[1;31m
+Start test 83?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'If card-number doesn't have right format, endpoint must respond with HTTP Bad Request status (400).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[1;31m
+Start test 84?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'If checksum of card-number is wrong, endpoint must respond with HTTP Bad Request status (400).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[1;31m
+Start test 85?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'A card must be added to Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[0;34mHibernate: insert into bankcards (number,id) values (?,default)
+?[0m?[1;31m
+Start test 86?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'Endpoint must responds with Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 order by b1_0.id
+?[0m?[1;31m
+Start test 87?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'Card must be removed from Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[0;34mHibernate: delete from bankcards where id=?
+?[0m?[1;31m
+Start test 88?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'If card-number not found in database, respond with the HTTP Not Found status (404).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 where b1_0.number=?
+?[0m?[1;31m
+Start test 89?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'If card-number doesn't have right format, endpoint must respond with HTTP Bad Request status (400).'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[1;31m
+Start test 90?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/stolencard'
+?[0m?[0;34mExpectations: 'Card must be removed from Black List'
+?[0m?[0;34m-----
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.number from bankcards b1_0 order by b1_0.id
+?[0m?[1;31m
+Start test 91?[0m
+?[0;34mTest case
+?[0m?[0;34mTesting api: '/api/antifraud/transaction'
+?[0m?[0;34mExpectations: 'Transaction must be PROHIBITED due to - suspicious ip reason'
 ?[0m?[0;34m-----
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.is_account_non_locked,u1_0.name,u1_0.password,u1_0.role,u1_0.username from users u1_0 where upper(u1_0.username)=upper(?)
 ?[0m</pre>
@@ -2981,7 +3237,7 @@ Start test 69?[0m
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.6.1</a> at 25 maj 2023, 16:43:38</p>
+<a href="http://www.gradle.org">Gradle 7.6.1</a> at 26 maj 2023, 13:26:31</p>
 </div>
 </div>
 </body>
