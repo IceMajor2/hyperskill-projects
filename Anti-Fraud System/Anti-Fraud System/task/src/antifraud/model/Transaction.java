@@ -1,9 +1,11 @@
 package antifraud.model;
 
+import antifraud.DTO.TransactionDTO;
 import antifraud.Enum.Region;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name = "transactions")
@@ -15,10 +17,28 @@ public class Transaction {
     private Long amount;
     private String ip;
     private String number;
+    @Enumerated(EnumType.STRING)
     private Region region;
     private LocalDateTime date;
 
     public Transaction() {
+    }
+
+    public Transaction(Long id, Long amount, String ip, String number, Region region, LocalDateTime date) {
+        this.id = id;
+        this.amount = amount;
+        this.ip = ip;
+        this.number = number;
+        this.region = region;
+        this.date = date;
+    }
+
+    public Transaction(TransactionDTO transactionDTO) {
+        this.amount = transactionDTO.getAmount();
+        this.number = transactionDTO.getNumber();
+        this.ip = transactionDTO.getIp();
+        this.region = Region.valueOf(transactionDTO.getRegion());
+        this.date = (LocalDateTime) DateTimeFormatter.ofPattern("yyy-MM-ddTHH:mm:ss").parse(transactionDTO.getDate());
     }
 
     public String getIp() {
