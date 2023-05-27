@@ -1395,24 +1395,6 @@ files:
         }
     }
   learner_created: true
-- name: src/antifraud/repository/BankCardsRepository.java
-  visible: true
-  text: |
-    package antifraud.repository;
-
-    import antifraud.model.BankCard;
-    import org.springframework.data.repository.CrudRepository;
-
-    import java.util.List;
-    import java.util.Optional;
-
-    public interface BankCardsRepository extends CrudRepository<BankCard, Long> {
-
-        Optional<BankCard> findByNumber(String number);
-
-        List<BankCard> findAllByOrderByIdAsc();
-    }
-  learner_created: true
 - name: src/antifraud/web/AuthController.java
   visible: true
   text: |
@@ -1647,42 +1629,6 @@ files:
 
         public void setAccountNonLocked(boolean accountNonLocked) {
             isAccountNonLocked = accountNonLocked;
-        }
-    }
-  learner_created: true
-- name: src/antifraud/DTO/TransactionDTO.java
-  visible: true
-  text: |
-    package antifraud.DTO;
-
-    public class TransactionDTO {
-
-        private Long amount;
-        private String ip;
-        private String number;
-
-        public Long getAmount() {
-            return amount;
-        }
-
-        public void setAmount(Long amount) {
-            this.amount = amount;
-        }
-
-        public String getIp() {
-            return ip;
-        }
-
-        public void setIp(String ip) {
-            this.ip = ip;
-        }
-
-        public String getNumber() {
-            return number;
-        }
-
-        public void setNumber(String number) {
-            this.number = number;
         }
     }
   learner_created: true
@@ -2437,6 +2383,30 @@ files:
   learner_created: true
 - name: src/antifraud/Enum/Region.java
   visible: true
+  learner_created: true
+- name: src/antifraud/service/SuspiciousIpService.java
+  visible: true
+  learner_created: true
+- name: src/antifraud/service/BankCardService.java
+  visible: true
+  learner_created: true
+- name: src/antifraud/repository/BankCardRepository.java
+  visible: true
+  text: |
+    package antifraud.repository;
+
+    import antifraud.model.BankCard;
+    import org.springframework.data.repository.CrudRepository;
+
+    import java.util.List;
+    import java.util.Optional;
+
+    public interface BankCardsRepository extends CrudRepository<BankCard, Long> {
+
+        Optional<BankCard> findByNumber(String number);
+
+        List<BankCard> findAllByOrderByIdAsc();
+    }
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18071#comment
 status: Unchecked

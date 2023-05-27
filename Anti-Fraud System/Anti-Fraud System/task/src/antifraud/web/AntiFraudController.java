@@ -1,10 +1,11 @@
 package antifraud.web;
 
 import antifraud.DTO.ResultDTO;
-import antifraud.DTO.TransactionDTO;
 import antifraud.model.BankCard;
 import antifraud.model.SuspiciousIp;
 import antifraud.model.Transaction;
+import antifraud.service.BankCardService;
+import antifraud.service.SuspiciousIpService;
 import antifraud.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class AntiFraudController {
 
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private SuspiciousIpService saveSuspiciousIpService;
+    @Autowired
+    private BankCardService bankCardService;
 
     @RequestMapping(value = {"/transaction", "/transaction/"}, method = RequestMethod.POST)
     // made 2 endpoints with and w/o trailing slash at the end
@@ -39,7 +44,7 @@ public class AntiFraudController {
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity saveSuspiciousIp(@Valid @RequestBody SuspiciousIp ip) {
         try {
-            SuspiciousIp savedIp = transactionService.saveSuspiciousIp(ip);
+            SuspiciousIp savedIp = saveSuspiciousIpService.saveSuspiciousIp(ip);
             return new ResponseEntity(Map.of("id", savedIp.getId(),
                     "ip", savedIp.getIp()), HttpStatus.OK);
         } catch (ResponseStatusException exception) {
@@ -51,7 +56,7 @@ public class AntiFraudController {
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity deleteSuspiciousIp(@PathVariable String ip) {
         try {
-            SuspiciousIp deletedIp = transactionService.deleteSuspiciousIp(ip);
+            SuspiciousIp deletedIp = saveSuspiciousIpService.deleteSuspiciousIp(ip);
             return ResponseEntity.ok(Map.of("status", "IP %s successfully removed!"
                     .formatted(deletedIp.getIp())));
         } catch (ResponseStatusException exception) {
@@ -62,7 +67,7 @@ public class AntiFraudController {
     @GetMapping("/suspicious-ip")
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity listOfSuspiciousIps() {
-        var suspiciousIps = transactionService.listOfSuspiciousIps();
+        var suspiciousIps = saveSuspiciousIpService.listOfSuspiciousIps();
         return ResponseEntity.ok(suspiciousIps);
     }
 
@@ -70,7 +75,7 @@ public class AntiFraudController {
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity saveStolenCardInfo(@RequestBody BankCard stolenCard) {
         try {
-            BankCard savedCard = transactionService.saveBankCardInfo(stolenCard);
+            BankCard savedCard = bankCardService.saveBankCardInfo(stolenCard);
             return new ResponseEntity(Map.of("id", savedCard.getId(), "number", savedCard.getNumber()),
                     HttpStatus.OK);
         } catch (ResponseStatusException exception) {
@@ -82,7 +87,7 @@ public class AntiFraudController {
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity deleteStolenCardInfo(@PathVariable String number) {
         try {
-            BankCard deletedCard = transactionService.deleteBankCardInfo(number);
+            BankCard deletedCard = bankCardService.deleteBankCardInfo(number);
             return ResponseEntity.ok(Map.of("status", "Card %s successfully removed!"
                     .formatted(deletedCard.getNumber())));
         } catch (ResponseStatusException exception) {
@@ -93,7 +98,7 @@ public class AntiFraudController {
     @GetMapping(value = {"/stolencard", "/stolencard/"})
     @PreAuthorize("hasAuthority('ROLE_SUPPORT')")
     public ResponseEntity listCardInfo() {
-        var cards = transactionService.getListOfBankCards();
+        var cards = bankCardService.getListOfBankCards();
         return ResponseEntity.ok(cards);
     }
 }
