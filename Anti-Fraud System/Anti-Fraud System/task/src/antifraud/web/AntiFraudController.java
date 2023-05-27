@@ -4,6 +4,7 @@ import antifraud.DTO.ResultDTO;
 import antifraud.DTO.TransactionDTO;
 import antifraud.model.BankCard;
 import antifraud.model.SuspiciousIp;
+import antifraud.model.Transaction;
 import antifraud.service.TransactionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class AntiFraudController {
     @RequestMapping(value = {"/transaction", "/transaction/"}, method = RequestMethod.POST)
     // made 2 endpoints with and w/o trailing slash at the end
     @PreAuthorize("hasAuthority('ROLE_MERCHANT')")
-    public ResponseEntity makeTransaction(@RequestBody TransactionDTO transactionDTO) {
+    public ResponseEntity makeTransaction(@RequestBody Transaction transaction) {
         try {
-            ResultDTO result = transactionService.makeTransaction(transactionDTO);
+            ResultDTO result = transactionService.makeTransaction(transaction);
             return new ResponseEntity(result, HttpStatus.OK);
         } catch (ResponseStatusException exception) {
             return new ResponseEntity(exception.getStatusCode());

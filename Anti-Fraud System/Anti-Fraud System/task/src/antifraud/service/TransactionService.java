@@ -1,13 +1,13 @@
 package antifraud.service;
 
 import antifraud.DTO.ResultDTO;
-import antifraud.DTO.TransactionDTO;
 import antifraud.Enum.TransactionStatus;
 import antifraud.model.BankCard;
 import antifraud.model.SuspiciousIp;
 import antifraud.model.Transaction;
 import antifraud.repository.BankCardsRepository;
 import antifraud.repository.SuspiciousIpRepository;
+import antifraud.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -21,36 +21,28 @@ import java.util.Optional;
 public class TransactionService {
 
     private final String IP_REGEX = "^((25[0-5]|(2[0-4]|1\\d|[1-9]|)\\d)\\.?\\b){4}$";
-    //private final String IP_REGEX = "(\\d{1,3}\\.?\\b){4}";
 
     @Autowired
     private SuspiciousIpRepository suspiciousIpRepository;
     @Autowired
     private BankCardsRepository bankCardsRepository;
+    @Autowired
+    private TransactionRepository transactionRepository;
 
-    public ResultDTO makeTransaction(TransactionDTO transactionDTO) {
-        if (transactionDTO == null || transactionDTO.getAmount() == null || transactionDTO.getAmount() <= 0) {
+    public ResultDTO makeTransaction(Transaction transaction) {
+        if (transaction == null || transaction.getAmount() == null || transaction.getAmount() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
-        List<String> errors = getTransactionErrors(transactionDTO);
-        TransactionStatus status = setStatus(transactionDTO, errors);
+        List<String> errors = getTransactionErrors(transaction);
+        TransactionStatus status = setStatus(transaction, errors);
         String reason = getReasonString(errors);
 
+        transactionRepository.save(transaction);
         return new ResultDTO(status, reason);
     }
 
-    private String getReasonString(List<String> errors) {
-        StringBuilder reason = new StringBuilder();
-        errors.sort(String::compareToIgnoreCase);
-        reason.append(errors.get(0));
-        for (int i = 1; i < errors.size(); i++) {
-            reason.append(", ").append(errors.get(i));
-        }
-        return reason.toString();
-    }
-
-    private List<String> getTransactionErrors(TransactionDTO transactionDTO) {
+    private List<String> getTransactionErrors(Transaction transaction) {
         List<String> errors = new ArrayList<>();
 //        if(transactionDTO.getAmount() >= 1500 && transactionDTO.getIp().equals("192.168.1.67")) {
 //            errors.add("amount");
@@ -70,24 +62,27 @@ public class TransactionService {
 //            }
 //            return errors;
 //        }
-        if (!isCardNumberValid(transactionDTO.getNumber())) {
+        if (!isCardNumberValid(transaction.getNumber())) {
             errors.add("card-number");
         }
-        if (!isIpValid(transactionDTO.getIp())) {
+
+        if (!isIpValid(transaction.getIp())) {
             errors.add("ip");
         }
-        if (transactionDTO.getAmount() > 1500 && errors.isEmpty()) {
+
+        if (transaction.getAmount() > 1500 && errors.isEmpty()) {
             errors.add("amount");
-        } else if (transactionDTO.getAmount() > 200 && errors.isEmpty()) {
+        } else if (transaction.getAmount() > 200 && errors.isEmpty()) {
             errors.add("amount");
         }
+
         if (errors.isEmpty()) {
             errors.add("none");
         }
         return errors;
     }
 
-    private TransactionStatus setStatus(TransactionDTO transaction, List<String> errors) {
+    private TransactionStatus setStatus(Transaction transaction, List<String> errors) {
 //        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
 //                && transaction.getNumber().equals("4000008449433403")) {
 //            return TransactionStatus.PROHIBITED;
@@ -102,6 +97,16 @@ public class TransactionService {
             return TransactionStatus.MANUAL_PROCESSING;
         }
         return TransactionStatus.PROHIBITED;
+    }
+
+    private String getReasonString(List<String> errors) {
+        StringBuilder reason = new StringBuilder();
+        errors.sort(String::compareToIgnoreCase);
+        reason.append(errors.get(0));
+        for (int i = 1; i < errors.size(); i++) {
+            reason.append(", ").append(errors.get(i));
+        }
+        return reason.toString();
     }
 
     public SuspiciousIp saveSuspiciousIp(SuspiciousIp ip) {
