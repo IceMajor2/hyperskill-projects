@@ -52,6 +52,14 @@ public class TransactionService {
 //            }
 //            return errors;
 //        }
+        if(transactionRepository.numberOfDifferentRegionsInLastHourMinus(transaction.getRegion()) >= 2) {
+            errors.add("region-correlation");
+        }
+
+        if(transactionRepository.numberOfDifferentIpsInLastHourMinus(transaction.getIp()) >= 2) {
+            errors.add("ip-correlation");
+        }
+
         if (!BankCardService.isCardNumberValid(transaction.getNumber())) {
             errors.add("card-number");
         }

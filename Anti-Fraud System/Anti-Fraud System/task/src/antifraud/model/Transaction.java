@@ -1,5 +1,6 @@
 package antifraud.model;
 
+import antifraud.Enum.Region;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -14,10 +15,11 @@ public class Transaction {
     private Long amount;
     private String ip;
     private String number;
-    private String region;
+    private Region region;
     private LocalDateTime date;
 
-    public Transaction() {}
+    public Transaction() {
+    }
 
     public String getIp() {
         return ip;
@@ -35,11 +37,11 @@ public class Transaction {
         this.number = number;
     }
 
-    public String getRegion() {
+    public Region getRegion() {
         return region;
     }
 
-    public void setRegion(String region) {
+    public void setRegion(Region region) {
         this.region = region;
     }
 
