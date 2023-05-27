@@ -52,24 +52,24 @@ public class TransactionService {
 
     private List<String> getTransactionErrors(TransactionDTO transactionDTO) {
         List<String> errors = new ArrayList<>();
-        if(transactionDTO.getAmount() >= 1500 && transactionDTO.getIp().equals("192.168.1.67")) {
-            errors.add("amount");
-            errors.add("ip");
-            errors.add("card-number");
-            return errors;
-        }
-        if (transactionDTO.getAmount() == 1000 && transactionDTO.getIp().equals("192.168.1.67")
-                && transactionDTO.getNumber().equals("4000008449433403")) {
-            errors.add("ip");
-            return errors;
-        }
-        if(transactionDTO.getAmount() == 1000 && !transactionDTO.getNumber().equals("4000008449433403")) {
-            errors.add("card-number");
-            if(transactionDTO.getIp().equals("192.168.1.67")) {
-                errors.add("ip");
-            }
-            return errors;
-        }
+//        if(transactionDTO.getAmount() >= 1500 && transactionDTO.getIp().equals("192.168.1.67")) {
+//            errors.add("amount");
+//            errors.add("ip");
+//            errors.add("card-number");
+//            return errors;
+//        }
+//        if (transactionDTO.getAmount() == 1000 && transactionDTO.getIp().equals("192.168.1.67")
+//                && transactionDTO.getNumber().equals("4000008449433403")) {
+//            errors.add("ip");
+//            return errors;
+//        }
+//        if(transactionDTO.getAmount() == 1000 && !transactionDTO.getNumber().equals("4000008449433403")) {
+//            errors.add("card-number");
+//            if(transactionDTO.getIp().equals("192.168.1.67")) {
+//                errors.add("ip");
+//            }
+//            return errors;
+//        }
         if (!isCardNumberValid(transactionDTO.getNumber())) {
             errors.add("card-number");
         }
@@ -88,13 +88,13 @@ public class TransactionService {
     }
 
     private TransactionStatus setStatus(TransactionDTO transaction, List<String> errors) {
-        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
-                && transaction.getNumber().equals("4000008449433403")) {
-            return TransactionStatus.PROHIBITED;
-        }
-        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
-            return TransactionStatus.PROHIBITED;
-        }
+//        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
+//                && transaction.getNumber().equals("4000008449433403")) {
+//            return TransactionStatus.PROHIBITED;
+//        }
+//        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
+//            return TransactionStatus.PROHIBITED;
+//        }
         if (transaction.getAmount() <= 200 && errors.contains("none") && errors.size() == 1) {
             return TransactionStatus.ALLOWED;
         }
