@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,11 +24,11 @@ public class TransactionService {
         if (transactionDTO == null || transactionDTO.getAmount() == null || transactionDTO.getAmount() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-        
+
         Transaction transaction = null;
         try {
             transaction = new Transaction(transactionDTO);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
 
@@ -52,11 +53,14 @@ public class TransactionService {
 
     private List<String> getManualProcessingErrors(Transaction transaction) {
         List<String> errors = new ArrayList<>();
+        String formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(transaction.getDate());
 
-        if (transactionRepository.numberOfDifferentRegionsInLastHourMinus(transaction.getRegion().toString()) == 2) {
+        if (transactionRepository.numberOfDifferentRegionsInLastHourMinus(formattedDate,
+                transaction.getRegion().toString()) == 2) {
             errors.add("region-correlation");
         }
-        if (transactionRepository.numberOfDifferentIpsInLastHourMinus(transaction.getIp()) == 2) {
+        if (transactionRepository.numberOfDifferentIpsInLastHourMinus(formattedDate,
+                transaction.getIp()) == 2) {
             errors.add("ip-correlation");
         }
 
@@ -64,17 +68,19 @@ public class TransactionService {
             errors.add("amount");
         }
 
-
         return errors;
     }
 
     private List<String> getProhibitedErrors(Transaction transaction) {
         List<String> errors = new ArrayList<>();
+        String formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(transaction.getDate());
 
-        if (transactionRepository.numberOfDifferentRegionsInLastHourMinus(transaction.getRegion().toString()) > 2) {
+        if (transactionRepository.numberOfDifferentRegionsInLastHourMinus(formattedDate,
+                transaction.getRegion().toString()) > 2) {
             errors.add("region-correlation");
         }
-        if (transactionRepository.numberOfDifferentIpsInLastHourMinus(transaction.getIp()) > 2) {
+        if (transactionRepository.numberOfDifferentIpsInLastHourMinus(formattedDate,
+                transaction.getIp()) > 2) {
             errors.add("ip-correlation");
         }
         if (transaction.getAmount() > 1500) {

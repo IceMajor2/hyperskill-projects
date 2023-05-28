@@ -4,8 +4,10 @@ import antifraud.DTO.TransactionDTO;
 import antifraud.Enum.Region;
 import jakarta.persistence.*;
 
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 @Entity
 @Table(name = "transactions")
@@ -33,12 +35,12 @@ public class Transaction {
         this.date = date;
     }
 
-    public Transaction(TransactionDTO transactionDTO) {
+    public Transaction(TransactionDTO transactionDTO) throws ParseException {
         this.amount = transactionDTO.getAmount();
         this.number = transactionDTO.getNumber();
         this.ip = transactionDTO.getIp();
         this.region = Region.valueOf(transactionDTO.getRegion());
-        this.date = (LocalDateTime) DateTimeFormatter.ofPattern("yyy-MM-ddTHH:mm:ss").parse(transactionDTO.getDate());
+        this.date = LocalDateTime.parse(transactionDTO.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
     }
 
     public String getIp() {
