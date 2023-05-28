@@ -2418,14 +2418,14 @@ feedback_link: https://hyperskill.org/learn/step/18071#comment
 status: Failed
 feedback:
   message: |-
-    Wrong answer in test #102
+    Wrong answer in test #98
 
-    The JSON object at key info should equal to &quot;amount, card-number, ip, ip-correlation&quot;, found &quot;amount, ip-correlation&quot;
+    The JSON object at key result should equal to &quot;MANUAL_PROCESSING&quot;, found &quot;ALLOWED&quot;
 
     Full JSON:
     {
-      &quot;result&quot;: &quot;PROHIBITED&quot;,
-      &quot;info&quot;: &quot;amount, ip-correlation&quot;
+      &quot;result&quot;: &quot;ALLOWED&quot;,
+      &quot;info&quot;: &quot;none&quot;
     }
-  time: "Sun, 28 May 2023 21:19:21 UTC"
+  time: "Sun, 28 May 2023 21:29:15 UTC"
 record: -1

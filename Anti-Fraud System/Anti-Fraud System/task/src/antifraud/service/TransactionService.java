@@ -34,25 +34,25 @@ public class TransactionService {
         }
         transactionRepository.save(transaction);
 
-        if(transaction.getAmount() >= 1500 && transaction.getIp().equals("192.168.1.67")) {
-            String reason = getReasonString(new ArrayList<String>
-                    (Arrays.asList(new String[] {"amount","ip","card-number"})));
-            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
-        }
-        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
-                && transaction.getNumber().equals("4000008449433403")) {
-            String reason = getReasonString(new ArrayList<String>(Arrays.asList(new String[] {"ip"})));
-            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
-        }
-        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
-            List<String> errs = new ArrayList<>();
-            errs.add("card-number");
-            if(transaction.getIp().equals("192.168.1.67")) {
-                errs.add("ip");
-            }
-            String reason = getReasonString(errs);
-            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
-        }
+//        if(transaction.getAmount() >= 1500 && transaction.getIp().equals("192.168.1.67")) {
+//            String reason = getReasonString(new ArrayList<String>
+//                    (Arrays.asList(new String[] {"amount","ip","card-number"})));
+//            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
+//        }
+//        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
+//                && transaction.getNumber().equals("4000008449433403")) {
+//            String reason = getReasonString(new ArrayList<String>(Arrays.asList(new String[] {"ip"})));
+//            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
+//        }
+//        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
+//            List<String> errs = new ArrayList<>();
+//            errs.add("card-number");
+//            if(transaction.getIp().equals("192.168.1.67")) {
+//                errs.add("ip");
+//            }
+//            String reason = getReasonString(errs);
+//            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
+//        }
 
         List<String> errors = getProhibitedErrors(transaction);
         if (!errors.isEmpty()) {
