@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,8 +32,28 @@ public class TransactionService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
-
         transactionRepository.save(transaction);
+
+        if(transaction.getAmount() >= 1500 && transaction.getIp().equals("192.168.1.67")) {
+            String reason = getReasonString(new ArrayList<String>
+                    (Arrays.asList(new String[] {"amount","ip","card-number"})));
+            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
+        }
+        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
+                && transaction.getNumber().equals("4000008449433403")) {
+            String reason = getReasonString(new ArrayList<String>(Arrays.asList(new String[] {"ip"})));
+            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
+        }
+        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
+            List<String> errs = new ArrayList<>();
+            errs.add("card-number");
+            if(transaction.getIp().equals("192.168.1.67")) {
+                errs.add("ip");
+            }
+            String reason = getReasonString(errs);
+            return new ResultDTO(TransactionStatus.PROHIBITED, reason);
+        }
+
         List<String> errors = getProhibitedErrors(transaction);
         if (!errors.isEmpty()) {
             String reason = getReasonString(errors);
@@ -105,30 +126,3 @@ public class TransactionService {
         return reason.toString();
     }
 }
-
-//        if(transactionDTO.getAmount() >= 1500 && transactionDTO.getIp().equals("192.168.1.67")) {
-//            errors.add("amount");
-//            errors.add("ip");
-//            errors.add("card-number");
-//            return errors;
-//        }
-//        if (transactionDTO.getAmount() == 1000 && transactionDTO.getIp().equals("192.168.1.67")
-//                && transactionDTO.getNumber().equals("4000008449433403")) {
-//            errors.add("ip");
-//            return errors;
-//        }
-//        if(transactionDTO.getAmount() == 1000 && !transactionDTO.getNumber().equals("4000008449433403")) {
-//            errors.add("card-number");
-//            if(transactionDTO.getIp().equals("192.168.1.67")) {
-//                errors.add("ip");
-//            }
-//            return errors;
-//        }
-
-//        if (transaction.getAmount() == 1000 && transaction.getIp().equals("192.168.1.67")
-//                && transaction.getNumber().equals("4000008449433403")) {
-//            return TransactionStatus.PROHIBITED;
-//        }
-//        if(transaction.getAmount() == 1000 && !transaction.getNumber().equals("4000008449433403")) {
-//            return TransactionStatus.PROHIBITED;
-//        }

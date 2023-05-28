@@ -2411,6 +2411,21 @@ files:
 - name: src/antifraud/DTO/TransactionDTO.java
   visible: true
   learner_created: true
+- name: db/service_db.mv.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/18071#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #102
+
+    The JSON object at key info should equal to &quot;amount, card-number, ip, ip-correlation&quot;, found &quot;amount, ip-correlation&quot;
+
+    Full JSON:
+    {
+      &quot;result&quot;: &quot;PROHIBITED&quot;,
+      &quot;info&quot;: &quot;amount, ip-correlation&quot;
+    }
+  time: "Sun, 28 May 2023 21:19:21 UTC"
 record: -1
