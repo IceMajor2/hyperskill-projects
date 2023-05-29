@@ -689,6 +689,9 @@ files:
 - name: src/account/security/UserDetailsServiceImpl.java
   visible: true
   learner_created: true
+- name: src/account/exceptions/UserExistsException.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/217/stages/1087/implement#comment
 status: Unchecked
 record: -1
