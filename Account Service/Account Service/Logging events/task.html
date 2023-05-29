@@ -1,0 +1,317 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>The security department has put forward new requirements. The service must log <strong>information security events</strong>. Take a look at what they include:</p>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 700px;">
+<tbody>
+<tr>
+<td>Description</td>
+<td>Event Name</td>
+</tr>
+<tr>
+<td>A user has been successfully registered</td>
+<td><code class="language-json">CREATE_USER</code></td>
+</tr>
+<tr>
+<td>A user has changed the password successfully</td>
+<td><code class="language-json">CHANGE_PASSWORD</code></td>
+</tr>
+<tr>
+<td>A user is trying to access a resource without access rights</td>
+<td><code class="language-json">ACCESS_DENIED</code></td>
+</tr>
+<tr>
+<td>Failed authentication</td>
+<td><code class="language-json">LOGIN_FAILED</code></td>
+</tr>
+<tr>
+<td>A role is granted to a user</td>
+<td><code class="language-json">GRANT_ROLE</code></td>
+</tr>
+<tr>
+<td>A role has been revoked</td>
+<td><code class="language-json">REMOVE_ROLE</code></td>
+</tr>
+<tr>
+<td>The Administrator has locked the user</td>
+<td><code class="language-json">LOCK_USER</code></td>
+</tr>
+<tr>
+<td>The Administrator has unlocked a user</td>
+<td><code class="language-json">UNLOCK_USER</code></td>
+</tr>
+<tr>
+<td>The Administrator has deleted a user</td>
+<td><code class="language-json">DELETE_USER</code></td>
+</tr>
+<tr>
+<td>A user has been blocked on suspicion of a brute force attack</td>
+<td><code class="language-json">BRUTE_FORCE</code></td>
+</tr>
+</tbody>
+</table>
+<p>The composition of the security event fields is presented below:</p>
+<pre><code class="language-json">{
+    "date": "&lt;date&gt;",
+    "action": "&lt;event_name from table&gt;",
+    "subject": "&lt;The user who performed the action&gt;",
+    "object": "&lt;The object on which the action was performed&gt;",
+    "path": "&lt;api&gt;"
+}</code></pre>
+<p>If it is impossible to determine a user, output <code class="language-json">Anonymous</code> in the <code class="language-json">subject</code> field. All examples of events are provided in the Examples.</p>
+<p>Also, you need to add the role of the <code class="language-json">auditor</code>. The auditor is an employee of the security department who analyzes information security events and identifies incidents. You need to add the appropriate endpoint for this. A user with the auditor role should be able to receive all events using the endpoint. The auditor is a part of the business group. We suggest that you implement the storage of information security events in the database, although you can choose another solution. Make sure it is persistent.</p>
+<p>Let's also discuss what a security incident is. For example, if a user made a mistake in entering a password. This is a minor user error, but numerous repeated attempts to log in with the wrong password can be evidence of a <strong>brute-force attack</strong>. In this case, it is necessary to register the incident and conduct an investigation. Information security events are collected in our service to serve as a basis for identifying incidents in the future after transmission to the <strong>Security Information and Event Management </strong>systems (SIEM).</p>
+<p>Let's implement a simple rule for detecting a brute force attack. If there are more than 5 consecutive attempts to enter an incorrect password, an entry about this should appear in the security events. Also, the user account must be blocked.</p>
+<p>To unlock a user, you will need to add a new administrative endpoint: <code class="language-json">api/admin/user/access</code>.</p>
+<p><b>Tip:</b> The following articles can help you with these tasks: <a href="https://www.baeldung.com/spring-security-block-brute-force-authentication-attempts" rel="noopener noreferrer nofollow" target="_blank">Prevent Brute Force Authentication Attempts with Spring Security</a> by Baeldung and <a href="https://www.codejava.net/frameworks/spring-boot/spring-security-limit-login-attempts-example" rel="noopener noreferrer nofollow" target="_blank">Spring Security Limit Login Attempts Example</a> by CodeJava.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Implement logging security events in the application following the requirements described above.</p>
+<p>Implement a mechanism to block the user after 5 consecutive failed logins. In a case like this, the next events should be logged: <code class="language-json">LOGIN_FAILED</code> -&gt; <code class="language-json">BRUTE_FORCE</code> -&gt; <code class="language-json">LOCK_USER</code>. In case of a successful login, reset the counter of the failed attempt.</p>
+<p>Add the <code class="language-json">PUT api/admin/user/access</code> endpoint that locks/unlocks users. It accepts the following JSON body:</p>
+<pre><code class="language-json">{
+   "user": "&lt;String value, not empty&gt;",
+   "operation": "&lt;[LOCK, UNLOCK]&gt;" 
+}</code></pre>
+<p>Where <code class="language-json">operation</code> determines whether the user will be locked or unlocked. If successful, respond with the <code class="language-json">HTTP OK</code> status (<code class="language-json">200</code>) and the following body:</p>
+<pre><code class="language-json">{
+    "status": "User &lt;username&gt; &lt;[locked, unlocked]&gt;!"
+}</code></pre>
+<p>For safety reasons, the Administrator cannot be blocked. In this case, respond with the <code class="language-json">HTTP Bad Request</code> status (<code class="language-json">400</code>) and the following body:</p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Can't lock the ADMINISTRATOR!",
+    "path": "&lt;api&gt;"
+}</code></pre>
+<p>For other errors, return responses like in the previous stage.</p>
+<p>Add the <code class="language-json">GET api/security/events</code> endpoint that must respond with an array of objects representing the security events of the service sorted in ascending order by ID. If no data is found, the service should return an empty JSON array.</p>
+<pre><code class="language-json">[
+    {
+        "date": "&lt;date&gt;",
+        "action": "&lt;event_name for event1&gt;",
+        "subject": "&lt;The user who performed the action&gt;",
+        "object": "&lt;The object on which the action was performed&gt;",
+        "path": "&lt;api&gt;"
+    },
+     ...
+    {
+        "date": "&lt;date&gt;",
+        "action": "&lt;event_name for eventN&gt;",
+        "subject": "&lt;The user who performed the action&gt;",
+        "object": "&lt;The object on which the action was performed&gt;",
+        "path": "&lt;api&gt;"
+    }
+]</code></pre>
+<p>Update the role model:</p>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 800px;">
+<tbody>
+<tr>
+<td> </td>
+<td>Anonymous</td>
+<td>User</td>
+<td>Accountant</td>
+<td>Administrator</td>
+<td>Auditor</td>
+</tr>
+<tr>
+<td><code class="language-json">POST api/auth/signup</code></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-json">POST api/auth/changepass</code></td>
+<td> </td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">GET api/empl/payment</code></td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">POST api/acct/payments</code></td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">PUT api/acct/payments</code></td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">GET api/admin/user</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">DELETE api/admin/user</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">PUT api/admin/user/role</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">PUT api/admin/user/access</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">GET api/security/events</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1: </strong><em>a </em><em>GET request for api/auth/signup under the Auditor role</em></p>
+<p><em>Response: </em><code class="language-json">200 OK</code></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">[
+{
+  "id" : 1,
+  "date" : "&lt;date&gt;",
+  "action" : "CREATE_USER",
+  "subject" : "Anonymous", \\ A User is not defined, fill with Anonymous
+  "object" : "johndoe@acme.com",
+  "path" : "/api/auth/signup"
+}, {
+  "id" : 6,
+  "date" : "&lt;date&gt;",
+  "action" : "LOGIN_FAILED",
+  "subject" : "maxmustermann@acme.com",
+  "object" : "/api/empl/payment", \\ the endpoint where the event occurred
+  "path" : "/api/empl/payment"
+}, {
+  "id" : 9,
+  "date" : "&lt;date&gt;",
+  "action" : "GRANT_ROLE",
+  "subject" : "johndoe@acme.com",
+  "object" : "Grant role ACCOUNTANT to petrpetrov@acme.com",
+  "path" : "/api/admin/user/role"
+}, {
+  "id" : 10,
+  "date" : "&lt;date&gt;",
+  "action" : "REMOVE_ROLE",
+  "subject" : "johndoe@acme.com",
+  "object" : "Remove role ACCOUNTANT from petrpetrov@acme.com",
+  "path" : "/api/admin/user/role"
+}, {
+  "id" : 11,
+  "date" : "&lt;date&gt;",
+  "action" : "DELETE_USER",
+  "subject" : "johndoe@acme.com",
+  "object" : "petrpetrov@acme.com",
+  "path" : "/api/admin/user"
+}, {
+  "id" : 12,
+  "date" : "&lt;date&gt;",
+  "action" : "CHANGE_PASSWORD",
+  "subject" : "johndoe@acme.com",
+  "object" : "johndoe@acme.com",
+  "path" : "/api/auth/changepass"
+}, {
+  "id" : 16,
+  "date" : "&lt;date&gt;",
+  "action" : "ACCESS_DENIED",
+  "subject" : "johndoe@acme.com",
+  "object" : "/api/acct/payments", \\ the endpoint where the event occurred
+  "path" : "/api/acct/payments"
+}, {
+  "id" : 25,
+  "date" : "&lt;date&gt;",
+  "action" : "BRUTE_FORCE",
+  "subject" : "maxmustermann@acme.com",
+  "object" : "/api/empl/payment", \\ the endpoint where the event occurred
+  "path" : "/api/empl/payment"
+}, {
+  "id" : 26,
+  "date" : "&lt;date&gt;",
+  "action" : "LOCK_USER",
+  "subject" : "maxmustermann@acme.com",
+  "object" : "Lock user maxmustermann@acme.com",
+  "path" : "/api/empl/payment" \\ the endpoint where the lock occurred
+}, {
+  "id" : 27,
+  "date" : "&lt;date&gt;",
+  "action" : "UNLOCK_USER",
+  "subject" : "johndoe@acme.com",
+  "object" : "Unlock user maxmustermann@acme.com",
+  "path" : "/api/admin/user/access"
+}
+]</code></pre>
+<p><strong>Example 2: </strong><em>a </em><em>POST request for /api/admin/user/role</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "user": "administrator@acme.com",
+   "role": "AUDITOR",
+   "operation": "GRANT" 
+}</code></pre>
+<p><em>Response: </em><code class="language-json">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "The user cannot combine administrative and business roles!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<p><strong>Example 3: </strong><em>a </em><em>PUT request for PUT api/admin/user/access</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "user": "administrator@acme.com",
+   "operation": "LOCK" 
+}</code></pre>
+<p><em>Response: </em><code class="language-json">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Can't lock the ADMINISTRATOR!",
+    "path": "/api/admin/user/access"
+}</code></pre>
+<p><strong> Example 4: </strong><em>a </em><em>PUT request for PUT api/admin/user/access</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "user": "user@acme.com",
+   "operation": "LOCK" 
+}</code></pre>
+<p><em>Response: </em><code class="language-json">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "status": "User user@acme.com locked!"
+}</code></pre>
+</div>

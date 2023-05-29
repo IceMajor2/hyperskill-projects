@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Account_Service.iml" filepath="$PROJECT_DIR$/.idea/modules/Account_Service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Account Service/task/Account_Service.Account_Service-task.iml" filepath="$PROJECT_DIR$/.idea/modules/Account Service/task/Account_Service.Account_Service-task.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Account Service/task/Account_Service.Account_Service-task.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Account Service/task/Account_Service.Account_Service-task.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Account Service/task/Account_Service.Account_Service-task.test.iml" filepath="$PROJECT_DIR$/.idea/modules/Account Service/task/Account_Service.Account_Service-task.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Account_Service.util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Account_Service.util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Account_Service.util.main.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Account_Service.util.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Account_Service.util.test.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Account_Service.util.test.iml" />
+    </modules>
+  </component>
+</project>

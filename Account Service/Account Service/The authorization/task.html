@@ -1,0 +1,345 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Our service is almost ready; only the roles remain. We need to add the <strong>authorization</strong>. Authorization is a process when the system decides whether an authenticated client has permission to access the requested resource. Authorization always follows authentication.</p>
+<p>Our service should implement the role model that we have developed earlier:</p>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 700px;">
+<tbody>
+<tr>
+<td> </td>
+<td>Anonymous</td>
+<td>User</td>
+<td>Accountant</td>
+<td>Administrator</td>
+</tr>
+<tr>
+<td><code class="language-java">POST api/auth/signup</code></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-java">POST api/auth/changepass</code></td>
+<td> </td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-java">GET api/empl/payment</code></td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-java">POST api/acct/payments</code></td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-java">PUT api/acct/payments</code></td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-java">GET api/admin/user</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-java">DELETE api/admin/user</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-java">PUT api/admin/user/role</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<p><b>Tip:</b> You can use the article <a href="https://www.javadevjournal.com/spring-security/spring-security-roles-and-permissions/" rel="noopener noreferrer nofollow" target="_blank">Spring Security Roles and Permissions</a> by JavadevJournal and <a href="https://www.baeldung.com/spring-security-method-security" rel="noopener noreferrer nofollow" target="_blank">Introduction to Spring Method Security</a> by Baeldung to learn more about the authorization in Spring Boot.</p>
+<p>We also advise you to take a look at the following articles; they may help you a lot: <a href="https://www.baeldung.com/spring-security-custom-access-denied-page" rel="noopener noreferrer nofollow" target="_blank">Spring Security – Customize the 403 Forbidden/Access Denied Page</a> and <a href="https://www.baeldung.com/hibernate-initialize-proxy-exception" rel="noopener noreferrer nofollow" target="_blank">Hibernate could not initialize proxy – no Session</a> by Baeldung </p>
+<p><b>Tip:</b> Some hints on how to create a table with user roles at the start of the service:</p>
+<pre><code class="language-java">@Component
+public class DataLoader {
+
+    private GroupRepository groupRepository;
+
+    @Autowired
+    public DataLoader(GroupRepository groupRepository) {
+        this.groupRepository = groupRepository;
+        createRoles();
+    }
+
+    private void createRoles() {
+        try {
+            groupRepository.save(new Group("ROLE_ADMINISTRATOR"));
+            groupRepository.save(new Group("ROLE_USER"));
+            groupRepository.save(new Group("ROLE_ACCOUNTANT"));
+        } catch (Exception e) {
+
+        }
+    }
+}</code></pre>
+<p></p>
+<p>The ACME Security Department imposes the new security requirements for our service! They are based on the <a href="https://github.com/OWASP/ASVS" rel="noopener noreferrer nofollow" target="_blank">ASVS</a>. Your task is to implement the following requirements from the <strong>V4. Access Control Verification Requirements </strong>paragraph:</p>
+<ul>
+<li>Verify that all user and data attributes and policy information used by access controls cannot be manipulated by end users unless specifically authorized.</li>
+<li>Verify that the principle of least privilege exists - users should only be able to access functions, data files, URLs, controllers, services, and other resources, for which they possess specific authorization. This implies protection against spoofing and elevation of privilege. </li>
+<li>Verify that the principle of deny by default exists whereby new users/roles start with minimal or no permissions and users/roles do not receive access to new features until access is explicitly assigned. </li>
+</ul>
+<p>Let's talk about roles. The <code class="language-java">Administrator</code> is the user who registered first, all other users should receive the <code class="language-java">User</code> role. The <code class="language-java">accountant</code> role should be assigned by the Administrator to one of the users later.</p>
+<p>To assign the roles and manage users, you will need to implement the following service endpoints:</p>
+<ol>
+<li><code class="language-java">PUT api/admin/user/role</code> sets the roles;</li>
+<li><code class="language-java">DELETE api/admin/user</code> deletes users;</li>
+<li><code class="language-java">GET api/admin/user</code> obtains information about all users; the information should not be sensitive.</li>
+</ol>
+<p>The roles should be divided into 2 groups: administrative (<code class="language-java">Administrator</code>) and business users (<code class="language-java">Accountant</code>, <code class="language-java">User</code>).<br/>
+    Do not mix up the groups; a user can be either from the administrative or business group. A user with an administrative role should not have access to business functions and vice versa.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Add the authorization to the service and implement the role model shown in the table above. The first registered user should receive the <code class="language-java">Administrator</code> role, the rest — <code class="language-java">Users</code>. In case of authorization violation, respond with <code class="language-java">HTTP Forbidden</code> status <code class="language-java">(403)</code> and the following body:</p>
+<pre><code class="language-json">{
+  "timestamp" : "&lt;date&gt;",
+  "status" : 403,
+  "error" : "Forbidden",
+  "message" : "Access Denied!",
+  "path" : "/api/admin/user/role"
+}</code></pre>
+<p>Change the response for the <code class="language-java">POST api/auth/signup</code> endpoint. It should respond with <code class="language-java">HTTP OK</code> status (<code class="language-java">200</code>) and the body with a JSON object with the information about a user. Add the <code class="language-java">roles</code> field that contains an array with roles, sorted in ascending order:</p>
+<pre><code class="language-json">{
+   "id": "&lt;Long value, not empty&gt;",   
+   "name": "&lt;String value, not empty&gt;",
+   "lastname": "&lt;String value, not empty&gt;",
+   "email": "&lt;String value, not empty&gt;",
+   "roles": "&lt;[User roles]&gt;"
+}</code></pre>
+<p>Add the <code class="language-java">GET api/admin/user</code> endpoint. It must respond with an array of objects representing the users sorted by ID in ascending order. Return an empty JSON array if there's no information.</p>
+<pre><code class="language-json">[
+    {
+        "id": "&lt;user1 id&gt;",
+        "name": "&lt;user1 name&gt;",
+        "lastname": "&lt;user1 last name&gt;",
+        "email": "&lt;user1 email&gt;",
+        "roles": "&lt;[user1 roles]&gt;"
+    },
+     ...
+    {
+        "id": "&lt;userN id&gt;",
+        "name": "&lt;userN name&gt;",
+        "lastname": "&lt;userN last name&gt;",
+        "email": "&lt;userN email&gt;",
+        "roles": "&lt;[userN roles]&gt;"
+    }
+]</code></pre>
+<p>Add the <code class="language-java">DELETE api/admin/user/{user email}</code> endpoint, where <code class="language-java">{user email}</code> specifies the user that should be deleted. The endpoint must delete the user and respond with <code class="language-java">HTTP OK</code> status (<code class="language-java">200</code>) and body like this:</p>
+<pre><code class="language-json">{
+   "user": "&lt;user email&gt;",
+   "status": "Deleted successfully!"
+}</code></pre>
+<p>If a user is not found, respond with <code class="language-java">HTTP Not Found</code> status (<code class="language-java">404</code>) and the following body:</p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 404,
+    "error": "Not Found",
+    "message": "User not found!",
+    "path": "&lt;api + parameter&gt;"
+}</code></pre>
+<p>The <code class="language-java">Administrator</code> should not be able to delete himself. In that case, respond with the <code class="language-java">HTTP Bad Request</code> status (<code class="language-java">400</code>) and the following body:</p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Can't remove ADMINISTRATOR role!",
+    "path": "&lt;api + path&gt;"
+}</code></pre>
+<p>Add the <code class="language-java">PUT api/admin/user/role</code> endpoint that changes user roles. It must accept the following JSON body:</p>
+<pre><code class="language-json">{
+   "user": "&lt;String value, not empty&gt;",
+   "role": "&lt;User role&gt;",
+   "operation": "&lt;[GRANT, REMOVE]&gt;"
+}</code></pre>
+<p>The <code class="language-java">operation</code> field above determines whether the role will be provided or removed. If successful, respond with the <code class="language-java">HTTP OK</code> status (<code class="language-java">200</code>) and the body like this:</p>
+<pre><code class="language-json">{
+   "id": "&lt;Long value, not empty&gt;",   
+   "name": "&lt;String value, not empty&gt;",
+   "lastname": "&lt;String value, not empty&gt;",
+   "email": "&lt;String value, not empty&gt;",
+   "roles": "[&lt;User roles&gt;]"
+}</code></pre>
+<p>In case of violation of the rules, the service must respond in the following way:</p>
+<ul>
+<li>If a user is not found, respond with the <code class="language-java">HTTP Not Found</code> status (<code class="language-java">404</code>) and the following body:</li>
+</ul>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 404,
+    "error": "Not Found",
+    "message": "User not found!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<ul>
+<li>If a role is not found, respond with <code class="language-java">HTTP Not Found</code> status (<code class="language-java">404</code>) and the following body:</li>
+</ul>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 404,
+    "error": "Not Found",
+    "message": "Role not found!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<ul>
+<li>If you want to delete a role that has not been provided to a user, respond with the <code class="language-java">HTTP Bad Request</code> status (<code class="language-java">400</code>) and body like this:</li>
+</ul>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "The user does not have a role!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<ul>
+<li>If you want to remove the only existing role of a user, respond with the <code class="language-java">HTTP Bad Request</code> status (<code class="language-java">400</code>) and the following body:</li>
+</ul>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "The user must have at least one role!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<ul>
+<li>If you try to remove the Administrator, respond with the <code class="language-java">HTTP Bad Request</code> status (<code class="language-java">400</code>) and the following body:</li>
+</ul>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Can't remove ADMINISTRATOR role!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<ul>
+<li>If an administrative user is granted a business role or vice versa, respond with the <code class="language-java">HTTP Bad Request</code> status (<code class="language-java">400</code>) and the following body:</li>
+</ul>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "The user cannot combine administrative and business roles!",
+    "path": "/api/admin/user/role"
+}</code></pre>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1: </strong><em>a </em><em>PUT request for /api/admin/user/role with the correct authentication under the Administrator role</em></p>
+<p><em>Request:</em></p>
+<pre><code class="language-json">{
+   "user": "ivanivanov@acme.com",
+   "role": "ACCOUNTANT",
+   "operation": "GRANT"
+}</code></pre>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "id": 2,
+    "name": "Ivan",
+    "lastname": "Ivanov",
+    "email": "ivanivanov@acme.com",
+    "roles": [
+        "ROLE_ACCOUNTANT",
+        "ROLE_USER"
+    ]
+}</code></pre>
+<p><strong>Example 2: </strong><em>a </em><em>GET request for /api/empl/payment with the correct authentication under the Administrator role</em></p>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">[
+    {
+        "id": 1,
+        "name": "John",
+        "lastname": "Doe",
+        "email": "johndoe@acme.com",
+        "roles": [
+            "ROLE_ADMINISTRATOR"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Ivan",
+        "lastname": "Ivanov",
+        "email": "ivanivanov@acme.com",
+        "roles": [
+            "ROLE_ACCOUNTANT",
+            "ROLE_USER"
+        ]
+    }
+]</code></pre>
+<p><strong>Example 3: </strong><em>a PUT request for /api/admin/user/role with the correct authentication under the Administrator role</em></p>
+<p><em>Request:</em></p>
+<pre><code class="language-json">{
+   "user": "ivanivanov@acme.com",
+   "role": "ACCOUNTANT",
+   "operation": "REMOVE"
+}</code></pre>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "id": 2,
+    "name": "Ivan",
+    "lastname": "Ivanov",
+    "email": "ivanivanov@acme.com",
+    "roles": [
+        "ROLE_USER"
+    ]
+}</code></pre>
+<p><br/>
+<strong>Example 4: </strong><em>a </em><em>GET request for /api/admin/user/role with the correct authentication under the User role</em></p>
+<p><em>Response: </em><code class="language-java">403 Forbidden</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 403,
+    "error": "Forbidden",
+    "message": "Access Denied!",
+    "path": "/api/admin/user/"
+}</code></pre>
+<p><br/>
+<strong>Example 5: </strong><em>a </em><em>DELETE request for /api/admin/user/ivanivanov@acme.com with the correct authentication under the Administrator role</em></p>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "user": "ivanivanov@acme.com",
+    "status": "Deleted successfully!"
+}</code></pre>
+<p><br/>
+<strong>Example 6: </strong><em>a </em><em>DELETE request for /api/admin/user/johndoe@acme.com with the correct authentication under the Administrator role</em></p>
+<p><em>Response: </em><code class="language-java">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "Can't remove ADMINISTRATOR role!",
+    "path": "/api/admin/user/johndoe@acme.com"
+}</code></pre>
+<p><strong>Example 7: </strong><em>a </em><em>DELETE request for /api/admin/user/ivanivanov@acme.com with the correct authentication under the Administrator role</em></p>
+<p><em>Response: </em><code class="language-java">404 Not Found</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;date&gt;",
+    "status": 404,
+    "error": "Not Found",
+    "message": "User not found!",
+    "path": "/api/admin/user/ivanivanov@acme.com"
+}</code></pre>
+</div>

@@ -1,0 +1,150 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Let's set up the authentication for our service. Of course, you can implement it yourself, but it is considered good practice to use an already tested and reliable implementation. Fortunately, Spring includes the Spring Security module that contains the right methods.</p>
+<p>In this stage, you need to provide the HTTP Basic authentication for our <code class="language-java">REST</code> service with <code class="language-java">JDBC</code> implementations of <code class="language-java">UserDetailService</code> for user management. You will need an endpoint for registering users at <code class="language-java">POST api/auth/signup</code>.</p>
+<p>To test the authentication, you need to add another endpoint <code class="language-java">GET api/empl/payment/</code> that will be available only for authenticated users. For persistence, put users in the database. Our service will include an H2 database.</p>
+<p></p><div class="alert alert-warning">To run the tests, the <code class="language-java">application.properties</code> file should contain the following line: <code class="language-java">spring.datasource.url=jdbc:h2:file:../service_db</code>.
+
+<p>Since 2.3.0, Spring Boot hides error messages by default, to pass the tests, you need to add the following line: <code class="language-java">server.error.include-message=always</code> to the <code class="language-java">application.properties</code> file. For more detail, refer to the <a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.3-Release-Notes#changes-to-the-default-error-pages-content" rel="noopener noreferrer nofollow" target="_blank">Spring Boot Release Notes</a>.</p></div>
+<p>You can use the article called <a href="https://progressivecoder.com/wp-content/cache/all/implementing-spring-boot-security-using-userdetailsservice/index.html" rel="noopener noreferrer nofollow" target="_blank">Implementing Spring Boot Security using UserDetailsService</a> by Progressive Coder to configure the authentication in Spring Boot using <code class="language-java">UserDetailsServices</code>.</p>
+<p>We suggest customizing the solution for the tasks of our service. First, don't forget that we are implementing a <code class="language-java">REST</code> architecture. It means that we don't have sessions. The HTTP basic mechanism is selected for authentication, and in case of an unauthorized access attempt, the service must respond with the appropriate status. Also, configure the access for the API. To do this, you need to configure the <code class="language-java">HttpSecurity</code> object with the method chaining like this:</p>
+<pre><code class="language-java">    public void configure(HttpSecurity http) throws Exception {
+        http.httpBasic()
+                .authenticationEntryPoint(restAuthenticationEntryPoint) // Handle auth error
+                .and()
+                .csrf().disable().headers().frameOptions().disable() // for Postman, the H2 console
+                .and()
+                .authorizeRequests() // manage access
+                .antMatchers(HttpMethod.POST, "/api/signup").permitAll()
+                // other matchers
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS); // no session
+    }</code></pre>
+<p><code class="language-java">RestAuthenticationEntryPoint</code> is an instance of the class that implements the <code class="language-java">AuthenticationEntryPoint</code> interface. This endpoint handles authentication errors. For example:</p>
+<pre><code class="language-java">    public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+        @Override
+        public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        }
+    }</code></pre>
+<p>If you don't know how to use exceptions in Spring Boot, please, take a look:</p>
+<pre><code class="language-java">@ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "Some error meassage")
+public class UserExistException extends RuntimeException { }</code></pre>
+<p>You will also need some security dependencies in Gradle:</p>
+<pre><code class="language-java">dependencies {
+   ... other dependencies ...
+   implementation 'org.springframework.boot:spring-boot-starter-security'
+}</code></pre>
+<h5 id="objectives">Objectives</h5>
+<p>Add the Spring security to your project and configure the HTTP basic authentication;</p>
+<p>For storing users and passwords, add a JDBC implementation of <code class="language-java">UserDetailsService</code> with an H2 database;</p>
+<p>Change the <code class="language-java">POST api/auth/signup</code> endpoint. It must be available to unauthorized users for registration and accepts data in the JSON format:</p>
+<pre><code class="language-json">{
+   "name": "&lt;String value, not empty&gt;",
+   "lastname": "&lt;String value, not empty&gt;",
+   "email": "&lt;String value, not empty&gt;",
+   "password": "&lt;String value, not empty&gt;"
+}</code></pre>
+<p>If OK, provide the <code class="language-java">HTTP OK</code> status (<code class="language-java">200</code>) and the following body:</p>
+<pre><code class="language-json">{
+   "id": "&lt;Long value, not empty&gt;",   
+   "name": "&lt;String value, not empty&gt;",
+   "lastname": "&lt;String value, not empty&gt;",
+   "email": "&lt;String value, not empty&gt;"
+}</code></pre>
+<p>As a unique login for authentication, take the value from the <code class="language-java">email</code> field. The value of the <code class="language-java">email</code> field must be <strong>case insensitive</strong>. <code class="language-java">Id</code> is a unique identifier that the service assigns to the user. If an email is occupied, the service should respond as shown below. The rest of the error messages are the same as in the previous stage:</p>
+<pre><code class="language-json">{
+    "timestamp": "data",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "User exist!",
+    "path": "/api/auth/signup"
+}</code></pre>
+<p>Add the <code class="language-java">GET api/empl/payment/</code> endpoint that allows for testing the authentication. It should be available only to authenticated users and return a response in the JSON format representing the user who has sent the request:</p>
+<pre><code class="language-json">{
+   "id": "&lt;Long value, not empty&gt;",   
+   "name": "&lt;String value, not empty&gt;",
+   "lastname": "&lt;String value, not empty&gt;",
+   "email": "&lt;String value, not empty&gt;"
+}</code></pre>
+<p>The <code class="language-java">email</code> field must contain the user's login who has sent the request. Error message for the non-authenticated or wrong user should have the <code class="language-java">401 (Unauthorized)</code> status.</p>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1: </strong><em>a POST request for api/auth/signup with the correct user</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "name": "John",
+   "lastname": "Doe",
+   "email": "JohnDoe@acme.com",
+   "password": "secret"
+}</code></pre>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+   "id": 1,
+   "name": "John",
+   "lastname": "Doe",
+   "email": "JohnDoe@acme.com"
+}</code></pre>
+<p><strong>Example 2: </strong><em>a </em><em>POST request for api/auth/signup with the occupied email</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "name": "John",
+   "lastname": "Doe",
+   "email": "johndoe@acme.com",
+   "password": "secret"
+}</code></pre>
+<p><em>Response:</em> <code class="language-java">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;data&gt;",
+    "status": 400,
+    "error": "Bad Request",
+    "message": "User exist!",
+    "path": "/api/auth/signup"
+}</code></pre>
+<p><strong>Example 3: </strong><em>a POST request for api/auth/signup with the wrong format of the user JSON</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "lastname": "Doe",
+   "email": "johndoe@acme.com",
+   "password": "secret"
+}</code></pre>
+<p><em>Response:</em> <code class="language-java">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+   "timestamp": "&lt;date&gt;",
+   "status": 400,
+   "error": "Bad Request",
+   "path": "/api/auth/signup"
+}</code></pre>
+<p><strong>Example 4: </strong><em>a </em><em>GET request for /api/empl/payment with the correct authentication, username = johndoe@acme.com, password = secret</em></p>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "id": 1,
+    "name": "John",
+    "lastname": "Doe",
+    "email": "johndoe@acme.com"
+}</code></pre>
+<p><strong>Example 5: </strong><em>a </em><em>GET request for /api/empl/payment with the correct authentication; username = JohnDoe@acme.com, password = secret</em></p>
+<p><em>Response: </em><code class="language-java">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "id": 1,
+    "name": "John",
+    "lastname": "Doe",
+    "email": "johndoe@acme.com"
+}</code></pre>
+<p> </p>
+<p><strong>Example 6: </strong><em>a </em><em>GET request for /api/empl/payment with the wrong authentication; username = johndoe@acme.com, password = no_secret</em></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+    "timestamp": "&lt;data&gt;",
+    "status": 401,
+    "error": "Unauthorized",
+    "message": "",
+    "path": "/api/empl/payment"
+}</code></pre>
+</div>

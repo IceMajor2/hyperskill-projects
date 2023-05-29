@@ -1,0 +1,10 @@
+type: framework
+content:
+- Create the service structure (API)
+- The authentication
+- Security first
+- Attention to business
+- The authorization
+- Logging events
+- Securing connection
+current_task: 0

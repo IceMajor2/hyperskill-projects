@@ -1,0 +1,22 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Our last step in the project is to ensure the security of our service. By now, all data, authentication, and business information is transmitted over an unsecured communication channel and can be easily intercepted. The solution to this problem is the HTTPS protocol. Implementing HTTPS in Spring Boot is easy, but first, you need to generate a private key and a certificate. To do this, you can use the <code class="java">keytool</code> utility that is included in the JDK. Save the certificate file in the <code class="java">keystore</code> directory in the resource folder of the Spring Boot application:</p>
+<pre><code class="java">keytool -genkeypair -alias accountant_service -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore keystore.p12 -validity 3650</code></pre>
+<p>[ALERT]In this example, we use a self-signed certificate, which is acceptable for a training project, but in real systems it is required to use a certificate signed by a trusted certification authority.[/ALERT]</p>
+<p>Next, make changes to the application properties:</p>
+<pre><code class="java">server.ssl.enabled=true
+# Keystore format
+server.ssl.key-store-type=PKCS12
+# The path to the keystore
+server.ssl.key-store=classpath:keystore/service.p12
+# Certificate password
+server.ssl.key-store-password=service
+# Certificate alias
+server.ssl.key-alias=accountant_service</code></pre>
+<p><b>Tip:</b> <a href="https://dzone.com/articles/ssl-in-java" rel="noopener noreferrer nofollow" target="_blank">Everything About HTTPS and SSL (Java)</a> by DZone can shed more light on this issue.</p>
+<h5 id="objectives">Objectives</h5>
+<ul>
+<li>Generate the certificate with <code class="java">CN=accountant_service</code>;</li>
+<li>Add the HTTPS support using the previously generated certificate. The tests will check only the CN attribute of the certificate.</li>
+</ul>
+</div>

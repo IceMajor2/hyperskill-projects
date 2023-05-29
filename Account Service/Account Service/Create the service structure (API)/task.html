@@ -1,0 +1,160 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>It's time to plan the architecture of our service. A good plan is 50% of the result. To begin with, we will determine the functions of our service, group them, and plan the appropriate endpoints following the principles of the <code class="language-json">REST</code> API:</p>
+<ul>
+<li>Authentication</li>
+</ul>
+<ol>
+<li><code class="language-json">POST api/auth/signup</code> allows the user to register on the service;</li>
+<li><code class="language-json">POST api/auth/changepass</code> changes a user password.</li>
+</ol>
+<ul>
+<li>Business functionality</li>
+</ul>
+<ol>
+<li><code class="language-json">GET api/empl/payment</code> gives access to the employee's payrolls;</li>
+<li><code class="language-json">POST api/acct/payments</code> uploads payrolls;</li>
+<li><code class="language-json">PUT api/acct/payments</code> updates payment information.</li>
+</ol>
+<ul>
+<li>Service functionality</li>
+</ul>
+<ol>
+<li><code class="language-json">PUT api/admin/user/role</code> changes user roles;</li>
+<li><code class="language-json">DELETE api/admin/user</code> deletes a user;</li>
+<li><code class="language-json">GET api/admin/user</code> displays information about all users.</li>
+</ol>
+<p>To ensure the security of our service, we will also plan the distribution of roles:</p>
+<table border="1" cellpadding="1" cellspacing="1">
+<tbody>
+<tr>
+<td> </td>
+<td>Anonymous</td>
+<td>User</td>
+<td>Accountant</td>
+<td>Administrator</td>
+</tr>
+<tr>
+<td><code class="language-json">POST api/auth/signup</code></td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-json">POST api/auth/changepass</code></td>
+<td> </td>
+<td>+</td>
+<td>+</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-json">GET api/empl/payment</code></td>
+<td>-</td>
+<td>+</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">POST api/acct/payments</code></td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">PUT api/acct/payments</code></td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code class="language-json">GET api/admin/user</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-json">DELETE api/admin/user</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+<tr>
+<td><code class="language-json">PUT api/admin/user/role</code></td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>+</td>
+</tr>
+</tbody>
+</table>
+<p>Later, we will reveal the purpose of the roles.</p>
+<h5 id="objectives">Objectives</h5>
+<p>In this stage, our goal is to run a SpringBoot web application for our service and test it with one endpoint.</p>
+<p>Create and run a SpringBoot application on the <code class="language-json">28852</code> port;</p>
+<p>Create the <code class="language-json">POST api/auth/signup</code> endpoint that accepts data in the JSON format:</p>
+<pre><code class="language-json">{
+   "name": "&lt;String value, not empty&gt;",
+   "lastname": "&lt;String value, not empty&gt;",
+   "email": "&lt;String value, not empty&gt;",
+   "password": "&lt;String value, not empty&gt;"
+}</code></pre>
+<p>It should return a response in the JSON format (without the password field):</p>
+<pre><code class="language-json">{
+   "name": "&lt;String value&gt;",
+   "lastname": "&lt;String value&gt;",
+   "email": "&lt;String value&gt;"
+}</code></pre>
+<p>If the status is <code class="language-json">HTTP OK (200)</code>, then all fields are correct. If it's <code class="language-json">HTTP Bad Request</code> (<code class="language-json">400</code>), then something is wrong. Our service must accept only corporate emails that end with <code class="language-json">@acme.com</code>. In this stage, we do not check the authentication, so the password field may contain anything (but not empty).</p>
+<h5 id="examples">Examples</h5>
+<p><strong>Example 1: </strong><em>a POST request for api/auth/signup</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "name": "John",
+   "lastname": "Doe",
+   "email": "johndoe@acme.com",
+   "password": "secret"
+}</code></pre>
+<p><em>Response: </em><code class="language-json">200 OK</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+   "name": "John",
+   "lastname": "Doe",
+   "email": "johndoe@acme.com",
+}</code></pre>
+<p><strong>Example 2:</strong> <em>a </em><em>POST request for api/auth/signup</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "lastname": "Doe",
+   "email": "johndoe@acme.com",
+   "password": "secret"
+}</code></pre>
+<p><em>Response:</em> <code class="language-json">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+   "timestamp": "&lt;date&gt;",
+   "status": 400,
+   "error": "Bad Request",
+   "path": "/api/auth/signup"
+}</code></pre>
+<p><strong>Example 3: </strong><em>a</em><strong> </strong><em>POST request for api/auth/signup</em></p>
+<p><em>Request body:</em></p>
+<pre><code class="language-json">{
+   "name": "John",
+   "lastname": "Doe",
+   "email": "johndoe@google.com",
+   "password": "secret"
+}</code></pre>
+<p><em>Response:</em> <code class="language-json">400 Bad Request</code></p>
+<p><em>Response body:</em></p>
+<pre><code class="language-json">{
+   "timestamp": "&lt;date&gt;",
+   "status": 400,
+   "error": "Bad Request",
+   "path": "/api/auth/signup"
+}</code></pre>
+</div>
