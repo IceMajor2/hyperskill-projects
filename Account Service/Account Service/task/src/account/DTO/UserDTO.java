@@ -1,21 +1,16 @@
 package account.DTO;
 
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 public class UserDTO {
 
     @NotEmpty
-    @NotNull
     private String name;
     @NotEmpty
-    @NotNull
     private String lastname;
     @NotEmpty
-    @NotNull
     private String email;
     @NotEmpty
-    @NotNull
     private String password;
 
     public UserDTO() {

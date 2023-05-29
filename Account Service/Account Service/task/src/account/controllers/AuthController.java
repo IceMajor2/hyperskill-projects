@@ -27,8 +27,8 @@ public class AuthController {
     public ResponseEntity registerUser(@RequestBody @Valid UserDTO userDTO) {
         try {
             User user = authService.registerUser(userDTO);
-            return ResponseEntity.ok(Map.of("name", user.getName(), "lastname", user.getLastName(),
-                    "email", user.getEmail()));
+            return ResponseEntity.ok(Map.of("id", user.getId(), "name", user.getName(),
+                    "lastname", user.getLastName(), "email", user.getEmail()));
         } catch(ResponseStatusException exception) {
             throw exception;
         }

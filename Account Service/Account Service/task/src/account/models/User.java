@@ -1,12 +1,23 @@
 package account.models;
 
 import account.DTO.UserDTO;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
+@Entity
+@Table(name = "users")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotEmpty
     private String name;
+    @NotEmpty
     private String lastName;
+    @NotEmpty
     private String email;
+    @NotEmpty
     private String password;
 
     public User(UserDTO userDTO) {
@@ -17,6 +28,14 @@ public class User {
     }
 
     public User() {}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
