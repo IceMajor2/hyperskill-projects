@@ -24,12 +24,8 @@ public class AuthController {
 
     @PostMapping(value = {"/signup", "/signup/"})
     public ResponseEntity registerUser(@RequestBody @Valid UserDTO userDTO) {
-        try {
-            User user = authService.registerUser(userDTO);
-            return ResponseEntity.ok(user);
-        } catch (ResponseStatusException exception) {
-            throw exception;
-        }
+        User user = authService.registerUser(userDTO);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping("/changepass")

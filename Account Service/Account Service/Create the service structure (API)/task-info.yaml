@@ -303,7 +303,7 @@ files:
 - name: src/account/security/RestAuthenticationEntryPoint.java
   visible: true
   learner_created: true
-feedback_link: https://hyperskill.org/projects/217/stages/1086/implement#comment
+feedback_link: https://hyperskill.org/learn/step/16601#comment
 status: Solved
 feedback:
   message: Congratulations!

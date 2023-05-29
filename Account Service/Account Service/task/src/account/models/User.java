@@ -24,6 +24,8 @@ public class User implements Serializable {
     private String email;
     @NotEmpty
     private String password;
+    @NotEmpty
+    private String role;
 
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
@@ -33,6 +35,15 @@ public class User implements Serializable {
     }
 
     public User() {}
+
+    @JsonIgnore
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
@@ -49,7 +60,7 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
+    @JsonProperty("lastname")
     public String getLastName() {
         return lastName;
     }
