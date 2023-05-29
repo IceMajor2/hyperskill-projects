@@ -279,6 +279,15 @@ files:
         implementation group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Final'
     }
   learner_created: false
+- name: src/account/AuthController.java
+  visible: true
+  learner_created: true
+- name: src/account/BusinessController.java
+  visible: true
+  learner_created: true
+- name: src/account/AdminController.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/projects/217/stages/1086/implement#comment
 status: Unchecked
 record: -1
