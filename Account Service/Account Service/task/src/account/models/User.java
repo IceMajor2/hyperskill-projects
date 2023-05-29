@@ -30,7 +30,7 @@ public class User implements Serializable {
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
         this.lastName = userDTO.getLastname();
-        this.email = userDTO.getEmail();
+        this.email = userDTO.getEmail().toLowerCase();
         this.password = userDTO.getPassword();
     }
 

@@ -698,6 +698,15 @@ files:
 - name: src/account/exceptions/UserNotExistsException.java
   visible: true
   learner_created: true
+- name: db/service_db.mv.db
+  visible: true
+  learner_created: true
+- name: db/service_db.trace.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16602#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Mon, 29 May 2023 13:41:44 UTC"
 record: -1
