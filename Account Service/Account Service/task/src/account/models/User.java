@@ -1,12 +1,16 @@
 package account.models;
 
 import account.DTO.UserDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +20,7 @@ public class User {
     @NotEmpty
     private String lastName;
     @NotEmpty
+    @Column(unique = true)
     private String email;
     @NotEmpty
     private String password;
@@ -61,10 +66,12 @@ public class User {
         this.email = email;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

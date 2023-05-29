@@ -25,6 +25,7 @@ public class AuthService {
         }
 
         User user = new User(userDTO);
+        userRepository.save(user);
         return user;
     }
 
