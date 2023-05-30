@@ -7,10 +7,16 @@ import jakarta.persistence.*;
 public class BreachedPassword {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String password;
+
+    public BreachedPassword() {}
+
+    public BreachedPassword(Long id, String password) {
+        this.password = password;
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

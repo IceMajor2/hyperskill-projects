@@ -1,3 +1,4 @@
+DELETE FROM breached_passwords;
 INSERT INTO breached_passwords (id, password) VALUES
 (1, 'PasswordForJanuary'),
 (2, 'PasswordForFebruary'),

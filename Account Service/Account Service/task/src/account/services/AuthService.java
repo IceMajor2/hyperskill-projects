@@ -51,15 +51,7 @@ public class AuthService {
     }
 
     private boolean isPasswordBreached(String password) {
-        String passEncoded = passwordEncoder.encode(password);
-        var iterator = breachedPasswordsRepository.findAll().iterator();
-
-        while (iterator.hasNext()) {
-            String breached = iterator.next().getPassword();
-            if (passwordEncoder.matches(breached, passEncoded)) {
-                return true;
-            }
-        }
-        return false;
+        var optPass = breachedPasswordsRepository.findByPassword(password);
+        return optPass.isPresent();
     }
 }
