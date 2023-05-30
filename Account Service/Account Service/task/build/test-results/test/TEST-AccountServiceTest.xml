@@ -1,7 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AccountServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-05-29T13:41:22" hostname="DESKTOP-OGGJ8AB" time="22.0">
+<testsuite name="AccountServiceTest" tests="1" skipped="0" failures="1" errors="0" timestamp="2023-05-30T14:26:44" hostname="DESKTOP-OGGJ8AB" time="16.251">
   <properties/>
-  <testcase name="start" classname="AccountServiceTest" time="22.0"/>
+  <testcase name="start" classname="AccountServiceTest" time="16.251">
+    <failure message="java.lang.AssertionError: Wrong answer in test #29&#10;&#10;The JSON object at key message should equal to &quot;Password length must be 12 chars minimum!&quot;, found &quot;The password length must be at least 12 chars!&quot;&#10;&#10;Full JSON:&#10;{&#10;  &quot;timestamp&quot;: &quot;2023-05-30T16:27:00.5627537&quot;,&#10;  &quot;status&quot;: 400,&#10;  &quot;error&quot;: &quot;Bad Request&quot;,&#10;  &quot;message&quot;: &quot;The password length must be at least 12 chars!&quot;,&#10;  &quot;path&quot;: &quot;/api/auth/changepass&quot;&#10;}" type="java.lang.AssertionError">java.lang.AssertionError: Wrong answer in test #29
+
+The JSON object at key message should equal to &quot;Password length must be 12 chars minimum!&quot;, found &quot;The password length must be at least 12 chars!&quot;
+
+Full JSON:
+{
+  &quot;timestamp&quot;: &quot;2023-05-30T16:27:00.5627537&quot;,
+  &quot;status&quot;: 400,
+  &quot;error&quot;: &quot;Bad Request&quot;,
+  &quot;message&quot;: &quot;The password length must be at least 12 chars!&quot;,
+  &quot;path&quot;: &quot;/api/auth/changepass&quot;
+}
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:203)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63)
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60)
+	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113)
+	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69)
+	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74)
+</failure>
+  </testcase>
   <system-out><![CDATA[?[1;31m
 Start test 1?[0m
 ?[0;34m
@@ -13,20 +73,20 @@ Start test 1?[0m
 ?[0m?[0;34m =========|_|==============|___/=/_/_/_/
 ?[0m?[0;34m :: Spring Boot ::                (v3.1.0)
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:23.522+02:00  INFO 19204 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 19204 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
-?[0m?[0;34m2023-05-29T15:41:23.528+02:00  INFO 19204 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
-?[0m?[0;34m2023-05-29T15:41:24.736+02:00  INFO 19204 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-?[0m?[0;34m2023-05-29T15:41:24.815+02:00  INFO 19204 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 65 ms. Found 1 JPA repository interfaces.
-?[0m?[0;34m2023-05-29T15:41:25.650+02:00  INFO 19204 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-?[0m?[0;34m2023-05-29T15:41:25.663+02:00  INFO 19204 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-?[0m?[0;34m2023-05-29T15:41:25.663+02:00  INFO 19204 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-?[0m?[0;34m2023-05-29T15:41:25.767+02:00  INFO 19204 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-?[0m?[0;34m2023-05-29T15:41:25.770+02:00  INFO 19204 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2194 ms
-?[0m?[0;34m2023-05-29T15:41:25.923+02:00  INFO 19204 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-?[0m?[0;34m2023-05-29T15:41:26.207+02:00  INFO 19204 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
-?[0m?[0;34m2023-05-29T15:41:26.209+02:00  INFO 19204 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-?[0m?[0;34m2023-05-29T15:41:26.226+02:00  INFO 19204 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-?[0m?[0;34m2023-05-29T15:41:26.379+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:45.487+02:00  INFO 16072 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 16072 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
+?[0m?[0;34m2023-05-30T16:26:45.493+02:00  INFO 16072 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+?[0m?[0;34m2023-05-30T16:26:46.847+02:00  INFO 16072 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+?[0m?[0;34m2023-05-30T16:26:46.931+02:00  INFO 16072 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 2 JPA repository interfaces.
+?[0m?[0;34m2023-05-30T16:26:47.860+02:00  INFO 16072 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+?[0m?[0;34m2023-05-30T16:26:47.876+02:00  INFO 16072 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+?[0m?[0;34m2023-05-30T16:26:47.877+02:00  INFO 16072 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+?[0m?[0;34m2023-05-30T16:26:47.990+02:00  INFO 16072 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+?[0m?[0;34m2023-05-30T16:26:47.993+02:00  INFO 16072 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2447 ms
+?[0m?[0;34m2023-05-30T16:26:48.156+02:00  INFO 16072 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+?[0m?[0;34m2023-05-30T16:26:48.470+02:00  INFO 16072 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
+?[0m?[0;34m2023-05-30T16:26:48.473+02:00  INFO 16072 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+?[0m?[0;34m2023-05-30T16:26:48.493+02:00  INFO 16072 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+?[0m?[0;34m2023-05-30T16:26:48.653+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -120,7 +180,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0;34m2023-05-29T15:41:26.397+02:00  WARN 19204 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0;34m2023-05-30T16:26:48.671+02:00  WARN 16072 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -147,22 +207,23 @@ Start test 1?[0m
 ?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
 ?[0m?[0;34m	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:26.518+02:00  INFO 19204 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-?[0m?[0;34m2023-05-29T15:41:26.603+02:00  INFO 19204 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
-?[0m?[0;34m2023-05-29T15:41:26.607+02:00  INFO 19204 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-?[0m?[0;34m2023-05-29T15:41:26.816+02:00  INFO 19204 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-29T15:41:27.035+02:00  INFO 19204 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-?[0m?[0;34m2023-05-29T15:41:27.082+02:00  INFO 19204 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-?[0m?[0;34m2023-05-29T15:41:27.362+02:00  INFO 19204 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-29T15:41:28.262+02:00  INFO 19204 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+?[0m?[0;34m2023-05-30T16:26:48.864+02:00  INFO 16072 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+?[0m?[0;34m2023-05-30T16:26:48.956+02:00  INFO 16072 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
+?[0m?[0;34m2023-05-30T16:26:48.959+02:00  INFO 16072 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+?[0m?[0;34m2023-05-30T16:26:49.171+02:00  INFO 16072 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+?[0m?[0;34m2023-05-30T16:26:49.399+02:00  INFO 16072 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+?[0m?[0;34m2023-05-30T16:26:49.456+02:00  INFO 16072 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+?[0m?[0;34m2023-05-30T16:26:49.723+02:00  INFO 16072 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+?[0m?[0;34m2023-05-30T16:26:50.665+02:00  INFO 16072 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+?[0m?[0;34mHibernate: create table breached_passwords (id bigint not null, password varchar(255), primary key (id))
 ?[0m?[0;34mHibernate: create table users (id bigint generated by default as identity, email varchar(255), last_name varchar(255), name varchar(255), password varchar(255), role varchar(255), primary key (id))
 ?[0m?[0;34mHibernate: alter table if exists users drop constraint if exists UK_6dotkott2kjsp8vw4d0m25fb7
 ?[0m?[0;34mHibernate: alter table if exists users add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
-?[0m?[0;34m2023-05-29T15:41:28.335+02:00  INFO 19204 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-?[0m?[0;34m2023-05-29T15:41:28.813+02:00  WARN 19204 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-?[0m?[0;34m2023-05-29T15:41:28.985+02:00  INFO 19204 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@14f11a56, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@11ce61d1, org.springframework.security.web.context.SecurityContextHolderFilter@217abcc9, org.springframework.security.web.header.HeaderWriterFilter@258f97f8, org.springframework.security.web.authentication.logout.LogoutFilter@59c2bf78, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@cfe881a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7473cfe2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@354ed5c4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@759862a2, org.springframework.security.web.session.SessionManagementFilter@12e04531, org.springframework.security.web.access.ExceptionTranslationFilter@416bff93, org.springframework.security.web.access.intercept.AuthorizationFilter@520034a]
-?[0m?[0;34m2023-05-29T15:41:29.699+02:00  INFO 19204 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-?[0m?[0;34m2023-05-29T15:41:29.784+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:50.743+02:00  INFO 16072 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+?[0m?[0;34m2023-05-30T16:26:51.256+02:00  WARN 16072 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+?[0m?[0;34m2023-05-30T16:26:51.432+02:00  INFO 16072 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6a2d0a19, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5702e6f3, org.springframework.security.web.context.SecurityContextHolderFilter@477dc93, org.springframework.security.web.header.HeaderWriterFilter@d140627, org.springframework.security.web.authentication.logout.LogoutFilter@33da0fad, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5444c63f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5cb654e3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3f89d36c, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5687e92d, org.springframework.security.web.session.SessionManagementFilter@58c48a23, org.springframework.security.web.access.ExceptionTranslationFilter@6be865c1, org.springframework.security.web.access.intercept.AuthorizationFilter@5d8c03cc]
+?[0m?[0;34m2023-05-30T16:26:52.144+02:00  INFO 16072 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+?[0m?[0;34m2023-05-30T16:26:52.235+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -257,7 +318,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.793+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.244+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -352,7 +413,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.803+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.252+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -447,7 +508,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.813+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.261+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -542,7 +603,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.823+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.271+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -637,7 +698,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.832+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.279+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -732,7 +793,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.841+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.288+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -827,7 +888,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.850+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.297+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -922,7 +983,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.860+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.306+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1017,7 +1078,7 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.869+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+?[0m?[0;34m2023-05-30T16:26:52.315+02:00  WARN 16072 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 ?[0m?[0;34m
 ?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 ?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1112,65 +1173,78 @@ Start test 1?[0m
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 ?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 ?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:29.892+02:00  INFO 19204 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-?[0m?[0;34m2023-05-29T15:41:29.913+02:00  INFO 19204 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 6.85 seconds (process running for 8.189)
-?[0;34m2023-05-29T15:41:30.298+02:00  INFO 19204 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-29T15:41:30.299+02:00  INFO 19204 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-29T15:41:30.300+02:00  INFO 19204 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-?[0m?[0;34mHibernate: insert into users (email,last_name,name,password,role,id) values (?,?,?,?,?,default)
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+?[0m?[0;34m2023-05-30T16:26:52.333+02:00  INFO 16072 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+?[0m?[0;34m2023-05-30T16:26:52.357+02:00  INFO 16072 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 7.382 seconds (process running for 8.876)
+?[0;34m2023-05-30T16:26:52.798+02:00  INFO 16072 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-30T16:26:52.799+02:00  INFO 16072 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+?[0m?[0;34m2023-05-30T16:26:52.801+02:00  INFO 16072 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
 ?[0m?[1;31m
 Start test 2?[0m
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 3?[0m
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 4?[0m
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 5?[0m
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-?[0m?[0;34mHibernate: insert into users (email,last_name,name,password,role,id) values (?,?,?,?,?,default)
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 6?[0m
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 7?[0m
-?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 8?[0m
-?[0;34m2023-05-29T15:41:31.077+02:00  WARN 19204 --- [o-28852-exec-10] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'name': rejected value []; codes [NotEmpty.userDTO.name,NotEmpty.name,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [must not be empty]] ]
 ?[1;31m
 Start test 9?[0m
-?[0m?[0;34m2023-05-29T15:41:31.087+02:00  WARN 19204 --- [io-28852-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'name': rejected value [null]; codes [NotEmpty.userDTO.name,NotEmpty.name,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.name,name]; arguments []; default message [name]]; default message [must not be empty]] ]
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 ?[1;31m
 Start test 10?[0m
-?[0m?[0;34m2023-05-29T15:41:31.097+02:00  WARN 19204 --- [io-28852-exec-2] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'lastname': rejected value []; codes [NotEmpty.userDTO.lastname,NotEmpty.lastname,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.lastname,lastname]; arguments []; default message [lastname]]; default message [must not be empty]] ]
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 ?[1;31m
 Start test 11?[0m
-?[0m?[0;34m2023-05-29T15:41:31.109+02:00  WARN 19204 --- [io-28852-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'lastname': rejected value [null]; codes [NotEmpty.userDTO.lastname,NotEmpty.lastname,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.lastname,lastname]; arguments []; default message [lastname]]; default message [must not be empty]] ]
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 ?[1;31m
 Start test 12?[0m
-?[0m?[0;34m2023-05-29T15:41:31.120+02:00  WARN 19204 --- [io-28852-exec-4] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'email': rejected value []; codes [NotEmpty.userDTO.email,NotEmpty.email,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.email,email]; arguments []; default message [email]]; default message [must not be empty]] ]
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+?[0m?[0;34mHibernate: insert into users (email,last_name,name,password,role,id) values (?,?,?,?,?,default)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 13?[0m
-?[0m?[0;34m2023-05-29T15:41:31.130+02:00  WARN 19204 --- [io-28852-exec-5] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'lastname': rejected value [null]; codes [NotEmpty.userDTO.lastname,NotEmpty.lastname,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.lastname,lastname]; arguments []; default message [lastname]]; default message [must not be empty]] ]
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 14?[0m
-?[0m?[0;34m2023-05-29T15:41:31.141+02:00  WARN 19204 --- [io-28852-exec-6] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'password': rejected value []; codes [NotEmpty.userDTO.password,NotEmpty.password,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.password,password]; arguments []; default message [password]]; default message [must not be empty]] ]
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 15?[0m
-?[0m?[0;34m2023-05-29T15:41:31.152+02:00  WARN 19204 --- [io-28852-exec-7] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MethodArgumentNotValidException: Validation failed for argument [0] in public org.springframework.http.ResponseEntity account.controllers.AuthController.registerUser(account.DTO.UserDTO): [Field error in object 'userDTO' on field 'password': rejected value [null]; codes [NotEmpty.userDTO.password,NotEmpty.password,NotEmpty.java.lang.String,NotEmpty]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [userDTO.password,password]; arguments []; default message [password]]; default message [must not be empty]] ]
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 16?[0m
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+?[0m?[0;34mHibernate: insert into users (email,last_name,name,password,role,id) values (?,?,?,?,?,default)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 17?[0m
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 18?[0m
-?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+?[0m?[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 19?[0m
@@ -1186,6 +1260,7 @@ Start test 21?[0m
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 22?[0m
+?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[1;31m
 Start test 23?[0m
@@ -1203,1220 +1278,8 @@ Start test 26?[0m
 Start test 27?[0m
 ?[1;31m
 Start test 28?[0m
-?[0;34m2023-05-29T15:41:32.590+02:00  INFO 19204 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-?[0m?[0;34m2023-05-29T15:41:32.591+02:00  INFO 19204 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-29T15:41:32.601+02:00  INFO 19204 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-?[0m?[0;34m2023-05-29T15:41:32.603+02:00  INFO 19204 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-?[0m?[0;34m2023-05-29T15:41:32.615+02:00  INFO 19204 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
-?[0;34m
-?[0m?[0;34m  .   ____          _            __ _ _
-?[0m?[0;34m /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-?[0m?[0;34m( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
-?[0m?[0;34m \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-?[0m?[0;34m  '  |____| .__|_| |_|_| |_\__, | / / / /
-?[0m?[0;34m =========|_|==============|___/=/_/_/_/
-?[0m?[0;34m :: Spring Boot ::                (v3.1.0)
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:43.033+02:00  INFO 19204 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 19204 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
-?[0m?[0;34m2023-05-29T15:41:43.033+02:00  INFO 19204 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
-?[0m?[0;34m2023-05-29T15:41:43.410+02:00  INFO 19204 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-?[0m?[0;34m2023-05-29T15:41:43.422+02:00  INFO 19204 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 11 ms. Found 1 JPA repository interfaces.
-?[0m?[0;34m2023-05-29T15:41:43.540+02:00  INFO 19204 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-?[0m?[0;34m2023-05-29T15:41:43.540+02:00  INFO 19204 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-?[0m?[0;34m2023-05-29T15:41:43.541+02:00  INFO 19204 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-?[0m?[0;34m2023-05-29T15:41:43.572+02:00  INFO 19204 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-?[0m?[0;34m2023-05-29T15:41:43.572+02:00  INFO 19204 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 537 ms
-?[0m?[0;34m2023-05-29T15:41:43.617+02:00  INFO 19204 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-?[0m?[0;34m2023-05-29T15:41:43.637+02:00  INFO 19204 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
-?[0m?[0;34m2023-05-29T15:41:43.637+02:00  INFO 19204 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-?[0m?[0;34m2023-05-29T15:41:43.637+02:00  INFO 19204 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-?[0m?[0;34m2023-05-29T15:41:43.665+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:630) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:920) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ThreadPoolExecutor.ensurePrestart(ThreadPoolExecutor.java:1593) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:346) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.scheduleWithFixedDelay(ScheduledThreadPoolExecutor.java:680) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ScheduledThreadPoolExecutor.scheduleWithFixedDelay(ScheduledThreadPoolExecutor.java:138) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:903) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:241) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:428) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:913) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:485) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:489) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:211) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:183) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:161) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:602) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:43.670+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:630) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:920) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ThreadPoolExecutor.ensurePrestart(ThreadPoolExecutor.java:1593) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.delayedExecute(ScheduledThreadPoolExecutor.java:346) ~[na:na]
-?[0m?[0;34m	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor.scheduleWithFixedDelay(ScheduledThreadPoolExecutor.java:680) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ScheduledThreadPoolExecutor.scheduleWithFixedDelay(ScheduledThreadPoolExecutor.java:138) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:918) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:485) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:489) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:211) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:183) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:161) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:602) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:43.704+02:00  INFO 19204 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-?[0m?[0;34m2023-05-29T15:41:43.718+02:00  INFO 19204 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-29T15:41:43.718+02:00  INFO 19204 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-?[0m?[0;34m2023-05-29T15:41:43.720+02:00  INFO 19204 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-?[0m?[0;34m2023-05-29T15:41:43.735+02:00  INFO 19204 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-?[0m?[0;34m2023-05-29T15:41:43.828+02:00  INFO 19204 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-?[0m?[0;34m2023-05-29T15:41:43.834+02:00  INFO 19204 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-?[0m?[0;34m2023-05-29T15:41:43.892+02:00  WARN 19204 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-?[0m?[0;34m2023-05-29T15:41:43.919+02:00  INFO 19204 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@217c7135, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5f735240, org.springframework.security.web.context.SecurityContextHolderFilter@36bf903c, org.springframework.security.web.header.HeaderWriterFilter@4127dcdb, org.springframework.security.web.authentication.logout.LogoutFilter@40ab1491, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5345b68c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2a073f4f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@55b9ffd0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@52c4bf29, org.springframework.security.web.session.SessionManagementFilter@6e8627e6, org.springframework.security.web.access.ExceptionTranslationFilter@568945a9, org.springframework.security.web.access.intercept.AuthorizationFilter@39ebf505]
-?[0m?[0;34m2023-05-29T15:41:44.136+02:00  INFO 19204 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-?[0m?[0;34m2023-05-29T15:41:44.178+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.198+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.205+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.211+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.218+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.226+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.234+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.242+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.254+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.263+02:00  WARN 19204 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
-?[0m?[0;34m
-?[0m?[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
-?[0m?[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.AccessibleObject.checkAccess(AccessibleObject.java:674) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.checkAccess(Field.java:1102) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Field.set(Field.java:797) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:60) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.security.PrivilegedSetAccessControlContext.run(PrivilegedSetAccessControlContext.java:28) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at java.base/java.security.AccessController.doPrivileged(AccessController.java:318) ~[na:na]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.TaskThreadFactory.newThread(TaskThreadFactory.java:64) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.<init>(ThreadPoolExecutor.java:653) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.addWorker(ThreadPoolExecutor.java:957) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.prestartAllCoreThreads(ThreadPoolExecutor.java:1694) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1370) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.threads.ThreadPoolExecutor.<init>(ThreadPoolExecutor.java:1280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.createExecutor(AbstractEndpoint.java:1029) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.NioEndpoint.startInternal(NioEndpoint.java:280) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.tomcat.util.net.AbstractEndpoint.start(AbstractEndpoint.java:1345) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.coyote.AbstractProtocol.start(AbstractProtocol.java:633) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.connector.Connector.startInternal(Connector.java:1041) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.apache.catalina.core.StandardService.addConnector(StandardService.java:232) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.addPreviouslyRemovedConnectors(TomcatWebServer.java:282) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.start(TomcatWebServer.java:213) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.WebServerStartStopLifecycle.start(WebServerStartStopLifecycle.java:44) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.doStart(DefaultLifecycleProcessor.java:178) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor$LifecycleGroup.start(DefaultLifecycleProcessor.java:356) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at java.base/java.lang.Iterable.forEach(Iterable.java:75) ~[na:na]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.startBeans(DefaultLifecycleProcessor.java:155) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.DefaultLifecycleProcessor.onRefresh(DefaultLifecycleProcessor.java:123) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:958) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:611) ~[spring-context-6.0.9.jar:6.0.9]
-?[0m?[0;34m	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:733) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:435) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:311) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1305) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1294) ~[spring-boot-3.1.0.jar:3.1.0]
-?[0m?[0;34m	at account.AccountServiceApplication.main(AccountServiceApplication.java:10) ~[main/:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:216) ~[test/:na]
-?[0m?[0;34m	at AccountServiceTest.lambda$new$29(AccountServiceTest.java:312) ~[test/:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.testing.TestRun.test(TestRun.java:94) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at org.hyperskill.hstest.stage.StageTest.start(StageTest.java:164) ~[hs-test-release-SNAPSHOT.jar:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.junit.runners.ParentRunner.run(ParentRunner.java:413) ~[junit-4.13.2.jar:4.13.2]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:108) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:57) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:39) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:52) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[na:na]
-?[0m?[0;34m	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
-?[0m?[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33) ~[na:na]
-?[0m?[0;34m	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94) ~[na:na]
-?[0m?[0;34m	at jdk.proxy1/jdk.proxy1.$Proxy2.processTestClass(Unknown Source) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker$2.run(TestWorker.java:176) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.executeAndMaintainThreadName(TestWorker.java:129) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:100) ~[na:na]
-?[0m?[0;34m	at org.gradle.api.internal.tasks.testing.worker.TestWorker.execute(TestWorker.java:60) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.ActionExecutionWorker.execute(ActionExecutionWorker.java:56) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:113) ~[na:na]
-?[0m?[0;34m	at org.gradle.process.internal.worker.child.SystemApplicationClassLoaderWorker.call(SystemApplicationClassLoaderWorker.java:65) ~[na:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
-?[0m?[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
-?[0m?[0;34m
-?[0m?[0;34m2023-05-29T15:41:44.275+02:00  INFO 19204 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-?[0m?[0;34m2023-05-29T15:41:44.288+02:00  INFO 19204 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 1.28 seconds (process running for 22.564)
-?[0m?[1;31m
+?[1;31m
 Start test 29?[0m
-?[0;34m2023-05-29T15:41:44.299+02:00  INFO 19204 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-29T15:41:44.299+02:00  INFO 19204 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-?[0m?[0;34m2023-05-29T15:41:44.300+02:00  INFO 19204 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ?[0m?[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>

@@ -1,6 +1,5 @@
 package account.controllers;
 
-import account.exceptions.UserNotExistsException;
 import account.models.User;
 import account.services.BusinessService;
 import org.springframework.beans.factory.annotation.Autowired;

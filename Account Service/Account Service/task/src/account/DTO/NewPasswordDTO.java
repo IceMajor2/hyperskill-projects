@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public class NewPasswordDTO {
 
-    @Size(min = 12, message = "The password length must be at least 12 chars!")
+    @Size(min = 12, message = "Password length must be 12 chars minimum!")
     @NotEmpty
     @JsonProperty("new_password")
     private String password;
