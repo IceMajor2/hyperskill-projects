@@ -1,5 +1,6 @@
 package account.services;
 
+import account.DTO.NewPasswordDTO;
 import account.DTO.UserDTO;
 import account.exceptions.BreachedPasswordException;
 import account.exceptions.UserExistsException;
@@ -8,9 +9,12 @@ import account.repositories.BreachedPasswordsRepository;
 import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 @Service
 public class AuthService {
@@ -30,6 +34,16 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
+    }
+
+    public void changePassword(UserDetails userDetails, NewPasswordDTO newPasswordDTO) {
+        if(isPasswordBreached(newPasswordDTO.getPassword())) {
+            throw new BreachedPasswordException();
+        }
+
+        User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
+        user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
+        userRepository.save(user);
     }
 
     private void validateCredentials(UserDTO userDTO) {

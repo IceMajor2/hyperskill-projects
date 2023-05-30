@@ -1086,7 +1086,16 @@ files:
 - name: src/account/repositories/DataLoader.java
   visible: true
   learner_created: true
-- name: src/resources/data-NOTtest.sql
+- name: src/account/DTO/NewPasswordDTO.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/CustomRestExceptionHandler.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/ApiError.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/MyCustomErrorAttributes.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16603#comment
