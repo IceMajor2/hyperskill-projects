@@ -3,6 +3,7 @@ package account.services;
 import account.DTO.NewPasswordDTO;
 import account.DTO.UserDTO;
 import account.exceptions.BreachedPasswordException;
+import account.exceptions.PasswordNotChangedException;
 import account.exceptions.UserExistsException;
 import account.models.User;
 import account.repositories.BreachedPasswordsRepository;
@@ -40,8 +41,11 @@ public class AuthService {
         if(isPasswordBreached(newPasswordDTO.getPassword())) {
             throw new BreachedPasswordException();
         }
-
         User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
+        if(!isPasswordDifferent(user.getPassword(), newPasswordDTO.getPassword())) {
+            throw new PasswordNotChangedException();
+        }
+
         user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
         userRepository.save(user);
     }
@@ -67,5 +71,9 @@ public class AuthService {
     private boolean isPasswordBreached(String password) {
         var optPass = breachedPasswordsRepository.findByPassword(password);
         return optPass.isPresent();
+    }
+
+    private boolean isPasswordDifferent(String userHashed, String password) {
+        return !passwordEncoder.matches(password, userHashed);
     }
 }

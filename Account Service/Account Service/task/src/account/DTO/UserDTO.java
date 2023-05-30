@@ -12,7 +12,7 @@ public class UserDTO {
     @NotEmpty
     private String email;
     @NotEmpty
-    //@Size(min = 12, message = "The password length must be at least 12 chars!")
+    @Size(min = 12, message = "The password length must be at least 12 chars!")
     private String password;
 
     public UserDTO() {

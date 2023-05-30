@@ -43,3 +43,13 @@ The object is already closed [90007-214]
 2023-05-30 13:37:44 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
 The object is already closed [90007-214]
+2023-05-30 16:22:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]
+2023-05-30 16:22:38 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Błąd składniowy w wyrażeniu SQL "DROP TABLE [*]FROM BREACHED_PASSWORDS"; oczekiwano "identifier"
+Syntax error in SQL statement "DROP TABLE [*]FROM BREACHED_PASSWORDS"; expected "identifier"; SQL statement:
+DROP TABLE FROM BREACHED_PASSWORDS [42001-214]
+2023-05-30 16:24:04 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Obiekt jest zamknięty
+The object is already closed [90007-214]

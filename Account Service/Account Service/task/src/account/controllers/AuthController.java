@@ -31,7 +31,7 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/changepass")
+    @PostMapping(value = {"/changepass", "/changepass/"})
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT') or hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity changePassword(@AuthenticationPrincipal UserDetails details,
                                          @RequestBody @Valid NewPasswordDTO passwordDTO) {

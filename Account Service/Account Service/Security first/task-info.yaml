@@ -1095,7 +1095,7 @@ files:
 - name: src/account/exceptions/ApiError.java
   visible: true
   learner_created: true
-- name: src/account/exceptions/MyCustomErrorAttributes.java
+- name: src/account/exceptions/PasswordNotChangedException.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16603#comment
