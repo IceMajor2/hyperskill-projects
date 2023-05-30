@@ -1,6 +1,7 @@
 package account.services;
 
 import account.DTO.UserDTO;
+import account.exceptions.BreachedPasswordException;
 import account.exceptions.UserExistsException;
 import account.models.User;
 import account.repositories.BreachedPasswordsRepository;
@@ -22,19 +23,27 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(UserDTO userDTO) {
-        if(!isEmailValid(userDTO.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
-
-        if(userRepository.findByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
-            throw new UserExistsException();
-        }
+        validateCredentials(userDTO);
 
         User user = new User(userDTO);
         user.setRole("USER");
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
+    }
+
+    private void validateCredentials(UserDTO userDTO) {
+        if (isPasswordBreached(userDTO.getPassword())) {
+            throw new BreachedPasswordException();
+        }
+
+        if (!isEmailValid(userDTO.getEmail())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        if (userRepository.findByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
+            throw new UserExistsException();
+        }
     }
 
     private boolean isEmailValid(String email) {
@@ -45,9 +54,9 @@ public class AuthService {
         String passEncoded = passwordEncoder.encode(password);
         var iterator = breachedPasswordsRepository.findAll().iterator();
 
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             String breached = iterator.next().getPassword();
-            if(passwordEncoder.matches(breached, passEncoded)) {
+            if (passwordEncoder.matches(breached, passEncoded)) {
                 return true;
             }
         }
