@@ -2148,6 +2148,15 @@ files:
 - name: src/account/services/AdminService.java
   visible: true
   learner_created: true
+- name: src/account/exceptions/UserNotFoundException.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/AdminDeletionException.java
+  visible: true
+  learner_created: true
+- name: src/account/DTO/RoleDTO.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16605#comment
 status: Unchecked
 record: -1

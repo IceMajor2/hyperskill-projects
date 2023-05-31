@@ -95,4 +95,9 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @JsonIgnore
+    public boolean isAdmin() {
+        return roles.contains("ROLE_ADMINISTRATOR");
+    }
 }

@@ -1,5 +1,7 @@
 package account.services;
 
+import account.exceptions.AdminDeletionException;
+import account.exceptions.UserNotFoundException;
 import account.models.User;
 import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +18,15 @@ public class AdminService {
     public List<User> getUsersList() {
         List<User> users = userRepository.findAllByOrderByIdAsc();
         return users;
+    }
+
+    public User deleteUser(String email) {
+        User user = userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new UserNotFoundException());
+        if(user.isAdmin()) {
+            throw new AdminDeletionException();
+        }
+        userRepository.delete(user);
+        return user;
     }
 }
