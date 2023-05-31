@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -56,18 +58,27 @@ public class BusinessService {
     public void updatePayment(PaymentDTO paymentDTO) {
         User user = userRepository.findByEmailIgnoreCase(paymentDTO.getEmail())
                 .orElseThrow(() -> new UserNotExistsException());
-        Payment dbPayment = paymentRepository.findByUserIdAndPeriod(user.getId(), paymentDTO.getPeriod())
-                .orElseThrow(() -> new NoSuchPaymentException());
-        dbPayment.setSalary(paymentDTO.getSalary());
-        paymentRepository.save(dbPayment);
+        try {
+            Date date = new SimpleDateFormat("MM-yyyy").parse(paymentDTO.getPeriod());
+            Payment dbPayment = paymentRepository.findByUserIdAndPeriod(user.getId(), date)
+                    .orElseThrow(() -> new NoSuchPaymentException());
+            dbPayment.setSalary(paymentDTO.getSalary());
+            paymentRepository.save(dbPayment);
+        } catch (ParseException exception) {
+            throw new RuntimeException(exception);
+        }
     }
 
     private boolean isPaymentUnique(Payment payment) {
         User user = payment.getUser();
         List<Payment> payments = paymentRepository.findByUserId(user.getId());
         for(Payment paymentObj : payments) {
-            if(paymentObj.getPeriod().equals(payment.getPeriod())) {
-                return false;
+            try {
+                if(paymentObj.getPeriod().equals(payment.getPeriod())) {
+                    return false;
+                }
+            } catch (ParseException exception) {
+                throw new RuntimeException(exception);
             }
         }
         return true;
