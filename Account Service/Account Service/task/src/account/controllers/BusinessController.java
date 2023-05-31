@@ -2,7 +2,6 @@ package account.controllers;
 
 import account.DTO.AuthPaymentDTO;
 import account.DTO.PaymentDTO;
-import account.models.User;
 import account.services.BusinessService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

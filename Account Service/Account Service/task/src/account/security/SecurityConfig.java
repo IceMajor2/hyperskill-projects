@@ -10,6 +10,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
+
+import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -28,8 +31,14 @@ public class SecurityConfig {
                 .headers(headers -> headers
                         .frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
                 .authorizeHttpRequests((authz) -> authz
-                        //.requestMatchers(HttpMethod.GET, "/api/empl/payment").authenticated()
-                        .anyRequest().permitAll()
+                        // my endpoints
+                        .requestMatchers("/api/auth/signup/", "/api/auth/signup").permitAll()
+                        .requestMatchers("/api/acct/payments/", "/api/auth/payments").permitAll()
+                        // other endpoints
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers(toH2Console()).permitAll()
+                        .requestMatchers("/actuator/shutdown").permitAll()
+                        .anyRequest().authenticated()
                 ).sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
