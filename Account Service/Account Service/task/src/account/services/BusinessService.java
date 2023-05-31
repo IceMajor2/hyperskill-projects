@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class BusinessService {
         } catch (ParseException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    public List<AuthPaymentDTO> getPayrolls(UserDetails userDetails) {
+        User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
+        List<Payment> payments = paymentRepository.findByUserId(user.getId());
+        return convertPaymentListToDTOList(payments);
     }
 
     @Transactional
@@ -83,5 +90,14 @@ public class BusinessService {
             }
         }
         return true;
+    }
+
+    private List<AuthPaymentDTO> convertPaymentListToDTOList(List<Payment> payments) {
+        List<AuthPaymentDTO> authPaymentDTOS = new ArrayList<>();
+        for(Payment payment : payments) {
+            AuthPaymentDTO authPaymentDTO = new AuthPaymentDTO(payment);
+            authPaymentDTOS.add(authPaymentDTO);
+        }
+        return authPaymentDTOS;
     }
 }

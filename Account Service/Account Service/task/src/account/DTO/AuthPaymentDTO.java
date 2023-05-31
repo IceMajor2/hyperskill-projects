@@ -1,5 +1,11 @@
 package account.DTO;
 
+import account.models.Payment;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class AuthPaymentDTO {
 
     private String name;
@@ -15,6 +21,13 @@ public class AuthPaymentDTO {
         this.lastname = lastname;
         this.period = period;
         this.salary = this.format(salary);
+    }
+
+    public AuthPaymentDTO(Payment payment) {
+        this.name = payment.getUser().getName();
+        this.lastname = payment.getUser().getLastName();
+        this.period = this.format(payment.getPeriod());
+        this.salary = this.format(payment.getSalary());
     }
 
     public String getName() {
@@ -56,5 +69,10 @@ public class AuthPaymentDTO {
         copy -= dollars * 100;
         int cents = (int) copy;
         return "%d dollar(s) %d cent(s)".formatted(dollars, cents);
+    }
+
+    private String format(Date date) {
+        DateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
+        return dateFormat.format(date);
     }
 }

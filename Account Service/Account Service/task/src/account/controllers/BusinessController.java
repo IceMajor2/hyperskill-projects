@@ -33,7 +33,8 @@ public class BusinessController {
     @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"})
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity getPayroll(@AuthenticationPrincipal UserDetails userDetails) {
-        return null;
+        List<AuthPaymentDTO> payments = businessService.getPayrolls(userDetails);
+        return ResponseEntity.ok(payments);
     }
 
     @PostMapping(value = {"/api/acct/payments", "/api/acct/payments/"})
