@@ -9,12 +9,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@Validated
 public class BusinessController {
 
     @Autowired
@@ -29,14 +31,15 @@ public class BusinessController {
 
     @PostMapping(value = {"/api/acct/payments", "/api/acct/payments/"})
     //@PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
-    public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaymentDTO> paycheckDTOS) {
-        businessService.uploadPayrolls(paycheckDTOS);
+    public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaymentDTO> paymentDTOS) {
+        businessService.uploadPayrolls(paymentDTOS);
         return ResponseEntity.ok(Map.of("status", "Added successfully!"));
     }
 
-    @PutMapping("/api/acct/payments")
-    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
-    public void updatePayment() {
-
+    @PutMapping(value = {"/api/acct/payments", "/api/acct/payments/"})
+//    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
+    public ResponseEntity updatePayment(@RequestBody @Valid PaymentDTO paymentDTO) {
+        businessService.updatePayment(paymentDTO);
+        return ResponseEntity.ok(Map.of("status", "Added successfully!"));
     }
 }

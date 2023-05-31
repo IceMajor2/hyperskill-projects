@@ -1,7 +1,8 @@
 package account.services;
 
 import account.DTO.PaymentDTO;
-import account.exceptions.PaymentMadeForPeriod;
+import account.exceptions.NoSuchPaymentException;
+import account.exceptions.PaymentMadeForPeriodException;
 import account.exceptions.UserNotExistsException;
 import account.models.Payment;
 import account.models.User;
@@ -12,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BusinessService {
@@ -37,11 +37,19 @@ public class BusinessService {
             Payment payment = new Payment(paymentDTO, user);
 
             if(!isPaymentUnique(payment)) {
-                throw new PaymentMadeForPeriod();
+                throw new PaymentMadeForPeriodException();
             }
 
             paymentRepository.save(payment);
         }
+    }
+
+    public void updatePayment(PaymentDTO paymentDTO) {
+        User user = userRepository.findByEmailIgnoreCase(paymentDTO.getEmail())
+                .orElseThrow(() -> new UserNotExistsException());
+        Payment dbPayment = paymentRepository.findByUserIdAndPeriod(user.getId(), paymentDTO.getPeriod());
+        dbPayment.setSalary(paymentDTO.getSalary());
+        paymentRepository.save(dbPayment);
     }
 
     private boolean isPaymentUnique(Payment payment) {

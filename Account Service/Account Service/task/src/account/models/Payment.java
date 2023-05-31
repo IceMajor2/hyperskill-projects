@@ -3,10 +3,6 @@ package account.models;
 import account.DTO.PaymentDTO;
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -17,8 +13,8 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
-    @Column
-    private YearMonth period;
+    @Column(unique = true)
+    private String period;
     @Column
     private Long salary;
 
@@ -26,7 +22,7 @@ public class Payment {
 
     public Payment(PaymentDTO paymentDTO, User user) {
         this.user = user;
-        this.period = YearMonth.parse(paymentDTO.getPeriod(), DateTimeFormatter.ofPattern("MM-yyyy"));
+        this.period = paymentDTO.getPeriod();
         this.salary = paymentDTO.getSalary();
     }
 
@@ -46,11 +42,11 @@ public class Payment {
         this.user = user;
     }
 
-    public YearMonth getPeriod() {
+    public String getPeriod() {
         return period;
     }
 
-    public void setPeriod(YearMonth period) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 

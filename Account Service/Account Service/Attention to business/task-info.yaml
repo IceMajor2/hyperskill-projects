@@ -1546,7 +1546,10 @@ files:
 - name: src/account/repositories/PaymentRepository.java
   visible: true
   learner_created: true
-- name: src/account/exceptions/PaymentMadeForPeriod.java
+- name: src/account/exceptions/NoSuchPaymentException.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/PaymentMadeForPeriodException.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16604#comment
