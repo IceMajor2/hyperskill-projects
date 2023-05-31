@@ -1,8 +1,9 @@
 package account.services;
 
-import account.DTO.PaycheckDTO;
+import account.DTO.PaymentDTO;
 import account.exceptions.UserNotExistsException;
 import account.models.User;
+import account.repositories.PaymentRepository;
 import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,8 @@ import java.util.List;
 public class BusinessService {
 
     @Autowired
+    private PaymentRepository paymentRepository;
+    @Autowired
     private UserRepository userRepository;
 
     public User getPayrolls(UserDetails userDetails) {
@@ -24,7 +27,21 @@ public class BusinessService {
         return user.get();
     }
 
-    public void uploadPayroll(List<PaycheckDTO> paycheckDTOS) {
+    public void uploadPayroll(List<PaymentDTO> paymentDTOS) {
+        for(PaymentDTO paymentDTO : paymentDTOS) {
+            if(!userExists(paymentDTO.getEmail())) {
+                throw new UserNotExistsException();
+            }
 
+
+        }
+    }
+
+    public boolean userExists(String email) {
+            return userRepository.findByEmailIgnoreCase(email).isPresent();
+    }
+
+    private boolean isPaymentUnique() {
+        return true;
     }
 }

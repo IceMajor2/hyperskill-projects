@@ -1534,13 +1534,16 @@ files:
         }
     }
   learner_created: true
-- name: src/account/DTO/PaycheckDTO.java
-  visible: true
-  learner_created: true
 - name: src/resources/message.properties
   visible: true
   learner_created: true
 - name: src/account/models/Payment.java
+  visible: true
+  learner_created: true
+- name: src/account/DTO/PaymentDTO.java
+  visible: true
+  learner_created: true
+- name: src/account/repositories/PaymentRepository.java
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16604#comment

@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -26,6 +27,8 @@ public class User implements Serializable {
     private String password;
     @NotEmpty
     private String role;
+//    @OneToMany(mappedBy = "payment")
+//    private List<Payment> payment;
 
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
@@ -44,6 +47,14 @@ public class User implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
+//    public List<Payment> getPayment() {
+//        return payment;
+//    }
+//
+//    public void setPayment(List<Payment> payment) {
+//        this.payment = payment;
+//    }
 
     public Long getId() {
         return id;

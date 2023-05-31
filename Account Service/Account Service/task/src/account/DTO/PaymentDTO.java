@@ -6,13 +6,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
-public class PaycheckDTO {
+public class PaymentDTO {
 
     @Pattern(regexp = ".+@acme.com\\b", message = "Address e-mail not valid!")
     private String email;
     @DateTimeFormat(pattern = "mm-YYYY")
     private LocalDate period;
-    @PositiveOrZero
+    @PositiveOrZero(message = "Salary cannot be negative!")
     private Long salary;
 
     public String getEmail() {

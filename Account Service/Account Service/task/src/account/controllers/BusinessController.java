@@ -1,6 +1,6 @@
 package account.controllers;
 
-import account.DTO.PaycheckDTO;
+import account.DTO.PaymentDTO;
 import account.models.User;
 import account.services.BusinessService;
 import jakarta.validation.Valid;
@@ -28,7 +28,7 @@ public class BusinessController {
 
     @PostMapping("/api/acct/payments")
     @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
-    public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaycheckDTO> paycheckDTOS) {
+    public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaymentDTO> paycheckDTOS) {
         businessService.uploadPayroll(paycheckDTOS);
         return null;
     }
