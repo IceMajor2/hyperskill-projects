@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,42 +20,39 @@ public class User implements Serializable {
     @NotEmpty
     private String name;
     @NotEmpty
+    @JsonProperty("lastname")
     private String lastName;
     @NotEmpty
     @Column(unique = true)
     private String email;
     @NotEmpty
+    @JsonIgnore
     private String password;
     @NotEmpty
-    private String role;
-//    @OneToMany(mappedBy = "payment")
-//    private List<Payment> payment;
+    @JsonProperty("roles")
+    private List<String> roles;
 
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
         this.lastName = userDTO.getLastname();
         this.email = userDTO.getEmail().toLowerCase();
         this.password = userDTO.getPassword();
+        this.roles = new ArrayList<>();
     }
 
     public User() {}
 
-    @JsonIgnore
-    public String getRole() {
-        return role;
+    public List<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(List<String> roles) {
+        this.roles = roles;
     }
 
-//    public List<Payment> getPayment() {
-//        return payment;
-//    }
-//
-//    public void setPayment(List<Payment> payment) {
-//        this.payment = payment;
-//    }
+    public void addRole(String role) {
+        this.roles.add(role);
+    }
 
     public Long getId() {
         return id;
@@ -71,7 +69,7 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    @JsonProperty("lastname")
+
     public String getLastName() {
         return lastName;
     }
@@ -88,12 +86,10 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
-    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

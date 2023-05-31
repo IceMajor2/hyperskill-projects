@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,8 +22,11 @@ public class UserDetailsImpl implements UserDetails {
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.nonLocked = isAccountNonLocked();
-        this.rolesAndAuthorities =
-                List.of(new SimpleGrantedAuthority(ROLE_PREFIX + user.getRole()));
+
+        this.rolesAndAuthorities = new ArrayList<>();
+        for(String role : user.getRoles()) {
+            rolesAndAuthorities.add(new SimpleGrantedAuthority(role));
+        }
     }
 
     @Override

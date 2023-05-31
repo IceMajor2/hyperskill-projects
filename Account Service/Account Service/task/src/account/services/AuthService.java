@@ -60,10 +60,10 @@ public class AuthService {
 
     private void assignRole(User user) {
         if (userRepository.count() == 0) {
-            user.setRole("ADMINISTRATOR");
+            user.addRole("ROLE_ADMINISTRATOR");
             return;
         }
-        user.setRole("USER");
+        user.addRole("ROLE_USER");
     }
 
     private boolean isPasswordBreached(String password) {
