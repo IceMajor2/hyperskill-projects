@@ -3,6 +3,10 @@ package account.models;
 import account.DTO.PaymentDTO;
 import jakarta.persistence.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Entity
 @Table(name = "payments")
 public class Payment {
@@ -14,15 +18,15 @@ public class Payment {
     @JoinColumn(name = "users_id")
     private User user;
     @Column
-    private String period;
+    private Date period;
     @Column
     private Long salary;
 
     public Payment() {}
 
-    public Payment(PaymentDTO paymentDTO, User user) {
+    public Payment(PaymentDTO paymentDTO, User user) throws ParseException {
         this.user = user;
-        this.period = paymentDTO.getPeriod();
+        this.period = new SimpleDateFormat("MM-yyyy").parse(paymentDTO.getPeriod());
         this.salary = paymentDTO.getSalary();
     }
 
@@ -42,11 +46,11 @@ public class Payment {
         this.user = user;
     }
 
-    public String getPeriod() {
+    public Date getPeriod() {
         return period;
     }
 
-    public void setPeriod(String period) {
+    public void setPeriod(Date period) {
         this.period = period;
     }
 
