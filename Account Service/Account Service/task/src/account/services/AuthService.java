@@ -57,7 +57,7 @@ public class AuthService {
             throw new UserExistsException();
         }
     }
-    
+
     private void assignRole(User user) {
         if (userRepository.count() == 0) {
             user.setRole("ADMINISTRATOR");

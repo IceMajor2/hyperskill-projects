@@ -1,14 +1,18 @@
 package account.exceptions;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
-import jakarta.validation.Path;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,6 +21,7 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -24,7 +29,7 @@ import java.util.Set;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
-public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
+public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler implements AccessDeniedHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid
@@ -62,5 +67,13 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
             message.append(violation.getMessage()).append("; ");
         }
         return message.delete(message.length() - 2, message.length()).toString();
+    }
+
+    @Override
+    public void handle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AccessDeniedException exc) throws IOException, ServletException {
+        response.sendError(403, "Access Denied!");
     }
 }

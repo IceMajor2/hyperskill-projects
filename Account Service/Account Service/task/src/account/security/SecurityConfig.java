@@ -1,5 +1,6 @@
 package account.security;
 
+import account.exceptions.CustomRestExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,6 +11,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
@@ -27,6 +29,7 @@ public class SecurityConfig {
         http
                 .httpBasic(httpBasic -> httpBasic
                         .authenticationEntryPoint(restAuthenticationEntryPoint))
+                .exceptionHandling(exceptionHandler -> exceptionHandler.accessDeniedHandler(getAccessDeniedHandler()))
                 .csrf((csrf) -> csrf.disable())
                 .headers(headers -> headers
                         .frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
@@ -47,5 +50,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder getEncoder() {
         return new BCryptPasswordEncoder(13);
+    }
+
+    @Bean
+    public AccessDeniedHandler getAccessDeniedHandler(){
+        return new CustomRestExceptionHandler();
     }
 }

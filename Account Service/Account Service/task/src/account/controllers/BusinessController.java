@@ -37,14 +37,14 @@ public class BusinessController {
     }
 
     @PostMapping(value = {"/api/acct/payments", "/api/acct/payments/"})
-    //@PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
+    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaymentDTO> paymentDTOS) {
         businessService.uploadPayrolls(paymentDTOS);
         return ResponseEntity.ok(Map.of("status", "Added successfully!"));
     }
 
     @PutMapping(value = {"/api/acct/payments", "/api/acct/payments/"})
-//    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
+    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity updatePayment(@RequestBody @Valid PaymentDTO paymentDTO) {
         businessService.updatePayment(paymentDTO);
         return ResponseEntity.ok(Map.of("status", "Updated successfully!"));
