@@ -24,7 +24,7 @@ public class BusinessController {
 
     @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"})
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT')")
-    public ResponseEntity getPayroll(@AuthenticationPrincipal UserDetails userDetails) {
+    public ResponseEntity getPayroll(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String period) {
         User user = businessService.getPayrolls(userDetails);
         return ResponseEntity.ok(user);
     }
@@ -40,6 +40,6 @@ public class BusinessController {
 //    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity updatePayment(@RequestBody @Valid PaymentDTO paymentDTO) {
         businessService.updatePayment(paymentDTO);
-        return ResponseEntity.ok(Map.of("status", "Added successfully!"));
+        return ResponseEntity.ok(Map.of("status", "Updated successfully!"));
     }
 }
