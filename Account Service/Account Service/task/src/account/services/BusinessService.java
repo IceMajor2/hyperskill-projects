@@ -28,7 +28,7 @@ public class BusinessService {
 
     public User getPayrolls(UserDetails userDetails) {
         var user = userRepository.findByEmailIgnoreCase(userDetails.getUsername());
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             throw new UserNotExistsException();
         }
         return user.get();
@@ -47,7 +47,7 @@ public class BusinessService {
                 throw new RuntimeException(exception);
             }
 
-            if(!isPaymentUnique(payment)) {
+            if (!isPaymentUnique(payment)) {
                 throw new PaymentMadeForPeriodException();
             }
 
@@ -72,13 +72,9 @@ public class BusinessService {
     private boolean isPaymentUnique(Payment payment) {
         User user = payment.getUser();
         List<Payment> payments = paymentRepository.findByUserId(user.getId());
-        for(Payment paymentObj : payments) {
-            try {
-                if(paymentObj.getPeriod().equals(payment.getPeriod())) {
-                    return false;
-                }
-            } catch (ParseException exception) {
-                throw new RuntimeException(exception);
+        for (Payment paymentObj : payments) {
+            if (paymentObj.getPeriod().equals(payment.getPeriod())) {
+                return false;
             }
         }
         return true;

@@ -2,7 +2,6 @@ package account.models;
 
 import account.DTO.PaymentDTO;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,7 +18,7 @@ public class Payment {
     @JoinColumn(name = "users_id")
     private User user;
     @Column
-    @DateTimeFormat(pattern = "MM-yyyy")
+    @Temporal(TemporalType.DATE)
     private Date period;
     @Column
     private Long salary;
@@ -48,9 +47,12 @@ public class Payment {
         this.user = user;
     }
 
-    public Date getPeriod() throws ParseException {
-        return this.period;
-        //return new SimpleDateFormat("MM-yyyy").parse(this.period.toString());
+    public Date getPeriod() {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(this.period.toString());
+        } catch (ParseException exception) {
+            return this.period;
+        }
     }
 
     public void setPeriod(Date period) {
