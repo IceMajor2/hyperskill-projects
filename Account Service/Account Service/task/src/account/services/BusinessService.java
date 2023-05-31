@@ -11,6 +11,7 @@ import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class BusinessService {
         return user.get();
     }
 
+    @Transactional
     public void uploadPayrolls(List<PaymentDTO> paymentDTOS) {
         for (PaymentDTO paymentDTO : paymentDTOS) {
             User user = userRepository.findByEmailIgnoreCase(paymentDTO.getEmail())

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -45,22 +46,30 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ApiError> handleConstraintViolationException(ConstraintViolationException exception) {
-        String message = "Body is invalid";
         HttpStatus status = HttpStatus.BAD_REQUEST;
-        String path = getPath(exception);
+        String message = getMessage(exception.getConstraintViolations());
+        String path = getPath(exception.getConstraintViolations().iterator().next());
 
         ApiError error = new ApiError(status, message, path);
         return ResponseEntity.badRequest().body(error);
     }
 
-    private String getPath(ConstraintViolationException exception) {
-        String path = null;
-        ConstraintViolation<?> violation = exception.getConstraintViolations()
-                .iterator().next();
-        // last node is path
-        for(Path.Node node : violation.getPropertyPath()) {
-            path = node.getName();
+    private String getMessage(Set<ConstraintViolation<?>> violations) {
+        StringBuilder message = new StringBuilder("");
+        var excIterator = violations.stream().iterator();
+        while(excIterator.hasNext()) {
+            var violation = excIterator.next();
+            message.append(violation.getMessage()).append("; ");
         }
-        return path;
+        return message.delete(message.length() - 2, message.length()).toString();
+    }
+
+    private String getPath(ConstraintViolation violation) {
+        StringBuilder path = new StringBuilder("/");
+
+        for(Path.Node node : violation.getPropertyPath()) {
+            path.append(node).append('/');
+        }
+        return path.deleteCharAt(path.length() - 1).toString();
     }
 }
