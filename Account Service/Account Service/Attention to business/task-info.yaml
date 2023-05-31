@@ -1552,6 +1552,9 @@ files:
 - name: src/account/exceptions/PaymentMadeForPeriodException.java
   visible: true
   learner_created: true
+- name: src/account/DTO/AuthPaymentDTO.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16604#comment
 status: Unchecked
 record: -1

@@ -1,5 +1,6 @@
 package account.services;
 
+import account.DTO.AuthPaymentDTO;
 import account.DTO.PaymentDTO;
 import account.exceptions.NoSuchPaymentException;
 import account.exceptions.PaymentMadeForPeriodException;
@@ -26,12 +27,16 @@ public class BusinessService {
     @Autowired
     private UserRepository userRepository;
 
-    public User getPayrolls(UserDetails userDetails) {
-        var user = userRepository.findByEmailIgnoreCase(userDetails.getUsername());
-        if (user.isEmpty()) {
-            throw new UserNotExistsException();
+    public AuthPaymentDTO getPayrolls(UserDetails userDetails, String period) {
+        try {
+            Date date = new SimpleDateFormat("MM-yyyy").parse(period);
+            User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
+            Payment payment = paymentRepository.findByUserIdAndPeriod(user.getId(), date)
+                    .orElseThrow(() -> new NoSuchPaymentException());
+            return new AuthPaymentDTO(user.getName(), user.getLastName(), period, payment.getSalary());
+        } catch (ParseException exception) {
+            throw new RuntimeException(exception);
         }
-        return user.get();
     }
 
     @Transactional

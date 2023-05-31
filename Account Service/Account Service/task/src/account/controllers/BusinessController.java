@@ -1,5 +1,6 @@
 package account.controllers;
 
+import account.DTO.AuthPaymentDTO;
 import account.DTO.PaymentDTO;
 import account.models.User;
 import account.services.BusinessService;
@@ -22,11 +23,17 @@ public class BusinessController {
     @Autowired
     private BusinessService businessService;
 
-    @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"})
+    @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"}, params = "period")
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity getPayroll(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String period) {
-        User user = businessService.getPayrolls(userDetails);
-        return ResponseEntity.ok(user);
+        AuthPaymentDTO authPaymentDTO = businessService.getPayrolls(userDetails, period);
+        return ResponseEntity.ok(authPaymentDTO);
+    }
+
+    @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"})
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT')")
+    public ResponseEntity getPayroll(@AuthenticationPrincipal UserDetails userDetails) {
+        return null;
     }
 
     @PostMapping(value = {"/api/acct/payments", "/api/acct/payments/"})

@@ -12,4 +12,6 @@ public interface PaymentRepository extends CrudRepository<Payment, Long> {
     List<Payment> findByUserId(Long userId);
 
     Optional<Payment> findByUserIdAndPeriod(Long userId, Date period);
+
+    Optional<Payment> findByUserIdAndPeriodOrderByPeriodDesc(Long userId, Date period);
 }
