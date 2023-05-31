@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class BusinessController {
@@ -26,11 +27,11 @@ public class BusinessController {
         return ResponseEntity.ok(user);
     }
 
-    @PostMapping("/api/acct/payments")
-    @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
+    @PostMapping(value = {"/api/acct/payments", "/api/acct/payments/"})
+    //@PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaymentDTO> paycheckDTOS) {
-        businessService.uploadPayroll(paycheckDTOS);
-        return null;
+        businessService.uploadPayrolls(paycheckDTOS);
+        return ResponseEntity.ok(Map.of("status", "Added successfully!"));
     }
 
     @PutMapping("/api/acct/payments")

@@ -1,7 +1,9 @@
 package account.services;
 
 import account.DTO.PaymentDTO;
+import account.exceptions.PaymentMadeForPeriod;
 import account.exceptions.UserNotExistsException;
+import account.models.Payment;
 import account.models.User;
 import account.repositories.PaymentRepository;
 import account.repositories.UserRepository;
@@ -10,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BusinessService {
@@ -27,21 +30,28 @@ public class BusinessService {
         return user.get();
     }
 
-    public void uploadPayroll(List<PaymentDTO> paymentDTOS) {
-        for(PaymentDTO paymentDTO : paymentDTOS) {
-            if(!userExists(paymentDTO.getEmail())) {
-                throw new UserNotExistsException();
+    public void uploadPayrolls(List<PaymentDTO> paymentDTOS) {
+        for (PaymentDTO paymentDTO : paymentDTOS) {
+            User user = userRepository.findByEmailIgnoreCase(paymentDTO.getEmail())
+                    .orElseThrow(() -> new UserNotExistsException());
+            Payment payment = new Payment(paymentDTO, user);
+
+            if(!isPaymentUnique(payment)) {
+                throw new PaymentMadeForPeriod();
             }
 
-
+            paymentRepository.save(payment);
         }
     }
 
-    public boolean userExists(String email) {
-            return userRepository.findByEmailIgnoreCase(email).isPresent();
-    }
-
-    private boolean isPaymentUnique() {
+    private boolean isPaymentUnique(Payment payment) {
+        User user = payment.getUser();
+        List<Payment> payments = paymentRepository.findByUserId(user.getId());
+        for(Payment paymentObj : payments) {
+            if(paymentObj.getPeriod().equals(payment.getPeriod())) {
+                return false;
+            }
+        }
         return true;
     }
 }
