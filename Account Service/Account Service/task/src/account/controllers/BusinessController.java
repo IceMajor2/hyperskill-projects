@@ -29,7 +29,8 @@ public class BusinessController {
     @PostMapping("/api/acct/payments")
     @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
     public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaycheckDTO> paycheckDTOS) {
-
+        businessService.uploadPayroll(paycheckDTOS);
+        return null;
     }
 
     @PutMapping("/api/acct/payments")
