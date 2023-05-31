@@ -1083,9 +1083,6 @@ files:
 - name: src/resources/data-test.sql
   visible: true
   learner_created: true
-- name: src/account/repositories/DataLoader.java
-  visible: true
-  learner_created: true
 - name: src/account/DTO/NewPasswordDTO.java
   visible: true
   learner_created: true
@@ -1102,20 +1099,8 @@ files:
   visible: true
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16603#comment
-status: Failed
+status: Solved
 feedback:
-  message: |-
-    Wrong answer in test #29
-
-    The JSON object at key message should equal to &quot;Password length must be 12 chars minimum!&quot;, found &quot;The password length must be at least 12 chars!&quot;
-
-    Full JSON:
-    {
-      &quot;timestamp&quot;: &quot;2023-05-30T16:27:00.5627537&quot;,
-      &quot;status&quot;: 400,
-      &quot;error&quot;: &quot;Bad Request&quot;,
-      &quot;message&quot;: &quot;The password length must be at least 12 chars!&quot;,
-      &quot;path&quot;: &quot;/api/auth/changepass&quot;
-    }
-  time: "Tue, 30 May 2023 14:27:01 UTC"
-record: -1
+  message: Congratulations!
+  time: "Tue, 30 May 2023 14:30:01 UTC"
+record: 3

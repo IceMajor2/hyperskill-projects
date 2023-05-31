@@ -2,10 +2,14 @@ import account.AccountServiceApplication;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.hyperskill.hstest.dynamic.DynamicTest;
 import org.hyperskill.hstest.dynamic.input.DynamicTesting;
 import org.hyperskill.hstest.exception.outcomes.UnexpectedError;
+import org.hyperskill.hstest.mocks.web.request.HttpRequest;
 import org.hyperskill.hstest.mocks.web.response.HttpResponse;
 import org.hyperskill.hstest.stage.SpringTest;
 import org.hyperskill.hstest.testcase.CheckResult;
@@ -19,11 +23,13 @@ import java.util.stream.Collectors;
 import static org.hyperskill.hstest.common.JsonUtils.getJson;
 import static org.hyperskill.hstest.common.JsonUtils.getPrettyJson;
 import static org.hyperskill.hstest.testing.expect.Expectation.expect;
+import static org.hyperskill.hstest.testing.expect.json.JsonChecker.isInteger;
+import static org.hyperskill.hstest.testing.expect.json.JsonChecker.isObject;
 import static org.hyperskill.hstest.testing.expect.json.JsonChecker.*;
 
 class TestReq {
 
-  private Map<String, String> properties = new LinkedHashMap<>();
+  private Map<String, Object> properties = new LinkedHashMap<>();
 
   // Deep copy
   public TestReq(TestReq another) {
@@ -45,7 +51,7 @@ class TestReq {
     }
   }
 
-  public TestReq setProps(String key, String value) {
+  public TestReq setProps(String key, Object value) {
     properties.put(key, value);
     return this;
   }
@@ -56,7 +62,17 @@ public class AccountServiceTest extends SpringTest {
 
   private  final String signUpApi = "/api/auth/signup";
   private  final String changePassApi = "/api/auth/changepass";
-  private  final String paymentApi = "/api/empl/payment";
+  private  final String getEmployeePaymentApi = "/api/empl/payment";
+  private final String postPaymentApi = "api/acct/payments";
+
+
+  static String[] breachedPass= new String[]{"PasswordForJanuary", "PasswordForFebruary", "PasswordForMarch",
+          "PasswordForApril", "PasswordForMay", "PasswordForJune",
+          "PasswordForJuly", "PasswordForAugust", "PasswordForSeptember",
+          "PasswordForOctober", "PasswordForNovember", "PasswordForDecember"};
+
+  List<Integer> userIdList = new ArrayList<>();
+
   private final TestReq johnDoe = new TestReq().setProps("name", "John")
           .setProps("lastname", "Doe")
           .setProps("email", "JohnDoe@acme.com")
@@ -87,34 +103,87 @@ public class AccountServiceTest extends SpringTest {
   private final String jDWrongPassword = new TestReq(johnDoe).setProps("password", "none").toJson();
   private final String maxMusWrongPassword = new TestReq(maxMus).setProps("password", "none").toJson();
   private final String captainNemoWrongUser = captainNemo.toJson();
+  private final String jDNewPass = new TestReq(johnDoe).setProps("password", "aNob5VvqzRtb").toJson();
 
   private final String jDDuplicatePass = new TestReq().setProps("new_password", "oMoa3VvqnLxW").toJson();
-
-  private final String jDShortPass1 = new TestReq().setProps("new_password", "o").toJson();
-  private final String jDShortPass2 = new TestReq().setProps("new_password", "oM").toJson();
-  private final String jDShortPass3 = new TestReq().setProps("new_password", "oMo").toJson();
-  private final String jDShortPass4 = new TestReq().setProps("new_password", "oMoa").toJson();
-  private final String jDShortPass5 = new TestReq().setProps("new_password", "oMoa3").toJson();
-  private final String jDShortPass6 = new TestReq().setProps("new_password", "oMoa3V").toJson();
-  private final String jDShortPass7 = new TestReq().setProps("new_password", "oMoa3Vv").toJson();
-  private final String jDShortPass8 = new TestReq().setProps("new_password", "oMoa3Vvq").toJson();
-  private final String jDShortPass9 = new TestReq().setProps("new_password", "oMoa3Vvqn").toJson();
-  private final String jDShortPass10 = new TestReq().setProps("new_password", "oMoa3Vvqno").toJson();
-  private final String jDShortPass11 = new TestReq().setProps("new_password", "oMoa3VvqnoM").toJson();
-
-
+  private final String jDShortPass = new TestReq().setProps("new_password", "oMoa3Vvqn").toJson();
   private final String jDPass = new TestReq().setProps("new_password", "aNob5VvqzRtb").toJson();
 
+  private String paymentsList = convert(new String[]{
+          new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "01-2021")
+                  .setProps("salary", 123456).toJson(),
+          new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "02-2021")
+                  .setProps("salary", 456789).toJson(),
+          new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "03-2021")
+                  .setProps("salary", 12).toJson(),
+          new TestReq().setProps("employee", "maxmustermann@acme.com").setProps("period", "01-2021")
+                  .setProps("salary", 54321).toJson(),
+          new TestReq().setProps("employee", "maxmustermann@acme.com").setProps("period", "02-2021")
+                  .setProps("salary", 987654).toJson(),
+          new TestReq().setProps("employee", "maxmustermann@acme.com").setProps("period", "03-2021")
+                  .setProps("salary", 120).toJson()
+  });
+  private String wrongPaymentListData = convert(new String[]{new TestReq().setProps("employee", "johndoe@acme.com")
+          .setProps("period", "13-2021").setProps("salary", 123456).toJson()});
 
-  static String[] breachedPass= new String[]{"PasswordForJanuary", "PasswordForFebruary", "PasswordForMarch",
-          "PasswordForApril", "PasswordForMay", "PasswordForJune",
-          "PasswordForJuly", "PasswordForAugust", "PasswordForSeptember",
-          "PasswordForOctober", "PasswordForNovember", "PasswordForDecember"};
 
-  List<Integer> userIdList = new ArrayList<>();
+  private  String wrongPaymentListSalary = convert(new String[]{new TestReq().setProps("employee", "johndoe@acme.com")
+          .setProps("period", "13-2021").setProps("salary", -1).toJson()});
+
+  private String wrongPaymentListDuplicate = convert(new String[]{
+          new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "01-2021")
+                  .setProps("salary", 123456).toJson(),
+          new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "01-2021")
+                  .setProps("salary", 456789).toJson()
+  });
+  private String updatePayment = new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "01-2021")
+          .setProps("salary", 77777).toJson();
+  private String updatePayment1 = new TestReq().setProps("employee", "johndoe@acme.com").setProps("period", "01-2021")
+          .setProps("salary", 88777).toJson();
+  private String updatePaymentResponse = new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+          .setProps("period", "January-2021").setProps("salary", "777 dollar(s) 77 cent(s)").toJson();
+  private String updatePaymentResponse1 = new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+          .setProps("period", "January-2021").setProps("salary", "887 dollar(s) 77 cent(s)").toJson();
+  private String updatePaymentWrongDate = new TestReq().setProps("employee", "johndoe@acme.com")
+          .setProps("period", "13-2021").setProps("salary", 1234567).toJson();
+  private String updatePaymentWrongSalary = new TestReq().setProps("employee", "johndoe@acme.com")
+          .setProps("period", "13-2021").setProps("salary", -1).toJson();
+  private String correctPaymentResponse = convert(new String[]{
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "March-2021").setProps("salary", "0 dollar(s) 12 cent(s)").toJson(),
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "February-2021").setProps("salary", "4567 dollar(s) 89 cent(s)").toJson(),
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "January-2021").setProps("salary", "1234 dollar(s) 56 cent(s)").toJson()
+  });
+  private String correctPaymentResponse1 = convert(new String[]{
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "March-2021").setProps("salary", "0 dollar(s) 12 cent(s)").toJson(),
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "February-2021").setProps("salary", "4567 dollar(s) 89 cent(s)").toJson(),
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "January-2021").setProps("salary", "777 dollar(s) 77 cent(s)").toJson()
+  });
+  private String correctPaymentResponse2 = convert(new String[]{
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "March-2021").setProps("salary", "0 dollar(s) 12 cent(s)").toJson(),
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "February-2021").setProps("salary", "4567 dollar(s) 89 cent(s)").toJson(),
+          new TestReq().setProps("name", "John").setProps("lastname", "Doe")
+                  .setProps("period", "January-2021").setProps("salary", "887 dollar(s) 77 cent(s)").toJson()
+  });
 
   public AccountServiceTest() {
     super(AccountServiceApplication.class, "../service_db.mv.db");
+  }
+
+  private String convert(String[] trs) {
+    JsonArray  jsonArray = new JsonArray();
+    for (String tr : trs) {
+      JsonElement jsonObject = JsonParser.parseString(tr);
+      jsonArray.add(jsonObject);
+    }
+    return jsonArray.toString();
   }
 
   /**
@@ -127,6 +196,7 @@ public class AccountServiceTest extends SpringTest {
    */
   CheckResult testPostApi(String api, String body, int status, String message) {
     HttpResponse response = post(api, body).send();
+
     if (response.getStatusCode() != status) {
       return CheckResult.wrong("POST " + api + " should respond with "
               + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
@@ -139,14 +209,6 @@ public class AccountServiceTest extends SpringTest {
 
   CheckResult testPostApiWithAuth(String api, String body, int status, String login, String pass, String message) {
     HttpResponse response = post(api, body).basicAuth(login, pass).send();
-
-    if (response.getStatusCode() == 404) {
-      return CheckResult.wrong("POST " + api + " should respond with "
-              + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
-              + "Endpoint not found!" + "\n"
-              + "Response body:\n" + response.getContent() + "\n"
-              + "Request body:\n" + body);
-    }
 
     if (response.getStatusCode() != status) {
       return CheckResult.wrong("POST " + api + " should respond with "
@@ -233,8 +295,6 @@ public class AccountServiceTest extends SpringTest {
               jsonResponse);
     }
 
-
-
     // Check JSON in response
     expect(response.getContent()).asJson().check(
             isObject()
@@ -252,6 +312,7 @@ public class AccountServiceTest extends SpringTest {
     userIdList.add(jsonResponse.get("id").getAsInt());
     return CheckResult.correct();
   }
+
 
   /**
    * Method for restarting application
@@ -278,26 +339,17 @@ public class AccountServiceTest extends SpringTest {
     JsonObject userJson = getJson(user).getAsJsonObject();
     String password = userJson.get("password").getAsString();
     String login = userJson.get("email").getAsString().toLowerCase();
-    HttpResponse response = get(paymentApi).basicAuth(login, password).send();
+    HttpResponse response = get(getEmployeePaymentApi).basicAuth(login, password).send();
     if (response.getStatusCode() != status) {
-      return CheckResult.wrong("Get " + paymentApi + " should respond with "
+      return CheckResult.wrong("Get " + getEmployeePaymentApi + " should respond with "
               + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
               + message + "\n"
               + "Authentication with " + login + " / " + password);
     }
-    // Check JSON in response
-    if (status == 200) {
-      expect(response.getContent()).asJson().check(
-              isObject()
-                      .value("id", isInteger())
-                      .value("name", userJson.get("name").getAsString())
-                      .value("lastname", userJson.get("lastname").getAsString())
-                      .value("email", isString(s -> s.equalsIgnoreCase(userJson.get("email").getAsString()))));
-    }
     return CheckResult.correct();
   }
 
-  CheckResult testChangePassword(String api, String body, int status, String user, String answer) {
+  CheckResult testChangePassword(String api, String body, int status, String user) {
     JsonObject userJson = getJson(user).getAsJsonObject();
     String pass = userJson.get("password").getAsString();
     String login = userJson.get("email").getAsString().toLowerCase();
@@ -313,16 +365,7 @@ public class AccountServiceTest extends SpringTest {
       expect(response.getContent()).asJson().check(
               isObject()
                       .value("email", userJson.get("email").getAsString().toLowerCase())
-                      .value("status", answer));
-    }
-    if (status == 400) {
-      expect(response.getContent()).asJson().check(
-              isObject()
-                      .value("status", 400)
-                      .value("error", "Bad Request")
-                      .value("message", answer)
-                      .value("path", "/api/auth/changepass")
-                      .anyOtherValues());
+                      .value("status", "The password has been updated successfully"));
     }
     return CheckResult.correct();
   }
@@ -366,7 +409,7 @@ public class AccountServiceTest extends SpringTest {
         return CheckResult.wrong("POST " + api + " should respond with "
                 + "status code 400 , responded: " + response.getStatusCode() + "\n"
                 + "Response body:\n" + response.getContent() + "\n"
-                + "Request body:\n" + getPrettyJson(json) + "\n"
+                + "Request body:\n" + json.toString() + "\n"
                 + message);
       }
       expect(response.getContent()).asJson().check(
@@ -380,87 +423,236 @@ public class AccountServiceTest extends SpringTest {
     return CheckResult.correct();
   }
 
+
+  CheckResult testPostPaymentResponse(String body, int status, String message) {
+    HttpResponse response = post(postPaymentApi, body).send();
+    if (response.getStatusCode() != status) {
+      return CheckResult.wrong("POST " + postPaymentApi + " should respond with "
+              + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+              + message + "\n"
+              + "Response body:\n" + response.getContent() + "\n"
+              + "Request body:\n" + body);
+    }
+
+    // Check JSON in response
+    if (response.getStatusCode() == 200) {
+      expect(response.getContent()).asJson().check(
+              isObject()
+                      .value("status", "Added successfully!")
+                      .anyOtherValues());
+    }
+    if (response.getStatusCode() == 400) {
+      expect(response.getContent()).asJson().check(
+              isObject()
+                      .value("error", "Bad Request")
+                      .value("path", "/api/acct/payments")
+                      .value("status", 400)
+                      .anyOtherValues());
+    }
+    return CheckResult.correct();
+  }
+
+  CheckResult testPutPaymentResponse(String body, int status, String message) {
+    HttpResponse response = put(postPaymentApi, body).send();
+    if (response.getStatusCode() != status) {
+      return CheckResult.wrong("PUT " + postPaymentApi + " should respond with "
+              + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+              + message + "\n"
+              + "Response body:\n" + response.getContent() + "\n"
+              + "Request body:\n" + body);
+    }
+
+    // Check JSON in response
+    if (response.getStatusCode() == 200) {
+      expect(response.getContent()).asJson().check(
+              isObject()
+                      .value("status", "Updated successfully!")
+                      .anyOtherValues());
+    }
+    if (response.getStatusCode() == 400) {
+      expect(response.getContent()).asJson().check(
+              isObject()
+                      .value("error", "Bad Request")
+                      .value("path", "/api/acct/payments")
+                      .value("status", 400)
+                      .anyOtherValues());
+    }
+    return CheckResult.correct();
+  }
+
+  CheckResult testGetPaymentResponse(String user, int status, String correctResponse, String message) {
+    JsonObject userJson = getJson(user).getAsJsonObject();
+    String password = userJson.get("password").getAsString();
+    String login = userJson.get("email").getAsString().toLowerCase();
+    HttpResponse response = get(getEmployeePaymentApi).basicAuth(login, password).send();
+
+    // Check is it array of JSON in response or something else
+    if (!response.getJson().isJsonArray()) {
+      return CheckResult.wrong("Wrong object in response, expected array of JSON but was \n" +
+              response.getContent().getClass());
+
+    }
+
+    JsonArray correctJson = getJson(correctResponse).getAsJsonArray();
+    JsonArray responseJson = getJson(response.getContent()).getAsJsonArray();
+
+    if (response.getStatusCode() != status) {
+      return CheckResult.wrong("POST " + getEmployeePaymentApi + " should respond with "
+              + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+              + message + "\n"
+              + "Response body:\n" + response.getContent() + "\n");
+    }
+
+    if (responseJson.size() == 0)  {
+      return CheckResult.wrong("Payments was not added " + "\n"
+              + "endpoint " + getEmployeePaymentApi + "\n"
+              + "responded with " + getPrettyJson(responseJson)  + "\n"
+              + "must be " + getPrettyJson(correctJson));
+    }
+
+    if (correctJson.size() != responseJson.size()) {
+      return CheckResult.wrong("New data should not be added" + "\n"
+              + "in response " + getPrettyJson(responseJson)  + "\n"
+              + "must be " + getPrettyJson(correctJson));
+    }
+
+    // Check JSON in response
+    if (response.getStatusCode() == 200) {
+      for (int i = 0; i < responseJson.size(); i++) {
+        if (!responseJson.get(i).equals(correctJson.get(i))) {
+          return CheckResult.wrong("Get " + getEmployeePaymentApi  +" wrong data in response body" + "\n"
+                  + "in response " + getPrettyJson(responseJson) + "\n"
+                  + "must be " + getPrettyJson(correctJson));
+        }
+      }
+    }
+//    if (response.getStatusCode() == 400) {
+//      expect(response.getContent()).asJson().check(
+//              isObject()
+//                      .value("error", "Bad Request")
+//                      .value("path", "/api/acct/payments")
+//                      .value("status", 400)
+//                      .anyOtherValues());
+//    }
+    return CheckResult.correct();
+  }
+
+  CheckResult testGetPaymentResponseParam(String user, int status, String request, String correctResponse, String message) {
+    JsonObject userJson = getJson(user).getAsJsonObject();
+    String password = userJson.get("password").getAsString();
+    String login = userJson.get("email").getAsString().toLowerCase();
+    JsonObject json = getJson(correctResponse).getAsJsonObject();
+    JsonObject jsonRequest = getJson(request).getAsJsonObject();
+    String param = jsonRequest.get("period").getAsString();
+    HttpResponse response = get(getEmployeePaymentApi).addParam("period", param).basicAuth(login, password).send();
+
+    if (response.getStatusCode() != status) {
+      return CheckResult.wrong("GET " + getEmployeePaymentApi + "?period=" + param + " should respond with "
+              + "status code " + status + ", responded: " + response.getStatusCode() + "\n"
+              + message + "\n"
+              + "Response body:\n" + response.getContent() + "\n");
+    }
+
+    // Check JSON in response
+    if (response.getStatusCode() == 200) {
+      if (!response.getJson().equals(json)) {
+        return CheckResult.wrong("Get " + getEmployeePaymentApi  + "?period=" + param
+                + " wrong data in response body" + "\n"
+                + "in response " + getPrettyJson(response.getJson()) + "\n"
+                + "must be " + getPrettyJson(json));
+      }
+    }
+
+    if (response.getStatusCode() == 400) {
+      expect(response.getContent()).asJson().check(
+              isObject()
+                      .value("error", "Bad Request")
+                      .value("path", "/api/empl/payment")
+                      .value("status", 400)
+                      .anyOtherValues());
+    }
+    return CheckResult.correct();
+  }
+
   @DynamicTest
   DynamicTesting[] dt = new DynamicTesting[] {
-
           // Test wrong POST request for signup api
-          () -> testPostApi(signUpApi, jDEmptyName, 400, "Empty name field!"),
-          () -> testPostApi(signUpApi, jDNoName, 400, "Name field is absent!"),
-          () -> testPostApi(signUpApi, jDEmptyLastName, 400, "Empty lastname field!"),
-          () -> testPostApi(signUpApi, jDNoLastName, 400, "Lastname field is absent!"),
-          () -> testPostApi(signUpApi, jDEmptyEmail, 400, "Empty email field!"),
-          () -> testPostApi(signUpApi, jDNoEmail, 400, "Email field is absent!"),
-          () -> testPostApi(signUpApi, jDEmptyPassword, 400, "Empty password field!"),
-          () -> testPostApi(signUpApi, jDNoPassword, 400, "Password field is absent!"),
-          () -> testPostApi(signUpApi, jDWrongEmail1, 400, "Wrong email!"),
-          () -> testPostApi(signUpApi, jDWrongEmail2, 400, "Wrong email!"),
-          // Test user registration on signup api
+          () -> testPostApi(signUpApi, jDEmptyName, 400, "Empty name field!"), // 1
+          () -> testPostApi(signUpApi, jDNoName, 400, "Name field is absent!"), // 2
+          () -> testPostApi(signUpApi, jDEmptyLastName, 400, "Empty lastname field!"), // 3
+          () -> testPostApi(signUpApi, jDNoLastName, 400, "Lastname field is absent!"), // 4
+          () -> testPostApi(signUpApi, jDEmptyEmail, 400, "Empty email field!"), // 5
+          () -> testPostApi(signUpApi, jDNoEmail, 400, "Email field is absent!"), // 6
+          () -> testPostApi(signUpApi, jDEmptyPassword, 400, "Empty password field!"), // 7
+          () -> testPostApi(signUpApi, jDNoPassword, 400, "Password field is absent!"), // 8
+          () -> testPostApi(signUpApi, jDWrongEmail1, 400, "Wrong email!"), // 9
+          () -> testPostApi(signUpApi, jDWrongEmail2, 400, "Wrong email!"), // 10
           // Test user registration on signup api
           () -> testBreachedPass(signUpApi, "", "",
-                  jDCorrectUser, "Sending password from breached list"),
-          () -> testPostSignUpResponse(jDCorrectUser, 200),
-          () -> testPostApi(signUpApi, jDCorrectUser, 400, "User must be unique!"),
-          () -> testUserDuplicates(jDCorrectUser),
-          () -> testPostApi(signUpApi, jDLower, 400, "User must be unique (ignorecase)!"),
-          () -> testPostSignUpResponse(maxMusLower, 200),
-          () -> testPostApi(signUpApi, maxMusLower, 400, "User must be unique!"),
-          () -> testPostApi(signUpApi, maxMusCorrectUser, 400, "User must be unique (ignorecase)!"),
+                  jDCorrectUser, "Sending password from breached list"), // 11
+          () -> testPostSignUpResponse(jDCorrectUser, 200), // 12
+          () -> testPostApi(signUpApi, jDCorrectUser, 400, "User must be unique!"), // 13
+          () -> testUserDuplicates(jDCorrectUser), // 14
+          () -> testPostApi(signUpApi, jDLower, 400, "User must be unique (ignorecase)!"), // 15
+          () -> testPostSignUpResponse(maxMusLower, 200), // 16
+          () -> testPostApi(signUpApi, maxMusLower, 400, "User must be unique!"), // 17
+          () -> testPostApi(signUpApi, maxMusCorrectUser, 400, "User must be unique (ignorecase)!"), // 18
           // Test authentication, positive tests
-          () -> testUserRegistration(jDLower, 200, "User must login!"),
-          () -> testUserRegistration(jDCorrectUser, 200, "Login case insensitive!"),
-          () -> testUserRegistration(maxMusLower, 200, "User must login!"),
-          () -> testUserRegistration(maxMusCorrectUser, 200, "Login case insensitive!"),
+          () -> testUserRegistration(jDLower, 200, "User must login!"), // 19
+          () -> testUserRegistration(jDCorrectUser, 200, "Login case insensitive!"), // 20
+          () -> testUserRegistration(maxMusLower, 200, "User must login!"), // 21
+          () -> testUserRegistration(maxMusCorrectUser, 200, "Login case insensitive!"), // 22
           // Test authentication, negative tests
-          () -> testUserRegistration(jDWrongPassword, 401, "Wrong password!"),
-          () -> testUserRegistration(jDWrongEmail1, 401, "Wrong user!"),
-          () -> testUserRegistration(maxMusWrongPassword, 401, "Wrong password!"),
-          () -> testUserRegistration(captainNemoWrongUser, 401, "Wrong user"),
-          () -> testGetApi(paymentApi, 401, "This api only for authenticated user"),
+          () -> testUserRegistration(jDWrongPassword, 401, "Wrong password!"), // 23
+          () -> testUserRegistration(jDWrongEmail1, 401, "Wrong user!"), // 24
+          () -> testUserRegistration(maxMusWrongPassword, 401, "Wrong password!"), // 25
+          () -> testUserRegistration(captainNemoWrongUser, 401, "Wrong user"), // 26
+          () -> testGetApi(getEmployeePaymentApi, 401, "This api only for authenticated user"), // 27
+
           // Test changing password
-          () -> testPostApi(changePassApi, jDDuplicatePass, 401, "This api only for authenticated user"),
-          () -> testChangePassword(changePassApi, jDShortPass1, 400, jDCorrectUser,
-                  "Password length must be 12 chars minimum!"),
-          () -> testChangePassword(changePassApi, jDDuplicatePass, 400, jDCorrectUser,
-                  "The passwords must be different!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass1, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass2, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass3, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass4, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass5, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass6, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass7, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass8, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass9, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass10, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
-          () -> testPostApiWithAuth(changePassApi, jDShortPass11, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"),
+          () -> testPostApi(changePassApi, jDDuplicatePass, 401, "This api only for authenticated user"), // 28
+          () -> testPostApiWithAuth(changePassApi, jDShortPass, 400,
+                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The password length must be at least 12 chars!"), // 29
           () -> testPostApiWithAuth(changePassApi, jDDuplicatePass, 400,
-                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The passwords must be different!"),
+                  "JohnDoe@acme.com", "oMoa3VvqnLxW", "The passwords must be different!"), // 30
           () -> testBreachedPass(changePassApi, "JohnDoe@acme.com", "oMoa3VvqnLxW",
-                  jDDuplicatePass, "Sending password from breached list"),
+                  jDDuplicatePass, "Sending password from breached list"), // 31
+          () -> testChangePassword(changePassApi,jDPass, 200, jDCorrectUser), // 32
+          () -> testGetApiAuth(getEmployeePaymentApi, 401,"JohnDoe@acme.com",
+                  "oMoa3VvqnLxW", "Password must be changed!"), // 33
+          () -> testGetApiAuth(getEmployeePaymentApi, 200,"JohnDoe@acme.com",
+                  "aNob5VvqzRtb", "Password must be changed!"), // 34
+
           // Test persistence
-          () -> restartApplication(),
+          () -> restartApplication(), // 35
           () -> testUserRegistration(maxMusCorrectUser, 200, "User must login, after restarting!" +
-                  " Check persistence."),
-          () -> testChangePassword(changePassApi, jDPass, 200, jDCorrectUser, "The password has been updated successfully"),
-          () -> testGetApiAuth(paymentApi, 401,"JohnDoe@acme.com",
-                  "oMoa3VvqnLxW", "Password must be changed!"),
-          () -> testGetApiAuth(paymentApi, 200,"JohnDoe@acme.com",
-                  "aNob5VvqzRtb", "Password must be changed!"),
-          () -> testChangePassword(changePassApi, jDPass, 200, maxMusCorrectUser, "The password has been updated successfully"),
-          () -> testGetApiAuth(paymentApi, 401,"MaxMustermann@acme.com",
-                  "ai0y9bMvyF6G", "Password must be changed!"),
-          () -> testGetApiAuth(paymentApi, 200,"MaxMustermann@acme.com",
-                  "aNob5VvqzRtb", "Password must be changed!")
+                  " Check persistence."), // 36
+          // Test business logic
+          () -> testPostPaymentResponse(paymentsList, 200, "Payment list must be added"), // 37
+          () -> testGetPaymentResponse(jDNewPass, 200, correctPaymentResponse,
+                  "Wrong status code!"), // 38
+          () -> testPostPaymentResponse(wrongPaymentListSalary, 400, "Wrong salary in payment list"), // 39
+          () -> testGetPaymentResponse(jDNewPass, 200, correctPaymentResponse,
+                  "Wrong status code!"), // 40
+          () -> testPostPaymentResponse(wrongPaymentListData, 400, "Wrong data in payment list"), // 41
+          () -> testGetPaymentResponse(jDNewPass, 200, correctPaymentResponse,
+                  "Wrong status code!"), // 42
+          () -> testPostPaymentResponse(wrongPaymentListDuplicate, 400, "Duplicated entry in payment list"), // 43
+          () -> testGetPaymentResponse(jDNewPass, 200, correctPaymentResponse,
+                  "Wrong status code!"), // 44
+          () -> testPutPaymentResponse(updatePaymentWrongDate, 400,"Wrong date in request body!"), // 45
+          () -> testPutPaymentResponse(updatePaymentWrongSalary, 400, "Wrong salary in request body!"), // 46
+          () -> testPutPaymentResponse(updatePayment, 200, "Salary must be update!"), // 47
+          () -> testGetPaymentResponseParam(jDNewPass, 200, updatePayment, updatePaymentResponse,
+                  "Salary must be update!"), // 48
+          () -> testGetPaymentResponse(jDNewPass, 200, correctPaymentResponse1,
+                  "Changes should only apply to one period!"), // 49
+          () -> testPutPaymentResponse(updatePayment1, 200, "Salary must be update!"), // 50
+          () -> testGetPaymentResponseParam(jDNewPass, 200, updatePayment1, updatePaymentResponse1,
+                  "Salary must be update!"), // 51
+          () -> testGetPaymentResponseParam(jDNewPass, 400, updatePaymentWrongDate, updatePaymentResponse,
+                  "Wrong date in request!"), // 52
+          () -> testGetPaymentResponse(jDNewPass, 200, correctPaymentResponse2,
+                  "Changes should only apply to one period!"), // 53
   };
 }

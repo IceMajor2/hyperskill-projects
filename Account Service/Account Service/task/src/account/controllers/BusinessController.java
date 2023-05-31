@@ -1,16 +1,17 @@
 package account.controllers;
 
+import account.DTO.PaycheckDTO;
 import account.models.User;
 import account.services.BusinessService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class BusinessController {
@@ -27,7 +28,7 @@ public class BusinessController {
 
     @PostMapping("/api/acct/payments")
     @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
-    public void uploadPayroll() {
+    public ResponseEntity uploadPayroll(@RequestBody List<@Valid PaycheckDTO> paycheckDTOS) {
 
     }
 

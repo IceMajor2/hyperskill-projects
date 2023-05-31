@@ -710,6 +710,836 @@ files:
       };
     }
   learner_created: false
+- name: src/account/controllers/AdminController.java
+  visible: true
+  text: |
+    package account.controllers;
+
+    import org.springframework.security.access.prepost.PreAuthorize;
+    import org.springframework.web.bind.annotation.*;
+
+    @RestController
+    @RequestMapping("/api/admin")
+    public class AdminController {
+
+        @PutMapping("/user/role")
+        @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+        public void changeUserRole() {
+
+        }
+
+        @DeleteMapping("/user")
+        @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+        public void deleteUser() {
+
+        }
+
+        @GetMapping("/user")
+        @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+        public void usersInfo() {
+
+        }
+    }
+  learner_created: true
+- name: db/service_db.trace.db
+  visible: true
+  text: |
+    2023-05-30 16:29:20 jdbc[3]: exception
+    org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+    2023-05-30 16:29:20 jdbc[3]: exception
+    org.h2.jdbc.JdbcSQLNonTransientException: The object is already closed [90007-214]
+  learner_created: true
+- name: src/account/exceptions/UserNotExistsException.java
+  visible: true
+  text: |
+    package account.exceptions;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.web.bind.annotation.ResponseStatus;
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "User does not exist!")
+    public class UserNotExistsException extends RuntimeException {
+    }
+  learner_created: true
+- name: src/account/exceptions/ApiError.java
+  visible: true
+  text: |-
+    package account.exceptions;
+
+    import org.springframework.http.HttpStatus;
+
+    import java.time.LocalDateTime;
+
+    public class ApiError {
+
+        private LocalDateTime timestamp;
+        private int status;
+        private String error;
+        private String message;
+        private String path;
+
+        public ApiError(HttpStatus status, String message, String path) {
+            super();
+            this.timestamp = LocalDateTime.now();
+            this.status = status.value();
+            this.error = status.getReasonPhrase();
+            this.message = message;
+            this.path = path;
+        }
+
+        public LocalDateTime getTimestamp() {
+            return timestamp;
+        }
+
+        public void setTimestamp(LocalDateTime timestamp) {
+            this.timestamp = timestamp;
+        }
+
+        public int getStatus() {
+            return status;
+        }
+
+        public void setStatus(int status) {
+            this.status = status;
+        }
+
+        public String getError() {
+            return error;
+        }
+
+        public void setError(String error) {
+            this.error = error;
+        }
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+
+        public String getPath() {
+            return path;
+        }
+
+        public void setPath(String path) {
+            this.path = path;
+        }
+    }
+  learner_created: true
+- name: src/account/exceptions/PasswordNotChangedException.java
+  visible: true
+  text: |
+    package account.exceptions;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.web.bind.annotation.ResponseStatus;
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "The passwords must be different!")
+    public class PasswordNotChangedException extends RuntimeException{
+    }
+  learner_created: true
+- name: src/account/DTO/NewPasswordDTO.java
+  visible: true
+  text: |
+    package account.DTO;
+
+    import com.fasterxml.jackson.annotation.JsonProperty;
+    import jakarta.validation.constraints.NotEmpty;
+    import jakarta.validation.constraints.Size;
+
+    public class NewPasswordDTO {
+
+        @Size(min = 12, message = "Password length must be 12 chars minimum!")
+        @NotEmpty
+        @JsonProperty("new_password")
+        private String password;
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+  learner_created: true
+- name: src/account/exceptions/UserExistsException.java
+  visible: true
+  text: |
+    package account.exceptions;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.web.bind.annotation.ResponseStatus;
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "User exist!")
+    public class UserExistsException extends RuntimeException {
+    }
+  learner_created: true
+- name: src/account/DTO/UserDTO.java
+  visible: true
+  text: |
+    package account.DTO;
+
+    import jakarta.validation.constraints.NotEmpty;
+    import jakarta.validation.constraints.Size;
+
+    public class UserDTO {
+
+        @NotEmpty
+        private String name;
+        @NotEmpty
+        private String lastname;
+        @NotEmpty
+        private String email;
+        @NotEmpty
+        @Size(min = 12, message = "Password length must be 12 chars minimum!")
+        private String password;
+
+        public UserDTO() {
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getLastname() {
+            return lastname;
+        }
+
+        public void setLastname(String lastname) {
+            this.lastname = lastname;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+  learner_created: true
+- name: src/account/exceptions/CustomRestExceptionHandler.java
+  visible: true
+  text: |-
+    package account.exceptions;
+
+    import org.springframework.core.Ordered;
+    import org.springframework.core.annotation.Order;
+    import org.springframework.http.HttpHeaders;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.HttpStatusCode;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.validation.FieldError;
+    import org.springframework.web.bind.MethodArgumentNotValidException;
+    import org.springframework.web.bind.annotation.RestControllerAdvice;
+    import org.springframework.web.context.request.ServletWebRequest;
+    import org.springframework.web.context.request.WebRequest;
+    import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
+    import java.util.ArrayList;
+    import java.util.List;
+
+
+    @Order(Ordered.HIGHEST_PRECEDENCE)
+    @RestControllerAdvice
+    public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
+
+        @Override
+        protected ResponseEntity<Object> handleMethodArgumentNotValid
+                (MethodArgumentNotValidException ex,
+                 HttpHeaders headers,
+                 HttpStatusCode status,
+                 WebRequest request) {
+
+            List<String> errors = new ArrayList<String>();
+            for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+                errors.add(error.getDefaultMessage());
+            }
+            String path = ((ServletWebRequest) request).getRequest().getRequestURI();
+            ApiError apiError =
+                    new ApiError(HttpStatus.BAD_REQUEST, errors.get(0), path);
+            return handleExceptionInternal(
+                    ex, apiError, headers, ex.getStatusCode(), request);
+        }
+    }
+  learner_created: true
+- name: src/account/controllers/AuthController.java
+  visible: true
+  text: |
+    package account.controllers;
+
+    import account.DTO.NewPasswordDTO;
+    import account.DTO.UserDTO;
+    import account.models.User;
+    import account.services.AuthService;
+    import jakarta.validation.Valid;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.security.access.prepost.PreAuthorize;
+    import org.springframework.security.core.annotation.AuthenticationPrincipal;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import org.springframework.web.bind.annotation.RequestBody;
+    import org.springframework.web.bind.annotation.RequestMapping;
+    import org.springframework.web.bind.annotation.RestController;
+
+    import java.util.Map;
+
+    @RestController
+    @RequestMapping("/api/auth")
+    public class AuthController {
+
+        @Autowired
+        private AuthService authService;
+
+        @PostMapping(value = {"/signup", "/signup/"})
+        public ResponseEntity registerUser(@RequestBody @Valid UserDTO userDTO) {
+            User user = authService.registerUser(userDTO);
+            return ResponseEntity.ok(user);
+        }
+
+        @PostMapping(value = {"/changepass", "/changepass/"})
+        @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT') or hasAuthority('ROLE_ADMINISTRATOR')")
+        public ResponseEntity changePassword(@AuthenticationPrincipal UserDetails details,
+                                             @RequestBody @Valid NewPasswordDTO passwordDTO) {
+            authService.changePassword(details, passwordDTO);
+            return ResponseEntity.ok(Map.of("email", details.getUsername(),
+                    "status", "The password has been updated successfully"));
+        }
+    }
+  learner_created: true
+- name: src/account/models/BreachedPassword.java
+  visible: true
+  text: |
+    package account.models;
+
+    import jakarta.persistence.*;
+
+    @Entity
+    @Table(name = "breached_passwords")
+    public class BreachedPassword {
+
+        @Id
+        private Long id;
+
+        private String password;
+
+        public BreachedPassword() {}
+
+        public BreachedPassword(Long id, String password) {
+            this.password = password;
+            this.id = id;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+  learner_created: true
+- name: src/account/security/SecurityConfig.java
+  visible: true
+  text: |
+    package account.security;
+
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.context.annotation.Bean;
+    import org.springframework.context.annotation.Configuration;
+    import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+    import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+    import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+    import org.springframework.security.config.http.SessionCreationPolicy;
+    import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+    import org.springframework.security.crypto.password.PasswordEncoder;
+    import org.springframework.security.web.SecurityFilterChain;
+
+    @EnableWebSecurity
+    @EnableMethodSecurity(prePostEnabled = true)
+    @Configuration
+    public class SecurityConfig {
+
+        @Autowired
+        private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+            http
+                    .httpBasic(httpBasic -> httpBasic
+                            .authenticationEntryPoint(restAuthenticationEntryPoint))
+                    .csrf((csrf) -> csrf.disable())
+                    .headers(headers -> headers
+                            .frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
+                    .authorizeHttpRequests((authz) -> authz
+                            //.requestMatchers(HttpMethod.GET, "/api/empl/payment").authenticated()
+                            .anyRequest().permitAll()
+                    ).sessionManagement(sessionManagement -> sessionManagement
+                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+            return http.build();
+        }
+
+        @Bean
+        public PasswordEncoder getEncoder() {
+            return new BCryptPasswordEncoder(13);
+        }
+    }
+  learner_created: true
+- name: src/account/security/UserDetailsImpl.java
+  visible: true
+  text: |
+    package account.security;
+
+    import account.models.User;
+    import org.springframework.security.core.GrantedAuthority;
+    import org.springframework.security.core.authority.SimpleGrantedAuthority;
+    import org.springframework.security.core.userdetails.UserDetails;
+
+    import java.util.Collection;
+    import java.util.List;
+
+    public class UserDetailsImpl implements UserDetails {
+
+        private final String ROLE_PREFIX = "ROLE_";
+
+        private final String username;
+        private final String password;
+        private boolean nonLocked;
+        private final List<GrantedAuthority> rolesAndAuthorities;
+
+        public UserDetailsImpl(User user) {
+            this.username = user.getEmail();
+            this.password = user.getPassword();
+            this.nonLocked = isAccountNonLocked();
+            this.rolesAndAuthorities =
+                    List.of(new SimpleGrantedAuthority(ROLE_PREFIX + user.getRole()));
+        }
+
+        @Override
+        public Collection<? extends GrantedAuthority> getAuthorities() {
+            return rolesAndAuthorities;
+        }
+
+        @Override
+        public String getPassword() {
+            return this.password;
+        }
+
+        @Override
+        public String getUsername() {
+            return this.username;
+        }
+
+        @Override
+        public boolean isAccountNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isAccountNonLocked() {
+            return true;
+        }
+
+        @Override
+        public boolean isCredentialsNonExpired() {
+            return true;
+        }
+
+        @Override
+        public boolean isEnabled() {
+            return true;
+        }
+    }
+  learner_created: true
+- name: src/account/models/User.java
+  visible: true
+  text: |
+    package account.models;
+
+    import account.DTO.UserDTO;
+    import com.fasterxml.jackson.annotation.JsonIgnore;
+    import com.fasterxml.jackson.annotation.JsonProperty;
+    import jakarta.persistence.*;
+    import jakarta.validation.constraints.NotEmpty;
+
+    import java.io.Serializable;
+
+    @Entity
+    @Table(name = "users")
+    public class User implements Serializable {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
+        @NotEmpty
+        private String name;
+        @NotEmpty
+        private String lastName;
+        @NotEmpty
+        @Column(unique = true)
+        private String email;
+        @NotEmpty
+        private String password;
+        @NotEmpty
+        private String role;
+
+        public User(UserDTO userDTO) {
+            this.name = userDTO.getName();
+            this.lastName = userDTO.getLastname();
+            this.email = userDTO.getEmail().toLowerCase();
+            this.password = userDTO.getPassword();
+        }
+
+        public User() {}
+
+        @JsonIgnore
+        public String getRole() {
+            return role;
+        }
+
+        public void setRole(String role) {
+            this.role = role;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+        @JsonProperty("lastname")
+        public String getLastName() {
+            return lastName;
+        }
+
+        public void setLastName(String lastName) {
+            this.lastName = lastName;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
+        @JsonIgnore
+        public String getPassword() {
+            return password;
+        }
+
+        @JsonProperty
+        public void setPassword(String password) {
+            this.password = password;
+        }
+    }
+  learner_created: true
+- name: src/resources/data-test.sql
+  visible: true
+  text: |-
+    DELETE FROM breached_passwords;
+    INSERT INTO breached_passwords (id, password) VALUES
+    (1, 'PasswordForJanuary'),
+    (2, 'PasswordForFebruary'),
+    (3, 'PasswordForMarch'),
+    (4, 'PasswordForApril'),
+    (5, 'PasswordForMay'),
+    (6, 'PasswordForJune'),
+    (7, 'PasswordForJuly'),
+    (8, 'PasswordForAugust'),
+    (9, 'PasswordForSeptember'),
+    (10, 'PasswordForOctober'),
+    (11, 'PasswordForNovember'),
+    (12, 'PasswordForDecember');
+  learner_created: true
+- name: src/account/services/AuthService.java
+  visible: true
+  text: |
+    package account.services;
+
+    import account.DTO.NewPasswordDTO;
+    import account.DTO.UserDTO;
+    import account.exceptions.BreachedPasswordException;
+    import account.exceptions.PasswordNotChangedException;
+    import account.exceptions.UserExistsException;
+    import account.models.User;
+    import account.repositories.BreachedPasswordsRepository;
+    import account.repositories.UserRepository;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.security.crypto.password.PasswordEncoder;
+    import org.springframework.stereotype.Service;
+    import org.springframework.web.server.ResponseStatusException;
+
+    @Service
+    public class AuthService {
+
+        @Autowired
+        private UserRepository userRepository;
+        @Autowired
+        private BreachedPasswordsRepository breachedPasswordsRepository;
+        @Autowired
+        private PasswordEncoder passwordEncoder;
+
+        public User registerUser(UserDTO userDTO) {
+            validateCredentials(userDTO);
+
+            User user = new User(userDTO);
+            user.setRole("USER");
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userRepository.save(user);
+            return user;
+        }
+
+        public void changePassword(UserDetails userDetails, NewPasswordDTO newPasswordDTO) {
+            if(isPasswordBreached(newPasswordDTO.getPassword())) {
+                throw new BreachedPasswordException();
+            }
+            User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
+            if(!isPasswordDifferent(user.getPassword(), newPasswordDTO.getPassword())) {
+                throw new PasswordNotChangedException();
+            }
+
+            user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
+            userRepository.save(user);
+        }
+
+        private void validateCredentials(UserDTO userDTO) {
+            if (isPasswordBreached(userDTO.getPassword())) {
+                throw new BreachedPasswordException();
+            }
+
+            if (!isEmailValid(userDTO.getEmail())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+
+            if (userRepository.findByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
+                throw new UserExistsException();
+            }
+        }
+
+        private boolean isEmailValid(String email) {
+            return email.endsWith("@acme.com");
+        }
+
+        private boolean isPasswordBreached(String password) {
+            var optPass = breachedPasswordsRepository.findByPassword(password);
+            return optPass.isPresent();
+        }
+
+        private boolean isPasswordDifferent(String userHashed, String password) {
+            return !passwordEncoder.matches(password, userHashed);
+        }
+    }
+  learner_created: true
+- name: src/account/services/BusinessService.java
+  visible: true
+  text: |
+    package account.services;
+
+    import account.exceptions.UserNotExistsException;
+    import account.models.User;
+    import account.repositories.UserRepository;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.stereotype.Service;
+
+    @Service
+    public class BusinessService {
+
+        @Autowired
+        private UserRepository userRepository;
+
+        public User getPayrolls(UserDetails userDetails) {
+            var user = userRepository.findByEmailIgnoreCase(userDetails.getUsername());
+            if(user.isEmpty()) {
+                throw new UserNotExistsException();
+            }
+            return user.get();
+        }
+    }
+  learner_created: true
+- name: src/account/exceptions/BreachedPasswordException.java
+  visible: true
+  text: |
+    package account.exceptions;
+
+    import org.springframework.http.HttpStatus;
+    import org.springframework.web.bind.annotation.ResponseStatus;
+
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "The password is in the hacker's database!")
+    public class BreachedPasswordException extends RuntimeException {
+    }
+  learner_created: true
+- name: src/account/security/RestAuthenticationEntryPoint.java
+  visible: true
+  text: |
+    package account.security;
+
+    import jakarta.servlet.ServletException;
+    import jakarta.servlet.http.HttpServletRequest;
+    import jakarta.servlet.http.HttpServletResponse;
+    import org.springframework.security.core.AuthenticationException;
+    import org.springframework.security.web.AuthenticationEntryPoint;
+    import org.springframework.stereotype.Component;
+
+    import java.io.IOException;
+
+    @Component
+    public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
+
+        @Override
+        public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        }
+    }
+  learner_created: true
+- name: src/account/security/UserDetailsServiceImpl.java
+  visible: true
+  text: |-
+    package account.security;
+
+    import account.repositories.UserRepository;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.security.core.userdetails.UserDetailsService;
+    import org.springframework.security.core.userdetails.UsernameNotFoundException;
+    import org.springframework.stereotype.Service;
+    import account.models.User;
+
+    import java.util.Optional;
+
+    @Service
+    public class UserDetailsServiceImpl implements UserDetailsService {
+
+        @Autowired
+        private UserRepository userRepository;
+
+        @Override
+        public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+            Optional<User> user = userRepository.findByEmailIgnoreCase(email);
+            return user.map(UserDetailsImpl::new).orElseThrow(() -> new UsernameNotFoundException("User '%s' was not found"
+                    .formatted(email)));
+        }
+    }
+  learner_created: true
+- name: src/account/repositories/UserRepository.java
+  visible: true
+  text: |
+    package account.repositories;
+
+    import account.models.User;
+    import org.springframework.data.repository.CrudRepository;
+
+    import java.util.List;
+    import java.util.Optional;
+
+    public interface UserRepository extends CrudRepository<User, Long> {
+
+        Optional<User> findByEmailIgnoreCase(String email);
+
+        List<User> findAllByOrderByIdAsc();
+    }
+  learner_created: true
+- name: src/account/repositories/BreachedPasswordsRepository.java
+  visible: true
+  text: |
+    package account.repositories;
+
+    import account.models.BreachedPassword;
+    import org.springframework.data.repository.CrudRepository;
+
+    import java.util.Optional;
+
+    public interface BreachedPasswordsRepository extends CrudRepository<BreachedPassword, Long> {
+
+        Optional<BreachedPassword> findByPassword(String password);
+    }
+  learner_created: true
+- name: src/account/controllers/BusinessController.java
+  visible: true
+  text: |
+    package account.controllers;
+
+    import account.models.User;
+    import account.services.BusinessService;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.security.access.prepost.PreAuthorize;
+    import org.springframework.security.core.annotation.AuthenticationPrincipal;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.web.bind.annotation.GetMapping;
+    import org.springframework.web.bind.annotation.PostMapping;
+    import org.springframework.web.bind.annotation.PutMapping;
+    import org.springframework.web.bind.annotation.RestController;
+
+    @RestController
+    public class BusinessController {
+
+        @Autowired
+        private BusinessService businessService;
+
+        @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"})
+        @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT')")
+        public ResponseEntity getPayroll(@AuthenticationPrincipal UserDetails userDetails) {
+            User user = businessService.getPayrolls(userDetails);
+            return ResponseEntity.ok(user);
+        }
+
+        @PostMapping("/api/acct/payments")
+        @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
+        public void uploadPayroll() {
+
+        }
+
+        @PutMapping("/api/acct/payments")
+        @PreAuthorize("hasAuthority('ROLE_ACCOUNTANT')")
+        public void updatePayment() {
+
+        }
+    }
+  learner_created: true
+- name: src/account/DTO/PaycheckDTO.java
+  visible: true
+  learner_created: true
+- name: src/resources/message.properties
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16604#comment
 status: Unchecked
 record: -1
