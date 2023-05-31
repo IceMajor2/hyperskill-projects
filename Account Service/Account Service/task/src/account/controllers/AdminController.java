@@ -3,6 +3,7 @@ package account.controllers;
 import account.DTO.RoleDTO;
 import account.models.User;
 import account.services.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,8 +20,9 @@ public class AdminController {
 
     @PutMapping(value = {"/user/role", "/user/role/"})
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public void changeUserRole(@RequestBody RoleDTO roleDTO) {
-
+    public ResponseEntity changeUserRole(@RequestBody @Valid RoleDTO roleDTO) {
+        User user = adminService.changeRole(roleDTO);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping(value = {"/user/{user_email}", "/user{user_email}"})

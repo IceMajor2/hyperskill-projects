@@ -2,6 +2,7 @@ package account.services;
 
 import account.DTO.NewPasswordDTO;
 import account.DTO.UserDTO;
+import account.enums.Roles;
 import account.exceptions.BreachedPasswordException;
 import account.exceptions.PasswordNotChangedException;
 import account.exceptions.UserExistsException;
@@ -9,11 +10,9 @@ import account.models.User;
 import account.repositories.BreachedPasswordsRepository;
 import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class AuthService {
@@ -60,10 +59,10 @@ public class AuthService {
 
     private void assignRole(User user) {
         if (userRepository.count() == 0) {
-            user.addRole("ROLE_ADMINISTRATOR");
+            user.addRole(Roles.ROLE_ADMINISTRATOR);
             return;
         }
-        user.addRole("ROLE_USER");
+        user.addRole(Roles.ROLE_USER);
     }
 
     private boolean isPasswordBreached(String password) {

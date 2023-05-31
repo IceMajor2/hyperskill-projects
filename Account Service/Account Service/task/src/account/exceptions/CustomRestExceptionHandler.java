@@ -50,7 +50,8 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler i
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ApiError> handleConstraintViolationException(ConstraintViolationException exception, WebRequest request) {
+    public ResponseEntity<ApiError> handleConstraintViolationException
+            (ConstraintViolationException exception, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = getMessage(exception.getConstraintViolations());
         String path = ((ServletWebRequest) request).getRequest().getRequestURI();

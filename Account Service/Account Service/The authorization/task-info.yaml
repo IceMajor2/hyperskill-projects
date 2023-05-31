@@ -2157,6 +2157,21 @@ files:
 - name: src/account/DTO/RoleDTO.java
   visible: true
   learner_created: true
+- name: src/account/enums/OperationType.java
+  visible: true
+  learner_created: true
+- name: src/account/enums/Roles.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/RoleNotFoundException.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/TooLittleRolesException.java
+  visible: true
+  learner_created: true
+- name: src/account/exceptions/RoleGroupCombinationException.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16605#comment
 status: Unchecked
 record: -1

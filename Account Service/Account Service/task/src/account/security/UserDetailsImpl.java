@@ -1,5 +1,6 @@
 package account.security;
 
+import account.enums.Roles;
 import account.models.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,8 +25,8 @@ public class UserDetailsImpl implements UserDetails {
         this.nonLocked = isAccountNonLocked();
 
         this.rolesAndAuthorities = new ArrayList<>();
-        for(String role : user.getRoles()) {
-            rolesAndAuthorities.add(new SimpleGrantedAuthority(role));
+        for(Roles role : user.getRoles()) {
+            rolesAndAuthorities.add(new SimpleGrantedAuthority(role.toString()));
         }
     }
 

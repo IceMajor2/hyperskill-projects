@@ -1,6 +1,7 @@
 package account.models;
 
 import account.DTO.UserDTO;
+import account.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -31,7 +32,7 @@ public class User implements Serializable {
     private String password;
     @NotEmpty
     @JsonProperty("roles")
-    private List<String> roles;
+    private List<Roles> roles;
 
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
@@ -43,16 +44,16 @@ public class User implements Serializable {
 
     public User() {}
 
-    public List<String> getRoles() {
+    public List<Roles> getRoles() {
         roles.sort(Comparator.naturalOrder());
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Roles> roles) {
         this.roles = roles;
     }
 
-    public void addRole(String role) {
+    public void addRole(Roles role) {
         this.roles.add(role);
     }
 
@@ -99,5 +100,17 @@ public class User implements Serializable {
     @JsonIgnore
     public boolean isAdmin() {
         return roles.contains("ROLE_ADMINISTRATOR");
+    }
+
+    public boolean hasRole(Roles role) {
+        return this.roles.contains(role);
+    }
+
+    public int rolesCount() {
+        return this.roles.size();
+    }
+
+    public void removeRole(Roles role) {
+        this.roles.remove(role);
     }
 }
