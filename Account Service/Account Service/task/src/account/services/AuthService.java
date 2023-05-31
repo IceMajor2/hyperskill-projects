@@ -29,18 +29,18 @@ public class AuthService {
         validateCredentials(userDTO);
 
         User user = new User(userDTO);
-        user.setRole("USER");
+        assignRole(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return user;
     }
 
     public void changePassword(UserDetails userDetails, NewPasswordDTO newPasswordDTO) {
-        if(isPasswordBreached(newPasswordDTO.getPassword())) {
+        if (isPasswordBreached(newPasswordDTO.getPassword())) {
             throw new BreachedPasswordException();
         }
         User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
-        if(!isPasswordDifferent(user.getPassword(), newPasswordDTO.getPassword())) {
+        if (!isPasswordDifferent(user.getPassword(), newPasswordDTO.getPassword())) {
             throw new PasswordNotChangedException();
         }
 
@@ -53,18 +53,18 @@ public class AuthService {
             throw new BreachedPasswordException();
         }
 
-//        if (!isEmailValid(userDTO.getEmail())) {
-//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-//        }
-
         if (userRepository.findByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new UserExistsException();
         }
     }
-
-//    private boolean isEmailValid(String email) {
-//        return email.endsWith("@acme.com");
-//    }
+    
+    private void assignRole(User user) {
+        if (userRepository.count() == 0) {
+            user.setRole("ADMINISTRATOR");
+            return;
+        }
+        user.setRole("USER");
+    }
 
     private boolean isPasswordBreached(String password) {
         var optPass = breachedPasswordsRepository.findByPassword(password);
