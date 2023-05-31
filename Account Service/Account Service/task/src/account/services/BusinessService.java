@@ -34,7 +34,8 @@ public class BusinessService {
             User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
             Payment payment = paymentRepository.findByUserIdAndPeriod(user.getId(), date)
                     .orElseThrow(() -> new NoSuchPaymentException());
-            return new AuthPaymentDTO(user.getName(), user.getLastName(), period, payment.getSalary());
+            return new AuthPaymentDTO(user.getName(), user.getLastName(),
+                    payment.getPeriod(), payment.getSalary());
         } catch (ParseException exception) {
             throw new RuntimeException(exception);
         }
@@ -42,7 +43,7 @@ public class BusinessService {
 
     public List<AuthPaymentDTO> getPayrolls(UserDetails userDetails) {
         User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
-        List<Payment> payments = paymentRepository.findByUserId(user.getId());
+        List<Payment> payments = paymentRepository.findByUserIdOrderByPeriodDesc(user.getId());
         return convertPaymentListToDTOList(payments);
     }
 
@@ -94,7 +95,7 @@ public class BusinessService {
 
     private List<AuthPaymentDTO> convertPaymentListToDTOList(List<Payment> payments) {
         List<AuthPaymentDTO> authPaymentDTOS = new ArrayList<>();
-        for(Payment payment : payments) {
+        for (Payment payment : payments) {
             AuthPaymentDTO authPaymentDTO = new AuthPaymentDTO(payment);
             authPaymentDTOS.add(authPaymentDTO);
         }

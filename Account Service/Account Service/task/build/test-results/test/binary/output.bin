@@ -9,20 +9,20 @@
 5[0m[0;34m =========|_|==============|___/=/_/_/_/
 7[0m[0;34m :: Spring Boot ::                (v3.1.0)
 [0m[0;34m
-±[0m[0;34m2023-05-30T16:29:11.819+02:00  INFO 5888 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 5888 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
-π[0m[0;34m2023-05-30T16:29:11.829+02:00  INFO 5888 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
-±[0m[0;34m2023-05-30T16:29:13.076+02:00  INFO 5888 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-À[0m[0;34m2023-05-30T16:29:13.153+02:00  INFO 5888 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 66 ms. Found 2 JPA repository interfaces.
-£[0m[0;34m2023-05-30T16:29:13.965+02:00  INFO 5888 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-è[0m[0;34m2023-05-30T16:29:13.981+02:00  INFO 5888 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-•[0m[0;34m2023-05-30T16:29:13.981+02:00  INFO 5888 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-®[0m[0;34m2023-05-30T16:29:14.089+02:00  INFO 5888 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-µ[0m[0;34m2023-05-30T16:29:14.092+02:00  INFO 5888 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2215 ms
-ê[0m[0;34m2023-05-30T16:29:14.255+02:00  INFO 5888 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-»[0m[0;34m2023-05-30T16:29:14.558+02:00  INFO 5888 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
-ï[0m[0;34m2023-05-30T16:29:14.562+02:00  INFO 5888 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-…[0m[0;34m2023-05-30T16:29:14.581+02:00  INFO 5888 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-Æ[0m[0;34m2023-05-30T16:29:14.730+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+≥[0m[0;34m2023-05-31T13:53:20.370+02:00  INFO 17452 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 17452 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
+∫[0m[0;34m2023-05-31T13:53:20.380+02:00  INFO 17452 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+≤[0m[0;34m2023-05-31T13:53:21.599+02:00  INFO 17452 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+Ã[0m[0;34m2023-05-31T13:53:21.687+02:00  INFO 17452 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 77 ms. Found 3 JPA repository interfaces.
+§[0m[0;34m2023-05-31T13:53:22.485+02:00  INFO 17452 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+ê[0m[0;34m2023-05-31T13:53:22.499+02:00  INFO 17452 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+¶[0m[0;34m2023-05-31T13:53:22.500+02:00  INFO 17452 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+©[0m[0;34m2023-05-31T13:53:22.602+02:00  INFO 17452 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+∂[0m[0;34m2023-05-31T13:53:22.604+02:00  INFO 17452 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2169 ms
+ë[0m[0;34m2023-05-31T13:53:22.757+02:00  INFO 17452 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+…[0m[0;34m2023-05-31T13:53:23.055+02:00  INFO 17452 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./db/service_db user=ADMIN
+ñ[0m[0;34m2023-05-31T13:53:23.058+02:00  INFO 17452 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+ [0m[0;34m2023-05-31T13:53:23.079+02:00  INFO 17452 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+Ø[0m[0;34m2023-05-31T13:53:23.234+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -116,7 +116,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-™[0;34m2023-05-30T16:29:14.748+02:00  WARN 5888 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+´[0;34m2023-05-31T13:53:23.248+02:00  WARN 17452 --- [alina-utility-1] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -143,23 +143,25 @@
 â[0m[0;34m	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.8.jar:10.1.8]
 H[0m[0;34m	at java.base/java.lang.Thread.run(Thread.java:833) ~[na:na]
 [0m[0;34m
-Ø[0m[0;34m2023-05-30T16:29:14.854+02:00  INFO 5888 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-ß[0m[0;34m2023-05-30T16:29:14.948+02:00  INFO 5888 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
-§[0m[0;34m2023-05-30T16:29:14.954+02:00  INFO 5888 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
-£[0m[0;34m2023-05-30T16:29:15.168+02:00  INFO 5888 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-≠[0m[0;34m2023-05-30T16:29:15.388+02:00  INFO 5888 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-¡[0m[0;34m2023-05-30T16:29:15.452+02:00  INFO 5888 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-£[0m[0;34m2023-05-30T16:29:15.764+02:00  INFO 5888 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-È[0m[0;34m2023-05-30T16:29:16.691+02:00  INFO 5888 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+∞[0m[0;34m2023-05-31T13:53:23.359+02:00  INFO 17452 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+®[0m[0;34m2023-05-31T13:53:23.451+02:00  INFO 17452 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.2.Final
+•[0m[0;34m2023-05-31T13:53:23.456+02:00  INFO 17452 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+§[0m[0;34m2023-05-31T13:53:23.707+02:00  INFO 17452 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Æ[0m[0;34m2023-05-31T13:53:23.947+02:00  INFO 17452 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+¬[0m[0;34m2023-05-31T13:53:24.003+02:00  INFO 17452 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+§[0m[0;34m2023-05-31T13:53:24.304+02:00  INFO 17452 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Í[0m[0;34m2023-05-31T13:53:25.278+02:00  INFO 17452 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
 u[0m[0;34mHibernate: create table breached_passwords (id bigint not null, password varchar(255), primary key (id))
+ô[0m[0;34mHibernate: create table payments (id bigint generated by default as identity, period date, salary bigint, users_id bigint, primary key (id))
 “[0m[0;34mHibernate: create table users (id bigint generated by default as identity, email varchar(255), last_name varchar(255), name varchar(255), password varchar(255), role varchar(255), primary key (id))
 j[0m[0;34mHibernate: alter table if exists users drop constraint if exists UK_6dotkott2kjsp8vw4d0m25fb7
 n[0m[0;34mHibernate: alter table if exists users add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
-π[0m[0;34m2023-05-30T16:29:16.786+02:00  INFO 5888 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-≠[0m[0;34m2023-05-30T16:29:17.338+02:00  WARN 5888 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-Á[0m[0;34m2023-05-30T16:29:17.510+02:00  INFO 5888 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@525aadf2, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@203b98cf, org.springframework.security.web.context.SecurityContextHolderFilter@386ec37d, org.springframework.security.web.header.HeaderWriterFilter@3204146d, org.springframework.security.web.authentication.logout.LogoutFilter@72f71ea2, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@33da0fad, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7ca0aa55, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@51a8aed8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@52bcd7c9, org.springframework.security.web.session.SessionManagementFilter@6be865c1, org.springframework.security.web.access.ExceptionTranslationFilter@4ab1693b, org.springframework.security.web.access.intercept.AuthorizationFilter@7df1fc5a]
-´[0m[0;34m2023-05-30T16:29:18.243+02:00  INFO 5888 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-Æ[0m[0;34m2023-05-30T16:29:18.348+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+â[0m[0;34mHibernate: alter table if exists payments add constraint FKe9hmevvy1ubu67yeyu73yw2ri foreign key (users_id) references users
+∫[0m[0;34m2023-05-31T13:53:25.372+02:00  INFO 17452 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Æ[0m[0;34m2023-05-31T13:53:25.961+02:00  WARN 17452 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+Ê[0m[0;34m2023-05-31T13:53:26.124+02:00  INFO 17452 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@73864c16, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5016934, org.springframework.security.web.context.SecurityContextHolderFilter@71739267, org.springframework.security.web.header.HeaderWriterFilter@7e729046, org.springframework.security.web.authentication.logout.LogoutFilter@460a4935, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2fedae96, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b9ce7a3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@17931cc0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@e10809f, org.springframework.security.web.session.SessionManagementFilter@63cff421, org.springframework.security.web.access.ExceptionTranslationFilter@428440f2, org.springframework.security.web.access.intercept.AuthorizationFilter@5ea50a98]
+¨[0m[0;34m2023-05-31T13:53:26.859+02:00  INFO 17452 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+Ø[0m[0;34m2023-05-31T13:53:26.948+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -254,7 +256,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.356+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:26.956+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -349,7 +351,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.366+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:26.966+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -444,7 +446,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.375+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:26.975+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -539,7 +541,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.386+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:26.987+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -634,7 +636,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.394+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:26.996+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -729,7 +731,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.404+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:27.007+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -824,7 +826,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.412+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:27.014+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -919,7 +921,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.423+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:27.021+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1014,7 +1016,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:18.430+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:27.028+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1109,11 +1111,11 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-≤[0m[0;34m2023-05-30T16:29:18.448+02:00  INFO 5888 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-¬[0m[0;34m2023-05-30T16:29:18.468+02:00  INFO 5888 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 7.121 seconds (process running for 8.5)
-´[0;34m2023-05-30T16:29:18.860+02:00  INFO 5888 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-û[0m[0;34m2023-05-30T16:29:18.860+02:00  INFO 5888 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-ñ[0m[0;34m2023-05-30T16:29:18.862+02:00  INFO 5888 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+≥[0m[0;34m2023-05-31T13:53:27.044+02:00  INFO 17452 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+≈[0m[0;34m2023-05-31T13:53:27.066+02:00  INFO 17452 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 7.159 seconds (process running for 8.473)
+¨[0;34m2023-05-31T13:53:27.415+02:00  INFO 17452 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+ü[0m[0;34m2023-05-31T13:53:27.415+02:00  INFO 17452 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+ó[0m[0;34m2023-05-31T13:53:27.416+02:00  INFO 17452 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 [0m[1;31m
 Start test 2[0m
 [1;31m
@@ -1130,10 +1132,8 @@
 Start test 8[0m
 [1;31m
 Start test 9[0m
-c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 [1;31m
 Start test 10[0m
-c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 [1;31m
 Start test 11[0m
 g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
@@ -1144,8 +1144,8 @@
 c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+c[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 [1;31m
@@ -1186,18 +1186,22 @@
 Start test 19[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
 [1;31m
 Start test 20[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
 [1;31m
 Start test 21[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
 [1;31m
 Start test 22[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
 [1;31m
 Start test 23[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
@@ -1225,74 +1229,50 @@
 [1;31m
 Start test 31[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 [1;31m
 Start test 32[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+`[0m[0;34mHibernate: update users set email=?,last_name=?,name=?,password=?,role=? where id=?
 [1;31m
 Start test 33[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 [1;31m
 Start test 34[0m
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
 [1;31m
 Start test 35[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 36[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 37[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 38[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 39[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 40[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 41[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 42[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-[1;31m
-Start test 43[0m
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-[1;31m
-Start test 44[0m
-ã[0;34m2023-05-30T16:29:42.666+02:00  INFO 5888 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
-¨[0m[0;34m2023-05-30T16:29:42.667+02:00  INFO 5888 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
-µ[0m[0;34m2023-05-30T16:29:42.677+02:00  INFO 5888 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-ö[0m[0;34m2023-05-30T16:29:42.679+02:00  INFO 5888 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-ò[0m[0;34m2023-05-30T16:29:42.690+02:00  INFO 5888 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+å[0;34m2023-05-31T13:53:46.553+02:00  INFO 17452 --- [       Thread-5] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+≠[0m[0;34m2023-05-31T13:53:46.555+02:00  INFO 17452 --- [       Thread-5] o.a.c.c.C.[Tomcat].[localhost].[/]       : Destroying Spring FrameworkServlet 'dispatcherServlet'
+∂[0m[0;34m2023-05-31T13:53:46.564+02:00  INFO 17452 --- [       Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+õ[0m[0;34m2023-05-31T13:53:46.566+02:00  INFO 17452 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+ô[0m[0;34m2023-05-31T13:53:46.577+02:00  INFO 17452 --- [       Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 	[0;34m
 4[0m[0;34m  .   ____          _            __ _ _
 5[0m[0;34m /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -1302,20 +1282,20 @@
 5[0m[0;34m =========|_|==============|___/=/_/_/_/
 7[0m[0;34m :: Spring Boot ::                (v3.1.0)
 [0m[0;34m
-±[0m[0;34m2023-05-30T16:29:53.119+02:00  INFO 5888 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 5888 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
-π[0m[0;34m2023-05-30T16:29:53.119+02:00  INFO 5888 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
-±[0m[0;34m2023-05-30T16:29:53.445+02:00  INFO 5888 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-À[0m[0;34m2023-05-30T16:29:53.461+02:00  INFO 5888 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 15 ms. Found 2 JPA repository interfaces.
-£[0m[0;34m2023-05-30T16:29:53.560+02:00  INFO 5888 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
-è[0m[0;34m2023-05-30T16:29:53.560+02:00  INFO 5888 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-•[0m[0;34m2023-05-30T16:29:53.561+02:00  INFO 5888 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
-®[0m[0;34m2023-05-30T16:29:53.620+02:00  INFO 5888 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-¥[0m[0;34m2023-05-30T16:29:53.621+02:00  INFO 5888 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 500 ms
-ê[0m[0;34m2023-05-30T16:29:53.669+02:00  INFO 5888 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
-…[0m[0;34m2023-05-30T16:29:53.691+02:00  INFO 5888 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
-ï[0m[0;34m2023-05-30T16:29:53.691+02:00  INFO 5888 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
-…[0m[0;34m2023-05-30T16:29:53.691+02:00  INFO 5888 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
-Æ[0m[0;34m2023-05-30T16:29:53.720+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+≥[0m[0;34m2023-05-31T13:53:56.999+02:00  INFO 17452 --- [    Test worker] account.AccountServiceApplication        : Starting AccountServiceApplication using Java 17.0.6 with PID 17452 (started by IceMajor in C:\Users\IceMajor\Documents\Programowanie\JetBrains_course\Account Service\Account Service\task)
+∫[0m[0;34m2023-05-31T13:53:57.000+02:00  INFO 17452 --- [    Test worker] account.AccountServiceApplication        : No active profile set, falling back to 1 default profile: "default"
+≤[0m[0;34m2023-05-31T13:53:57.362+02:00  INFO 17452 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+Ã[0m[0;34m2023-05-31T13:53:57.384+02:00  INFO 17452 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 21 ms. Found 3 JPA repository interfaces.
+§[0m[0;34m2023-05-31T13:53:57.512+02:00  INFO 17452 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 28852 (http)
+ê[0m[0;34m2023-05-31T13:53:57.512+02:00  INFO 17452 --- [    Test worker] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+¶[0m[0;34m2023-05-31T13:53:57.513+02:00  INFO 17452 --- [    Test worker] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.8]
+©[0m[0;34m2023-05-31T13:53:57.545+02:00  INFO 17452 --- [    Test worker] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+µ[0m[0;34m2023-05-31T13:53:57.545+02:00  INFO 17452 --- [    Test worker] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 541 ms
+ë[0m[0;34m2023-05-31T13:53:57.604+02:00  INFO 17452 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+ [0m[0;34m2023-05-31T13:53:57.630+02:00  INFO 17452 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn10: url=jdbc:h2:file:./db/service_db user=ADMIN
+ñ[0m[0;34m2023-05-31T13:53:57.630+02:00  INFO 17452 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+ [0m[0;34m2023-05-31T13:53:57.630+02:00  INFO 17452 --- [    Test worker] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2'. Database available at 'jdbc:h2:file:./db/service_db'
+Ø[0m[0;34m2023-05-31T13:53:57.663+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1360,8 +1340,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1412,7 +1392,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:53.726+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:57.669+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1452,8 +1432,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1504,17 +1484,17 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Ø[0m[0;34m2023-05-30T16:29:53.753+02:00  INFO 5888 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-£[0m[0;34m2023-05-30T16:29:53.769+02:00  INFO 5888 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-≠[0m[0;34m2023-05-30T16:29:53.769+02:00  INFO 5888 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-¡[0m[0;34m2023-05-30T16:29:53.771+02:00  INFO 5888 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
-£[0m[0;34m2023-05-30T16:29:53.784+02:00  INFO 5888 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
-È[0m[0;34m2023-05-30T16:29:53.887+02:00  INFO 5888 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-π[0m[0;34m2023-05-30T16:29:53.891+02:00  INFO 5888 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-≠[0m[0;34m2023-05-30T16:29:53.963+02:00  WARN 5888 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-Á[0m[0;34m2023-05-30T16:29:53.988+02:00  INFO 5888 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@352df548, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45dc4d1a, org.springframework.security.web.context.SecurityContextHolderFilter@6ca95b1e, org.springframework.security.web.header.HeaderWriterFilter@3a07afe6, org.springframework.security.web.authentication.logout.LogoutFilter@550482aa, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2b7b6f58, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7c305624, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7b4fbedb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4dbcc8ce, org.springframework.security.web.session.SessionManagementFilter@428943a4, org.springframework.security.web.access.ExceptionTranslationFilter@1540b926, org.springframework.security.web.access.intercept.AuthorizationFilter@44cd3ea9]
-´[0m[0;34m2023-05-30T16:29:54.179+02:00  INFO 5888 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
-Æ[0m[0;34m2023-05-30T16:29:54.208+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+∞[0m[0;34m2023-05-31T13:53:57.700+02:00  INFO 17452 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+§[0m[0;34m2023-05-31T13:53:57.715+02:00  INFO 17452 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Æ[0m[0;34m2023-05-31T13:53:57.716+02:00  INFO 17452 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+¬[0m[0;34m2023-05-31T13:53:57.718+02:00  INFO 17452 --- [    Test worker] org.hibernate.orm.dialect                : HHH035001: Using dialect: org.hibernate.dialect.H2Dialect, version: 2.1.214
+§[0m[0;34m2023-05-31T13:53:57.736+02:00  INFO 17452 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+Í[0m[0;34m2023-05-31T13:53:57.853+02:00  INFO 17452 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+∫[0m[0;34m2023-05-31T13:53:57.868+02:00  INFO 17452 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+Æ[0m[0;34m2023-05-31T13:53:57.944+02:00  WARN 17452 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+Á[0m[0;34m2023-05-31T13:53:57.970+02:00  INFO 17452 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@23001753, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@39a2adf9, org.springframework.security.web.context.SecurityContextHolderFilter@530dd2d7, org.springframework.security.web.header.HeaderWriterFilter@257ba195, org.springframework.security.web.authentication.logout.LogoutFilter@2a70c8d5, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6d0ef6dc, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3e6f3ad5, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@46e05384, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@27ae8ce3, org.springframework.security.web.session.SessionManagementFilter@3a9d6f5d, org.springframework.security.web.access.ExceptionTranslationFilter@75630d9e, org.springframework.security.web.access.intercept.AuthorizationFilter@f1a5005]
+¨[0m[0;34m2023-05-31T13:53:58.184+02:00  INFO 17452 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 14 endpoint(s) beneath base path '/actuator'
+Ø[0m[0;34m2023-05-31T13:53:58.210+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1560,8 +1540,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1612,7 +1592,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.217+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.216+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1658,8 +1638,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1710,7 +1690,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.223+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.222+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1756,8 +1736,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1808,7 +1788,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.229+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.229+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1854,8 +1834,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -1906,7 +1886,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.241+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.235+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -1952,8 +1932,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2004,7 +1984,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.254+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.242+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2050,8 +2030,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2102,7 +2082,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.263+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.248+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2148,8 +2128,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2200,7 +2180,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.270+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.254+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2246,8 +2226,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2298,7 +2278,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.277+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.261+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2344,8 +2324,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2396,7 +2376,7 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-Æ[0m[0;34m2023-05-30T16:29:54.285+02:00  WARN 5888 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
+Ø[0m[0;34m2023-05-31T13:53:58.267+02:00  WARN 17452 --- [    Test worker] .t.u.s.PrivilegedSetAccessControlContext : Unable to set field Thread.inheritedAccessControlContext
 [0m[0;34m
 ’[0m[0;34mjava.lang.IllegalAccessException: class org.apache.tomcat.util.security.PrivilegedSetAccessControlContext cannot access a member of class java.lang.Thread (in module java.base) with modifiers "private"
 q[0m[0;34m	at java.base/jdk.internal.reflect.Reflection.newIllegalAccessException(Reflection.java:392) ~[na:na]
@@ -2442,8 +2422,8 @@
 S[0m[0;34m	at java.base/java.lang.reflect.Method.invoke(Method.java:568) ~[na:na]
 z[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.startSpring(SpringTest.java:187) ~[hs-test-release-SNAPSHOT.jar:na]
 {[0m[0;34m	at org.hyperskill.hstest.stage.SpringTest.reloadSpring(SpringTest.java:239) ~[hs-test-release-SNAPSHOT.jar:na]
-^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:262) ~[test/:na]
-Y[0m[0;34m	at AccountServiceTest.lambda$new$45(AccountServiceTest.java:452) ~[test/:na]
+^[0m[0;34m	at AccountServiceTest.restartApplication(AccountServiceTest.java:323) ~[test/:na]
+Y[0m[0;34m	at AccountServiceTest.lambda$new$35(AccountServiceTest.java:627) ~[test/:na]
 ö[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting.lambda$searchDynamicTests$3(DynamicTesting.java:289) ~[hs-test-release-SNAPSHOT.jar:na]
 §[0m[0;34m	at org.hyperskill.hstest.dynamic.input.DynamicTesting$1DynamicTestElement.lambda$getTests$0(DynamicTesting.java:252) ~[hs-test-release-SNAPSHOT.jar:na]
 ï[0m[0;34m	at org.hyperskill.hstest.testing.runner.SpringApplicationRunner.test(SpringApplicationRunner.java:43) ~[hs-test-release-SNAPSHOT.jar:na]
@@ -2494,38 +2474,100 @@
 Ä[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.run(GradleWorkerMain.java:69) ~[gradle-worker.jar:na]
 Å[0m[0;34m	at worker.org.gradle.process.internal.worker.GradleWorkerMain.main(GradleWorkerMain.java:74) ~[gradle-worker.jar:na]
 [0m[0;34m
-≤[0m[0;34m2023-05-30T16:29:54.296+02:00  INFO 5888 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
-≈[0m[0;34m2023-05-30T16:29:54.311+02:00  INFO 5888 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 1.216 seconds (process running for 44.343)
+≥[0m[0;34m2023-05-31T13:53:58.276+02:00  INFO 17452 --- [    Test worker] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 28852 (http) with context path ''
+∆[0m[0;34m2023-05-31T13:53:58.285+02:00  INFO 17452 --- [    Test worker] account.AccountServiceApplication        : Started AccountServiceApplication in 1.314 seconds (process running for 39.692)
 [0m[1;31m
+Start test 36[0m
+¨[0;34m2023-05-31T13:53:58.291+02:00  INFO 17452 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+ü[0m[0;34m2023-05-31T13:53:58.291+02:00  INFO 17452 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+ó[0m[0;34m2023-05-31T13:53:58.292+02:00  INFO 17452 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
+[1;31m
+Start test 37[0m
+è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+_[0m[0;34mHibernate: insert into payments (period,salary,users_id,id) values (?,?,?,default)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+_[0m[0;34mHibernate: insert into payments (period,salary,users_id,id) values (?,?,?,default)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+_[0m[0;34mHibernate: insert into payments (period,salary,users_id,id) values (?,?,?,default)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+_[0m[0;34mHibernate: insert into payments (period,salary,users_id,id) values (?,?,?,default)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+_[0m[0;34mHibernate: insert into payments (period,salary,users_id,id) values (?,?,?,default)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+_[0m[0;34mHibernate: insert into payments (period,salary,users_id,id) values (?,?,?,default)
+[1;31m
+Start test 38[0m
+è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
+[1;31m
+Start test 39[0m
+[1;31m
+Start test 40[0m
+è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
+[1;31m
+Start test 41[0m
+[1;31m
+Start test 42[0m
+è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
+[1;31m
+Start test 43[0m
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+u[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=?
+[1;31m
+Start test 44[0m
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
+[1;31m
 Start test 45[0m
-´[0;34m2023-05-30T16:29:54.319+02:00  INFO 5888 --- [io-28852-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-û[0m[0;34m2023-05-30T16:29:54.319+02:00  INFO 5888 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-ñ[0m[0;34m2023-05-30T16:29:54.320+02:00  INFO 5888 --- [io-28852-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 [1;31m
 Start test 46[0m
-è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
-ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-`[0m[0;34mHibernate: update users set email=?,last_name=?,name=?,password=?,role=? where id=?
 [1;31m
 Start test 47[0m
 è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+á[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? and p1_0.period=?
+S[0m[0;34mHibernate: update payments set period=?,salary=?,users_id=? where id=?
 [1;31m
 Start test 48[0m
 è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+á[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? and p1_0.period=?
 [1;31m
 Start test 49[0m
 è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-g[0m[0;34mHibernate: select b1_0.id,b1_0.password from breached_passwords b1_0 where b1_0.password=?
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
-`[0m[0;34mHibernate: update users set email=?,last_name=?,name=?,password=?,role=? where id=?
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc
 [1;31m
 Start test 50[0m
-è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+á[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? and p1_0.period=?
+S[0m[0;34mHibernate: update payments set period=?,salary=?,users_id=? where id=?
 [1;31m
 Start test 51[0m
 è[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
 ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+á[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? and p1_0.period=?
+[1;31m
+Start test 52[0m
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+á[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? and p1_0.period=?
+[1;31m
+Start test 53[0m
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+ì[0m[0;34mHibernate: select u1_0.id,u1_0.email,u1_0.last_name,u1_0.name,u1_0.password,u1_0.role from users u1_0 where upper(u1_0.email)=upper(?)
+è[0m[0;34mHibernate: select p1_0.id,p1_0.period,p1_0.salary,p1_0.users_id from payments p1_0 where p1_0.users_id=? order by p1_0.period desc

@@ -5,6 +5,7 @@ import account.models.Payment;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class AuthPaymentDTO {
 
@@ -16,10 +17,10 @@ public class AuthPaymentDTO {
     public AuthPaymentDTO() {
     }
 
-    public AuthPaymentDTO(String name, String lastname, String period, Long salary) {
+    public AuthPaymentDTO(String name, String lastname, Date period, Long salary) {
         this.name = name;
         this.lastname = lastname;
-        this.period = period;
+        this.period = this.format(period);
         this.salary = this.format(salary);
     }
 
@@ -72,7 +73,7 @@ public class AuthPaymentDTO {
     }
 
     private String format(Date date) {
-        DateFormat dateFormat = new SimpleDateFormat("MM-yyyy");
+        DateFormat dateFormat = new SimpleDateFormat("MMMM-yyyy", Locale.US);
         return dateFormat.format(date);
     }
 }
