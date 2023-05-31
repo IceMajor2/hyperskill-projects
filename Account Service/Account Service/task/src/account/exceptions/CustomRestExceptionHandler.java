@@ -45,10 +45,10 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ApiError> handleConstraintViolationException(ConstraintViolationException exception) {
+    public ResponseEntity<ApiError> handleConstraintViolationException(ConstraintViolationException exception, WebRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         String message = getMessage(exception.getConstraintViolations());
-        String path = getPath(exception.getConstraintViolations().iterator().next());
+        String path = ((ServletWebRequest) request).getRequest().getRequestURI();
 
         ApiError error = new ApiError(status, message, path);
         return ResponseEntity.badRequest().body(error);
@@ -62,14 +62,5 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler {
             message.append(violation.getMessage()).append("; ");
         }
         return message.delete(message.length() - 2, message.length()).toString();
-    }
-
-    private String getPath(ConstraintViolation violation) {
-        StringBuilder path = new StringBuilder("/");
-
-        for(Path.Node node : violation.getPropertyPath()) {
-            path.append(node).append('/');
-        }
-        return path.deleteCharAt(path.length() - 1).toString();
     }
 }
