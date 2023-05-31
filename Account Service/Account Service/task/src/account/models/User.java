@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Entity
@@ -43,6 +44,7 @@ public class User implements Serializable {
     public User() {}
 
     public List<String> getRoles() {
+        roles.sort(Comparator.naturalOrder());
         return roles;
     }
 
