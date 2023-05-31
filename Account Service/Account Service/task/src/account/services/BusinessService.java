@@ -47,7 +47,8 @@ public class BusinessService {
     public void updatePayment(PaymentDTO paymentDTO) {
         User user = userRepository.findByEmailIgnoreCase(paymentDTO.getEmail())
                 .orElseThrow(() -> new UserNotExistsException());
-        Payment dbPayment = paymentRepository.findByUserIdAndPeriod(user.getId(), paymentDTO.getPeriod());
+        Payment dbPayment = paymentRepository.findByUserIdAndPeriod(user.getId(), paymentDTO.getPeriod())
+                .orElseThrow(() -> new NoSuchPaymentException());
         dbPayment.setSalary(paymentDTO.getSalary());
         paymentRepository.save(dbPayment);
     }

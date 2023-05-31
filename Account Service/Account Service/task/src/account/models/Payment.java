@@ -13,7 +13,7 @@ public class Payment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
-    @Column(unique = true)
+    @Column
     private String period;
     @Column
     private Long salary;
