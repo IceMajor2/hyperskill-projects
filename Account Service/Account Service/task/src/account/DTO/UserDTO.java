@@ -1,6 +1,7 @@
 package account.DTO;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class UserDTO {
@@ -10,6 +11,7 @@ public class UserDTO {
     @NotEmpty
     private String lastname;
     @NotEmpty
+    @Pattern(regexp = ".+@acme.com\\b", message = "Address e-mail not valid!")
     private String email;
     @NotEmpty
     @Size(min = 12, message = "Password length must be 12 chars minimum!")

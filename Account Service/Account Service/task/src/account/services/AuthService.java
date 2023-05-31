@@ -53,18 +53,18 @@ public class AuthService {
             throw new BreachedPasswordException();
         }
 
-        if (!isEmailValid(userDTO.getEmail())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        }
+//        if (!isEmailValid(userDTO.getEmail())) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+//        }
 
         if (userRepository.findByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
             throw new UserExistsException();
         }
     }
 
-    private boolean isEmailValid(String email) {
-        return email.endsWith("@acme.com");
-    }
+//    private boolean isEmailValid(String email) {
+//        return email.endsWith("@acme.com");
+//    }
 
     private boolean isPasswordBreached(String password) {
         var optPass = breachedPasswordsRepository.findByPassword(password);
