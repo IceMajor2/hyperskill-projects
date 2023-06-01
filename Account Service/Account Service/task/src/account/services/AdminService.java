@@ -4,6 +4,7 @@ import account.DTO.RoleDTO;
 import account.DTO.UserActionDTO;
 import account.enums.OperationType;
 import account.enums.Roles;
+import account.exceptions.auth.LockAdminException;
 import account.exceptions.auth.UserNotFoundException;
 import account.exceptions.roles.*;
 import account.models.User;
@@ -53,6 +54,8 @@ public class AdminService {
 
     public User lockUnlockUser(UserActionDTO userActionDTO) {
         User user = getUserOrElseThrow(userActionDTO.getEmail());
+        adminLockCondition(user);
+        
         user.setAccountNonLocked(userActionDTO.getOperation().accountShouldBeNonLocked());
         userRepository.save(user);
         return user;
@@ -93,6 +96,12 @@ public class AdminService {
     private void adminDeleteCondition(User user) throws AdminDeletionException {
         if (user.isAdmin()) {
             throw new RoleNotFoundException();
+        }
+    }
+
+    private void adminLockCondition(User user) {
+        if(user.isAdmin()) {
+            throw new LockAdminException();
         }
     }
 
