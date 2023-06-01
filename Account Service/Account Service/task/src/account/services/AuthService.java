@@ -39,7 +39,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        SecurityLog log = getCreateUserLog(user);
+        var log = getCreateUserLog(user);
         securityLogRepository.save(log);
 
         return user;
@@ -52,6 +52,9 @@ public class AuthService {
 
         user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
         userRepository.save(user);
+
+        var log = getChangePasswordLog(user);
+        securityLogRepository.save(log);
     }
 
     private SecurityLog getCreateUserLog(User user) {
@@ -59,6 +62,15 @@ public class AuthService {
         String subject = "Anonymous";
         String object = user.getEmail();
         String path = "/api/auth/signup";
+        SecurityLog log = new SecurityLog(action, subject, object, path);
+        return log;
+    }
+
+    private SecurityLog getChangePasswordLog(User user) {
+        var action = SecurityAction.CHANGE_PASSWORD;
+        String subject = user.getEmail();
+        String object = user.getEmail();
+        String path = "/api/auth/changepass";
         SecurityLog log = new SecurityLog(action, subject, object, path);
         return log;
     }
