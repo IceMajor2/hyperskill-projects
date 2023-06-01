@@ -25,36 +25,24 @@ public class AuthService {
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(UserDTO userDTO) {
-        validateCredentials(userDTO);
+        passwordBreachedCondition(userDTO.getPassword());
+        userExistsCondition(userDTO.getEmail());
 
         User user = new User(userDTO);
         assignRole(user);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         userRepository.save(user);
         return user;
     }
 
     public void changePassword(UserDetails userDetails, NewPasswordDTO newPasswordDTO) {
-        if (isPasswordBreached(newPasswordDTO.getPassword())) {
-            throw new BreachedPasswordException();
-        }
+        passwordBreachedCondition(newPasswordDTO.getPassword());
         User user = userRepository.findByEmailIgnoreCase(userDetails.getUsername()).get();
-        if (!isPasswordDifferent(user.getPassword(), newPasswordDTO.getPassword())) {
-            throw new PasswordNotChangedException();
-        }
+        differentPasswordCondition(user.getPassword(), newPasswordDTO.getPassword());
 
         user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
         userRepository.save(user);
-    }
-
-    private void validateCredentials(UserDTO userDTO) {
-        if (isPasswordBreached(userDTO.getPassword())) {
-            throw new BreachedPasswordException();
-        }
-
-        if (userRepository.findByEmailIgnoreCase(userDTO.getEmail()).isPresent()) {
-            throw new UserExistsException();
-        }
     }
 
     private void assignRole(User user) {
@@ -65,12 +53,22 @@ public class AuthService {
         user.addRole(Roles.ROLE_USER);
     }
 
-    private boolean isPasswordBreached(String password) {
+    private void passwordBreachedCondition(String password) {
         var optPass = breachedPasswordsRepository.findByPassword(password);
-        return optPass.isPresent();
+        if(optPass.isPresent()) {
+            throw new BreachedPasswordException();
+        }
     }
 
-    private boolean isPasswordDifferent(String userHashed, String password) {
-        return !passwordEncoder.matches(password, userHashed);
+    private void userExistsCondition(String email) {
+        if(userRepository.findByEmailIgnoreCase(email).isPresent()) {
+            throw new UserExistsException();
+        }
+    }
+
+    private void differentPasswordCondition(String usrPassHash, String newPass) {
+        if(passwordEncoder.matches(newPass, usrPassHash)) {
+            throw new PasswordNotChangedException();
+        }
     }
 }
