@@ -50,7 +50,7 @@ public class AdminService {
         return user;
     }
 
-    private Roles parseRole(String role) {
+    public static Roles parseRole(String role) {
         Roles roleEnum = null;
         try {
             roleEnum = Roles.valueOf("ROLE_" + role);

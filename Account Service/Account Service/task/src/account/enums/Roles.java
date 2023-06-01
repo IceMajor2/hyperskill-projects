@@ -12,4 +12,8 @@ public enum Roles {
     public boolean isAdmin() {
         return admin;
     }
+
+    public String noPrefix() {
+        return this.toString().substring(5);
+    }
 }

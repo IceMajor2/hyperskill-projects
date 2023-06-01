@@ -4,6 +4,7 @@ import account.DTO.RoleDTO;
 import account.exceptions.ApiError;
 import account.models.User;
 import account.services.AdminService;
+import account.services.SecurityLogService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +22,14 @@ public class AdminController {
 
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private SecurityLogService securityLogService;
 
     @PutMapping(value = {"/user/role", "/user/role/"})
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity changeUserRole(@RequestBody @Valid RoleDTO roleDTO) {
         User user = adminService.changeRole(roleDTO);
+        securityLogService.saveRoleChangedLog(user, roleDTO);
         return ResponseEntity.ok(user);
     }
 

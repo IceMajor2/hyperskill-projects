@@ -1,5 +1,8 @@
 package account.services;
 
+import account.DTO.RoleDTO;
+import account.enums.OperationType;
+import account.enums.Roles;
 import account.enums.SecurityAction;
 import account.models.SecurityLog;
 import account.models.User;
@@ -28,6 +31,18 @@ public class SecurityLogService {
         String subject = user.getEmail();
         String object = user.getEmail();
         String path = "/api/auth/changepass";
+        SecurityLog log = new SecurityLog(action, subject, object, path);
+
+        securityLogRepository.save(log);
+    }
+
+    public void saveRoleChangedLog(User user, RoleDTO roleDTO) {
+        OperationType op = roleDTO.getOperation();
+        var action = op == OperationType.GRANT ? SecurityAction.GRANT_ROLE : SecurityAction.REMOVE_ROLE;
+        String subject = user.getEmail();
+        Roles role = AdminService.parseRole(roleDTO.getRole());
+        String object = "%s role %s to %s".formatted(op.inLowerCaseExceptFirst(), role.noPrefix(), subject);
+        String path = "/api/adming/user/role";
         SecurityLog log = new SecurityLog(action, subject, object, path);
 
         securityLogRepository.save(log);
