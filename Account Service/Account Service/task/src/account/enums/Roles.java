@@ -5,8 +5,8 @@ public enum Roles {
 
     private boolean admin;
 
-    Roles(boolean isAdmin) {
-        this.admin = admin;
+    private Roles(boolean isAdmin) {
+        this.admin = isAdmin;
     }
 
     public boolean isAdmin() {

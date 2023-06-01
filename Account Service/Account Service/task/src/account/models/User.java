@@ -9,6 +9,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -99,7 +100,7 @@ public class User implements Serializable {
 
     @JsonIgnore
     public boolean isAdmin() {
-        return roles.contains("ROLE_ADMINISTRATOR");
+        return roles.contains(Roles.ROLE_ADMINISTRATOR);
     }
 
     public boolean hasRole(Roles role) {

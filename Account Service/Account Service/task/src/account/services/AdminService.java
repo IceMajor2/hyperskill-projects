@@ -35,31 +35,40 @@ public class AdminService {
     public User changeRole(RoleDTO roleDTO) {
         User user = userRepository.findByEmailIgnoreCase(roleDTO.getEmail())
                 .orElseThrow(() -> new UserNotFoundException());
+
+        OperationType op = roleDTO.getOperation();
         Roles role = null;
         try {
             role = Roles.valueOf(roleDTO.getRole());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        if (roleDTO.getOperation().equals(OperationType.REMOVE) && !user.hasRole(role)) {
+        // START |----| exceptions
+        if (op == OperationType.REMOVE && !user.hasRole(role)) {
             throw new RoleNotFoundException();
         }
-        if (roleDTO.getOperation().equals(OperationType.REMOVE) && user.rolesCount() == 1) {
+        if (op == OperationType.REMOVE && user.rolesCount() == 1) {
             throw new TooLittleRolesException();
         }
-        if (roleDTO.getOperation().equals(OperationType.REMOVE) && user.isAdmin()) {
+        if (op == OperationType.REMOVE && user.isAdmin()) {
             throw new AdminDeletionException();
         }
-        if (roleDTO.getOperation().equals(OperationType.GRANT) && ((role.isAdmin() && !user.isAdmin())
+        if (op == OperationType.GRANT
+                && ((role.isAdmin() && !user.isAdmin())
                 || (!role.isAdmin() && user.isAdmin()))) {
             throw new RoleGroupCombinationException();
         }
+        if(op == OperationType.GRANT && user.hasRole(role)) {
+            throw new RoleAlreadyAllocatedException();
+        }
         // END |----| exceptions handled
-        if(roleDTO.getOperation().equals(OperationType.GRANT)) {
+
+        if (op == OperationType.GRANT) {
             user.addRole(role);
             userRepository.save(user);
             return user;
         }
+
         user.removeRole(role);
         userRepository.save(user);
         return user;
