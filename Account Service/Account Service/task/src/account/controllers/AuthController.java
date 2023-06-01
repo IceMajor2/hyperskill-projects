@@ -4,6 +4,7 @@ import account.DTO.NewPasswordDTO;
 import account.DTO.UserDTO;
 import account.models.User;
 import account.services.AuthService;
+import account.services.SecurityService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +24,13 @@ public class AuthController {
 
     @Autowired
     private AuthService authService;
+    @Autowired
+    private SecurityService securityService;
 
     @PostMapping(value = {"/signup", "/signup/"})
     public ResponseEntity registerUser(@RequestBody @Valid UserDTO userDTO) {
         User user = authService.registerUser(userDTO);
+        securityService.saveCreateUserLog(user);
         return ResponseEntity.ok(user);
     }
 
@@ -34,7 +38,8 @@ public class AuthController {
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT') or hasAuthority('ROLE_ADMINISTRATOR')")
     public ResponseEntity changePassword(@AuthenticationPrincipal UserDetails details,
                                          @RequestBody @Valid NewPasswordDTO passwordDTO) {
-        authService.changePassword(details, passwordDTO);
+        User user = authService.changePassword(details, passwordDTO);
+        securityService.saveChangePasswordLog(user);
         return ResponseEntity.ok(Map.of("email", details.getUsername(),
                 "status", "The password has been updated successfully"));
     }
