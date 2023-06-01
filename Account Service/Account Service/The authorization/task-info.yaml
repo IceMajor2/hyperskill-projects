@@ -2175,6 +2175,24 @@ files:
 - name: src/account/exceptions/RoleAlreadyAllocatedException.java
   visible: true
   learner_created: true
+- name: db/service_db.mv.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16605#comment
-status: Unchecked
+status: Failed
+feedback:
+  message: |-
+    Wrong answer in test #52
+
+    PUT /api/admin/user/role should respond with status code 404, responded: 200
+    Trying add not existing role!
+    Response body:
+    {
+      &quot;timestamp&quot; : &quot;2023-06-01T14:55:09.7466841&quot;,
+      &quot;status&quot; : 404,
+      &quot;error&quot; : &quot;Not Found&quot;,
+      &quot;message&quot; : &quot;Provided role does not exist!&quot;,
+      &quot;path&quot; : &quot;/api/admin/user/role&quot;
+    }
+  time: "Thu, 01 Jun 2023 12:55:10 UTC"
 record: -1

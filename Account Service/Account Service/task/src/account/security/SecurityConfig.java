@@ -37,6 +37,7 @@ public class SecurityConfig {
                         // my endpoints
                         .requestMatchers("/api/auth/signup/", "/api/auth/signup").permitAll()
                         .requestMatchers("/api/acct/payments/", "/api/auth/payments").permitAll()
+                        .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMINISTRATOR")
                         // other endpoints
                         .requestMatchers("/error").permitAll()
                         .requestMatchers(toH2Console()).permitAll()

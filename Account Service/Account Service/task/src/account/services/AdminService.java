@@ -39,7 +39,7 @@ public class AdminService {
         OperationType op = roleDTO.getOperation();
         Roles role = null;
         try {
-            role = Roles.valueOf(roleDTO.getRole());
+            role = Roles.valueOf("ROLE_" + roleDTO.getRole());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,6 +1,5 @@
 package account.exceptions;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
@@ -25,7 +24,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice
@@ -60,6 +58,14 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler i
         return ResponseEntity.badRequest().body(error);
     }
 
+    @Override
+    public void handle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            AccessDeniedException exc) throws IOException {
+        response.sendError(403, "Access Denied!");
+    }
+
     private String getMessage(Set<ConstraintViolation<?>> violations) {
         StringBuilder message = new StringBuilder("");
         var excIterator = violations.stream().iterator();
@@ -68,13 +74,5 @@ public class CustomRestExceptionHandler extends ResponseEntityExceptionHandler i
             message.append(violation.getMessage()).append("; ");
         }
         return message.delete(message.length() - 2, message.length()).toString();
-    }
-
-    @Override
-    public void handle(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            AccessDeniedException exc) throws IOException, ServletException {
-        response.sendError(403, "Access Denied!");
     }
 }
