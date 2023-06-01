@@ -9,7 +9,6 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -20,17 +19,22 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotEmpty
     private String name;
+
     @NotEmpty
     @JsonProperty("lastname")
     private String lastName;
+
     @NotEmpty
     @Column(unique = true)
     private String email;
+
     @NotEmpty
     @JsonIgnore
     private String password;
+
     @NotEmpty
     @JsonProperty("roles")
     private List<Roles> roles;

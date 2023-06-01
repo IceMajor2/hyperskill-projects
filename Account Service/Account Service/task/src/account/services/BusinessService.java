@@ -2,9 +2,9 @@ package account.services;
 
 import account.DTO.AuthPaymentDTO;
 import account.DTO.PaymentDTO;
-import account.exceptions.NoSuchPaymentException;
-import account.exceptions.PaymentMadeForPeriodException;
-import account.exceptions.UserNotExistsException;
+import account.exceptions.business.NoSuchPaymentException;
+import account.exceptions.business.PaymentMadeForPeriodException;
+import account.exceptions.auth.UserNotExistsException;
 import account.models.Payment;
 import account.models.User;
 import account.repositories.PaymentRepository;

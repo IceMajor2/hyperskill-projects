@@ -2,7 +2,6 @@ package account.controllers;
 
 import account.DTO.RoleDTO;
 import account.exceptions.ApiError;
-import account.exceptions.RoleNotFoundException;
 import account.models.User;
 import account.services.AdminService;
 import jakarta.validation.Valid;

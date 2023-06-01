@@ -12,8 +12,6 @@ import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private final String ROLE_PREFIX = "ROLE_";
-
     private final String username;
     private final String password;
     private boolean nonLocked;

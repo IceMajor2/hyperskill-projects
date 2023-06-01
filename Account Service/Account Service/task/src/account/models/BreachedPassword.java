@@ -8,7 +8,6 @@ public class BreachedPassword {
 
     @Id
     private Long id;
-
     private String password;
 
     public BreachedPassword() {}

@@ -14,12 +14,15 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_id")
     private User user;
+
     @Column
     @Temporal(TemporalType.DATE)
     private Date period;
+
     @Column
     private Long salary;
 

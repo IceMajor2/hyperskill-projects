@@ -11,7 +11,9 @@ public class RoleDTO {
     @JsonProperty("user")
     @NotEmpty
     private String email;
+
     private String role;
+
     @Enumerated(EnumType.STRING)
     private OperationType operation;
 

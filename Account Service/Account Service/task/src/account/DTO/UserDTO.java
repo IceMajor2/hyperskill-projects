@@ -8,11 +8,14 @@ public class UserDTO {
 
     @NotEmpty
     private String name;
+
     @NotEmpty
     private String lastname;
+
     @NotEmpty
     @Pattern(regexp = ".+@acme.com\\b", message = "Address e-mail not valid!")
     private String email;
+
     @NotEmpty
     @Size(min = 12, message = "Password length must be 12 chars minimum!")
     private String password;
