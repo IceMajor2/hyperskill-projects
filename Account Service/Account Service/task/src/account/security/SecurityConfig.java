@@ -54,6 +54,6 @@ public class SecurityConfig {
 
     @Bean
     public AccessDeniedHandler getAccessDeniedHandler(){
-        return new CustomRestExceptionHandler();
+        return new CustomAccessDeniedHandler();
     }
 }
