@@ -2,6 +2,7 @@ package account.controllers;
 
 import account.DTO.RoleDTO;
 import account.exceptions.ApiError;
+import account.exceptions.RoleNotFoundException;
 import account.models.User;
 import account.services.AdminService;
 import jakarta.validation.Valid;
@@ -45,13 +46,13 @@ public class AdminController {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ApiError handleRoleNotFound(
+    public ResponseEntity handleRoleNotFound(
             RuntimeException ex, WebRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
-        String message = "Provided role does not exist!";
+        String message = "Role not found!";
         String path = ((ServletWebRequest) request).getRequest().getRequestURI();
 
         ApiError error = new ApiError(status, message, path);
-        return error;
+        return ResponseEntity.status(status).body(error);
     }
 }

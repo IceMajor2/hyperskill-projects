@@ -34,9 +34,9 @@ public class SecurityConfig {
                 .headers(headers -> headers
                         .frameOptions(frameOptionsConfig -> frameOptionsConfig.disable()))
                 .authorizeHttpRequests((authz) -> authz
-                        // my endpoints
+                        // controller-specific endpoints
                         .requestMatchers("/api/auth/signup/", "/api/auth/signup").permitAll()
-                        .requestMatchers("/api/acct/payments/", "/api/auth/payments").permitAll()
+                        .requestMatchers("/api/acct/payments/", "/api/acct/payments").hasAuthority("ROLE_ACCOUNTANT")
                         .requestMatchers("/api/admin/**").hasAuthority("ROLE_ADMINISTRATOR")
                         // other endpoints
                         .requestMatchers("/error").permitAll()

@@ -47,11 +47,11 @@ public class AdminService {
         if (op == OperationType.REMOVE && !user.hasRole(role)) {
             throw new RoleNotFoundException();
         }
-        if (op == OperationType.REMOVE && user.rolesCount() == 1) {
-            throw new TooLittleRolesException();
-        }
         if (op == OperationType.REMOVE && user.isAdmin()) {
             throw new AdminDeletionException();
+        }
+        if (op == OperationType.REMOVE && user.rolesCount() == 1) {
+            throw new TooLittleRolesException();
         }
         if (op == OperationType.GRANT
                 && ((role.isAdmin() && !user.isAdmin())
