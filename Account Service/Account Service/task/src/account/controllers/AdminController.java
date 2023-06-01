@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
@@ -51,8 +53,10 @@ public class AdminController {
 
     @PutMapping(value = {"/user/access", "/user/access/"})
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public ResponseEntity lockUnlockUser(@RequestBody @Valid UserActionDTO userActionDTO) {
+    public ResponseEntity lockUnlockUser(@AuthenticationPrincipal UserDetails details,
+                                         @RequestBody @Valid UserActionDTO userActionDTO) {
         User user = adminService.lockUnlockUser(userActionDTO);
+        securityLogService.saveAccountLockLog(details, user, userActionDTO);
         return ResponseEntity.ok(Map.of("status", "User %s %s!"
                 .formatted(user.getEmail(),
                         userActionDTO.getOperation().toString().toLowerCase() + "ed")));

@@ -1,18 +1,12 @@
 package account.enums;
 
 public enum OperationType {
-    GRANT("GRANT"), REMOVE("REMOVE");
-
-    private String label;
-
-    OperationType(String label) {
-        this.label = label;
-    }
+    GRANT, REMOVE;
 
     public String inLowerCaseExceptFirst() {
         StringBuilder sb = new StringBuilder("");
-        sb.append(label.charAt(0));
-        sb.append(label.substring(1, label.length()).toLowerCase());
+        sb.append(this.toString().charAt(0));
+        sb.append(this.toString().substring(1, this.toString().length()).toLowerCase());
         return sb.toString();
     }
 }

@@ -12,4 +12,11 @@ public enum AccountAction {
     public boolean accountShouldBeNonLocked() {
         return accountShouldBeNonLocked;
     }
+
+    public String inLowerCaseExceptFirst() {
+        StringBuilder sb = new StringBuilder("");
+        sb.append(this.toString().charAt(0));
+        sb.append(this.toString().substring(1, this.toString().length()).toLowerCase());
+        return sb.toString();
+    }
 }
