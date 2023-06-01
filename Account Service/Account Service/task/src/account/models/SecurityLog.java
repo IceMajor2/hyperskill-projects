@@ -1,6 +1,7 @@
 package account.models;
 
 import account.enums.Roles;
+import account.enums.SecurityAction;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
@@ -19,11 +20,21 @@ public class SecurityLog {
     @Temporal(TemporalType.DATE)
     private Date date;
     @Enumerated(EnumType.STRING)
-    private Roles subject;
+    private SecurityAction action;
+    private String subject;
     private String object;
     private String path;
 
-    public SecurityLog() {}
+    public SecurityLog() {
+    }
+
+    public SecurityLog(SecurityAction action, String subject, String object, String path) {
+        this.date = new Date();
+        this.action = action;
+        this.subject = subject;
+        this.object = object;
+        this.path = path;
+    }
 
     public Long getId() {
         return id;
@@ -41,11 +52,11 @@ public class SecurityLog {
         this.date = date;
     }
 
-    public Roles getSubject() {
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(Roles subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
     }
 
@@ -59,6 +70,14 @@ public class SecurityLog {
 
     public String getPath() {
         return path;
+    }
+
+    public SecurityAction getAction() {
+        return action;
+    }
+
+    public void setAction(SecurityAction action) {
+        this.action = action;
     }
 
     public void setPath(String path) {

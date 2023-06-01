@@ -3,11 +3,14 @@ package account.services;
 import account.DTO.NewPasswordDTO;
 import account.DTO.UserDTO;
 import account.enums.Roles;
+import account.enums.SecurityAction;
 import account.exceptions.auth.BreachedPasswordException;
 import account.exceptions.auth.PasswordNotChangedException;
 import account.exceptions.auth.UserExistsException;
+import account.models.SecurityLog;
 import account.models.User;
 import account.repositories.BreachedPasswordsRepository;
+import account.repositories.SecurityLogRepository;
 import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +25,8 @@ public class AuthService {
     @Autowired
     private BreachedPasswordsRepository breachedPasswordsRepository;
     @Autowired
+    private SecurityLogRepository securityLogRepository;
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public User registerUser(UserDTO userDTO) {
@@ -33,6 +38,10 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
+
+        SecurityLog log = getCreateUserLog(user);
+        securityLogRepository.save(log);
+
         return user;
     }
 
@@ -43,6 +52,15 @@ public class AuthService {
 
         user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
         userRepository.save(user);
+    }
+
+    private SecurityLog getCreateUserLog(User user) {
+        var action = SecurityAction.CREATE_USER;
+        String subject = "Anonymous";
+        String object = user.getEmail();
+        String path = "/api/auth/signup";
+        SecurityLog log = new SecurityLog(action, subject, object, path);
+        return log;
     }
 
     private void assignRole(User user) {
