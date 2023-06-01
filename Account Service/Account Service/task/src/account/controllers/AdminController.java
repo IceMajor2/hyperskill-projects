@@ -38,8 +38,10 @@ public class AdminController {
 
     @DeleteMapping(value = {"/user/{email}", "/user", "/user/"})
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public ResponseEntity deleteUser(@PathVariable String email) {
+    public ResponseEntity deleteUser(@AuthenticationPrincipal UserDetails details,
+                                     @PathVariable String email) {
         User deletedUsr = adminService.deleteUser(email);
+        securityLogService.saveAccountDeletedLog(details, deletedUsr);
         return ResponseEntity.ok(Map.of("user", deletedUsr.getEmail(),
                 "status", "Deleted successfully!"));
     }

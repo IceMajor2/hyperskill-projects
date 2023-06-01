@@ -66,6 +66,17 @@ public class SecurityLogService {
         securityLogRepository.save(log);
     }
 
+    public void saveAccountDeletedLog(UserDetails adminDetails, User user) {
+        var action = SecurityAction.DELETE_USER;
+        User admin = userRepository.findByEmailIgnoreCase(adminDetails.getUsername()).get();
+        String subject = admin.getEmail();
+        String object = user.getEmail();
+        String path = "/api/admin/user";
+        SecurityLog log = new SecurityLog(action, subject, object, path);
+
+        securityLogRepository.save(log);
+    }
+
     public void saveLog(SecurityLog log) {
         securityLogRepository.save(log);
     }
