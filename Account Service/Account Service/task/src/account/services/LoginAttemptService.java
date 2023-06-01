@@ -69,7 +69,7 @@ public class LoginAttemptService {
     }
 
     private void saveLockUserLog(final String userEmail, String URI) {
-        var action = SecurityAction.BRUTE_FORCE;
+        var action = SecurityAction.LOCK_USER;
         String subject = userEmail;
         String object = "Lock user %s".formatted(userEmail);
         String path = URI;
