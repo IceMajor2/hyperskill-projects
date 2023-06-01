@@ -2,7 +2,6 @@ package account.services;
 
 import account.enums.SecurityAction;
 import account.models.SecurityLog;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +26,10 @@ public class LoginAttemptService {
         int usrAttempts = attempts.getOrDefault(userEmail, 0);
         usrAttempts++;
         attempts.put(userEmail, usrAttempts);
+    }
+
+    public void loginSuccessful(final String userEmail) {
+        attempts.put(userEmail, 0);
     }
 
     public boolean isBlocked(final String userEmail) {
