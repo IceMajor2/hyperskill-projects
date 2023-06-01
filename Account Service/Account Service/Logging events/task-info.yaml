@@ -2359,6 +2359,15 @@ files:
 - name: src/account/services/SecurityService.java
   visible: true
   learner_created: true
+- name: src/account/security/AuthenticationFailureListener.java
+  visible: true
+  learner_created: true
+- name: src/account/services/SecurityLogService.java
+  visible: true
+  learner_created: true
+- name: src/account/services/LoginAttemptService.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16606#comment
 status: Unchecked
 record: -1

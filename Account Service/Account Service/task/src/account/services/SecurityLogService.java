@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SecurityService {
+public class SecurityLogService {
 
     @Autowired
     private SecurityLogRepository securityLogRepository;
@@ -30,6 +30,10 @@ public class SecurityService {
         String path = "/api/auth/changepass";
         SecurityLog log = new SecurityLog(action, subject, object, path);
 
+        securityLogRepository.save(log);
+    }
+
+    public void saveLog(SecurityLog log) {
         securityLogRepository.save(log);
     }
 }
