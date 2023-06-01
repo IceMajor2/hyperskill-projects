@@ -55,7 +55,7 @@ public class AdminService {
     public User lockUnlockUser(UserActionDTO userActionDTO) {
         User user = getUserOrElseThrow(userActionDTO.getEmail());
         adminLockCondition(user);
-        
+
         user.setAccountNonLocked(userActionDTO.getOperation().accountShouldBeNonLocked());
         userRepository.save(user);
         return user;

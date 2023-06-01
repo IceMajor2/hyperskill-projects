@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SecurityLogService {
 
@@ -21,6 +23,11 @@ public class SecurityLogService {
     private SecurityLogRepository securityLogRepository;
     @Autowired
     private UserRepository userRepository;
+
+    public List<SecurityLog> getLogs() {
+        var logs = securityLogRepository.findAllByOrderByIdAsc();
+        return logs;
+    }
 
     public void saveCreateUserLog(User user) {
         var action = SecurityAction.CREATE_USER;
