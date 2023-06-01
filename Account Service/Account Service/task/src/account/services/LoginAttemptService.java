@@ -2,6 +2,8 @@ package account.services;
 
 import account.enums.SecurityAction;
 import account.models.SecurityLog;
+import account.models.User;
+import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ public class LoginAttemptService {
     private Map<String, Integer> attempts;
     @Autowired
     private SecurityLogService securityLogService;
+    @Autowired
+    private UserRepository userRepository;
 
     public LoginAttemptService() {
         super();
@@ -22,26 +26,55 @@ public class LoginAttemptService {
     }
 
     public void loginFailed(final String userEmail, String URI) {
-        saveLogWhenLoginFailed(userEmail, URI);
+        saveLoginFailedLog(userEmail, URI);
+        User user = userRepository.findByEmailIgnoreCase(userEmail).get();
+        if(user.isAdmin()) {
+            return;
+        }
+
         int usrAttempts = attempts.getOrDefault(userEmail, 0);
         usrAttempts++;
         attempts.put(userEmail, usrAttempts);
+
+        if(usrAttempts > MAX_ATTEMPTS) {
+            saveBruteForceLog(userEmail, URI);
+            user.setAccountNonLocked(false);
+            saveLockUserLog(userEmail, URI);
+            userRepository.save(user);
+        }
     }
 
     public void loginSuccessful(final String userEmail) {
         attempts.put(userEmail, 0);
     }
 
-    public boolean isBlocked(final String userEmail) {
-        return attempts.getOrDefault(userEmail, 0) > MAX_ATTEMPTS;
-    }
-
-    private void saveLogWhenLoginFailed(final String userEmail, String URI) {
+    private void saveLoginFailedLog(final String userEmail, String URI) {
         var action = SecurityAction.LOGIN_FAILED;
         String subject = userEmail;
         String object = URI;
         String path = URI;
         SecurityLog log = new SecurityLog(action, subject, object, path);
+
+        securityLogService.saveLog(log);
+    }
+
+    private void saveBruteForceLog(final String userEmail, String URI) {
+        var action = SecurityAction.BRUTE_FORCE;
+        String subject = userEmail;
+        String object = URI;
+        String path = URI;
+        SecurityLog log = new SecurityLog(action, subject, object, path);
+
+        securityLogService.saveLog(log);
+    }
+
+    private void saveLockUserLog(final String userEmail, String URI) {
+        var action = SecurityAction.BRUTE_FORCE;
+        String subject = userEmail;
+        String object = "Lock user %s".formatted(userEmail);
+        String path = URI;
+        SecurityLog log = new SecurityLog(action, subject, object, path);
+
         securityLogService.saveLog(log);
     }
 }
