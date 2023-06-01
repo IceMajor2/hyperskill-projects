@@ -2356,9 +2356,6 @@ files:
 - name: src/account/repositories/SecurityLogRepository.java
   visible: true
   learner_created: true
-- name: src/account/services/SecurityService.java
-  visible: true
-  learner_created: true
 - name: src/account/security/AuthenticationFailureListener.java
   visible: true
   learner_created: true
