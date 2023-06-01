@@ -1,6 +1,7 @@
 package account.services;
 
 import account.DTO.RoleDTO;
+import account.DTO.UserActionDTO;
 import account.enums.OperationType;
 import account.enums.Roles;
 import account.exceptions.auth.UserNotFoundException;
@@ -46,6 +47,13 @@ public class AdminService {
         }
 
         user.removeRole(role);
+        userRepository.save(user);
+        return user;
+    }
+
+    public User lockUnlockUser(UserActionDTO userActionDTO) {
+        User user = getUserOrElseThrow(userActionDTO.getEmail());
+        user.setAccountNonLocked(userActionDTO.getOperation().accountShouldBeNonLocked());
         userRepository.save(user);
         return user;
     }

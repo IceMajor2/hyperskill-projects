@@ -1,6 +1,7 @@
 package account.controllers;
 
 import account.DTO.RoleDTO;
+import account.DTO.UserActionDTO;
 import account.exceptions.ApiError;
 import account.models.User;
 import account.services.AdminService;
@@ -46,6 +47,15 @@ public class AdminController {
     public ResponseEntity usersInfo() {
         var users = adminService.getUsersList();
         return ResponseEntity.ok(users);
+    }
+
+    @PutMapping(value = {"/user/access", "/user/access/"})
+    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+    public ResponseEntity lockUnlockUser(@RequestBody @Valid UserActionDTO userActionDTO) {
+        User user = adminService.lockUnlockUser(userActionDTO);
+        return ResponseEntity.ok(Map.of("status", "User %s %s!"
+                .formatted(user.getEmail(),
+                        userActionDTO.getOperation().toString().toLowerCase() + "ed")));
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

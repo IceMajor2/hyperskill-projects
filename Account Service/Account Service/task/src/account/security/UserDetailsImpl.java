@@ -20,7 +20,7 @@ public class UserDetailsImpl implements UserDetails {
     public UserDetailsImpl(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
-        this.nonLocked = isAccountNonLocked();
+        this.nonLocked = user.isAccountNonLocked();
 
         this.rolesAndAuthorities = new ArrayList<>();
         for(Roles role : user.getRoles()) {
@@ -50,7 +50,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return this.nonLocked;
     }
 
     @Override

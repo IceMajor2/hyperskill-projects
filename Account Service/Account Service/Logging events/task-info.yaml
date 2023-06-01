@@ -2371,6 +2371,12 @@ files:
 - name: src/account/security/CustomAccessDeniedHandler.java
   visible: true
   learner_created: true
+- name: src/account/enums/AccountAction.java
+  visible: true
+  learner_created: true
+- name: src/account/DTO/UserActionDTO.java
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16606#comment
 status: Unchecked
 record: -1

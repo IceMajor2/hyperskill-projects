@@ -19,25 +19,22 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @NotEmpty
     private String name;
-
     @NotEmpty
     @JsonProperty("lastname")
     private String lastName;
-
     @NotEmpty
     @Column(unique = true)
     private String email;
-
     @NotEmpty
     @JsonIgnore
     private String password;
-
     @NotEmpty
     @JsonProperty("roles")
     private List<Roles> roles;
+    @JsonIgnore
+    private boolean accountNonLocked = true;
 
     public User(UserDTO userDTO) {
         this.name = userDTO.getName();
@@ -100,6 +97,14 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
     }
 
     @JsonIgnore
