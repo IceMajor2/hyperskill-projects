@@ -49,6 +49,4 @@ public class BusinessController {
         businessService.updatePayment(paymentDTO);
         return ResponseEntity.ok(Map.of("status", "Updated successfully!"));
     }
-
-
 }

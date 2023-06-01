@@ -13,12 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private Map<String, Integer> attempts;
 
     public List<User> getUsersList() {
         List<User> users = userRepository.findAllByOrderByIdAsc();
@@ -57,6 +60,9 @@ public class AdminService {
         adminLockCondition(user);
 
         user.setAccountNonLocked(userActionDTO.getOperation().accountShouldBeNonLocked());
+        if(userActionDTO.getOperation().accountShouldBeNonLocked() == true) {
+            attempts.put(user.getEmail(), 0);
+        }
         userRepository.save(user);
         return user;
     }

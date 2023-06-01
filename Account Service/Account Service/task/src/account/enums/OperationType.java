@@ -1,7 +1,17 @@
 package account.enums;
 
 public enum OperationType {
-    GRANT, REMOVE;
+    GRANT("to"), REMOVE("from");
+
+    private String toFrom;
+
+    OperationType(String toFrom) {
+        this.toFrom = toFrom;
+    }
+
+    public String getToFrom() {
+        return toFrom;
+    }
 
     public String inLowerCaseExceptFirst() {
         StringBuilder sb = new StringBuilder("");

@@ -1,7 +1,7 @@
 package account.enums;
 
 public enum Roles {
-    ROLE_ADMINISTRATOR(true), ROLE_ACCOUNTANT(false), ROLE_USER(false), ROLE_AUDITOR(false);
+    ROLE_ACCOUNTANT(false), ROLE_ADMINISTRATOR(true), ROLE_AUDITOR(false), ROLE_USER(false);
 
     private boolean admin;
 

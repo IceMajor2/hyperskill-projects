@@ -2383,6 +2383,12 @@ files:
         }
     }
   learner_created: true
+- name: db/service_db.mv.db
+  visible: true
+  learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16606#comment
-status: Unchecked
+status: Solved
+feedback:
+  message: Congratulations!
+  time: "Thu, 01 Jun 2023 22:31:02 UTC"
 record: -1

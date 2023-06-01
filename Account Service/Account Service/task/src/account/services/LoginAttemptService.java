@@ -5,15 +5,17 @@ import account.models.SecurityLog;
 import account.models.User;
 import account.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class LoginAttemptService {
 
-    private static final int MAX_ATTEMPTS = 5;
+    private static final int MAX_ATTEMPTS = 4;
     private Map<String, Integer> attempts;
     @Autowired
     private SecurityLogService securityLogService;
@@ -27,15 +29,23 @@ public class LoginAttemptService {
 
     public void loginFailed(final String userEmail, String URI) {
         saveLoginFailedLog(userEmail, URI);
-        User user = userRepository.findByEmailIgnoreCase(userEmail).get();
+        Optional<User> userOpt = userRepository.findByEmailIgnoreCase(userEmail);
+
+        if(userOpt.isEmpty()) {
+            return;
+        }
+        User user = userOpt.get();
         if(user.isAdmin()) {
+            return;
+        }
+        if(!user.isAccountNonLocked()) {
             return;
         }
 
         int usrAttempts = attempts.getOrDefault(userEmail, 0);
         usrAttempts++;
         attempts.put(userEmail, usrAttempts);
-
+        System.out.println(usrAttempts);
         if(usrAttempts > MAX_ATTEMPTS) {
             saveBruteForceLog(userEmail, URI);
             user.setAccountNonLocked(false);
@@ -76,5 +86,10 @@ public class LoginAttemptService {
         SecurityLog log = new SecurityLog(action, subject, object, path);
 
         securityLogService.saveLog(log);
+    }
+
+    @Bean
+    public Map<String, Integer> getAttempts() {
+        return attempts;
     }
 }

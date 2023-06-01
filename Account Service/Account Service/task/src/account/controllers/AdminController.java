@@ -30,9 +30,10 @@ public class AdminController {
 
     @PutMapping(value = {"/user/role", "/user/role/"})
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public ResponseEntity changeUserRole(@RequestBody @Valid RoleDTO roleDTO) {
+    public ResponseEntity changeUserRole(@AuthenticationPrincipal UserDetails details,
+                                         @RequestBody @Valid RoleDTO roleDTO) {
         User user = adminService.changeRole(roleDTO);
-        securityLogService.saveRoleChangedLog(user, roleDTO);
+        securityLogService.saveRoleChangedLog(details, user, roleDTO);
         return ResponseEntity.ok(user);
     }
 

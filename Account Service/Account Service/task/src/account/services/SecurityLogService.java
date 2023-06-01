@@ -49,13 +49,14 @@ public class SecurityLogService {
         securityLogRepository.save(log);
     }
 
-    public void saveRoleChangedLog(User user, RoleDTO roleDTO) {
+    public void saveRoleChangedLog(UserDetails adminDetails, User user, RoleDTO roleDTO) {
         OperationType op = roleDTO.getOperation();
         var action = op == OperationType.GRANT ? SecurityAction.GRANT_ROLE : SecurityAction.REMOVE_ROLE;
-        String subject = user.getEmail();
+        String subject = adminDetails.getUsername();
         Roles role = AdminService.parseRole(roleDTO.getRole());
-        String object = "%s role %s to %s".formatted(op.inLowerCaseExceptFirst(), role.noPrefix(), subject);
-        String path = "/api/adming/user/role";
+        String object = "%s role %s %s %s".formatted(op.inLowerCaseExceptFirst(), role.noPrefix(),
+                op.getToFrom(), user.getEmail());
+        String path = "/api/admin/user/role";
         SecurityLog log = new SecurityLog(action, subject, object, path);
 
         securityLogRepository.save(log);
@@ -64,8 +65,7 @@ public class SecurityLogService {
     public void saveAccountLockLog(UserDetails adminDetails, User user, UserActionDTO userActionDTO) {
         AccountAction op = userActionDTO.getOperation();
         var action = op == AccountAction.LOCK ? SecurityAction.LOCK_USER : SecurityAction.UNLOCK_USER;
-        User admin = userRepository.findByEmailIgnoreCase(adminDetails.getUsername()).get();
-        String subject = admin.getEmail();
+        String subject = adminDetails.getUsername();
         String object = "%s user %s".formatted(op.inLowerCaseExceptFirst(), user.getEmail());
         String path = "/api/admin/user/access";
         SecurityLog log = new SecurityLog(action, subject, object, path);
@@ -75,8 +75,7 @@ public class SecurityLogService {
 
     public void saveAccountDeletedLog(UserDetails adminDetails, User user) {
         var action = SecurityAction.DELETE_USER;
-        User admin = userRepository.findByEmailIgnoreCase(adminDetails.getUsername()).get();
-        String subject = admin.getEmail();
+        String subject = adminDetails.getUsername();
         String object = user.getEmail();
         String path = "/api/admin/user";
         SecurityLog log = new SecurityLog(action, subject, object, path);
