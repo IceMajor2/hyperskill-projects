@@ -1,6 +1,7 @@
-package account.security;
+package account.services;
 
 import account.repositories.UserRepository;
+import account.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -2005,35 +2005,6 @@ files:
         }
     }
   learner_created: true
-- name: src/account/security/UserDetailsServiceImpl.java
-  visible: true
-  text: |-
-    package account.security;
-
-    import account.repositories.UserRepository;
-    import org.springframework.beans.factory.annotation.Autowired;
-    import org.springframework.security.core.userdetails.UserDetails;
-    import org.springframework.security.core.userdetails.UserDetailsService;
-    import org.springframework.security.core.userdetails.UsernameNotFoundException;
-    import org.springframework.stereotype.Service;
-    import account.models.User;
-
-    import java.util.Optional;
-
-    @Service
-    public class UserDetailsServiceImpl implements UserDetailsService {
-
-        @Autowired
-        private UserRepository userRepository;
-
-        @Override
-        public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-            Optional<User> user = userRepository.findByEmailIgnoreCase(email);
-            return user.map(UserDetailsImpl::new).orElseThrow(() -> new UsernameNotFoundException("User '%s' was not found"
-                    .formatted(email)));
-        }
-    }
-  learner_created: true
 - name: src/account/repositories/UserRepository.java
   visible: true
   text: |
@@ -2382,6 +2353,35 @@ files:
   learner_created: true
 - name: src/account/security/AuthenticationSuccessListener.java
   visible: true
+  learner_created: true
+- name: src/account/services/UserDetailsServiceImpl.java
+  visible: true
+  text: |-
+    package account.security;
+
+    import account.repositories.UserRepository;
+    import org.springframework.beans.factory.annotation.Autowired;
+    import org.springframework.security.core.userdetails.UserDetails;
+    import org.springframework.security.core.userdetails.UserDetailsService;
+    import org.springframework.security.core.userdetails.UsernameNotFoundException;
+    import org.springframework.stereotype.Service;
+    import account.models.User;
+
+    import java.util.Optional;
+
+    @Service
+    public class UserDetailsServiceImpl implements UserDetailsService {
+
+        @Autowired
+        private UserRepository userRepository;
+
+        @Override
+        public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+            Optional<User> user = userRepository.findByEmailIgnoreCase(email);
+            return user.map(UserDetailsImpl::new).orElseThrow(() -> new UsernameNotFoundException("User '%s' was not found"
+                    .formatted(email)));
+        }
+    }
   learner_created: true
 feedback_link: https://hyperskill.org/learn/step/16606#comment
 status: Unchecked
