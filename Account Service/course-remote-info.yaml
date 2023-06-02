@@ -25,7 +25,7 @@ stages:
   is_completed: true
 - id: 1092
   step: 16607
-  is_completed: false
+  is_completed: true
 topics:
   0:
   - title: Computer algorithms
