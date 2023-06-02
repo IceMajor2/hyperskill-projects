@@ -40,7 +40,7 @@ My implementation of project 'Account Service' from JetBrains Academy on Hypersk
 
 In order to get this project launched on your machine, see the instructions below.
 
-1. Download this directory (it's not repository) this link:
+1. Download this directory (it's not repository) through, for example, this link:
 ```shell
 https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2FIceMajor2%2FJetBrains_course%2Ftree%2Fmain%2FAccountService
 ```
