@@ -25,6 +25,13 @@ public class UserInterface {
                 printCategories();
                 continue;
             }
+            if("playlists Mood".equals(input)) {
+                System.out.println("---MOOD PLAYLISTS---");
+                System.out.println("Walk Like A Badass");
+                System.out.println("Rage Beats");
+                System.out.println("Arab Mood Booster");
+                System.out.println("Sunday Stroll");
+            }
             if("exit".equals(input)) {
                 printExit();
                 break;
