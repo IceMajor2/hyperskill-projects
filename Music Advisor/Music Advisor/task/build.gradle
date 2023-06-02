@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+group 'advisor'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:+'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class' : 'advisor.Main'
+    }
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

@@ -1,0 +1,15 @@
+# compiled files
+*.class
+
+# course files
+course-info.yaml
+course-remote-info.yaml
+/Music Advisor/*
+
+!/Music Advisor/task
+
+# IntelliJ
+.gradle
+.idea
+
+
