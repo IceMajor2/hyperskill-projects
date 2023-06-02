@@ -31,6 +31,7 @@ public class UserInterface {
                 System.out.println("Rage Beats");
                 System.out.println("Arab Mood Booster");
                 System.out.println("Sunday Stroll");
+                continue;
             }
             if("exit".equals(input)) {
                 printExit();

@@ -5,6 +5,7 @@
 course-info.yaml
 course-remote-info.yaml
 /Music Advisor/*
+/Music Advisor/task/build
 
 !/Music Advisor/task
 
