@@ -87,13 +87,19 @@ public class UserInterface {
     }
 
     private void authUser() throws IOException, InterruptedException {
+        System.out.println("use this link to request the access code:");
         System.out.println(
                 "https://accounts.spotify.com/" +
-                        "authorize?client_id=b43811db87904f6a99fc4dde9844d12c" +
+                        "authorize?client_id=" + Http.CLIENT_ID +
                         "&redirect_uri=http://localhost:8080" +
                         "&response_type=code");
-        System.out.println("---SUCCESS---");
+        System.out.println("waiting for code...");
         http.listenForCodeAndShutDown();
+        System.out.println("code received");
+        System.out.println("making http request for access_token...");
+        System.out.println("response:");
+        //http.accessTokenRequest();
+        System.out.println(http.accessTokenRequest());
         this.logged = true;
     }
 }
