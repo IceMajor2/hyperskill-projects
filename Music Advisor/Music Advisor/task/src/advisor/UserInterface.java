@@ -15,7 +15,7 @@ public class UserInterface {
         this.logged = false;
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, InterruptedException {
         one:
         while (true) {
             String input = scanner.nextLine();
@@ -86,16 +86,14 @@ public class UserInterface {
         }
     }
 
-
-    private void authUser() throws IOException {
-        http.start();
+    private void authUser() throws IOException, InterruptedException {
         System.out.println(
                 "https://accounts.spotify.com/" +
                         "authorize?client_id=b43811db87904f6a99fc4dde9844d12c" +
                         "&redirect_uri=http://localhost:8080" +
                         "&response_type=code");
         System.out.println("---SUCCESS---");
-        http.shutDown();
+        http.listenForCodeAndShutDown();
         this.logged = true;
     }
 }

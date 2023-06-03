@@ -1,7 +1,5 @@
 package advisor;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -15,14 +13,9 @@ public class Http {
     private String AUTH_CODE;
     private final String _URI = "http://localhost:8080";
 
-    private HttpServer server;
     private HttpClient client;
 
     private Http() throws IOException {
-        this.AUTH_CODE = "";
-        this.server = HttpServer.create();
-        server.bind(new InetSocketAddress(8080), 0);
-
         this.client = HttpClient.newBuilder().build();
     }
 
@@ -33,46 +26,36 @@ public class Http {
         return INSTANCE;
     }
 
-    public void start() {
-        server.start();
+    private HttpServer initServer() throws IOException {
+        return HttpServer.create(new InetSocketAddress(8080), 0);
     }
 
-    public void shutDown() {
-        server.stop(1);
-    }
+    public void listenForCodeAndShutDown() throws IOException, InterruptedException {
+        AUTH_CODE = "";
+        HttpServer server = initServer();
 
-    private void listenForCode() {
-        server.createContext("/", new HttpHandler() {
-            @Override
-            public void handle(HttpExchange exchange) throws IOException {
-                String query = exchange.getRequestURI().getQuery();
+        server.createContext("/", exchange -> {
+            String query = exchange.getRequestURI().getQuery();
 
-                if(query.contains("code")) {
-                    AUTH_CODE = query.substring(5);
-                    query = "Got the code. Return back to your program.";
-                } else {
-                    query = "Authorization code not found. Try again.";
-                }
+            if (query != null && query.contains("code")) {
+                AUTH_CODE = query.substring(5);
+                query = "Got the code. Return back to your program.";
 
-                exchange.sendResponseHeaders(401, query.length());
-                exchange.getResponseBody().write(query.getBytes());
-                exchange.getResponseBody().close();
+            } else {
+                AUTH_CODE = null;
+                query = "Authorization code not found. Try again.";
             }
+
+            exchange.sendResponseHeaders(200, query.length());
+            exchange.getResponseBody().write(query.getBytes());
+            exchange.getResponseBody().close();
         });
+        server.start();
+        // keeping server alive, while the OAuth awaits
+        while (AUTH_CODE != null && AUTH_CODE.isEmpty()) {
+            Thread.sleep(10);
+        }
+        // OAuth received... stopping server
+        server.stop(10);
     }
-
-    public boolean isAuthorized() {
-        return !AUTH_CODE.isEmpty();
-    }
-
-//    Simple hello world request
-//    public HttpResponse sendWelcomeRequest() throws InterruptedException, IOException {
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(_URI))
-//                .GET()
-//                .build();
-//        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//        System.out.println(response.body());
-//        return response;
-//    }
 }
