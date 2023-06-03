@@ -94,12 +94,17 @@ public class UserInterface {
                         "&redirect_uri=http://localhost:8080" +
                         "&response_type=code");
         System.out.println("waiting for code...");
-        http.listenForCodeAndShutDown();
+
+        // return if authorization was unsuccessful
+        if(http.listenForCodeAndShutDown().equals("-")) {
+            return;
+        }
+
         System.out.println("code received");
         System.out.println("making http request for access_token...");
         System.out.println("response:");
-        //http.accessTokenRequest();
         System.out.println(http.accessTokenRequest());
+        System.out.println("---SUCCESS---");
         this.logged = true;
     }
 }
