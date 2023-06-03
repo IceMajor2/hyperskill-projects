@@ -15,10 +15,11 @@ public class Http {
 
     private final String _URI = "http://localhost:8080";
 
+    private static Http INSTANCE;
     private HttpServer server;
     private HttpClient client;
 
-    public Http() throws IOException {
+    private Http() throws IOException {
         this.server = HttpServer.create();
         server.bind(new InetSocketAddress(8080), 0);
 
@@ -26,9 +27,11 @@ public class Http {
     }
 
     public static Http getInstanceAndLaunch() throws IOException {
-        Http http = new Http();
-        http.launch();
-        return http;
+        if(INSTANCE == null) {
+            INSTANCE = new Http();
+        }
+        INSTANCE.launch();
+        return INSTANCE;
     }
 
     public void launch() {
@@ -46,7 +49,7 @@ public class Http {
         return response;
     }
 
-    public void openDefaultContext() {
+    private void openDefaultContext() {
         server.createContext("/", new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
