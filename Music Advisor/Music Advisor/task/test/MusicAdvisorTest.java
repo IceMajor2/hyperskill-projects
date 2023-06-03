@@ -1,83 +1,128 @@
+import org.hyperskill.hstest.dynamic.DynamicTest;
+import org.hyperskill.hstest.mocks.web.WebServerMock;
 import org.hyperskill.hstest.stage.StageTest;
 import org.hyperskill.hstest.testcase.CheckResult;
-import org.hyperskill.hstest.testcase.TestCase;
+import org.hyperskill.hstest.testing.TestedProgram;
+import org.junit.AfterClass;
 
-import java.util.List;
-import java.util.function.Function;
+@SuppressWarnings("unused")
+public class MusicAdvisorTest extends StageTest<String> {
 
-class Attach {
-    Function<String, CheckResult> func;
+    private static final String fictiveAuthCode = "123123";
+    private static final String fictiveAccessToken = "456456";
+    private static final String fictiveRefreshToken = "567567";
 
-    Attach(Function<String, CheckResult> func) {
-        this.func = func;
+    private static final int accessServerPort = 45678;
+    private static final String accessServerUrl = "http://127.0.0.1:" + accessServerPort;
+
+    private static final String[] arguments = new String[]{
+            "-access",
+            accessServerUrl
+    };
+
+    private static final String tokenResponse = "{" +
+            "\"access_token\":\"" + fictiveAccessToken + "\"," +
+            "\"token_type\":\"Bearer\"," +
+            "\"expires_in\":3600," +
+            "\"refresh_token\":" + "\"" + fictiveRefreshToken + "\"," +
+            "\"scope\":\"\"" +
+            "}";
+
+    private static final WebServerMock accessServer = new WebServerMock(accessServerPort)
+            .setPage("/api/token", tokenResponse);
+
+    private static final MockTokenServer tokenServer = new MockTokenServer(accessServer);
+
+    @DynamicTest
+    CheckResult testAuth() {
+
+        TestedProgram userProgram = new TestedProgram();
+        userProgram.start(arguments);
+        userProgram.setReturnOutputAfterExecution(false);
+
+        Server server = new Server(userProgram, fictiveAuthCode);
+        server.start();
+        tokenServer.start();
+
+        userProgram.goBackground();
+        userProgram.execute("auth");
+
+        try {
+            server.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if (Server.checkResult != null) {
+            return Server.checkResult;
+        }
+
+        userProgram.stopBackground();
+
+        String outputAfterAuth = userProgram.getOutput();
+        if (!outputAfterAuth.contains(fictiveAccessToken)) {
+            return CheckResult.wrong("Not found correct access token in the result. " +
+                    "Make sure, that you use the server from the command line arguments to access the token.");
+        }
+
+        userProgram.execute("featured");
+
+        String outputAfterFeatured = userProgram.getOutput();
+        if (!outputAfterFeatured.contains("---FEATURED---")) {
+            return CheckResult.wrong("When \"featured\" was inputted there should be \"---FEATURED---\" line");
+        }
+
+        userProgram.execute("exit");
+        userProgram.stop();
+
+        return CheckResult.correct();
     }
-}
 
-public class MusicAdvisorTest extends StageTest<Attach> {
+    @DynamicTest
+    CheckResult testNewWithoutAuth() {
 
-    @Override
-    public List<TestCase<Attach>> generate() {
-        return List.of(
-            new TestCase<Attach>()
-                .setInput("auth\nexit")
-                .setAttach(new Attach(reply -> {
-                    if (!reply.contains("---SUCCESS---")) {
-                        return new CheckResult(false,
-                            "There is no \"---SUCCESS---\" after \"auth\" but should be");
-                    }
-                    if (!reply.contains("https://accounts.spotify.com/authorize?")) {
-                        return new CheckResult(false,
-                            "There is no link after \"auth\" but should be");
-                    }
-//                    if (reply.contains("a19ee7dbfda443b2a8150c9101bfd645")) {
-//                        return new CheckResult(false,
-//                                "You shouldn't use the client_id from the example!! " +
-//                                        "You should create your own id on the spotify site.");
-//                    }
-                    return CheckResult.correct();
-                })),
+        TestedProgram userProgram = new TestedProgram();
+        userProgram.start(arguments);
+        userProgram.setReturnOutputAfterExecution(false);
 
-            new TestCase<Attach>()
-                .setInput("new\nexit")
-                .setAttach(new Attach(reply -> {
-                    if (!reply.strip().startsWith("Please, provide access for application.")) {
-                        return new CheckResult(false,
-                            "When no access provided you should output " +
-                                "\"Please, provide access for application.\"");
-                    }
-                    return CheckResult.correct();
-                })),
+        userProgram.execute("new");
+        String outputAfterNew = userProgram.getOutput();
 
-            new TestCase<Attach>()
-                .setInput("featured\nexit")
-                .setAttach(new Attach(reply -> {
-                    if (!reply.strip().startsWith("Please, provide access for application.")) {
-                        return new CheckResult(false,
-                            "When no access provided you should output " +
-                                "\"Please, provide access for application.\"");
-                    }
-                    return CheckResult.correct();
-                })),
+        if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
+            return CheckResult.wrong("When no access provided you should output " +
+                    "\"Please, provide access for application.\"");
+        }
 
-            new TestCase<Attach>()
-                .setInput("auth\nnew\nfeatured\nexit")
-                .setAttach(new Attach(reply -> {
-                    if (!reply.contains("---NEW RELEASES---")) {
-                        return new CheckResult(false,
-                            "When \"new\" was inputted there should be \"---NEW RELEASES---\" line");
-                    }
-                    if (!reply.contains("---FEATURED---")) {
-                        return new CheckResult(false,
-                            "When \"featured\" was inputted there should be \"---FEATURED---\" line");
-                    }
-                    return CheckResult.correct();
-                }))
+        userProgram.execute("exit");
+        userProgram.stop();
 
-        );
+        return CheckResult.correct();
     }
 
-    @Override
-    public CheckResult check(String reply, Attach clue) {
-        return clue.func.apply(reply);
+    @DynamicTest
+    CheckResult testFeaturedWithoutAuth() {
+
+        TestedProgram userProgram = new TestedProgram();
+        userProgram.start(arguments);
+        userProgram.setReturnOutputAfterExecution(false);
+
+        userProgram.execute("featured");
+        String outputAfterNew = userProgram.getOutput();
+
+        if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
+            return CheckResult.wrong("When no access provided you should output " +
+                    "\"Please, provide access for application.\"");
+        }
+
+        userProgram.execute("exit");
+        userProgram.stop();
+
+        return CheckResult.correct();
     }
+
+    @AfterClass
+    public static void afterTest() {
+        tokenServer.stopMock();
+    }
+
 }
