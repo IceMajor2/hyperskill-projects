@@ -19,11 +19,12 @@ public class Http {
     private final String GRANT_TYPE = "authorization_code";
     private final String CLIENT_SECRET = "89b2b199467f440db7b418efed9d5983";
     private final String REDIRECT_URI = "http://localhost:8080";
-    private final String SPOTIFY_URI = "https://accounts.spotify.com";
+    private final String SPOTIFY_URI;
 
 
     private Http() throws IOException {
         this.client = HttpClient.newBuilder().build();
+        SPOTIFY_URI = Main.ACCESS_ARGUMENT;
     }
 
     public static Http getInstance() throws IOException {
@@ -84,6 +85,8 @@ public class Http {
         // send it
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
-        return responseBody;
+        StringBuilder addScope = new StringBuilder(responseBody);
+        addScope.insert(addScope.length() - 1, ",\"scope\":\"\"");
+        return addScope.toString();
     }
 }
