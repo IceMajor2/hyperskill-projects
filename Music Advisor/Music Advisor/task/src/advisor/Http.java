@@ -13,13 +13,16 @@ import java.net.http.HttpResponse;
 
 public class Http {
 
+    private static Http INSTANCE;
+
+    private static String AUTH_CODE;
     private final String _URI = "http://localhost:8080";
 
-    private static Http INSTANCE;
-    private HttpServer server;
-    private HttpClient client;
+    private static HttpServer server;
+    private static HttpClient client;
 
     private Http() throws IOException {
+        this.AUTH_CODE = "";
         this.server = HttpServer.create();
         server.bind(new InetSocketAddress(8080), 0);
 
@@ -34,30 +37,47 @@ public class Http {
         return INSTANCE;
     }
 
-    public void launch() {
-        openDefaultContext();
+    private void launch() {
+        getSpotifyCode();
         server.start();
     }
 
-    public HttpResponse sendWelcomeRequest() throws InterruptedException, IOException {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(_URI))
-                .GET()
-                .build();
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
-        return response;
+    public static void shutDown() {
+        server.stop(1);
     }
 
-    private void openDefaultContext() {
+    private void getSpotifyCode() {
         server.createContext("/", new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
-                String msg = "Hello world!";
-                exchange.sendResponseHeaders(200, msg.length());
-                exchange.getResponseBody().write(msg.getBytes());
+                String query = exchange.getRequestURI().getQuery();
+
+                if(query.contains("code")) {
+                    AUTH_CODE = query.substring(5);
+                    query = "Got the code. Return back to your program.";
+                } else {
+                    query = "Authorization code not found. Try again.";
+                }
+
+                exchange.sendResponseHeaders(401, query.length());
+                exchange.getResponseBody().write(query.getBytes());
                 exchange.getResponseBody().close();
             }
         });
     }
+
+    public static boolean isAuthorized() {
+        return !AUTH_CODE.isEmpty();
+    }
+
+//    Simple hello world request
+//    public HttpResponse sendWelcomeRequest() throws InterruptedException, IOException {
+//        HttpRequest request = HttpRequest.newBuilder()
+//                .uri(URI.create(_URI))
+//                .GET()
+//                .build();
+//        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+//        System.out.println(response.body());
+//        return response;
+//    }
 }

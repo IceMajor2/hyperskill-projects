@@ -1,5 +1,6 @@
 package advisor;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -12,7 +13,7 @@ public class UserInterface {
         this.logged = false;
     }
 
-    public void run() {
+    public void run() throws IOException {
         one:
         while (true) {
             String input = scanner.nextLine();
@@ -84,13 +85,15 @@ public class UserInterface {
     }
 
 
-    private void authUser() {
+    private void authUser() throws IOException {
+        Http.getInstanceAndLaunch();
         System.out.println(
                 "https://accounts.spotify.com/" +
                         "authorize?client_id=b43811db87904f6a99fc4dde9844d12c" +
                         "&redirect_uri=http://localhost:8080" +
                         "&response_type=code");
         System.out.println("---SUCCESS---");
+        Http.shutDown();
         this.logged = true;
     }
 }
