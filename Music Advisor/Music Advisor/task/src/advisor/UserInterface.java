@@ -13,6 +13,7 @@ public class UserInterface {
     }
 
     public void run() {
+        one:
         while (true) {
             String input = scanner.nextLine();
             if ("auth".equals(input)) {
@@ -25,7 +26,7 @@ public class UserInterface {
             }
             while (logged) {
                 loggedMenu(input);
-                continue;
+                continue one;
             }
             System.out.println("Please, provide access for application.");
         }
