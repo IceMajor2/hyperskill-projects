@@ -6,20 +6,17 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URI;
 import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 public class Http {
 
     private static Http INSTANCE;
 
-    private static String AUTH_CODE;
+    private String AUTH_CODE;
     private final String _URI = "http://localhost:8080";
 
-    private static HttpServer server;
-    private static HttpClient client;
+    private HttpServer server;
+    private HttpClient client;
 
     private Http() throws IOException {
         this.AUTH_CODE = "";
@@ -29,24 +26,22 @@ public class Http {
         this.client = HttpClient.newBuilder().build();
     }
 
-    public static Http getInstanceAndLaunch() throws IOException {
+    public static Http getInstance() throws IOException {
         if(INSTANCE == null) {
             INSTANCE = new Http();
         }
-        INSTANCE.launch();
         return INSTANCE;
     }
 
-    private void launch() {
-        getSpotifyCode();
+    public void start() {
         server.start();
     }
 
-    public static void shutDown() {
+    public void shutDown() {
         server.stop(1);
     }
 
-    private void getSpotifyCode() {
+    private void listenForCode() {
         server.createContext("/", new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
@@ -66,7 +61,7 @@ public class Http {
         });
     }
 
-    public static boolean isAuthorized() {
+    public boolean isAuthorized() {
         return !AUTH_CODE.isEmpty();
     }
 

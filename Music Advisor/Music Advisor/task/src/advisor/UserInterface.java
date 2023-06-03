@@ -5,10 +5,12 @@ import java.util.Scanner;
 
 public class UserInterface {
 
+    private Http http;
     private Scanner scanner;
     private boolean logged;
 
-    public UserInterface() {
+    public UserInterface() throws IOException {
+        this.http = Http.getInstance();
         this.scanner = new Scanner(System.in);
         this.logged = false;
     }
@@ -86,14 +88,14 @@ public class UserInterface {
 
 
     private void authUser() throws IOException {
-        Http.getInstanceAndLaunch();
+        http.start();
         System.out.println(
                 "https://accounts.spotify.com/" +
                         "authorize?client_id=b43811db87904f6a99fc4dde9844d12c" +
                         "&redirect_uri=http://localhost:8080" +
                         "&response_type=code");
         System.out.println("---SUCCESS---");
-        Http.shutDown();
+        http.shutDown();
         this.logged = true;
     }
 }
