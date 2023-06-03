@@ -6,14 +6,23 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class Http {
 
-    private HttpServer httpServer;
+    private final String _URI = "http://localhost:8080";
+
+    private HttpServer server;
+    private HttpClient client;
 
     public Http() throws IOException {
-        this.httpServer = HttpServer.create();
-        httpServer.bind(new InetSocketAddress(8080), 0);
+        this.server = HttpServer.create();
+        server.bind(new InetSocketAddress(8080), 0);
+
+        this.client = HttpClient.newBuilder().build();
     }
 
     public static Http getInstanceAndLaunch() throws IOException {
@@ -24,11 +33,21 @@ public class Http {
 
     public void launch() {
         openDefaultContext();
-        httpServer.start();
+        server.start();
+    }
+
+    public HttpResponse sendWelcomeRequest() throws InterruptedException, IOException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(_URI))
+                .GET()
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println(response.body());
+        return response;
     }
 
     public void openDefaultContext() {
-        httpServer.createContext("/", new HttpHandler() {
+        server.createContext("/", new HttpHandler() {
             @Override
             public void handle(HttpExchange exchange) throws IOException {
                 String msg = "Hello world!";
