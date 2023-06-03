@@ -5,38 +5,29 @@ import java.util.Scanner;
 public class UserInterface {
 
     private Scanner scanner;
+    private boolean logged;
 
     public UserInterface() {
         this.scanner = new Scanner(System.in);
+        this.logged = false;
     }
 
     public void run() {
-        while(true) {
+        while (true) {
             String input = scanner.nextLine();
-            if("featured".equals(input)) {
-                printFeatured();
+            if ("auth".equals(input)) {
+                authUser();
                 continue;
             }
-            if("new".equals(input)) {
-                printNew();
-                continue;
-            }
-            if("categories".equals(input)) {
-                printCategories();
-                continue;
-            }
-            if("playlists Mood".equals(input)) {
-                System.out.println("---MOOD PLAYLISTS---");
-                System.out.println("Walk Like A Badass");
-                System.out.println("Rage Beats");
-                System.out.println("Arab Mood Booster");
-                System.out.println("Sunday Stroll");
-                continue;
-            }
-            if("exit".equals(input)) {
+            if ("exit".equals(input)) {
                 printExit();
-                break;
+                return;
             }
+            while (logged) {
+                loggedMenu(input);
+                continue;
+            }
+            System.out.println("Please, provide access for application.");
         }
     }
 
@@ -66,5 +57,39 @@ public class UserInterface {
 
     private void printExit() {
         System.out.println("---GOODBYE!---");
+    }
+
+    private void loggedMenu(String input) {
+        if ("featured".equals(input)) {
+            printFeatured();
+            return;
+        }
+        if ("new".equals(input)) {
+            printNew();
+            return;
+        }
+        if ("categories".equals(input)) {
+            printCategories();
+            return;
+        }
+        if ("playlists Mood".equals(input)) {
+            System.out.println("---MOOD PLAYLISTS---");
+            System.out.println("Walk Like A Badass");
+            System.out.println("Rage Beats");
+            System.out.println("Arab Mood Booster");
+            System.out.println("Sunday Stroll");
+            return;
+        }
+    }
+
+
+    private void authUser() {
+        System.out.println(
+                "https://accounts.spotify.com/" +
+                        "authorize?client_id=b43811db87904f6a99fc4dde9844d12c" +
+                        "&redirect_uri=http://localhost:8080" +
+                        "&response_type=code");
+        System.out.println("---SUCCESS---");
+        this.logged = true;
     }
 }
