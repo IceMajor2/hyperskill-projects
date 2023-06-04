@@ -1,5 +1,6 @@
 package advisor.http;
 
+import advisor.CategoriesRepository;
 import advisor.JsonService;
 import advisor.models.Album;
 import advisor.models.Category;
@@ -17,10 +18,12 @@ public class HttpController {
 
     private HttpClient client;
     private HttpRequestService httpRequestService;
+    private CategoriesRepository categoriesRepository;
 
     private HttpController() {
         this.client = HttpClient.newBuilder().build();
         this.httpRequestService = HttpRequestService.getInstance();
+        this.categoriesRepository = new CategoriesRepository();
     }
 
     public static HttpController getInstance() {
@@ -60,6 +63,7 @@ public class HttpController {
         var request = httpRequestService.getCategoriesRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         var categories = JsonService.categoriesJsonToModel(responseJsonBody);
+        categoriesRepository.put(categories);
         return categories;
     }
 }

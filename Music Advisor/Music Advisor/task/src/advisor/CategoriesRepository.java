@@ -2,6 +2,7 @@ package advisor;
 
 import advisor.models.Category;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,5 +20,11 @@ public class CategoriesRepository {
 
     public Category get(String id) {
         return this.categories.get(id);
+    }
+
+    public void put(Collection<Category> categories) {
+        for (Category category : categories) {
+            this.categories.put(category.getId(), category);
+        }
     }
 }
