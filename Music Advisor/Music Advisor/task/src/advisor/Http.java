@@ -1,5 +1,8 @@
 package advisor;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -8,12 +11,15 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Http {
 
     private static Http INSTANCE;
     private HttpClient client;
     private String AUTH_CODE;
+    private String accessToken;
 
     public static final String CLIENT_ID = "b43811db87904f6a99fc4dde9844d12c";
     public static final String REDIRECT_URI = "http://localhost:8080";
@@ -25,6 +31,7 @@ public class Http {
     private Http() {
         this.client = HttpClient.newBuilder().build();
         this.AUTH_CODE = "";
+        this.accessToken = "";
     }
 
     public static Http getInstance() throws IOException {
@@ -80,15 +87,37 @@ public class Http {
                 .build();
 
         // send it
-        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        String responseBody = response.body();
-        StringBuilder addScope = new StringBuilder(responseBody);
-        return addScope.toString();
+        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+
+        String accessToken = parseAccessToken(responseJsonBody);
+        this.accessToken = accessToken;
+
+        return responseJsonBody;
     }
 
-    public void getFeatured() {
-        var request = HttpRequest.newBuilder()
-                .header("Application", "Bearer %s".formatted(AUTH_CODE))
+    private String parseAccessToken(String jsonBody) {
+        JsonObject jsonObject = JsonParser.parseString(jsonBody).getAsJsonObject();
+        String accessToken = jsonObject.get("access_token").getAsString();
+        return accessToken;
+    }
+
+    public void getFeatured() throws IOException, InterruptedException {
+        var request = this.prepareFeaturedRequest();
+
+        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        System.out.println(responseJsonBody);
+        JsonObject jsonObject = JsonParser.parseString(responseJsonBody).getAsJsonObject();
+
+        List<String> playlists = new ArrayList<>();
+        for(JsonElement playlist: jsonObject.getAsJsonArray("items")) {
+            playlists.add(playlist.getAsString());
+            System.out.println(playlist);
+        }
+    }
+
+    private HttpRequest prepareFeaturedRequest() {
+        return HttpRequest.newBuilder()
+                .header("Application", "Bearer %s".formatted(accessToken))
                 .uri(URI.create(RESOURCE_URI + "/v1/browse/featured-playlists"))
                 .GET()
                 .build();
