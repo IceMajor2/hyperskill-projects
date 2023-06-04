@@ -68,7 +68,7 @@ public class HttpController {
     }
 
     public List<Playlist> getPlaylist(Category category) throws IOException, InterruptedException {
-        var request = httpRequestService.getCategoriesRequest(category);
+        var request = httpRequestService.getPlaylistRequest(category);
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         var playlists = JsonService.playlistsJsonToModel(responseJsonBody);
         return playlists;

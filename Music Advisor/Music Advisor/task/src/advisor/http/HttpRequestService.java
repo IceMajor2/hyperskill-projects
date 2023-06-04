@@ -1,6 +1,7 @@
 package advisor.http;
 
 import advisor.Main;
+import advisor.models.Category;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -70,6 +71,15 @@ public class HttpRequestService {
         return HttpRequest.newBuilder()
                 .header("Authorization", "Bearer %s".formatted(accessToken))
                 .uri(URI.create(RESOURCE_URI + "/v1/browse/categories"))
+                .GET()
+                .build();
+    }
+
+    public HttpRequest getCategoriesRequest(Category category) {
+        return HttpRequest.newBuilder()
+                .header("Authorization", "Bearer %s".formatted(accessToken))
+                .uri(URI.create(RESOURCE_URI + "/browse/categories/{%s}/playlists"
+                        .formatted(category.getId())))
                 .GET()
                 .build();
     }
