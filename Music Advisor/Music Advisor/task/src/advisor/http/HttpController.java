@@ -1,6 +1,6 @@
 package advisor.http;
 
-import advisor.CategoriesRepository;
+import advisor.repositories.CategoriesRepository;
 import advisor.JsonService;
 import advisor.models.Album;
 import advisor.models.Category;
@@ -55,7 +55,7 @@ public class HttpController {
     public List<Playlist> getFeatured() throws IOException, InterruptedException {
         var request = httpRequestService.getFeaturedRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        var playlists = JsonService.featuredJsonToModel(responseJsonBody);
+        var playlists = JsonService.playlistsJsonToModel(responseJsonBody);
         return playlists;
     }
 
@@ -65,5 +65,12 @@ public class HttpController {
         var categories = JsonService.categoriesJsonToModel(responseJsonBody);
         categoriesRepository.put(categories);
         return categories;
+    }
+
+    public List<Playlist> getPlaylist(Category category) throws IOException, InterruptedException {
+        var request = httpRequestService.getCategoriesRequest(category);
+        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        var playlists = JsonService.playlistsJsonToModel(responseJsonBody);
+        return playlists;
     }
 }
