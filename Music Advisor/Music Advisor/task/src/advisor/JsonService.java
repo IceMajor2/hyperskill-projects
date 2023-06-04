@@ -18,7 +18,13 @@ public class JsonService {
 
         List<Playlist> playlists = new ArrayList<>();
         for (JsonElement playlistEl : playlistsJson.getAsJsonArray("items")) {
-            JsonObject playlistObj = playlistEl.getAsJsonObject();
+            JsonObject playlistObj = playlistEl.isJsonObject() ? playlistEl.getAsJsonObject() : null;
+            // Spotify's weird playlist named EQUAL ${EQUAL_id}
+            // GET request returns a JsonElement that is not JsonObject
+            // thus isJsonObject() method call
+            if (playlistObj == null) {
+                continue;
+            }
 
             String name = playlistObj.get("name").getAsString();
             if (name == null) {
