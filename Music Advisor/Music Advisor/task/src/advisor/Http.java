@@ -11,8 +11,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Http {
 
@@ -101,23 +100,32 @@ public class Http {
         return accessToken;
     }
 
-    public void getFeatured() throws IOException, InterruptedException {
+    public Map<String, String> getFeatured() throws IOException, InterruptedException {
         var request = this.prepareFeaturedRequest();
 
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        System.out.println(responseJsonBody);
         JsonObject jsonObject = JsonParser.parseString(responseJsonBody).getAsJsonObject();
+        JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
 
-        List<String> playlists = new ArrayList<>();
-        for(JsonElement playlist: jsonObject.getAsJsonArray("items")) {
-            playlists.add(playlist.getAsString());
-            System.out.println(playlist);
+        Map<String, String> playlists = new LinkedHashMap<>();
+        for(JsonElement playlistEl : playlistsJson.getAsJsonArray("items")) {
+            JsonObject playlistObj = playlistEl.getAsJsonObject();
+
+            String name = playlistObj.get("name").getAsString();
+            if(name == null) {
+                continue;
+            }
+            JsonObject linkObj = playlistObj.getAsJsonObject("external_urls");
+            String link = linkObj.get("spotify").getAsString();
+
+            playlists.put(name, link);
         }
+        return playlists;
     }
 
     private HttpRequest prepareFeaturedRequest() {
         return HttpRequest.newBuilder()
-                .header("Application", "Bearer %s".formatted(accessToken))
+                .header("Authorization", "Bearer %s".formatted(accessToken))
                 .uri(URI.create(RESOURCE_URI + "/v1/browse/featured-playlists"))
                 .GET()
                 .build();
