@@ -4,6 +4,7 @@ import advisor.models.Category;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CategoriesRepository {
@@ -14,8 +15,8 @@ public class CategoriesRepository {
         this.categories = new HashMap<>();
     }
 
-    public void put(Category category) {
-        this.categories.put(category.getId(), category);
+    public int size() {
+        return categories.size();
     }
 
     public Category get(String name) {
@@ -26,5 +27,9 @@ public class CategoriesRepository {
         for (Category category : categories) {
             this.categories.put(category.getName(), category);
         }
+    }
+
+    public List<Category> asList() {
+        return categories.values().stream().toList();
     }
 }
