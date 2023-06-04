@@ -100,7 +100,7 @@ public class UserInterface {
     }
 
     private String getCategory(String input) {
-        return input.split(" ")[1];
+        return input.substring(10);
     }
 
     private void authUser() throws IOException, InterruptedException {
