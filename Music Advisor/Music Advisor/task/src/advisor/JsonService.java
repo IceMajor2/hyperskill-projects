@@ -1,6 +1,7 @@
 package advisor;
 
 import advisor.models.Album;
+import advisor.models.Category;
 import advisor.models.Playlist;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class JsonService {
 
-    public static List<Playlist> featuredJsonToMap(String body) {
+    public static List<Playlist> featuredJsonToModel(String body) {
         JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
         JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
 
@@ -56,6 +57,23 @@ public class JsonService {
             albums.add(album);
         }
         return albums;
+    }
+
+    public static List<Category> categoriesJsonToModel(String body) {
+        JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
+        JsonObject categoriesObj = jsonObject.getAsJsonObject("categories");
+
+        List<Category> categories = new ArrayList<>();
+        for(JsonElement categoryEl : categoriesObj.getAsJsonArray("items")) {
+            JsonObject categoryObj = categoryEl.getAsJsonObject();
+
+            String id = categoryObj.get("id").getAsString();
+            String name = categoryObj.get("name").getAsString();
+
+            Category category = new Category(id, name);
+            categories.add(category);
+        }
+        return categories;
     }
 
     public static String parseAccessToken(String body) {
