@@ -1,22 +1,21 @@
 package advisor;
 
 import advisor.models.Album;
+import advisor.models.Playlist;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JsonService {
 
-    public static Map<String, String> featuredJsonToMap(String body) {
+    public static List<Playlist> featuredJsonToMap(String body) {
         JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
         JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
 
-        Map<String, String> playlists = new LinkedHashMap<>();
+        List<Playlist> playlists = new ArrayList<>();
         for (JsonElement playlistEl : playlistsJson.getAsJsonArray("items")) {
             JsonObject playlistObj = playlistEl.getAsJsonObject();
 
@@ -27,7 +26,8 @@ public class JsonService {
             JsonObject linkObj = playlistObj.getAsJsonObject("external_urls");
             String link = linkObj.get("spotify").getAsString();
 
-            playlists.put(name, link);
+            Playlist playlist = new Playlist(name, link);
+            playlists.add(playlist);
         }
         return playlists;
     }

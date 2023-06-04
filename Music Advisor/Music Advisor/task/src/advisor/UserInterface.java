@@ -3,6 +3,7 @@ package advisor;
 import advisor.http.HttpController;
 import advisor.http.HttpRequestService;
 import advisor.models.Album;
+import advisor.models.Playlist;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -40,17 +41,16 @@ public class UserInterface {
     }
 
     private void printFeatured() throws IOException, InterruptedException {
-        var featured = httpController.getFeatured();
-        for (var entry : featured.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue());
+        List<Playlist> featuredPlaylists = httpController.getFeatured();
+        for(Playlist playlist : featuredPlaylists) {
+            System.out.println(playlist);
             System.out.println();
         }
     }
 
     private void printNew() throws IOException, InterruptedException {
-        List<Album> albums = httpController.getNew();
-        for(Album album : albums) {
+        List<Album> newAlbums = httpController.getNew();
+        for(Album album : newAlbums) {
             System.out.println(album);
             System.out.println();
         }

@@ -2,6 +2,7 @@ package advisor.http;
 
 import advisor.JsonService;
 import advisor.models.Album;
+import advisor.models.Playlist;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -47,7 +48,7 @@ public class HttpController {
         return albums;
     }
 
-    public Map<String, String> getFeatured() throws IOException, InterruptedException {
+    public List<Playlist> getFeatured() throws IOException, InterruptedException {
         var request = httpRequestService.getFeaturedRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         var playlists = JsonService.featuredJsonToMap(responseJsonBody);
