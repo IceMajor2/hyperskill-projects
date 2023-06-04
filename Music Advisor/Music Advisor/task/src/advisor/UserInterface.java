@@ -34,12 +34,13 @@ public class UserInterface {
         }
     }
 
-    private void printFeatured() {
-        System.out.println("---FEATURED---");
-        System.out.println("Mellow Morning");
-        System.out.println("Wake Up and Smell the Coffee");
-        System.out.println("Monday Motivation");
-        System.out.println("Songs to Sing in the Shower");
+    private void printFeatured() throws IOException,InterruptedException {
+        var featured = http.getFeatured();
+        for(var entry : featured.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue());
+            System.out.println();
+        }
     }
 
     private void printNew() {
@@ -62,7 +63,7 @@ public class UserInterface {
         System.out.println("---GOODBYE!---");
     }
 
-    private void loggedMenu(String input) {
+    private void loggedMenu(String input) throws IOException, InterruptedException {
         if ("featured".equals(input)) {
             printFeatured();
             return;
