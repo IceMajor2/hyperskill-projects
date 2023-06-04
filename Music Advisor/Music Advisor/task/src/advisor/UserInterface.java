@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class UserInterface {
 
-    private Http http;
+    private HttpController httpController;
     private Scanner scanner;
     private boolean logged;
 
@@ -35,7 +35,7 @@ public class UserInterface {
     }
 
     private void printFeatured() throws IOException,InterruptedException {
-        var featured = http.getFeatured();
+        var featured = httpController.getFeatured();
         for(var entry : featured.entrySet()) {
             System.out.println(entry.getKey());
             System.out.println(entry.getValue());
@@ -87,22 +87,22 @@ public class UserInterface {
     }
 
     private void authUser() throws IOException, InterruptedException {
-        this.http = Http.getInstance();
+        this.httpController = HttpController.getInstance();
 
         System.out.println("use this link to request the access code:");
         System.out.println(
-                Http.SERVER_URI +
-                        "/authorize?client_id=" + Http.CLIENT_ID +
-                        "&redirect_uri=" + Http.REDIRECT_URI +
+                HttpRequestService.SERVER_URI +
+                        "/authorize?client_id=" + HttpRequestService.CLIENT_ID +
+                        "&redirect_uri=" + HttpRequestService.REDIRECT_URI +
                         "&response_type=code");
         System.out.println("waiting for code...");
 
-        http.listenForCodeAndShutDown();
+        httpController.listenForCodeAndShutDown();
 
         System.out.println("code received");
         System.out.println("making http request for access_token...");
         System.out.println("response:");
-        System.out.println(http.accessTokenRequest());
+        System.out.println(httpController.accessTokenRequest());
         System.out.println("---SUCCESS---");
         this.logged = true;
     }
