@@ -3,6 +3,7 @@ package advisor;
 import advisor.http.HttpController;
 import advisor.http.HttpRequestService;
 import advisor.models.Album;
+import advisor.models.Category;
 import advisor.models.Playlist;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class UserInterface {
 
     private void printFeatured() throws IOException, InterruptedException {
         List<Playlist> featuredPlaylists = httpController.getFeatured();
-        for(Playlist playlist : featuredPlaylists) {
+        for (Playlist playlist : featuredPlaylists) {
             System.out.println(playlist);
             System.out.println();
         }
@@ -50,18 +51,17 @@ public class UserInterface {
 
     private void printNew() throws IOException, InterruptedException {
         List<Album> newAlbums = httpController.getNew();
-        for(Album album : newAlbums) {
+        for (Album album : newAlbums) {
             System.out.println(album);
             System.out.println();
         }
     }
 
-    private void printCategories() {
-        System.out.println("---CATEGORIES---");
-        System.out.println("Top Lists");
-        System.out.println("Pop");
-        System.out.println("Mood");
-        System.out.println("Latin");
+    private void printCategories() throws IOException, InterruptedException {
+        List<Category> categories = httpController.getCategories();
+        for(Category category : categories) {
+            System.out.println(category);
+        }
     }
 
     private void printExit() {
