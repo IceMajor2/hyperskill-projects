@@ -51,7 +51,14 @@ public class HttpController {
     public List<Playlist> getFeatured() throws IOException, InterruptedException {
         var request = httpRequestService.getFeaturedRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        var playlists = JsonService.featuredJsonToMap(responseJsonBody);
+        var playlists = JsonService.featuredJsonToModel(responseJsonBody);
         return playlists;
+    }
+
+    public List<String> getCategories() throws IOException, InterruptedException {
+        var request = httpRequestService.getCategoriesRequest();
+        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        var categories = JsonService.categoriesJsonToModel(responseJsonBody);
+        return null;
     }
 }
