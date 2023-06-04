@@ -87,8 +87,10 @@ public class Http {
     }
 
     public void getFeatured() {
-//        var request = HttpRequest.newBuilder()
-//                .header("Application", "Bearer %s".formatted(AUTH_CODE))
-//                .uri(URI.create(SPOTIFY_URI))
+        var request = HttpRequest.newBuilder()
+                .header("Application", "Bearer %s".formatted(AUTH_CODE))
+                .uri(URI.create(RESOURCE_URI + "/v1/browse/featured-playlists"))
+                .GET()
+                .build();
     }
 }
