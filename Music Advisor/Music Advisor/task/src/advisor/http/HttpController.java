@@ -1,8 +1,7 @@
-package advisor;
+package advisor.http;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import advisor.JsonService;
+import advisor.models.Album;
 
 import java.io.IOException;
 import java.net.http.HttpClient;

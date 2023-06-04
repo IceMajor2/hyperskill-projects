@@ -1,5 +1,9 @@
 package advisor;
 
+import advisor.http.HttpController;
+import advisor.http.HttpRequestService;
+import advisor.models.Album;
+
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
