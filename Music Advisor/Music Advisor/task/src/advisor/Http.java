@@ -102,9 +102,13 @@ public class Http {
 
     public Map<String, String> getFeatured() throws IOException, InterruptedException {
         var request = this.prepareFeaturedRequest();
-
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        JsonObject jsonObject = JsonParser.parseString(responseJsonBody).getAsJsonObject();
+        var playlists = featuredJsonToMap(responseJsonBody);
+        return playlists;
+    }
+
+    private Map<String, String> featuredJsonToMap(String featuredBody) {
+        JsonObject jsonObject = JsonParser.parseString(featuredBody).getAsJsonObject();
         JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
 
         Map<String, String> playlists = new LinkedHashMap<>();
