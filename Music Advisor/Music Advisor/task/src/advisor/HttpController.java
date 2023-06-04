@@ -29,48 +29,29 @@ public class HttpController {
         return INSTANCE;
     }
 
-    public String listenForCodeAndShutDown() throws IOException, InterruptedException {
+    public String getAuthenticationCode() throws IOException, InterruptedException {
         return httpRequestService.authenticationListener();
     }
 
     public String accessTokenRequest() throws IOException, InterruptedException {
         var request = httpRequestService.postAccessTokenRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        String accessToken = parseAccessToken(responseJsonBody);
+        String accessToken = JsonService.parseAccessToken(responseJsonBody);
         httpRequestService.setAccessToken(accessToken);
         return responseJsonBody;
+    }
+
+    public List<Album> getNew() throws IOException, InterruptedException {
+        var request = httpRequestService.getNewRequest();
+        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        var albums = JsonService.newJsonToModel(responseJsonBody);
+        return albums;
     }
 
     public Map<String, String> getFeatured() throws IOException, InterruptedException {
         var request = httpRequestService.getFeaturedRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        var playlists = featuredJsonToMap(responseJsonBody);
+        var playlists = JsonService.featuredJsonToMap(responseJsonBody);
         return playlists;
-    }
-
-    private Map<String, String> featuredJsonToMap(String featuredBody) {
-        JsonObject jsonObject = JsonParser.parseString(featuredBody).getAsJsonObject();
-        JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
-
-        Map<String, String> playlists = new LinkedHashMap<>();
-        for (JsonElement playlistEl : playlistsJson.getAsJsonArray("items")) {
-            JsonObject playlistObj = playlistEl.getAsJsonObject();
-
-            String name = playlistObj.get("name").getAsString();
-            if (name == null) {
-                continue;
-            }
-            JsonObject linkObj = playlistObj.getAsJsonObject("external_urls");
-            String link = linkObj.get("spotify").getAsString();
-
-            playlists.put(name, link);
-        }
-        return playlists;
-    }
-
-    private String parseAccessToken(String jsonBody) {
-        JsonObject jsonObject = JsonParser.parseString(jsonBody).getAsJsonObject();
-        String accessToken = jsonObject.get("access_token").getAsString();
-        return accessToken;
     }
 }
