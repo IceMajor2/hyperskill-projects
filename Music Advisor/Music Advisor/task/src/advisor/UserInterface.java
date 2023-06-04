@@ -2,6 +2,7 @@ package advisor;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.List;
 
 public class UserInterface {
 
@@ -34,21 +35,21 @@ public class UserInterface {
         }
     }
 
-    private void printFeatured() throws IOException,InterruptedException {
+    private void printFeatured() throws IOException, InterruptedException {
         var featured = httpController.getFeatured();
-        for(var entry : featured.entrySet()) {
+        for (var entry : featured.entrySet()) {
             System.out.println(entry.getKey());
             System.out.println(entry.getValue());
             System.out.println();
         }
     }
 
-    private void printNew() {
-        System.out.println("---NEW RELEASES---");
-        System.out.println("Mountains [Sia, Diplo, Labrinth]");
-        System.out.println("Runaway [Lil Peep]");
-        System.out.println("The Greatest Show [Panic! At The Disco]");
-        System.out.println("All Out Life [Slipknot]");
+    private void printNew() throws IOException, InterruptedException {
+        List<Album> albums = httpController.getNew();
+        for(Album album : albums) {
+            System.out.println(album);
+            System.out.println();
+        }
     }
 
     private void printCategories() {
@@ -97,7 +98,7 @@ public class UserInterface {
                         "&response_type=code");
         System.out.println("waiting for code...");
 
-        httpController.listenForCodeAndShutDown();
+        httpController.getAuthenticationCode();
 
         System.out.println("code received");
         System.out.println("making http request for access_token...");
