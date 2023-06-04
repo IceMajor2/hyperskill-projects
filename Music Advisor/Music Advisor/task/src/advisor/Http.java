@@ -16,15 +16,14 @@ public class Http {
     private String AUTH_CODE;
 
     public static final String CLIENT_ID = "b43811db87904f6a99fc4dde9844d12c";
+    public static final String REDIRECT_URI = "http://localhost:8080";
+    public static final String SPOTIFY_URI = Main.ACCESS_ARGUMENT;
     private final String GRANT_TYPE = "authorization_code";
     private final String CLIENT_SECRET = "89b2b199467f440db7b418efed9d5983";
-    private final String REDIRECT_URI = "http://localhost:8080";
-    private final String SPOTIFY_URI;
 
-
-    private Http() throws IOException {
+    private Http() {
         this.client = HttpClient.newBuilder().build();
-        SPOTIFY_URI = Main.ACCESS_ARGUMENT;
+        this.AUTH_CODE = "";
     }
 
     public static Http getInstance() throws IOException {
@@ -48,22 +47,19 @@ public class Http {
             if (query != null && query.contains("code")) {
                 AUTH_CODE = query.substring(5);
                 query = "Got the code. Return back to your program.";
-
             } else {
-                AUTH_CODE = null;
                 query = "Authorization code not found. Try again.";
             }
-
             exchange.sendResponseHeaders(200, query.length());
             exchange.getResponseBody().write(query.getBytes());
             exchange.getResponseBody().close();
         });
         server.start();
         // keeping server alive, while the OAuth awaits
-        while (AUTH_CODE != null && AUTH_CODE.isEmpty()) {
+        while (AUTH_CODE.isEmpty()) {
             Thread.sleep(10);
         }
-        // OAuth received... stopping server
+        // OAuth successful... stopping server
         server.stop(10);
 
         return AUTH_CODE;
@@ -86,7 +82,6 @@ public class Http {
         var response = client.send(request, HttpResponse.BodyHandlers.ofString());
         String responseBody = response.body();
         StringBuilder addScope = new StringBuilder(responseBody);
-        addScope.insert(addScope.length() - 1, ",\"scope\":\"\"");
         return addScope.toString();
     }
 }

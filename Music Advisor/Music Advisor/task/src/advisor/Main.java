@@ -16,3 +16,7 @@ public class Main {
         userInterface.run();
     }
 }
+
+/**
+ * TODO: secure SPOTIFY's client ID (+ secret)
+ */

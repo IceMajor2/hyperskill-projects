@@ -9,8 +9,7 @@ public class UserInterface {
     private Scanner scanner;
     private boolean logged;
 
-    public UserInterface() throws IOException {
-        this.http = Http.getInstance();
+    public UserInterface() {
         this.scanner = new Scanner(System.in);
         this.logged = false;
     }
@@ -87,18 +86,17 @@ public class UserInterface {
     }
 
     private void authUser() throws IOException, InterruptedException {
+        this.http = Http.getInstance();
+
         System.out.println("use this link to request the access code:");
         System.out.println(
-                "https://accounts.spotify.com/" +
-                        "authorize?client_id=" + Http.CLIENT_ID +
-                        "&redirect_uri=http://localhost:8080" +
+                Http.SPOTIFY_URI +
+                        "/authorize?client_id=" + Http.CLIENT_ID +
+                        "&redirect_uri=" + Http.REDIRECT_URI +
                         "&response_type=code");
         System.out.println("waiting for code...");
 
-        // return if authorization was unsuccessful
-        if(http.listenForCodeAndShutDown().equals("-")) {
-            return;
-        }
+        http.listenForCodeAndShutDown();
 
         System.out.println("code received");
         System.out.println("making http request for access_token...");
