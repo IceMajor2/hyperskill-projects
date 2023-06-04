@@ -2,6 +2,7 @@ package advisor.http;
 
 import advisor.JsonService;
 import advisor.models.Album;
+import advisor.models.Category;
 import advisor.models.Playlist;
 
 import java.io.IOException;
@@ -55,10 +56,10 @@ public class HttpController {
         return playlists;
     }
 
-    public List<String> getCategories() throws IOException, InterruptedException {
+    public List<Category> getCategories() throws IOException, InterruptedException {
         var request = httpRequestService.getCategoriesRequest();
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         var categories = JsonService.categoriesJsonToModel(responseJsonBody);
-        return null;
+        return categories;
     }
 }
