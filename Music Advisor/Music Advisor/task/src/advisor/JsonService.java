@@ -12,7 +12,7 @@ import java.util.List;
 
 public class JsonService {
 
-    public static List<Playlist> featuredJsonToModel(String body) {
+    public static List<Playlist> playlistsJsonToModel(String body) {
         JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
         JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
 
@@ -38,7 +38,7 @@ public class JsonService {
         JsonObject albumsJson = jsonObject.getAsJsonObject("albums");
 
         List<Album> albums = new ArrayList<>();
-        for(JsonElement albumEl : albumsJson.getAsJsonArray("items")) {
+        for (JsonElement albumEl : albumsJson.getAsJsonArray("items")) {
             JsonObject albumObj = albumEl.getAsJsonObject();
 
             JsonObject linkObj = albumObj.getAsJsonObject("external_urls");
@@ -46,7 +46,7 @@ public class JsonService {
             String name = albumObj.get("name").getAsString();
 
             List<String> artists = new ArrayList<>();
-            for(JsonElement artistEl : albumObj.getAsJsonArray("artists")) {
+            for (JsonElement artistEl : albumObj.getAsJsonArray("artists")) {
                 JsonObject artistObj = artistEl.getAsJsonObject();
 
                 String artist = artistObj.get("name").getAsString();
@@ -64,7 +64,7 @@ public class JsonService {
         JsonObject categoriesObj = jsonObject.getAsJsonObject("categories");
 
         List<Category> categories = new ArrayList<>();
-        for(JsonElement categoryEl : categoriesObj.getAsJsonArray("items")) {
+        for (JsonElement categoryEl : categoriesObj.getAsJsonArray("items")) {
             JsonObject categoryObj = categoryEl.getAsJsonObject();
 
             String id = categoryObj.get("id").getAsString();
