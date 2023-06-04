@@ -1,4 +1,4 @@
-package advisor;
+package advisor.repositories;
 
 import advisor.models.Category;
 
