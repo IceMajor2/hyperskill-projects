@@ -59,13 +59,21 @@ public class UserInterface {
 
     private void printCategories() throws IOException, InterruptedException {
         List<Category> categories = httpController.getCategories();
-        for(Category category : categories) {
+        for (Category category : categories) {
             System.out.println(category);
         }
     }
 
     private void printExit() {
         System.out.println("---GOODBYE!---");
+    }
+
+    private void printPlaylist(String category) {
+        List<Playlist> playlists = httpController.getPlaylist(category);
+        for(Playlist playlist : playlists) {
+            System.out.println(playlist);
+            System.out.println();
+        }
     }
 
     private void loggedMenu(String input) throws IOException, InterruptedException {
@@ -81,14 +89,14 @@ public class UserInterface {
             printCategories();
             return;
         }
-        if ("playlists Mood".equals(input)) {
-            System.out.println("---MOOD PLAYLISTS---");
-            System.out.println("Walk Like A Badass");
-            System.out.println("Rage Beats");
-            System.out.println("Arab Mood Booster");
-            System.out.println("Sunday Stroll");
+        if (input.contains("playlists")) {
+            printPlaylist(this.getCategory(input));
             return;
         }
+    }
+
+    private String getCategory(String input) {
+        return input.split(" ")[1];
     }
 
     private void authUser() throws IOException, InterruptedException {
