@@ -46,7 +46,7 @@ public class Server extends Thread {
             }
 
             try {
-                sleep(300);
+                sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
