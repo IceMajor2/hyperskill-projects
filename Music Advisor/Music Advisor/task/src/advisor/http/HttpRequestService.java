@@ -75,10 +75,10 @@ public class HttpRequestService {
                 .build();
     }
 
-    public HttpRequest getCategoriesRequest(Category category) {
+    public HttpRequest getPlaylistRequest(Category category) {
         return HttpRequest.newBuilder()
                 .header("Authorization", "Bearer %s".formatted(accessToken))
-                .uri(URI.create(RESOURCE_URI + "/browse/categories/{%s}/playlists"
+                .uri(URI.create(RESOURCE_URI + "/v1/browse/categories/%s/playlists"
                         .formatted(category.getId())))
                 .GET()
                 .build();

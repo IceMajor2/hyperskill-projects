@@ -60,17 +60,30 @@ public class HttpController {
     }
 
     public List<Category> getCategories() throws IOException, InterruptedException {
-        var request = httpRequestService.getCategoriesRequest();
-        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-        var categories = JsonService.categoriesJsonToModel(responseJsonBody);
-        categoriesRepository.put(categories);
-        return categories;
+        if (categoriesRepository.size() == 0) {
+            loadCategories();
+        }
+        return categoriesRepository.asList();
     }
 
-    public List<Playlist> getPlaylist(Category category) throws IOException, InterruptedException {
+    public List<Playlist> getPlaylist(String categoryName) throws IOException, InterruptedException {
+        if (categoriesRepository.size() == 0) {
+            loadCategories();
+        }
+        Category category = categoriesRepository.get(categoryName);
+        if(category == null) {
+            return Collections.emptyList();
+        }
         var request = httpRequestService.getPlaylistRequest(category);
         String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
         var playlists = JsonService.playlistsJsonToModel(responseJsonBody);
         return playlists;
+    }
+
+    private void loadCategories() throws IOException, InterruptedException {
+        var request = httpRequestService.getCategoriesRequest();
+        String responseJsonBody = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
+        var categories = JsonService.categoriesJsonToModel(responseJsonBody);
+        this.categoriesRepository.put(categories);
     }
 }

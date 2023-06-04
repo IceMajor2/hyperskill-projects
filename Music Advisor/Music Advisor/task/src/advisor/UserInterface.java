@@ -68,9 +68,13 @@ public class UserInterface {
         System.out.println("---GOODBYE!---");
     }
 
-    private void printPlaylist(String category) {
+    private void printPlaylist(String category) throws IOException, InterruptedException {
         List<Playlist> playlists = httpController.getPlaylist(category);
-        for(Playlist playlist : playlists) {
+        if(playlists.isEmpty()) {
+            System.out.println("Unknown category name.");
+            return;
+        }
+        for (Playlist playlist : playlists) {
             System.out.println(playlist);
             System.out.println();
         }
