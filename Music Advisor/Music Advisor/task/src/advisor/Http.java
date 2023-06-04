@@ -17,7 +17,8 @@ public class Http {
 
     public static final String CLIENT_ID = "b43811db87904f6a99fc4dde9844d12c";
     public static final String REDIRECT_URI = "http://localhost:8080";
-    public static final String SPOTIFY_URI = Main.ACCESS_ARGUMENT;
+    public static final String SERVER_URI = Main.ACCESS_ARGUMENT;
+    public static final String RESOURCE_URI = Main.RESOURCE_ARGUMENT;
     private final String GRANT_TYPE = "authorization_code";
     private final String CLIENT_SECRET = "89b2b199467f440db7b418efed9d5983";
 
@@ -69,7 +70,7 @@ public class Http {
         // prepare request
         var request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .uri(URI.create(SPOTIFY_URI + "/api/token"))
+                .uri(URI.create(SERVER_URI + "/api/token"))
                 .POST(HttpRequest.BodyPublishers.ofString(
                         "grant_type=" + GRANT_TYPE +
                                 "&code=" + AUTH_CODE +
@@ -83,5 +84,11 @@ public class Http {
         String responseBody = response.body();
         StringBuilder addScope = new StringBuilder(responseBody);
         return addScope.toString();
+    }
+
+    public void getFeatured() {
+//        var request = HttpRequest.newBuilder()
+//                .header("Application", "Bearer %s".formatted(AUTH_CODE))
+//                .uri(URI.create(SPOTIFY_URI))
     }
 }

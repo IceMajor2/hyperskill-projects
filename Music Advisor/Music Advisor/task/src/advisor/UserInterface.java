@@ -90,7 +90,7 @@ public class UserInterface {
 
         System.out.println("use this link to request the access code:");
         System.out.println(
-                Http.SPOTIFY_URI +
+                Http.SERVER_URI +
                         "/authorize?client_id=" + Http.CLIENT_ID +
                         "&redirect_uri=" + Http.REDIRECT_URI +
                         "&response_type=code");
