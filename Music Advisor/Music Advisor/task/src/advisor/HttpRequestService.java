@@ -57,6 +57,14 @@ public class HttpRequestService {
                 .build();
     }
 
+    public HttpRequest getNewRequest() {
+        return HttpRequest.newBuilder()
+                .header("Authorization", "Bearer %s".formatted(accessToken))
+                .uri(URI.create(RESOURCE_URI + "/v1/browse/new-releases"))
+                .GET()
+                .build();
+    }
+
     public String authenticationListener() throws IOException, InterruptedException {
         HttpServer server = initServer();
 
