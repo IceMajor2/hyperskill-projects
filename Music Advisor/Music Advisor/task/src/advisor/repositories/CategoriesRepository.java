@@ -18,13 +18,13 @@ public class CategoriesRepository {
         this.categories.put(category.getId(), category);
     }
 
-    public Category get(String id) {
-        return this.categories.get(id);
+    public Category get(String name) {
+        return this.categories.get(name);
     }
 
     public void put(Collection<Category> categories) {
         for (Category category : categories) {
-            this.categories.put(category.getId(), category);
+            this.categories.put(category.getName(), category);
         }
     }
 }
