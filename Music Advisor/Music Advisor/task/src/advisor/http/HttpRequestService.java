@@ -66,6 +66,14 @@ public class HttpRequestService {
                 .build();
     }
 
+    public HttpRequest getCategoriesRequest() {
+        return HttpRequest.newBuilder()
+                .header("Authorization", "Bearer %s".formatted(accessToken))
+                .uri(URI.create(RESOURCE_URI + "/v1/browse/categories"))
+                .GET()
+                .build();
+    }
+
     public String authenticationListener() throws IOException, InterruptedException {
         HttpServer server = initServer();
 
