@@ -1,5 +1,3 @@
 *.class
 /app/build
 .gradle
-
-
