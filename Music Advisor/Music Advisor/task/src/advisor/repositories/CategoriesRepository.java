@@ -2,17 +2,14 @@ package advisor.repositories;
 
 import advisor.models.Category;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CategoriesRepository {
 
     private Map<String, Category> categories;
 
     public CategoriesRepository() {
-        this.categories = new HashMap<>();
+        this.categories = new LinkedHashMap<>();
     }
 
     public int size() {
