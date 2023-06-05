@@ -25,7 +25,7 @@ public class UserInterface {
         one:
         while (true) {
             String input = scanner.nextLine();
-           // input = input.isEmpty() ? scanner.nextLine() : input;
+            // input = input.isEmpty() ? scanner.nextLine() : input;
             if ("auth".equals(input)) {
                 authUser();
                 continue;
@@ -64,7 +64,7 @@ public class UserInterface {
         }
         if (input.contains("playlists")) {
             var playlists = httpController.getPlaylist(this.getCategory(input));
-            if(playlists.isEmpty()) {
+            if (playlists.isEmpty()) {
                 System.out.println("Unknown category name.");
                 return;
             }
@@ -104,14 +104,6 @@ public class UserInterface {
         }
     }
 
-    private void printExit() {
-        System.out.println("---GOODBYE!---");
-    }
-
-    private String getCategory(String input) {
-        return input.substring(10);
-    }
-
     private void authUser() throws IOException, InterruptedException {
         this.httpController = HttpController.getInstance();
 
@@ -131,6 +123,15 @@ public class UserInterface {
         System.out.println(httpController.accessTokenRequest());
         System.out.println("---SUCCESS---");
         this.logged = true;
+    }
+
+    private void printExit() {
+        System.out.println("---GOODBYE!---");
+    }
+
+    // util methods
+    private String getCategory(String input) {
+        return input.substring(10);
     }
 
     private int getTotalPages(List<?> list) {
