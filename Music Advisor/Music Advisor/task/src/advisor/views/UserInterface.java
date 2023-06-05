@@ -21,14 +21,20 @@ public class UserInterface {
         this.entriesPerPage = Main.PAGE_ARGUMENT;
     }
 
-    public void run() throws IOException, InterruptedException {
-        run("");
-    }
+//    public void run() throws IOException, InterruptedException {
+//        run("");
+//    }
 
-    public void run(String input) throws IOException, InterruptedException {
+    public void run() throws IOException, InterruptedException {
         one:
         while (true) {
-            input = input.isEmpty() ? scanner.nextLine() : input;
+            String input = scanner.nextLine();
+            //input = input.isEmpty() ? scanner.nextLine() : input;
+            while (logged) {
+                input = loggedMenu(input);
+                break;
+//                continue one;
+            }
             if ("auth".equals(input)) {
                 authUser();
                 input = "";
@@ -36,51 +42,43 @@ public class UserInterface {
             }
             if ("exit".equals(input)) {
                 printExit();
-                System.exit(0);
+                break;
+                //System.exit(0);
             }
-            while (logged) {
-                loggedMenu(input);
-                input = "";
-                continue one;
-            }
-            input = "";
             System.out.println("Please, provide access for application.");
         }
     }
 
-    private void loggedMenu(String input) throws IOException, InterruptedException {
+    private String loggedMenu(String input) throws IOException, InterruptedException {
         Printer printer = null;
         if ("featured".equals(input)) {
             var featured = httpController.getFeatured();
             printer = new Printer(new MusicPrintingStrategy(), this.entriesPerPage, getTotalPages(featured));
-            musicMenu(printer, featured);
-            return;
+            return musicMenu(printer, featured);
         }
         if ("new".equals(input)) {
             var newest = httpController.getNew();
             printer = new Printer(new MusicPrintingStrategy(), this.entriesPerPage, getTotalPages(newest));
-            musicMenu(printer, newest);
-            return;
+            return musicMenu(printer, newest);
         }
         if ("categories".equals(input)) {
             var categories = httpController.getCategories();
             printer = new Printer(new CategoryPrintingStrategy(), this.entriesPerPage, getTotalPages(categories));
-            musicMenu(printer, categories);
-            return;
+            return musicMenu(printer, categories);
         }
         if (input.contains("playlists")) {
             var playlists = httpController.getPlaylist(this.getCategory(input));
             if (playlists.isEmpty()) {
                 System.out.println("Unknown category name.");
-                return;
+                return "";
             }
             printer = new Printer(new MusicPrintingStrategy(), this.entriesPerPage, getTotalPages(playlists));
-            musicMenu(printer, playlists);
-            return;
+            return musicMenu(printer, playlists);
         }
+        return "";
     }
 
-    private void musicMenu(Printer printer, List<?> list) throws IOException, InterruptedException {
+    private String musicMenu(Printer printer, List<?> list) throws IOException, InterruptedException {
         int currentPage = 1;
         printer.print(list, currentPage);
 
@@ -109,7 +107,8 @@ public class UserInterface {
             }
             break;
         }
-        run(input);
+        return input;
+        //run(input);
     }
 
     private void authUser() throws IOException, InterruptedException {
