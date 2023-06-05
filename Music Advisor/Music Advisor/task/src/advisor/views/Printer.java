@@ -1,7 +1,5 @@
 package advisor.views;
 
-import advisor.Main;
-
 import java.util.List;
 
 public class Printer {
@@ -17,22 +15,24 @@ public class Printer {
     }
 
     public void print(List<?> list, int page) {
-        this.strategy.print(list, page, totalPages);
+        this.strategy.print(list, page, entriesPerPage, totalPages);
     }
 }
 
 interface PrintingStrategy {
 
-    void print(List<?> list, int page, int totalPages);
+    void print(List<?> list, int page, int entriesPerPage, int totalPages);
 }
 
 class CategoryPrintingStrategy implements PrintingStrategy {
 
     @Override
-    public void print(List<?> list, int page, int totalPages) {
-        for (Object cat : list) {
-            System.out.println(cat);
+    public void print(List<?> list, int page, int entriesPerPage, int totalPages) {
+        int startIndex = (page - 1) * entriesPerPage;
+        for(int i = startIndex; i < startIndex + entriesPerPage; i++) {
+            System.out.println(list.get(i));
         }
+        System.out.println();
         System.out.println("---PAGE %d OF %d---".formatted(page, totalPages));
     }
 
@@ -41,9 +41,10 @@ class CategoryPrintingStrategy implements PrintingStrategy {
 class MusicPrintingStrategy implements PrintingStrategy {
 
     @Override
-    public void print(List<?> list, int page, int totalPages) {
-        for (Object musicObject : list) {
-            System.out.println(musicObject);
+    public void print(List<?> list, int page, int entriesPerPage, int totalPages) {
+        int startIndex = (page - 1) * entriesPerPage;
+        for(int i = startIndex; i < startIndex + entriesPerPage; i++) {
+            System.out.println(list.get(i));
             System.out.println();
         }
         System.out.println("---PAGE %d OF %d---".formatted(page, totalPages));
