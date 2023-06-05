@@ -24,7 +24,9 @@ public class MusicAdvisorTest extends StageTest<String> {
             "-access",
             accessServerUrl,
             "-resource",
-            resourceServerUrl
+            resourceServerUrl,
+            "-page",
+            "1"
     };
 
     private static final String tokenResponse = "{" +
@@ -90,7 +92,7 @@ public class MusicAdvisorTest extends StageTest<String> {
                 "previous": null,
                 "total": 3
             }
-        }""".replaceAll(spotifyServerUrl, resourceServerUrl);
+        }""";
 
 
     private static final String apiPlaylistsPartyResponse = """
@@ -204,6 +206,23 @@ public class MusicAdvisorTest extends StageTest<String> {
                         },
                         "href": "https://api.spotify.com/v1/albums/5ZX4m5aVSmWQ5iHAPQpT71",
                         "id": "5ZX4m5aVSmWQ5iHAPQpT71",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/e6b635ebe3ef4ba22492f5698a7b5d417f78b88a",
+                                "width": 640
+                            },
+                            {
+                                "height": 300,
+                                "url": "https://i.scdn.co/image/92ae5b0fe64870c09004dd2e745a4fb1bf7de39d",
+                                "width": 300
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/8a7ab6fc2c9f678308ba0f694ecd5718dc6bc930",
+                                "width": 64
+                            }
+                        ],
                         "name": "Runnin'",
                         "type": "album",
                         "uri": "spotify:album:5ZX4m5aVSmWQ5iHAPQpT71"
@@ -220,16 +239,6 @@ public class MusicAdvisorTest extends StageTest<String> {
                                 "name": "Drake2",
                                 "type": "artist",
                                 "uri": "spotify:artist:3TVXtAsR1Inumwj472S9r4"
-                            },
-                            {
-                                "external_urls": {
-                                    "spotify": "https://open.spotify.com/artist/3TVXtAsR1Inumwj472S9r4"
-                                },
-                                "href": "https://api.spotify.com/v1/artists/3TVXtAsR1Inumwj472S9r4",
-                                "id": "3TVXtAsR1Inumwj472S9r4",
-                                "name": "Drake3",
-                                "type": "artist",
-                                "uri": "spotify:artist:3TVXtAsR1Inumwj472S9r4"
                             }
                         ],
                         "available_markets": [
@@ -240,6 +249,23 @@ public class MusicAdvisorTest extends StageTest<String> {
                         },
                         "href": "https://api.spotify.com/v1/albums/0geTzdk2InlqIoB16fW9Nd",
                         "id": "0geTzdk2InlqIoB16fW9Nd",
+                        "images": [
+                            {
+                                "height": 640,
+                                "url": "https://i.scdn.co/image/d40e9c3d22bde2fbdb2ecc03cccd7a0e77f42e4c",
+                                "width": 640
+                            },
+                            {
+                                "height": 300,
+                                "url": "https://i.scdn.co/image/dff06a3375f6d9b32ecb081eb9a60bbafecb5731",
+                                "width": 300
+                            },
+                            {
+                                "height": 64,
+                                "url": "https://i.scdn.co/image/808a02bd7fc59b0652c9df9f68675edbffe07a79",
+                                "width": 64
+                            }
+                        ],
                         "name": "Sneakin'",
                         "type": "album",
                         "uri": "spotify:album:0geTzdk2InlqIoB16fW9Nd"
@@ -333,7 +359,7 @@ public class MusicAdvisorTest extends StageTest<String> {
                 "previous": null,
                 "total": 2
             }
-        }""".replaceAll(spotifyServerUrl, resourceServerUrl);
+        }""";
 
     private static final TempWebServerMock resourceServerMock = new TempWebServerMock(resourceServerPort)
             .setPage("/v1/browse/categories", apiCategoriesResponse)
@@ -377,179 +403,147 @@ public class MusicAdvisorTest extends StageTest<String> {
         userProgram.stopBackground();
     }
 
-    @DynamicTest
-    CheckResult testNewWithoutAuth() {
+    private void checkAlbum1(String reply) {
+        String album1 = """
+            Runnin'
+            [Pharrell Williams]
+            https://open.spotify.com/album/5ZX4m5aVSmWQ5iHAPQpT71"""
+            .replaceAll(spotifyServerUrl, resourceServerUrl);
 
-        TestedProgram userProgram = new TestedProgram();
-        userProgram.start(arguments);
-        userProgram.setReturnOutputAfterExecution(false);
+        String album2 = """
+            Sneakin'
+            [Drake2]
+            https://open.spotify.com/album/0geTzdk2InlqIoB16fW9Nd"""
+            .replaceAll(spotifyServerUrl, resourceServerUrl);
 
-        userProgram.execute("new");
-
-        String outputAfterNew = userProgram.getOutput();
-
-        if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
-            return CheckResult.wrong("When no access provided you should output " +
-                    "\"Please, provide access for application.\"");
+        if (!reply.contains(album1)) {
+            throw new WrongAnswer("Album from page 1 not appeared on \"new\" action");
         }
-
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
+        if (reply.contains(album2)) {
+            throw new WrongAnswer("Album from page 2 appeared on page 1 on \"new\" action");
         }
-
-        return CheckResult.correct();
+        if (!reply.contains("---PAGE 1 OF 2---")) {
+            throw new WrongAnswer("Something wrong with pagination format. Not found ---PAGE 1 OF 2---");
+        }
     }
 
-    @DynamicTest
-    CheckResult testFeaturedWithoutAuth() {
+    private void checkAlbum2(String reply) {
+        String album1 = """
+            Runnin'
+            [Pharrell Williams]
+            https://open.spotify.com/album/5ZX4m5aVSmWQ5iHAPQpT71"""
+            .replaceAll(spotifyServerUrl, resourceServerUrl);
 
-        TestedProgram userProgram = new TestedProgram();
-        userProgram.start(arguments);
-        userProgram.setReturnOutputAfterExecution(false);
+        String album2 = """
+            Sneakin'
+            [Drake2]
+            https://open.spotify.com/album/0geTzdk2InlqIoB16fW9Nd"""
+            .replaceAll(spotifyServerUrl, resourceServerUrl);
 
-        userProgram.execute("featured");
-
-        String outputAfterNew = userProgram.getOutput();
-
-        if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
-            return CheckResult.wrong("When no access provided you should output " +
-                    "\"Please, provide access for application.\"");
+        if (!reply.contains(album2)) {
+            throw new WrongAnswer("Album from page 2 not appeared on \"new\" action");
+        }
+        if (reply.contains(album1)) {
+            throw new WrongAnswer("Album from page 1 appeared on page 2 on \"new\" action");
         }
 
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
+        if (!reply.contains("---PAGE 2 OF 2---")) {
+            throw new WrongAnswer("Something wrong with pagination format. Not found ---PAGE 2 OF 2---");
         }
-
-        return CheckResult.correct();
     }
 
-    @DynamicTest
-    CheckResult testCategoriesWithoutAuth() {
+    private int countAppearances(String str, String findStr) {
+        int lastIndex = 0;
+        int count = 0;
 
-        TestedProgram userProgram = new TestedProgram();
-        userProgram.start(arguments);
-        userProgram.setReturnOutputAfterExecution(false);
-
-        userProgram.execute("categories");
-
-        String outputAfterNew = userProgram.getOutput();
-
-        if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
-            return CheckResult.wrong("When no access provided you should output " +
-                    "\"Please, provide access for application.\"");
+        while (lastIndex != -1) {
+            lastIndex = str.indexOf(findStr, lastIndex);
+            if (lastIndex != -1) {
+                count++;
+                lastIndex += findStr.length();
+            }
         }
-
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
-        }
-
-        return CheckResult.correct();
-    }
-
-    @DynamicTest
-    CheckResult testPlaylistWithoutAuth() {
-
-        TestedProgram userProgram = new TestedProgram();
-        userProgram.start(arguments);
-        userProgram.setReturnOutputAfterExecution(false);
-
-        userProgram.execute("playlists Party Time");
-
-        String outputAfterNew = userProgram.getOutput();
-
-        if (!outputAfterNew.strip().startsWith("Please, provide access for application.")) {
-            return CheckResult.wrong("When no access provided you should output " +
-                    "\"Please, provide access for application.\"");
-        }
-
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
-        }
-
-        return CheckResult.correct();
+        return count;
     }
 
     @DynamicTest
     CheckResult testAuth() {
 
         TestedProgram userProgram = new TestedProgram();
-
         userProgram.start(arguments);
         userProgram.setReturnOutputAfterExecution(false);
 
         auth(userProgram);
 
         userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
-        }
+        userProgram.stop();
 
         return CheckResult.correct();
 
+    }
+
+    void testNewAlbums(TestedProgram userProgram) {
+        userProgram.execute("new");
+
+        String output = userProgram.getOutput();
+        checkAlbum1(output);
+
+        userProgram.execute("prev");
+        output = userProgram.getOutput();
+        if (!output.contains("No more pages")) {
+            throw new WrongAnswer("Your output should be `No more pages` on -1 page.");
+        }
+
+        userProgram.execute("next");
+        output = userProgram.getOutput();
+        checkAlbum2(output);
+
+        userProgram.execute("next");
+        output = userProgram.getOutput();
+        if (!output.contains("No more pages")) {
+            throw new WrongAnswer("Your output should be `No more pages` after the last page.");
+        }
+
+        userProgram.execute("prev");
+        output = userProgram.getOutput();
+        checkAlbum1(output);
+
+        userProgram.execute("exit");
     }
 
     @DynamicTest
     CheckResult testNew() {
 
         TestedProgram userProgram = new TestedProgram();
-
         userProgram.start(arguments);
         userProgram.setReturnOutputAfterExecution(false);
-
         auth(userProgram);
 
-        userProgram.execute("new");
-
         if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
-            return CheckResult.wrong("Access token is incorrect!");
+            return CheckResult.wrong("Access Token is incorrect!");
         }
 
-        String outputAfterNew = userProgram.getOutput();
+        testNewAlbums(userProgram);
+        testNewAlbums(userProgram);
 
-        String album1 =
-                "Runnin'\n" +
-                        "[Pharrell Williams]\n" +
-                        "https://open.spotify.com/album/5ZX4m5aVSmWQ5iHAPQpT71"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        String album2 =
-                "Sneakin'\n" +
-                        "[Drake2, Drake3]\n" +
-                        "https://open.spotify.com/album/0geTzdk2InlqIoB16fW9Nd"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        if (outputAfterNew.contains("Invalid access token")) {
-            return CheckResult.wrong("Your answer was `Invalid access token` on `new` action. " +
-                    "Make sure you use the server from -resource command line argument.");
-        }
-
-        if (!outputAfterNew.contains(album1) || !outputAfterNew.contains(album2)) {
-            return CheckResult.wrong(
-                    "There are no albums in correct format on \"new\" action. " +
-                            "Make sure you use the server from -resource command line argument.");
-        }
-
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
-        }
+        userProgram.stop();
 
         return CheckResult.correct();
     }
 
     @DynamicTest
-    CheckResult testCategories() {
+    CheckResult testCategoriesNextPrev() {
 
         TestedProgram userProgram = new TestedProgram();
-
         userProgram.start(arguments);
         userProgram.setReturnOutputAfterExecution(false);
-
         auth(userProgram);
+
+        String category1 = "Top Lists";
+        String category2 = "Super Mood";
+        String category3 = "Party Time";
+
+
 
         userProgram.execute("categories");
 
@@ -558,24 +552,71 @@ public class MusicAdvisorTest extends StageTest<String> {
                     "Access token is incorrect!");
         }
 
-        String outputAfterCategories = userProgram.getOutput();
-
-        String category1 = "Top Lists";
-        String category2 = "Super Mood";
-        String category3 = "Party Time";
-
-        if (!outputAfterCategories.contains(category1)
-                || !outputAfterCategories.contains(category2)
-                || !outputAfterCategories.contains(category3)) {
-
-            return CheckResult.wrong("There are no categories in correct format on \"category\" action");
+        String output = userProgram.getOutput();
+        if (!output.contains("---PAGE 1 OF 3---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 1 OF 3---");
+        }
+        if (countAppearances(output, category1) != 1
+                || countAppearances(output, category2) != 0
+                || countAppearances(output, category3) != 0) {
+            return CheckResult.wrong("Something wrong with showing categories and pages.\n" +
+                                     "Should include \"" + category1 + "\" once, " +
+                                     "exclude \"" + category2 + "\", and \"" + category3 + "\".");
         }
 
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
+        userProgram.execute("next");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 2 OF 3---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 2 OF 3---");
+        }
+        if (countAppearances(output, category1) != 0
+                || countAppearances(output, category2) != 1
+                || countAppearances(output, category3) != 0) {
+            return CheckResult.wrong("Something wrong with showing categories and pages.\n" +
+                                     "Should include \"" + category2 + "\" once, " +
+                                     "exclude \"" + category1 + "\", and \"" + category3 + "\".");
         }
 
+        userProgram.execute("next");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 3 OF 3---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 3 OF 3---");
+        }
+        if (countAppearances(output, category1) != 0
+                || countAppearances(output, category2) != 0
+                || countAppearances(output, category3) != 1) {
+            return CheckResult.wrong("Something wrong with showing categories and pages.\n" +
+                                     "Should include \"" + category3 + "\" once, " +
+                                     "exclude \"" + category1 + "\", and \"" + category2 + "\".");
+        }
+
+        userProgram.execute("prev");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 2 OF 3---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 2 OF 3---");
+        }
+        if (countAppearances(output, category1) != 0
+                || countAppearances(output, category2) != 1
+                || countAppearances(output, category3) != 0) {
+            return CheckResult.wrong("Something wrong with showing categories and pages.\n" +
+                                     "Should include \"" + category2 + "\" once, " +
+                                     "exclude \"" + category1 + "\", and \"" + category3 + "\".");
+        }
+
+        userProgram.execute("prev");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 1 OF 3---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 1 OF 3---");
+        }
+        if (countAppearances(output, category1) != 1
+                || countAppearances(output, category2) != 0
+                || countAppearances(output, category3) != 0) {
+            return CheckResult.wrong("Something wrong with showing categories and pages.\n" +
+                                     "Should include \"" + category1 + "\" once, " +
+                                     "exclude \"" + category2 + "\", and \"" + category3 + "\".");
+        }
+
+        userProgram.stop();
         return CheckResult.correct();
     }
 
@@ -583,34 +624,53 @@ public class MusicAdvisorTest extends StageTest<String> {
     CheckResult testFeatured() {
 
         TestedProgram userProgram = new TestedProgram();
-
         userProgram.start(arguments);
         userProgram.setReturnOutputAfterExecution(false);
-
         auth(userProgram);
+
+        String featured1 =
+                "Monday Morning Mood\n" +
+                "http://open.spotify.com/user/spotify/playlist/6ftJBzU2LLQcaKefMi7ee7"
+                .replaceAll(spotifyServerUrl, resourceServerUrl);
+
+        String featured2 =
+                "Upp och hoppa!\n" +
+                "http://open.spotify.com/user/spotify__sverige/playlist/4uOEx4OUrkoGNZoIlWMUbO"
+                .replaceAll(spotifyServerUrl, resourceServerUrl);
 
         userProgram.execute("featured");
 
         if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
-            return CheckResult.wrong("Access token is incorrect!");
+            return CheckResult.wrong("Access Token is incorrect!");
         }
 
-        String outputAfterFeatured = userProgram.getOutput();
+        String output = userProgram.getOutput();
+        if (!output.contains("---PAGE 1 OF 2---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 1 OF 2---");
+        }
+        if (countAppearances(output, featured1) != 1
+                || countAppearances(output, featured2) != 0) {
+            return CheckResult.wrong("Something wrong with showing featured playlists and pages");
+        }
 
-        String featured1 =
-                "Monday Morning Mood\n" +
-                        "http://open.spotify.com/user/spotify/playlist/6ftJBzU2LLQcaKefMi7ee7"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
+        userProgram.execute("next");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 2 OF 2---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 2 OF 2---");
+        }
+        if (countAppearances(output, featured1) != 0
+                || countAppearances(output, featured2) != 1) {
+            return CheckResult.wrong("Something wrong with showing featured playlists and pages");
+        }
 
-        String featured2 =
-                "Upp och hoppa!\n" +
-                        "http://open.spotify.com/user/spotify__sverige/playlist/4uOEx4OUrkoGNZoIlWMUbO"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        if (!outputAfterFeatured.contains(featured1)
-                || !outputAfterFeatured.contains(featured2)) {
-
-            return CheckResult.wrong("There are no featured playlists in correct format on \"featured\" action");
+        userProgram.execute("prev");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 1 OF 2---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 1 OF 2---");
+        }
+        if (countAppearances(output, featured1) != 1
+                || countAppearances(output, featured2) != 0) {
+            return CheckResult.wrong("Something wrong with showing featured playlists and pages");
         }
 
         userProgram.execute("exit");
@@ -622,80 +682,56 @@ public class MusicAdvisorTest extends StageTest<String> {
     }
 
     @DynamicTest
-    CheckResult testPartyPlayList() {
+    CheckResult testPlayList() {
 
         TestedProgram userProgram = new TestedProgram();
-
         userProgram.start(arguments);
         userProgram.setReturnOutputAfterExecution(false);
-
         auth(userProgram);
+
+        String playlist1 =
+                "Noite Eletronica\n" +
+                "http://open.spotify.com/user/spotifybrazilian/playlist/4k7EZPI3uKMz4aRRrLVfen"
+                .replaceAll(spotifyServerUrl, resourceServerUrl);
+
+        String playlist2 =
+                "Festa Indie\n" +
+                "http://open.spotify.com/user/spotifybrazilian/playlist/4HZh0C9y80GzHDbHZyX770"
+                .replaceAll(spotifyServerUrl, resourceServerUrl);
 
         userProgram.execute("playlists Party Time");
 
         if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
-            return CheckResult.wrong("Access token is incorrect!");
+            return CheckResult.wrong("Access Token is incorrect!");
         }
 
-        String outputAfterPartyPlaylist = userProgram.getOutput();
-
-        String playlist1 =
-                "Noite Eletronica\n" +
-                        "http://open.spotify.com/user/spotifybrazilian/playlist/4k7EZPI3uKMz4aRRrLVfen"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        String playlist2 =
-                "Festa Indie\n" +
-                        "http://open.spotify.com/user/spotifybrazilian/playlist/4HZh0C9y80GzHDbHZyX770"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        if (!outputAfterPartyPlaylist.contains(playlist1)
-                || !outputAfterPartyPlaylist.contains(playlist2)) {
-            return CheckResult.wrong("There are no playlists in correct format on \"playlists {name}\" action. " +
-                    "Make sure you correctly parsed the category name.");
+        String output = userProgram.getOutput();
+        if (!output.contains("---PAGE 1 OF 2---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 1 OF 2---");
+        }
+        if (countAppearances(output, playlist1) != 1
+                || countAppearances(output, playlist2) != 0) {
+            return CheckResult.wrong("Something wrong with showing playlists and pages");
         }
 
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
+        userProgram.execute("next");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 2 OF 2---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 2 OF 2---");
+        }
+        if (countAppearances(output, playlist1) != 0
+                || countAppearances(output, playlist2) != 1) {
+            return CheckResult.wrong("Something wrong with showing playlists and pages");
         }
 
-        return CheckResult.correct();
-    }
-
-    @DynamicTest
-    CheckResult testUnknownPlayList() {
-
-        TestedProgram userProgram = new TestedProgram();
-
-        userProgram.start(arguments);
-        userProgram.setReturnOutputAfterExecution(false);
-
-        auth(userProgram);
-
-        userProgram.execute("playlists Party Time");
-
-        if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
-            return CheckResult.wrong("Access token is incorrect!");
+        userProgram.execute("prev");
+        output = userProgram.getOutput();
+        if (!output.contains("---PAGE 1 OF 2---")) {
+            return CheckResult.wrong("Something wrong with pagination format. Not found ---PAGE 1 OF 2---");
         }
-
-        String outputAfterUnknownPlaylist = userProgram.getOutput();
-
-        String playlist1 =
-                "Noite Eletronica\n" +
-                        "http://open.spotify.com/user/spotifybrazilian/playlist/4k7EZPI3uKMz4aRRrLVfen"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        String playlist2 =
-                "Festa Indie\n" +
-                        "http://open.spotify.com/user/spotifybrazilian/playlist/4HZh0C9y80GzHDbHZyX770"
-                                .replaceAll(spotifyServerUrl, resourceServerUrl);
-
-        if (!outputAfterUnknownPlaylist.contains(playlist1)
-                || !outputAfterUnknownPlaylist.contains(playlist2)) {
-
-            return CheckResult.wrong("There are no playlists in correct format on \"playlists {name}\" action. " +
-                    "Make sure you correctly parsed the category name.");
+        if (countAppearances(output, playlist1) != 1
+                || countAppearances(output, playlist2) != 0) {
+            return CheckResult.wrong("Something wrong with showing playlists and pages");
         }
 
         userProgram.execute("exit");
@@ -706,37 +742,6 @@ public class MusicAdvisorTest extends StageTest<String> {
         return CheckResult.correct();
     }
 
-    @DynamicTest
-    CheckResult testTopPlayList() {
-
-        TestedProgram userProgram = new TestedProgram();
-
-        userProgram.start(arguments);
-        userProgram.setReturnOutputAfterExecution(false);
-
-        auth(userProgram);
-
-        userProgram.execute("playlists Top Lists");
-
-        if(!resourceServerMock.getAccess_token().contains(fictiveAccessToken)) {
-            return CheckResult.wrong("Access token is incorrect!");
-        }
-
-        String outputAfterUnknownPlaylist = userProgram.getOutput();
-
-        if (!outputAfterUnknownPlaylist.contains(testErrorMessage)) {
-            return new CheckResult(false,
-                    "You got a json with unpredictable error from the api. " +
-                            "Error message should be parsed from the api response and printed.");
-        }
-
-        userProgram.execute("exit");
-        if (!userProgram.isFinished()) {
-            userProgram.stop();
-        }
-
-        return CheckResult.correct();
-    }
 
     @AfterClass
     public static void afterTest() {
