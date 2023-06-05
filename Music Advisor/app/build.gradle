@@ -20,13 +20,17 @@ application {
 
 run {
 	standardInput = System.in
-	if (project.hasProperty("access")) {
-		args Eval.me(access)
+	systemProperties System.getProperties()
+	
+	
+	
+/*	if (System.properties.containsKey("access")) {
+		//args Eval.me(access)
 	}
 	if (project.hasProperty("resource")) {
 		args Eval.me(resource)
 	}
 	if (project.hasProperty("page")) {
 		args Eval.me(page)
-	}
+	}*/
 }

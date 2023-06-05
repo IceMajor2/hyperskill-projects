@@ -1,3 +1,2 @@
 * secure Spotify's tokens & IDs
-* change parsing of arguments
 * add README

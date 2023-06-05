@@ -1,3 +1,4 @@
 *.class
 /app/build
 .gradle
+/app/nb-configuration.xml
