@@ -1,5 +1,6 @@
 plugins {
 	id 'application'
+	id 'java'
 }
 
 repositories {
@@ -14,10 +15,18 @@ dependencies {
 }
 
 application {
-    // Define the main class for the application.
     mainClass = 'advisor.Main'
 }
 
 run {
 	standardInput = System.in
+	if (project.hasProperty("access")) {
+		args Eval.me(access)
+	}
+	if (project.hasProperty("resource")) {
+		args Eval.me(resource)
+	}
+	if (project.hasProperty("page")) {
+		args Eval.me(page)
+	}
 }
