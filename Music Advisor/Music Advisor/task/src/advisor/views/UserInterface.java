@@ -107,6 +107,9 @@ public class UserInterface {
                 printer.print(list, currentPage);
                 continue;
             }
+            if("exit".equals(input)) {
+                return;
+            }
             break;
         }
         run(input);
