@@ -1,5 +1,7 @@
 package advisor;
 
+import advisor.views.UserInterface;
+
 public class Main {
 
     public static String ACCESS_ARGUMENT;

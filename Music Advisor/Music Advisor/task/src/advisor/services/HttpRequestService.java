@@ -1,4 +1,4 @@
-package advisor.http;
+package advisor.services;
 
 import advisor.Main;
 import advisor.models.Category;

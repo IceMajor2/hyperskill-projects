@@ -1,4 +1,4 @@
-package advisor;
+package advisor.services;
 
 import advisor.models.Album;
 import advisor.models.Category;

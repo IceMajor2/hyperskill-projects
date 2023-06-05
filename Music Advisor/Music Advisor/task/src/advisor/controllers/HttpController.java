@@ -1,10 +1,11 @@
-package advisor.http;
+package advisor.controllers;
 
 import advisor.repositories.CategoriesRepository;
-import advisor.JsonService;
+import advisor.services.JsonService;
 import advisor.models.Album;
 import advisor.models.Category;
 import advisor.models.Playlist;
+import advisor.services.HttpRequestService;
 
 import java.io.IOException;
 import java.net.http.HttpClient;

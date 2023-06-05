@@ -1,7 +1,7 @@
-package advisor;
+package advisor.views;
 
-import advisor.http.HttpController;
-import advisor.http.HttpRequestService;
+import advisor.controllers.HttpController;
+import advisor.services.HttpRequestService;
 import advisor.models.Album;
 import advisor.models.Category;
 import advisor.models.Playlist;
