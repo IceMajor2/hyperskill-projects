@@ -32,7 +32,3 @@ public class Main {
         }
     }
 }
-
-/**
- * TODO: secure SPOTIFY's client ID (+ secret)
- */
