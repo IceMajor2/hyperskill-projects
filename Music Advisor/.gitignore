@@ -1,19 +1,5 @@
-# compiled files
 *.class
-
-# course files
-course-info.yaml
-course-remote-info.yaml
-/Music Advisor/*
-/Music Advisor/task/build
-
-
-# plugin
-/Music Advisor/
-buildJB.gradle
-
-# IntelliJ
+/app/build
 .gradle
-.idea
 
 

@@ -17,7 +17,7 @@ public class JsonService {
     public static List<Playlist> playlistsJsonToModel(String body) {
         JsonObject jsonObject = JsonParser.parseString(body).getAsJsonObject();
         JsonObject playlistsJson = jsonObject.getAsJsonObject("playlists");
-        System.out.println(body); // <-- somehow, this is needed to pass stage 4
+        // System.out.println(body); // <-- somehow, this is needed to pass stage 4
         if(playlistsJson == null) {
             return Collections.emptyList();
         }
