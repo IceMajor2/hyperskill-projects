@@ -1,5 +1,6 @@
 package advisor.views;
 
+import advisor.Main;
 import advisor.controllers.HttpController;
 import advisor.services.HttpRequestService;
 import advisor.models.Album;
@@ -14,17 +15,24 @@ public class UserInterface {
 
     private HttpController httpController;
     private Scanner scanner;
+    private int entriesPerPage;
     private boolean logged;
 
     public UserInterface() {
         this.scanner = new Scanner(System.in);
         this.logged = false;
+        this.entriesPerPage = Main.PAGE_ARGUMENT;
     }
+
+    //public void run() throws IOException, InterruptedException {
+        //run("");
+    //}
 
     public void run() throws IOException, InterruptedException {
         one:
         while (true) {
             String input = scanner.nextLine();
+           // input = input.isEmpty() ? scanner.nextLine() : input;
             if ("auth".equals(input)) {
                 authUser();
                 continue;
@@ -41,62 +49,77 @@ public class UserInterface {
         }
     }
 
-    private void printFeatured() throws IOException, InterruptedException {
-        List<Playlist> featuredPlaylists = httpController.getFeatured();
-        for (Playlist playlist : featuredPlaylists) {
-            System.out.println(playlist);
-            System.out.println();
+    private void loggedMenu(String input) throws IOException, InterruptedException {
+        if ("featured".equals(input)) {
+            var featured = httpController.getFeatured();
+            musicMenu(featured);
+            return;
+        }
+        if ("new".equals(input)) {
+            var newest = httpController.getNew();
+            musicMenu(newest);
+            return;
+        }
+        if ("categories".equals(input)) {
+            var categories = httpController.getCategories();
+            musicMenu(categories);
+            return;
+        }
+        if (input.contains("playlists")) {
+            var playlists = httpController.getPlaylist(this.getCategory(input));
+            if(playlists.isEmpty()) {
+                System.out.println("Unknown category name.");
+                return;
+            }
+            musicMenu(playlists);
+            return;
         }
     }
 
-    private void printNew() throws IOException, InterruptedException {
-        List<Album> newAlbums = httpController.getNew();
-        for (Album album : newAlbums) {
-            System.out.println(album);
-            System.out.println();
+    private void musicMenu(List<?> list) throws IOException, InterruptedException {
+        int currentPage = 1;
+        printList(list, currentPage);
+
+        int totalPages = getTotalPages(list);
+
+        String input = "";
+        while (true) {
+            input = scanner.nextLine();
+            if ("prev".equals(input)) {
+                if (currentPage == 1) {
+                    System.out.println("No more pages.");
+                    continue;
+                }
+                currentPage--;
+                printList(list, currentPage);
+                continue;
+            }
+            if ("next".equals(input)) {
+                if (currentPage == totalPages) {
+                    System.out.println("No more pages.");
+                    continue;
+                }
+                currentPage++;
+                printList(list, currentPage);
+                continue;
+            }
+            break;
         }
+        //run(input);
     }
 
-    private void printCategories() throws IOException, InterruptedException {
-        List<Category> categories = httpController.getCategories();
-        for (Category category : categories) {
-            System.out.println(category);
+    private void printList(List<?> list, int page) {
+        int startIndex = (page - 1) * entriesPerPage;
+        for (int i = startIndex; i < startIndex + entriesPerPage; i++) {
+            System.out.println(list.get(i));
+            System.out.println();
         }
+        System.out.println("---PAGE %d OF %d---"
+                .formatted(page, this.getTotalPages(list)));
     }
 
     private void printExit() {
         System.out.println("---GOODBYE!---");
-    }
-
-    private void printPlaylist(String category) throws IOException, InterruptedException {
-        List<Playlist> playlists = httpController.getPlaylist(category);
-        if(playlists.isEmpty()) {
-            System.out.println("Unknown category name.");
-            return;
-        }
-        for (Playlist playlist : playlists) {
-            System.out.println(playlist);
-            System.out.println();
-        }
-    }
-
-    private void loggedMenu(String input) throws IOException, InterruptedException {
-        if ("featured".equals(input)) {
-            printFeatured();
-            return;
-        }
-        if ("new".equals(input)) {
-            printNew();
-            return;
-        }
-        if ("categories".equals(input)) {
-            printCategories();
-            return;
-        }
-        if (input.contains("playlists")) {
-            printPlaylist(this.getCategory(input));
-            return;
-        }
     }
 
     private String getCategory(String input) {
@@ -122,5 +145,10 @@ public class UserInterface {
         System.out.println(httpController.accessTokenRequest());
         System.out.println("---SUCCESS---");
         this.logged = true;
+    }
+
+    private int getTotalPages(List<?> list) {
+        int size = list.size();
+        return size / entriesPerPage + (size % entriesPerPage == 0 ? 0 : 1);
     }
 }
