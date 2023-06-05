@@ -22,22 +22,28 @@ public class UserInterface {
     }
 
     public void run() throws IOException, InterruptedException {
+        run("");
+    }
+
+    public void run(String input) throws IOException, InterruptedException {
         one:
         while (true) {
-            String input = scanner.nextLine();
-            // input = input.isEmpty() ? scanner.nextLine() : input;
+            input = input.isEmpty() ? scanner.nextLine() : input;
             if ("auth".equals(input)) {
                 authUser();
+                input = "";
                 continue;
             }
             if ("exit".equals(input)) {
                 printExit();
-                return;
+                System.exit(0);
             }
             while (logged) {
                 loggedMenu(input);
+                input = "";
                 continue one;
             }
+            input = "";
             System.out.println("Please, provide access for application.");
         }
     }
@@ -74,14 +80,15 @@ public class UserInterface {
         }
     }
 
-    private void musicMenu(Printer printer, List<?> list) {
+    private void musicMenu(Printer printer, List<?> list) throws IOException, InterruptedException {
         int currentPage = 1;
         printer.print(list, currentPage);
 
         int totalPages = getTotalPages(list);
 
+        String input = "";
         while (true) {
-            String input = scanner.nextLine();
+            input = scanner.nextLine();
             if ("prev".equals(input)) {
                 if (currentPage == 1) {
                     System.out.println("No more pages.");
@@ -102,6 +109,7 @@ public class UserInterface {
             }
             break;
         }
+        run(input);
     }
 
     private void authUser() throws IOException, InterruptedException {
