@@ -6,6 +6,7 @@ public class Main {
 
     public static String ACCESS_ARGUMENT;
     public static String RESOURCE_ARGUMENT;
+    public static int PAGE_ARGUMENT;
 
     public static void main(String[] args) throws Exception {
         setArgs(args);
@@ -23,6 +24,11 @@ public class Main {
             RESOURCE_ARGUMENT = args[3];
         } catch (Exception e) {
             RESOURCE_ARGUMENT = "https://api.spotify.com";
+        }
+        try {
+            PAGE_ARGUMENT = Integer.valueOf(args[5]);
+        } catch (Exception e) {
+            PAGE_ARGUMENT = 5;
         }
     }
 }
