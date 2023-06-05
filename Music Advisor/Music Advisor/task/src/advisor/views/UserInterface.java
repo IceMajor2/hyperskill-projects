@@ -3,9 +3,6 @@ package advisor.views;
 import advisor.Main;
 import advisor.controllers.HttpController;
 import advisor.services.HttpRequestService;
-import advisor.models.Album;
-import advisor.models.Category;
-import advisor.models.Playlist;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,10 +20,6 @@ public class UserInterface {
         this.logged = false;
         this.entriesPerPage = Main.PAGE_ARGUMENT;
     }
-
-    //public void run() throws IOException, InterruptedException {
-        //run("");
-    //}
 
     public void run() throws IOException, InterruptedException {
         one:
@@ -50,19 +43,23 @@ public class UserInterface {
     }
 
     private void loggedMenu(String input) throws IOException, InterruptedException {
+        Printer printer = null;
         if ("featured".equals(input)) {
             var featured = httpController.getFeatured();
-            musicMenu(featured);
+            printer = new Printer(new MusicPrintingStrategy(), this.entriesPerPage, getTotalPages(featured));
+            musicMenu(printer, featured);
             return;
         }
         if ("new".equals(input)) {
             var newest = httpController.getNew();
-            musicMenu(newest);
+            printer = new Printer(new MusicPrintingStrategy(), this.entriesPerPage, getTotalPages(newest));
+            musicMenu(printer, newest);
             return;
         }
         if ("categories".equals(input)) {
             var categories = httpController.getCategories();
-            musicMenu(categories);
+            printer = new Printer(new CategoryPrintingStrategy(), this.entriesPerPage, getTotalPages(categories));
+            musicMenu(printer, categories);
             return;
         }
         if (input.contains("playlists")) {
@@ -71,27 +68,27 @@ public class UserInterface {
                 System.out.println("Unknown category name.");
                 return;
             }
-            musicMenu(playlists);
+            printer = new Printer(new MusicPrintingStrategy(), this.entriesPerPage, getTotalPages(playlists));
+            musicMenu(printer, playlists);
             return;
         }
     }
 
-    private void musicMenu(List<?> list) throws IOException, InterruptedException {
+    private void musicMenu(Printer printer, List<?> list) {
         int currentPage = 1;
-        printList(list, currentPage);
+        printer.print(list, currentPage);
 
         int totalPages = getTotalPages(list);
 
-        String input = "";
         while (true) {
-            input = scanner.nextLine();
+            String input = scanner.nextLine();
             if ("prev".equals(input)) {
                 if (currentPage == 1) {
                     System.out.println("No more pages.");
                     continue;
                 }
                 currentPage--;
-                printList(list, currentPage);
+                printer.print(list, currentPage);
                 continue;
             }
             if ("next".equals(input)) {
@@ -100,22 +97,11 @@ public class UserInterface {
                     continue;
                 }
                 currentPage++;
-                printList(list, currentPage);
+                printer.print(list, currentPage);
                 continue;
             }
             break;
         }
-        //run(input);
-    }
-
-    private void printList(List<?> list, int page) {
-        int startIndex = (page - 1) * entriesPerPage;
-        for (int i = startIndex; i < startIndex + entriesPerPage; i++) {
-            System.out.println(list.get(i));
-            System.out.println();
-        }
-        System.out.println("---PAGE %d OF %d---"
-                .formatted(page, this.getTotalPages(list)));
     }
 
     private void printExit() {
