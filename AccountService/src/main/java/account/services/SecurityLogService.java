@@ -1,7 +1,7 @@
 package account.services;
 
-import account.DTO.RoleDTO;
-import account.DTO.UserActionDTO;
+import account.dto.RoleDTO;
+import account.dto.UserActionDTO;
 import account.enums.AccountAction;
 import account.enums.OperationType;
 import account.enums.Roles;
@@ -19,10 +19,13 @@ import java.util.List;
 @Service
 public class SecurityLogService {
 
-    @Autowired
     private SecurityLogRepository securityLogRepository;
-    @Autowired
     private UserRepository userRepository;
+
+    public SecurityLogService(SecurityLogRepository securityLogRepository, UserRepository userRepository) {
+        this.securityLogRepository = securityLogRepository;
+        this.userRepository = userRepository;
+    }
 
     public List<SecurityLog> getLogs() {
         var logs = securityLogRepository.findAllByOrderByIdAsc();

@@ -17,13 +17,13 @@ public class LoginAttemptService {
 
     private static final int MAX_ATTEMPTS = 4;
     private Map<String, Integer> attempts;
-    @Autowired
     private SecurityLogService securityLogService;
-    @Autowired
     private UserRepository userRepository;
 
-    public LoginAttemptService() {
+    public LoginAttemptService(SecurityLogService securityLogService, UserRepository userRepository) {
         super();
+        this.securityLogService = securityLogService;
+        this.userRepository = userRepository;
         attempts = new HashMap<>();
     }
 

@@ -1,6 +1,6 @@
 package account.models;
 
-import account.DTO.UserDTO;
+import account.dto.UserDTO;
 import account.enums.Roles;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;

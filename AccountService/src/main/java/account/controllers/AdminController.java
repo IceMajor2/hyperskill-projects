@@ -1,7 +1,7 @@
 package account.controllers;
 
-import account.DTO.RoleDTO;
-import account.DTO.UserActionDTO;
+import account.dto.RoleDTO;
+import account.dto.UserActionDTO;
 import account.exceptions.ApiError;
 import account.models.User;
 import account.services.AdminService;
@@ -23,10 +23,13 @@ import java.util.Map;
 @RequestMapping("/api/admin")
 public class AdminController {
 
-    @Autowired
     private AdminService adminService;
-    @Autowired
     private SecurityLogService securityLogService;
+
+    public AdminController(AdminService adminService, SecurityLogService securityLogService) {
+        this.adminService = adminService;
+        this.securityLogService = securityLogService;
+    }
 
     @PutMapping(value = {"/user/role", "/user/role/"})
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")

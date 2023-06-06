@@ -1,6 +1,6 @@
 package account.models;
 
-import account.DTO.PaymentDTO;
+import account.dto.PaymentDTO;
 import jakarta.persistence.*;
 
 import java.text.ParseException;

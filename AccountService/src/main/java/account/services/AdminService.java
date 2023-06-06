@@ -1,7 +1,7 @@
 package account.services;
 
-import account.DTO.RoleDTO;
-import account.DTO.UserActionDTO;
+import account.dto.RoleDTO;
+import account.dto.UserActionDTO;
 import account.enums.OperationType;
 import account.enums.Roles;
 import account.exceptions.auth.LockAdminException;
@@ -18,10 +18,13 @@ import java.util.Map;
 @Service
 public class AdminService {
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private Map<String, Integer> attempts;
+
+    public AdminService(UserRepository userRepository, Map<String, Integer> attempts) {
+        this.userRepository = userRepository;
+        this.attempts = attempts;
+    }
 
     public List<User> getUsersList() {
         List<User> users = userRepository.findAllByOrderByIdAsc();

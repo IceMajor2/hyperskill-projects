@@ -1,7 +1,7 @@
 package account.services;
 
-import account.DTO.NewPasswordDTO;
-import account.DTO.UserDTO;
+import account.dto.NewPasswordDTO;
+import account.dto.UserDTO;
 import account.enums.Roles;
 import account.exceptions.auth.BreachedPasswordException;
 import account.exceptions.auth.PasswordNotChangedException;
@@ -17,12 +17,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
-    @Autowired
     private UserRepository userRepository;
-    @Autowired
     private BreachedPasswordsRepository breachedPasswordsRepository;
-    @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public AuthService(UserRepository userRepository,
+                       BreachedPasswordsRepository breachedPasswordsRepository,
+                       PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.breachedPasswordsRepository = breachedPasswordsRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User registerUser(UserDTO userDTO) {
         passwordBreachedCondition(userDTO.getPassword());

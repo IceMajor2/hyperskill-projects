@@ -1,4 +1,4 @@
-package account.DTO;
+package account.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;

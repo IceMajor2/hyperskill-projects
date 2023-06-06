@@ -1,12 +1,11 @@
 package account.controllers;
 
-import account.DTO.NewPasswordDTO;
-import account.DTO.UserDTO;
+import account.dto.NewPasswordDTO;
+import account.dto.UserDTO;
 import account.models.User;
 import account.services.AuthService;
 import account.services.SecurityLogService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,10 +21,13 @@ import java.util.Map;
 @RequestMapping("/api/auth")
 public class AuthController {
 
-    @Autowired
     private AuthService authService;
-    @Autowired
     private SecurityLogService securityLogService;
+
+    public AuthController(AuthService authService, SecurityLogService securityLogService) {
+        this.authService = authService;
+        this.securityLogService = securityLogService;
+    }
 
     @PostMapping(value = {"/signup", "/signup/"})
     public ResponseEntity registerUser(@RequestBody @Valid UserDTO userDTO) {

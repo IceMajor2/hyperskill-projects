@@ -1,18 +1,21 @@
-package account.DTO;
+package account.dto;
 
-import account.enums.AccountAction;
+import account.enums.OperationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
 
-public class UserActionDTO {
+public class RoleDTO {
 
-    @NotEmpty
     @JsonProperty("user")
+    @NotEmpty
     private String email;
+
+    private String role;
+
     @Enumerated(EnumType.STRING)
-    private AccountAction operation;
+    private OperationType operation;
 
     public String getEmail() {
         return email;
@@ -22,11 +25,19 @@ public class UserActionDTO {
         this.email = email;
     }
 
-    public AccountAction getOperation() {
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public OperationType getOperation() {
         return operation;
     }
 
-    public void setOperation(AccountAction operation) {
+    public void setOperation(OperationType operation) {
         this.operation = operation;
     }
 }

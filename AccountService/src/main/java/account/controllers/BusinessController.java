@@ -1,7 +1,7 @@
 package account.controllers;
 
-import account.DTO.AuthPaymentDTO;
-import account.DTO.PaymentDTO;
+import account.dto.AuthPaymentDTO;
+import account.dto.PaymentDTO;
 import account.services.BusinessService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,11 @@ import java.util.Map;
 @Validated
 public class BusinessController {
 
-    @Autowired
     private BusinessService businessService;
+
+    public BusinessController(BusinessService businessService) {
+        this.businessService = businessService;
+    }
 
     @GetMapping(value = {"/api/empl/payment", "/api/empl/payment/"}, params = "period")
     @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ACCOUNTANT')")

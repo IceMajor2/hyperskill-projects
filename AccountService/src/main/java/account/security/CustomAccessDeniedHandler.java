@@ -14,8 +14,15 @@ import java.io.IOException;
 
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-    @Autowired
     private SecurityLogService securityLogService;
+
+    @Autowired
+    public CustomAccessDeniedHandler(SecurityLogService securityLogService) {
+        this.securityLogService = securityLogService;
+    }
+
+    public CustomAccessDeniedHandler() {
+    }
 
     @Override
     public void handle(

@@ -1,4 +1,4 @@
-package account.DTO;
+package account.dto;
 
 import account.models.Payment;
 

@@ -10,8 +10,11 @@ import org.springframework.stereotype.Component;
 public class AuthenticationSuccessListener
         implements ApplicationListener<AuthenticationSuccessEvent> {
 
-    @Autowired
     private LoginAttemptService loginAttemptService;
+
+    public AuthenticationSuccessListener(LoginAttemptService loginAttemptService) {
+        this.loginAttemptService = loginAttemptService;
+    }
 
     @Override
     public void onApplicationEvent(AuthenticationSuccessEvent event) {

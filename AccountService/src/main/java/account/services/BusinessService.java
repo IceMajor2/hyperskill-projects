@@ -1,7 +1,7 @@
 package account.services;
 
-import account.DTO.AuthPaymentDTO;
-import account.DTO.PaymentDTO;
+import account.dto.AuthPaymentDTO;
+import account.dto.PaymentDTO;
 import account.exceptions.business.NoSuchPaymentException;
 import account.exceptions.business.PaymentMadeForPeriodException;
 import account.exceptions.auth.UserNotExistsException;
@@ -23,10 +23,13 @@ import java.util.List;
 @Service
 public class BusinessService {
 
-    @Autowired
     private PaymentRepository paymentRepository;
-    @Autowired
     private UserRepository userRepository;
+
+    public BusinessService(PaymentRepository paymentRepository, UserRepository userRepository) {
+        this.paymentRepository = paymentRepository;
+        this.userRepository = userRepository;
+    }
 
     public AuthPaymentDTO getPayrolls(UserDetails userDetails, String period) {
         try {
