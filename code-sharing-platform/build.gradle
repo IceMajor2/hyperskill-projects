@@ -15,8 +15,10 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'net.sourceforge.htmlunit:htmlunit:2.70.0'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.6'
+	implementation 'org.jsoup:jsoup:1.16.1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'junit:junit:4.13.1'
 }
 
 tasks.named('test') {
