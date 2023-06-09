@@ -20,9 +20,10 @@ class CodeSharingPlatformApplicationTests {
     @Test
     public void shouldReturnCorrectHeaders() {
         ResponseEntity response = restTemplate.getForEntity("/", String.class);
+        var contentTypeStr = "%s/%s".formatted(response.getHeaders().getContentType().getType(),
+                response.getHeaders().getContentType().getSubtype());
 
-        Assert.assertEquals(MediaType.TEXT_HTML,
-                response.getHeaders().getContentType());
+        Assert.assertEquals(MediaType.TEXT_HTML.toString(), contentTypeStr);
     }
 
     @Test
