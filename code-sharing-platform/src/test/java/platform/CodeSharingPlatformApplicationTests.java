@@ -1,33 +1,24 @@
 package platform;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CodeSharingPlatformApplicationTests {
 
-    private static WebClient webClient;
-
-    @BeforeAll
-    public static void init() {
-        webClient = new WebClient();
-    }
-
-    @AfterAll
-    public static void close() {
-        webClient.close();
-    }
+    @Autowired
+    TestRestTemplate restTemplate;
 
     @Test
-    public void ensureRightTitleTest() throws Exception {
-        webClient.getOptions().setThrowExceptionOnScriptError(false);
-        HtmlPage page = webClient.getPage("/code");
+    public void titleShouldBeCodeTest() {
+        String responseBody = restTemplate.getForObject("/", String.class);
+        Document doc = Jsoup.parse(responseBody);
 
-        Assertions.assertEquals("Code", page.getTitleText());
+        Assert.assertEquals("Code", doc.title());
     }
 }
