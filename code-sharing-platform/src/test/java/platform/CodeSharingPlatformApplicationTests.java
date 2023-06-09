@@ -19,7 +19,7 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void shouldReturnCorrectHeaders() {
-        ResponseEntity response = restTemplate.getForEntity("/", String.class);
+        ResponseEntity response = restTemplate.getForEntity("/code", String.class);
         var contentTypeStr = "%s/%s".formatted(response.getHeaders().getContentType().getType(),
                 response.getHeaders().getContentType().getSubtype());
 
@@ -28,7 +28,7 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void titleShouldBeCodeTest() {
-        String response = restTemplate.getForObject("/", String.class);
+        String response = restTemplate.getForObject("/code", String.class);
         Document doc = Jsoup.parse(response);
 
         Assert.assertEquals("Code", doc.title());
@@ -36,7 +36,7 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void preTagShouldNotBeEmpty() {
-        String response = restTemplate.getForObject("/", String.class);
+        String response = restTemplate.getForObject("/code", String.class);
         Document doc = Jsoup.parse(response);
 
         Elements elements = doc.select("pre");
