@@ -1,8 +1,5 @@
 package platform;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -10,12 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CodeSharingPlatformController {
 
     @GetMapping("/code")
-    public ResponseEntity<String> getCode() {
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.setContentType(MediaType.TEXT_HTML);
-
-        return ResponseEntity.ok()
-                .headers(responseHeaders)
-                .body("index");
+    public String getCode() {
+        // no need to explicitly define headers. Spring, I guess, does that for me
+        return "index";
     }
 }
