@@ -122,14 +122,33 @@ class CodeSharingPlatformApplicationTests {
         assertTrue("Date is of wrong format", isDateValid(dateStr));
     }
 
+    @Test
+    public void htmlDateShouldEqualToApiDate() {
+        // get API date
+        ResponseEntity<String> apiRes = restTemplate
+                .getForEntity("/api/code", String.class);
+
+        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
+        String apiDate = documentContext.read("$.date");
+
+        // get HTML date
+        String htmlRes = restTemplate.getForObject("/code", String.class);
+        Document doc = Jsoup.parse(htmlRes);
+
+        Element date = doc.getElementById("load_date");
+        String dateStr = date.text();
+
+        assertTrue("Dates do not match", areDatesEqual(apiDate, dateStr));
+    }
+
     private boolean areDatesEqual(String date1, String date2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         long time1 = LocalDateTime.parse(date1, formatter).toEpochSecond(ZoneOffset.UTC);
         long time2 = LocalDateTime.parse(date2, formatter).toEpochSecond(ZoneOffset.UTC);
-        if(time2 - 1 <= time1 && time1 <= time2 + 1) {
+        if (time2 - 1 <= time1 && time1 <= time2 + 1) {
             return true;
         }
-        if(time1 - 1 <= time2 && time2 <= time1 + 1) {
+        if (time1 - 1 <= time2 && time2 <= time1 + 1) {
             return true;
         }
         return false;
@@ -140,7 +159,7 @@ class CodeSharingPlatformApplicationTests {
         try {
             LocalDateTime.parse(date, formatter);
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
