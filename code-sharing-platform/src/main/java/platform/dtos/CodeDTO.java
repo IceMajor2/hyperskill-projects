@@ -1,4 +1,4 @@
-package platform;
+package platform.dtos;
 
 public class CodeDTO {
 
