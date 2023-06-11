@@ -14,7 +14,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDateTime;
@@ -33,10 +36,8 @@ class CodeSharingPlatformApplicationTests {
     private String setupTime;
 
     @BeforeEach
-    public void setup() {
-        String jsonRequest = "{ \"code\": \"int a = 0;\" }";
-        HttpEntity<String> request = new HttpEntity<>(jsonRequest);
-        restTemplate.exchange("/api/code/new", HttpMethod.POST, request, Void.class);
+    public void setup() throws JSONException {
+        sendNewCodePost("int a = 0;");
         this.setupTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 
@@ -75,7 +76,7 @@ class CodeSharingPlatformApplicationTests {
         String code = documentContext.read("$.code");
         String date = documentContext.read("$.date");
 
-        assertEquals(code, CodeSharingPlatformApplication.latestCode.getCode());
+        assertEquals("int a = 0;", code);
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(this.setupTime, date),
                 areDatesEqual(date, this.setupTime));
     }
@@ -145,8 +146,14 @@ class CodeSharingPlatformApplicationTests {
     @Test
     @DirtiesContext
     public void apiCorrectPostNewCodeResponse() throws JSONException {
+        ResponseEntity<String> postRes = sendNewCodePost("int b = 9;");
+
+        assertEquals("{}", postRes.getBody());
+    }
+
+    private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
         JSONObject codeDTO = new JSONObject();
-        codeDTO.put("code", "int b = 9;");
+        codeDTO.put("code", code);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -155,8 +162,7 @@ class CodeSharingPlatformApplicationTests {
         HttpEntity<String> request = new HttpEntity<>(codeDTO.toString(), headers);
         ResponseEntity<String> postRes = restTemplate.
                 postForEntity("/api/code/new", request, String.class);
-
-        assertEquals("{}", postRes.getBody());
+        return postRes;
     }
 
     private boolean areDatesEqual(String date1, String date2) {
