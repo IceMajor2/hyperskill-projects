@@ -1,7 +1,6 @@
 package platform.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import platform.CodeDTO;
+import platform.dtos.CodeDTO;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
