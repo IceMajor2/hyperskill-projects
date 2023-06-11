@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 public class Code {
 
     private String code;
-    private String time;
+    private String date;
 
     public Code(String code) {
         this.code = code;
-        this.time = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 
     public Code() {
@@ -24,11 +24,11 @@ public class Code {
         this.code = code;
     }
 
-    public String getTime() {
-        return time;
+    public String getDate() {
+        return date;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setDate(String date) {
+        this.date = date;
     }
 }
