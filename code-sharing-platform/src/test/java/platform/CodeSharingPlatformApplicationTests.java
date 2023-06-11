@@ -2,6 +2,8 @@ package platform;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -12,14 +14,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
+import org.springframework.test.annotation.DirtiesContext;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -66,7 +67,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void apiCorrectJSONBody() {
+    public void apiCorrectGetLatestCodeResponse() {
         ResponseEntity<String> response = restTemplate
                 .getForEntity("/api/code", String.class);
 
@@ -74,7 +75,7 @@ class CodeSharingPlatformApplicationTests {
         String code = documentContext.read("$.code");
         String date = documentContext.read("$.date");
 
-        assertEquals(code, "int a = 0;");
+        assertEquals(code, CodeSharingPlatformApplication.latestCode.getCode());
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(this.setupTime, date),
                 areDatesEqual(date, this.setupTime));
     }
@@ -139,6 +140,23 @@ class CodeSharingPlatformApplicationTests {
 
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(this.setupTime, dateStr),
                 areDatesEqual(dateStr, this.setupTime));
+    }
+
+    @Test
+    @DirtiesContext
+    public void apiCorrectPostNewCodeResponse() throws JSONException {
+        JSONObject codeDTO = new JSONObject();
+        codeDTO.put("code", "int b = 9;");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> request = new HttpEntity<>(codeDTO.toString(), headers);
+        ResponseEntity<String> postRes = restTemplate.
+                postForEntity("/api/code/new", request, String.class);
+
+        assertEquals("{}", postRes.getBody());
     }
 
     private boolean areDatesEqual(String date1, String date2) {
