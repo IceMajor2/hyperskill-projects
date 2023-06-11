@@ -1,5 +1,8 @@
 package platform.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import platform.CodeDTO;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -10,6 +13,11 @@ public class Code {
 
     public Code(String code) {
         this.code = code;
+        this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+    }
+
+    public Code(CodeDTO codeDTO) {
+        this.code = codeDTO.getCode();
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
     }
 
