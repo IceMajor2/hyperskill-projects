@@ -5,6 +5,7 @@ import com.jayway.jsonpath.JsonPath;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,8 +22,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CodeSharingPlatformApplicationTests {
@@ -74,7 +74,7 @@ class CodeSharingPlatformApplicationTests {
         String code = documentContext.read("$.code");
         String date = documentContext.read("$.date");
 
-        assertTrue(dateCheck(date, this.setupTime));
+        assertTrue(areDatesEqual(date, this.setupTime));
 
         assertEquals(code, "int a = 0;");
         assertEquals(date, this.setupTime);
@@ -106,10 +106,23 @@ class CodeSharingPlatformApplicationTests {
         Element codeSnippet = doc.getElementById("code_snippet");
         String htmlCode = codeSnippet.text();
 
+        assertEquals(codeSnippet.tagName().toLowerCase(), "pre");
         assertEquals(apiCode, htmlCode);
     }
 
-    private boolean dateCheck(String date1, String date2) {
+    @Test
+    public void htmlDateDisplay() {
+        String htmlRes = restTemplate.getForObject("/code", String.class);
+        Document doc = Jsoup.parse(htmlRes);
+
+        Element date = doc.getElementById("load_date");
+        String dateStr = date.text();
+
+        assertEquals(date.tagName().toLowerCase(), "span");
+        assertTrue("Date is of wrong format", isDateValid(dateStr));
+    }
+
+    private boolean areDatesEqual(String date1, String date2) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         long time1 = LocalDateTime.parse(date1, formatter).toEpochSecond(ZoneOffset.UTC);
         long time2 = LocalDateTime.parse(date2, formatter).toEpochSecond(ZoneOffset.UTC);
@@ -120,5 +133,15 @@ class CodeSharingPlatformApplicationTests {
             return true;
         }
         return false;
+    }
+
+    private boolean isDateValid(String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        try {
+            LocalDateTime.parse(date, formatter);
+            return true;
+        } catch(Exception e) {
+            return false;
+        }
     }
 }
