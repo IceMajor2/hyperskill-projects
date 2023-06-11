@@ -6,20 +6,36 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CodeSharingPlatformApplicationTests {
 
     @Autowired
     TestRestTemplate restTemplate;
+    private String setupTime;
+
+    @Before
+    public void setup() {
+        String jsonRequest = "{ \"code\": \"int a = 0;\" }";
+        HttpEntity<String> request = new HttpEntity<>(jsonRequest);
+        restTemplate.exchange("/api/code/new", HttpMethod.POST, request, Void.class);
+        this.setupTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+    }
 
     @Test
     public void shouldReturnCorrectHeaders() {
@@ -54,12 +70,10 @@ class CodeSharingPlatformApplicationTests {
 
         DocumentContext documentContext = JsonPath.parse(response.getBody());
         String code = documentContext.read("$.code");
+        String date = documentContext.read("$.date");
 
-        String expected = "public static void main(String[] args) {\n" +
-                "    SpringApplication.run(CodeSharingPlatform.class, args);\n" +
-                "}";
-
-        assertEquals(code, expected);
+        assertEquals(code, "int a = 0;");
+        assertEquals(date, this.setupTime);
     }
 
     @Test
