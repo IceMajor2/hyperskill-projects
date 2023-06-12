@@ -10,8 +10,8 @@ public class WebController {
 
     @GetMapping("/code")
     public String getLatestCode(Model model) {
-        model.addAttribute("date", CodeSharingPlatformApplication.latestCode.getDate());
-        model.addAttribute("code", CodeSharingPlatformApplication.latestCode.getCode());
+        //model.addAttribute("date", CodeSharingPlatformApplication.latestCode.getDate());
+        //model.addAttribute("code", CodeSharingPlatformApplication.latestCode.getCode());
         return "index";
     }
 
