@@ -5,11 +5,8 @@ import com.jayway.jsonpath.JsonPath;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +25,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class CodeSharingPlatformApplicationTests {
@@ -89,7 +87,8 @@ class CodeSharingPlatformApplicationTests {
         String actualDate = documentContext.read("$.date");
 
         assertEquals(expectedCode, actualCode);
-        assertEquals(expectedDate, actualDate);
+
+        assertDatesEqual(expectedDate, actualDate);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
@@ -132,6 +131,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     private void assertDatesEqual(String expected, String actual) {
+        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss", isDateFormatValid(actual));
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(expected, actual),
                 areDatesEqual(expected, actual));
     }
