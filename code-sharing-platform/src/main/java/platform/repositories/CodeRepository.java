@@ -35,6 +35,9 @@ public class CodeRepository {
 
     public List<Code> getNLatest(int n) {
         int size = this.codeRepository.size();
+        if(n > size) {
+            return this.codeRepository.values().stream().toList();
+        }
         return this.codeRepository.values().stream().toList().subList(size - n, size);
     }
 }
