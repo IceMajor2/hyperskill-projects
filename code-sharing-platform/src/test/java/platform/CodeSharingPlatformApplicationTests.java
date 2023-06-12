@@ -74,20 +74,36 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void getCodeSnippet() {
-        ResponseEntity<String> response = restTemplate
-                .getForEntity("/api/code/1", String.class);
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
-
+    public void getApiNCodeSnippet() {
         TestCode expected = this.codes.get(1);
         String expectedCode = expected.getCode();
         String expectedDate = expected.getDate();
+
+        ResponseEntity<String> response = restTemplate
+                .getForEntity("/api/code/1", String.class);
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
 
         String actualCode = documentContext.read("$.code");
         String actualDate = documentContext.read("$.date");
 
         assertEquals(expectedCode, actualCode);
+        assertDatesEqual(expectedDate, actualDate);
+    }
 
+    @Test
+    public void getHtmlNCodeSnippet() {
+        TestCode expected = this.codes.get(3);
+        String expectedCode = expected.getCode();
+        String expectedDate = expected.getDate();
+
+        String response = restTemplate
+                .getForObject("/code/3", String.class);
+        Document doc = Jsoup.parse(response);
+
+        String actualCode = doc.getElementById("code_snippet").text();
+        String actualDate = doc.getElementById("load_date").text();
+
+        assertEquals(expectedCode, actualCode);
         assertDatesEqual(expectedDate, actualDate);
     }
 
