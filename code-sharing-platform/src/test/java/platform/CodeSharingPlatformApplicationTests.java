@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ class CodeSharingPlatformApplicationTests {
     public void apiCorrectPostNewCodeResponse() throws JSONException {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
 
-        String expected = "{\"id\":" + codes.size() + "}";
+        String expected = "{\"id\":\"" + codes.size() + "\"}";
         assertEquals(expected, postRes.getBody());
     }
 
@@ -143,6 +144,27 @@ class CodeSharingPlatformApplicationTests {
 
         assertEquals(Arrays.toString(expectedSnippets.toArray()),
                 Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
+    }
+
+    @Test
+    public void htmlGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
+        sendNewCodePost("public static final xyz = 0;");
+        List<String> expectedSnippets = this.codes.values().stream().map(obj -> obj.getCode()).toList();
+
+        String response = restTemplate
+                .getForObject("/code/latest", String.class);
+        Document doc = Jsoup.parse(response);
+
+        Elements snippetElements = doc.getElementsByTag("pre");
+
+        List<String> actualSnippets = new ArrayList<>();
+        for(Element element : snippetElements) {
+            if(element.id().equals("code_snippet")) {
+                actualSnippets.add(element.text());
+            }
+        }
+
+        assertEquals(expectedSnippets, actualSnippets);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
