@@ -50,7 +50,6 @@ class CodeSharingPlatformApplicationTests {
         sendNewCodePost("return 0;");
         sendNewCodePost("import java.time.LocalDateTime;");
         sendNewCodePost("sendNewCodePost(this);");
-        sendNewCodePost("public static final xyz = 0;");
     }
 
     @Test
@@ -118,7 +117,22 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void apiGetTenLatestCodeSnippetsOrderDesc() {
+    public void apiGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
+        sendNewCodePost("public static final xyz = 0;");
+        List<String> expectedSnippets = this.codes.values().stream().map(obj -> obj.getCode()).toList();
+
+        ResponseEntity<String> response = restTemplate
+                .getForEntity("/api/code/latest", String.class);
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+
+        JSONArray actualSnippets = documentContext.read("$..code");
+
+        assertEquals(Arrays.toString(expectedSnippets.toArray()),
+                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
+    }
+
+    @Test
+    public void apiGetTenLatestWhenLessThanTenElements() {
         List<String> expectedSnippets = this.codes.values().stream().map(obj -> obj.getCode()).toList();
 
         ResponseEntity<String> response = restTemplate
