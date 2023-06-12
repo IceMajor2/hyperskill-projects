@@ -14,4 +14,9 @@ public class WebController {
         model.addAttribute("code", CodeSharingPlatformApplication.latestCode.getCode());
         return "index";
     }
+
+    @GetMapping("/code/new")
+    public String getCreateCode() {
+        return "new_code";
+    }
 }
