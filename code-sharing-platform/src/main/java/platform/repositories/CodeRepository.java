@@ -15,13 +15,15 @@ public class CodeRepository {
         this.codeRepository = new HashMap<>();
     }
 
-    public void put(Long id, Code code) {
+    public Long put(Long id, Code code) {
         this.codeRepository.put(id, code);
+        return id;
     }
 
-    public void put(Code code) {
+    public Long put(Code code) {
         Long id = this.codeRepository.size() + 1L;
         this.codeRepository.put(id, code);
+        return id;
     }
 
     public int size() {

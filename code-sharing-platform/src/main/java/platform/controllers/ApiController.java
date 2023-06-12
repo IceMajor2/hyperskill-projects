@@ -12,6 +12,8 @@ import platform.CodeSharingPlatformApplication;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
+import java.util.Map;
+
 @Controller
 public class ApiController {
 
@@ -22,10 +24,10 @@ public class ApiController {
     }
 
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
-    public ResponseEntity<String> postNewCode(@RequestBody @Validated CodeDTO newCode) {
+    public ResponseEntity postNewCode(@RequestBody @Validated CodeDTO newCode) {
         Code code = new Code(newCode);
-        this.codeRepository.put(code);
-        return ResponseEntity.ok("{}");
+        Long id = this.codeRepository.put(code);
+        return ResponseEntity.ok(Map.of("id", id));
     }
 
     @GetMapping("/api/code/{N}")

@@ -108,7 +108,7 @@ class CodeSharingPlatformApplicationTests {
         assertEquals(expectedCode, actualCode);
         assertDatesEqual(expectedDate, actualDate);
     }
-    
+
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
         TestCode testCode = new TestCode(code);
         JSONObject codeDTO = new JSONObject();
