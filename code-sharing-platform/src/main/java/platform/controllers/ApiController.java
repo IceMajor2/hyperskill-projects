@@ -26,7 +26,7 @@ public class ApiController {
     public ResponseEntity postNewCode(@RequestBody @Validated CodeDTO newCode) {
         Code code = new Code(newCode);
         Long id = this.codeRepository.put(code);
-        return ResponseEntity.ok(Map.of("id", id));
+        return ResponseEntity.ok(Map.of("id", id.toString()));
     }
 
     @GetMapping("/api/code/{N}")
