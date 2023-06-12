@@ -7,6 +7,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class CodeSharingPlatformApplicationTests {
 
     @Autowired
@@ -44,11 +46,11 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    @DirtiesContext
     public void apiCorrectPostNewCodeResponse() throws JSONException {
-        ResponseEntity<String> postRes = sendNewCodePost("int b = 9;");
+        ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
 
-        assertEquals("{}", postRes.getBody());
+        String expected = "{\"id\":4}";
+        assertEquals(expected, postRes.getBody());
     }
 
     @Test
@@ -106,7 +108,7 @@ class CodeSharingPlatformApplicationTests {
         assertEquals(expectedCode, actualCode);
         assertDatesEqual(expectedDate, actualDate);
     }
-
+    
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
         TestCode testCode = new TestCode(code);
         JSONObject codeDTO = new JSONObject();
@@ -119,7 +121,7 @@ class CodeSharingPlatformApplicationTests {
         HttpEntity<String> request = new HttpEntity<>(codeDTO.toString(), headers);
         ResponseEntity<String> postRes = restTemplate.
                 postForEntity("/api/code/new", request, String.class);
-        this.codes.put(this.codes.size() + 1,testCode);
+        this.codes.put(this.codes.size() + 1, testCode);
         return postRes;
     }
 
