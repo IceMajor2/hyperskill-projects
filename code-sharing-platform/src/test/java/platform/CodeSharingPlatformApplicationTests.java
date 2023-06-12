@@ -2,6 +2,7 @@ package platform;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import net.minidev.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
@@ -18,16 +19,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import platform.models.Code;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -39,17 +40,24 @@ class CodeSharingPlatformApplicationTests {
 
     @BeforeEach
     public void setup() throws JSONException {
-        this.codes = new HashMap<>();
+        this.codes = new LinkedHashMap<>();
         sendNewCodePost("int a = 0;");
         sendNewCodePost("int b = 9;");
         sendNewCodePost("class Code { }");
+        sendNewCodePost("System.out.println(\"Hello world!\");");
+        sendNewCodePost("interface Shoutable {}");
+        sendNewCodePost("makeShout();");
+        sendNewCodePost("return 0;");
+        sendNewCodePost("import java.time.LocalDateTime;");
+        sendNewCodePost("sendNewCodePost(this);");
+        sendNewCodePost("public static final xyz = 0;");
     }
 
     @Test
     public void apiCorrectPostNewCodeResponse() throws JSONException {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
 
-        String expected = "{\"id\":4}";
+        String expected = "{\"id\":" + codes.size() + "}";
         assertEquals(expected, postRes.getBody());
     }
 
@@ -107,6 +115,20 @@ class CodeSharingPlatformApplicationTests {
 
         assertEquals(expectedCode, actualCode);
         assertDatesEqual(expectedDate, actualDate);
+    }
+
+    @Test
+    public void apiGetTenLatestCodeSnippetsOrderDesc() {
+        List<String> expectedSnippets = this.codes.values().stream().map(obj -> obj.getCode()).toList();
+
+        ResponseEntity<String> response = restTemplate
+                .getForEntity("/api/code/latest", String.class);
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+
+        JSONArray actualSnippets = documentContext.read("$..code");
+
+        assertEquals(Arrays.toString(expectedSnippets.toArray()),
+                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
     }
 
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
