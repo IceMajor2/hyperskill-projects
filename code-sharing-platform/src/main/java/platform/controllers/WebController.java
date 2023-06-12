@@ -8,6 +8,8 @@ import platform.CodeSharingPlatformApplication;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
+import java.util.List;
+
 @Controller
 public class WebController {
 
@@ -28,5 +30,12 @@ public class WebController {
         model.addAttribute("code", code.getCode());
         model.addAttribute("date", code.getDate());
         return "index";
+    }
+
+    @GetMapping("/code/latest")
+    public String getLatestCodes(Model model) {
+        List<Code> codes = this.codeRepository.getNLatest(10);
+        model.addAttribute("codes", codes);
+        return "latest_codes";
     }
 }
