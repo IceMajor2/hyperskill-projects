@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import platform.dtos.CodeDTO;
-import platform.CodeSharingPlatformApplication;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
@@ -34,5 +33,10 @@ public class ApiController {
     public ResponseEntity getNCode(@PathVariable("N") Long id) {
         Code code = this.codeRepository.get(id);
         return ResponseEntity.ok(code);
+    }
+
+    @GetMapping("/api/code/latest")
+    public ResponseEntity getLatestCodes() {
+        return ResponseEntity.ok(codeRepository.getNLatest(10));
     }
 }
