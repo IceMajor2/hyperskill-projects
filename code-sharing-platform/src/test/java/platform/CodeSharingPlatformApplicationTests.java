@@ -165,7 +165,7 @@ class CodeSharingPlatformApplicationTests {
         String htmlCode = doc.getElementById("code_snippet").text();
         assertNotEquals(htmlCode, newApiCode.toString());
 
-        ResponseEntity<String> postRes = sendNewCodePost(newApiCode.toString());
+        sendNewCodePost(newApiCode.toString());
 
         ResponseEntity<String> newApiRes = restTemplate
                 .getForEntity("/api/code", String.class);
@@ -182,6 +182,18 @@ class CodeSharingPlatformApplicationTests {
 
         assertEquals(newApiCodeRes, newHtmlCode);
         assertEquals(newApiDateRes, newHtmlDate);
+    }
+
+    @Test
+    public void checkCodeNewHtmlEndpoint() {
+        String response = restTemplate
+                .getForObject("/code/new", String.class);
+
+        Document doc = Jsoup.parse(response);
+
+        Element codeSnippet = doc.getElementById("code_snippet");
+
+        assertEquals(codeSnippet.tagName().toLowerCase(), "textarea");
     }
 
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
