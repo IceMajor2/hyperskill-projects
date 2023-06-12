@@ -194,6 +194,16 @@ class CodeSharingPlatformApplicationTests {
         Element codeSnippet = doc.getElementById("code_snippet");
 
         assertEquals(codeSnippet.tagName().toLowerCase(), "textarea");
+        assertEquals("Code", doc.title());
+
+        Element sendSnippetButton = doc.getElementById("send_snippet");
+        assertEquals("button", sendSnippetButton.tagName());
+
+        Element attribute = sendSnippetButton.getElementsByAttribute("type").first();
+        assertEquals("submit", attribute.text());
+
+        String buttonText = sendSnippetButton.text();
+        assertEquals("Submit", buttonText);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
