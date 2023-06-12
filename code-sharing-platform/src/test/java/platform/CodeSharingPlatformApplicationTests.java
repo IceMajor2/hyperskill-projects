@@ -5,6 +5,7 @@ import com.jayway.jsonpath.JsonPath;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -194,13 +195,13 @@ class CodeSharingPlatformApplicationTests {
         Element codeSnippet = doc.getElementById("code_snippet");
 
         assertEquals(codeSnippet.tagName().toLowerCase(), "textarea");
-        assertEquals("Code", doc.title());
+        assertEquals("Create", doc.title());
 
         Element sendSnippetButton = doc.getElementById("send_snippet");
         assertEquals("button", sendSnippetButton.tagName());
 
-        Element attribute = sendSnippetButton.getElementsByAttribute("type").first();
-        assertEquals("submit", attribute.text());
+        String attribute = sendSnippetButton.attributes().get("type");
+        assertEquals("submit", attribute);
 
         String buttonText = sendSnippetButton.text();
         assertEquals("Submit", buttonText);
