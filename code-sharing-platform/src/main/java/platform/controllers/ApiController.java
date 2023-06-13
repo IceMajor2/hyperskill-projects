@@ -24,6 +24,9 @@ public class ApiController {
 
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
     public ResponseEntity postNewCode(@RequestBody @Validated CodeDTO newCode) {
+        if(codeRepository.existsByCode(newCode.getCode())) {
+            return null;
+        }
         Code code = new Code(newCode);
         Code savedCode = codeRepository.save(code);
         return ResponseEntity.ok(Map.of("id", savedCode.getId().toString()));

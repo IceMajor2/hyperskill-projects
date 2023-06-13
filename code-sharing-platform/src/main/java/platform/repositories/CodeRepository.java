@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface CodeRepository extends CrudRepository<Code, Long> {
 
-    public List<Code> findFirst10ByOrderByDateDesc();
+    List<Code> findFirst10ByOrderByDateDesc();
 
-    public List<Code> findAll();
+    List<Code> findAll();
 
+    boolean existsByCode(String code);
 }
