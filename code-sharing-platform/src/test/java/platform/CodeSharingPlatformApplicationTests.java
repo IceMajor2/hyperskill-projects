@@ -32,6 +32,8 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
+import static platform.CustomAssertions.*;
+import static platform.CustomJsonOperations.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -194,40 +196,6 @@ class CodeSharingPlatformApplicationTests {
         assertEquals(expectedDates, actualDates);
     }
 
-    private JSONObject createJson(ResponseEntity<String> response) {
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
-        try {
-            JSONObject actualJson = new JSONObject(documentContext.jsonString());
-            return actualJson;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private JSONObject createJson(Code code) {
-        JSONObject json = new JSONObject();
-        try {
-            json.put("date", code.getDateFormatted());
-            json.put("code", code.getCode());
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return json;
-    }
-
-    private JSONObject createJson(String... pairs) {
-        JSONObject json = new JSONObject();
-        for (int i = 1; i < pairs.length; i += 2) {
-            try {
-                json.put(pairs[i - 1], pairs[i]);
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return json;
-    }
-
     private ResponseEntity<String> sendNewCodePost(String code) {
         JSONObject codeDTO = createJson("code", code);
 
@@ -239,51 +207,5 @@ class CodeSharingPlatformApplicationTests {
         ResponseEntity<String> postRes = restTemplate.
                 postForEntity("/api/code/new", request, String.class);
         return postRes;
-    }
-
-    private boolean areDatesEqual(String date1, String date2) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        long time1 = LocalDateTime.parse(date1, formatter).toEpochSecond(ZoneOffset.UTC);
-        long time2 = LocalDateTime.parse(date2, formatter).toEpochSecond(ZoneOffset.UTC);
-        if (time2 - 3 <= time1 && time1 <= time2 + 3) {
-            return true;
-        }
-        if (time1 - 3 <= time2 && time2 <= time1 + 3) {
-            return true;
-        }
-        return false;
-    }
-
-    private void assertIsUUID(String string) {
-        try {
-            UUID object = UUID.fromString(string);
-        } catch (IllegalArgumentException e) {
-            fail("Value of key 'id' is not of UUID type.");
-        }
-    }
-
-    private boolean isDateFormatValid(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        try {
-            LocalDateTime.parse(date, formatter);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private void assertDateFormat(String date) {
-        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss. Was [%s]".formatted(date),
-                isDateFormatValid(date));
-    }
-
-    private void assertDatesEqual(String expected, String actual) {
-        assertDateFormat(actual);
-        assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(expected, actual),
-                areDatesEqual(expected, actual));
-    }
-
-    private void assertJsonEqual(JSONObject expected, JSONObject actual) {
-        assertEquals(expected.toString(), actual.toString());
     }
 }
