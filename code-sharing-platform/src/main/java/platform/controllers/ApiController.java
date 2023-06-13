@@ -8,42 +8,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import platform.dtos.CodeRequestDTO;
-import platform.dtos.CodeResponseDTO;
 import platform.models.Code;
-import platform.repositories.CodeRepository;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.UUID;
+import platform.services.ApiService;
 
 @Controller
 public class ApiController {
 
-    private CodeRepository codeRepository;
+    private ApiService apiService;
 
-    public ApiController(CodeRepository codeRepository) {
-        this.codeRepository = codeRepository;
+    public ApiController(ApiService apiService) {
+        this.apiService = apiService;
     }
 
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
     public ResponseEntity postNewCode(@RequestBody @Validated CodeRequestDTO newCode) {
-        if(codeRepository.existsByCode(newCode.getCode())) {
-            return null;
-        }
-        Code code = new Code(newCode);
-        Code savedCode = codeRepository.save(code);
-        CodeResponseDTO codeResponseDTO = new CodeResponseDTO(savedCode);
-        return ResponseEntity.ok(codeResponseDTO);
+        var response = this.apiService.postNewCode(newCode);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/api/code/{id}")
-    public ResponseEntity getNCode(@PathVariable String id) {
-        Code code = this.codeRepository.findById(UUID.fromString(id)).get();
+    public ResponseEntity getCode(@PathVariable String id) {
+        Code code = this.apiService.getCode(id);
         return ResponseEntity.ok(code);
     }
 
     @GetMapping("/api/code/latest")
     public ResponseEntity getLatestCodes() {
-        return ResponseEntity.ok(codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc());
+        var codes = this.apiService.getLatestCodes();
+        return ResponseEntity.ok(codes);
     }
 }

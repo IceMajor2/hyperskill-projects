@@ -4,18 +4,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import platform.models.Code;
-import platform.repositories.CodeRepository;
-
-import java.util.List;
+import platform.services.WebService;
 
 @Controller
 public class WebController {
 
-    private CodeRepository codeRepository;
+    private WebService webService;
 
-    public WebController(CodeRepository codeRepository) {
-        this.codeRepository = codeRepository;
+    public WebController(WebService webService) {
+        this.webService = webService;
     }
 
     @GetMapping("/code/new")
@@ -23,18 +20,15 @@ public class WebController {
         return "new_code";
     }
 
-    @GetMapping("/code/{N}")
-    public String getNCode(@PathVariable("N") Long id, Model model) {
-        Code code = codeRepository.findByNumId(id).get();
-        model.addAttribute("code", code.getCode());
-        model.addAttribute("date", code.getDateFormatted());
+    @GetMapping("/code/{id}")
+    public String getCode(@PathVariable String id, Model model) {
+        this.webService.getCode(id, model);
         return "index";
     }
 
     @GetMapping("/code/latest")
     public String getLatestCodes(Model model) {
-        List<Code> codes = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
-        model.addAttribute("codes", codes);
+        this.webService.getLatestCodes(model);
         return "latest_codes";
     }
 }
