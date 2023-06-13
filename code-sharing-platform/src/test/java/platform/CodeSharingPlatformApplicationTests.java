@@ -2,14 +2,13 @@ package platform;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
+import net.minidev.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Attribute;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,168 +20,53 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import java.util.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class CodeSharingPlatformApplicationTests {
 
     @Autowired
-    TestRestTemplate restTemplate;
-    private String setupTime;
+    private TestRestTemplate restTemplate;
+    private Map<Integer, TestCode> codes;
 
     @BeforeEach
     public void setup() throws JSONException {
+        this.codes = new LinkedHashMap<>();
+        LocalDateTime setupTime = Instant.ofEpochMilli(100).atZone(ZoneId.systemDefault()).toLocalDateTime();
         sendNewCodePost("int a = 0;");
-        this.setupTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"));
+        setupTime.plusNanos(1);
+        sendNewCodePost("int b = 9;");
+        setupTime.plusNanos(1);
+        sendNewCodePost("class Code { }");
+        setupTime.plusNanos(1);
+        sendNewCodePost("System.out.println(\"Hello world!\");");
+        setupTime.plusNanos(1);
+        sendNewCodePost("interface Shoutable {}");
+        setupTime.plusNanos(1);
+        sendNewCodePost("makeShout();");
+        setupTime.plusNanos(1);
+        sendNewCodePost("return 0;");
+        setupTime.plusNanos(1);
+        sendNewCodePost("import java.time.LocalDateTime;");
+        setupTime.plusNanos(1);
+        sendNewCodePost("sendNewCodePost(this);");
     }
 
     @Test
-    public void shouldReturnCorrectHeaders() {
-        ResponseEntity response = restTemplate.getForEntity("/code", String.class);
-        var contentTypeStr = "%s/%s".formatted(response.getHeaders().getContentType().getType(),
-                response.getHeaders().getContentType().getSubtype());
-
-        Assert.assertEquals(MediaType.TEXT_HTML.toString(), contentTypeStr);
-    }
-
-    @Test
-    public void titleShouldBeCodeTest() {
-        String response = restTemplate.getForObject("/code", String.class);
-        Document doc = Jsoup.parse(response);
-
-        assertEquals("Code", doc.title());
-    }
-
-    @Test
-    public void preTagShouldNotBeEmpty() {
-        String response = restTemplate.getForObject("/code", String.class);
-        Document doc = Jsoup.parse(response);
-
-        Elements elements = doc.select("pre");
-        Assert.assertTrue(elements.hasText());
-    }
-
-    @Test
-    public void apiCorrectGetLatestCodeResponse() {
-        ResponseEntity<String> response = restTemplate
-                .getForEntity("/api/code", String.class);
-
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
-        String code = documentContext.read("$.code");
-        String date = documentContext.read("$.date");
-
-        assertEquals("int a = 0;", code);
-        assertDatesEqual(this.setupTime, date);
-    }
-
-    @Test
-    public void apiCorrectHeaders() {
-        ResponseEntity<String> response = restTemplate
-                .getForEntity("/api/code", String.class);
-        var contentTypeStr = "%s/%s".formatted(response.getHeaders().getContentType().getType(),
-                response.getHeaders().getContentType().getSubtype());
-
-        Assert.assertEquals(MediaType.APPLICATION_JSON.toString(), contentTypeStr);
-    }
-
-    @Test
-    public void apiCodeShouldEqualHTMLCode() {
-        // get API code
-        ResponseEntity<String> apiRes = restTemplate
-                .getForEntity("/api/code", String.class);
-
-        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
-        String apiCode = documentContext.read("$.code");
-
-        // get HTML code
-        String htmlRes = restTemplate.getForObject("/code", String.class);
-        Document doc = Jsoup.parse(htmlRes);
-
-        Element codeSnippet = doc.getElementById("code_snippet");
-        String htmlCode = codeSnippet.text();
-
-        assertEquals(codeSnippet.tagName().toLowerCase(), "pre");
-        assertEquals(apiCode, htmlCode);
-    }
-
-    @Test
-    public void htmlDateDisplay() {
-        String htmlRes = restTemplate.getForObject("/code", String.class);
-        Document doc = Jsoup.parse(htmlRes);
-
-        Element date = doc.getElementById("load_date");
-        String dateStr = date.text();
-
-        assertEquals(date.tagName().toLowerCase(), "span");
-        assertTrue("Date is of wrong format", isDateFormatValid(dateStr));
-    }
-
-    @Test
-    public void htmlDateShouldEqualToApiDate() {
-        // get API date
-        ResponseEntity<String> apiRes = restTemplate
-                .getForEntity("/api/code", String.class);
-
-        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
-        String apiDate = documentContext.read("$.date");
-
-        // get HTML date
-        String htmlRes = restTemplate.getForObject("/code", String.class);
-        Document doc = Jsoup.parse(htmlRes);
-
-        Element date = doc.getElementById("load_date");
-        String dateStr = date.text();
-
-        assertDatesEqual(this.setupTime, dateStr);
-    }
-
-    @Test
-    @DirtiesContext
     public void apiCorrectPostNewCodeResponse() throws JSONException {
-        ResponseEntity<String> postRes = sendNewCodePost("int b = 9;");
+        ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
 
-        assertEquals("{}", postRes.getBody());
-    }
-
-    @Test
-    @DirtiesContext
-    public void apiNewCodePostShouldChangeHTMLCode() throws JSONException {
-        ResponseEntity<String> apiRes = restTemplate
-                .getForEntity("/api/code", String.class);
-
-        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
-        String apiCode = documentContext.read("$.code");
-        StringBuilder newApiCode = new StringBuilder(apiCode)
-                .append("SOMETHING");
-
-        String htmlRes = restTemplate.getForObject("/code", String.class);
-        Document doc = Jsoup.parse(htmlRes);
-
-        String htmlCode = doc.getElementById("code_snippet").text();
-        assertNotEquals(htmlCode, newApiCode.toString());
-
-        sendNewCodePost(newApiCode.toString());
-
-        ResponseEntity<String> newApiRes = restTemplate
-                .getForEntity("/api/code", String.class);
-
-        DocumentContext newDocumentContext = JsonPath.parse(newApiRes.getBody());
-        String newApiCodeRes = newDocumentContext.read("$.code");
-        String newApiDateRes = newDocumentContext.read("$.date");
-
-        String newHtmlRes = restTemplate.getForObject("/code", String.class);
-        Document newDoc = Jsoup.parse(newHtmlRes);
-
-        String newHtmlCode = newDoc.getElementById("code_snippet").text();
-        String newHtmlDate = newDoc.getElementById("load_date").text();
-
-        assertEquals(newApiCodeRes, newHtmlCode);
-        assertEquals(newApiDateRes, newHtmlDate);
+        String expected = "{\"id\":\"" + codes.size() + "\"}";
+        assertEquals(expected, postRes.getBody());
     }
 
     @Test
@@ -207,7 +91,92 @@ class CodeSharingPlatformApplicationTests {
         assertEquals("Submit", buttonText);
     }
 
-    private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
+    @Test
+    public void getApiNCodeSnippet() {
+        TestCode expected = this.codes.get(1);
+        String expectedCode = expected.getCode();
+        String expectedDate = expected.getDate();
+
+        ResponseEntity<String> response = restTemplate
+                .getForEntity("/api/code/1", String.class);
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+
+        String actualCode = documentContext.read("$.code");
+        String actualDate = documentContext.read("$.date");
+
+        assertEquals(expectedCode, actualCode);
+        assertDatesEqual(expectedDate, actualDate);
+    }
+
+    @Test
+    public void getHtmlNCodeSnippet() {
+        TestCode expected = this.codes.get(3);
+        String expectedCode = expected.getCode();
+        String expectedDate = expected.getDate();
+
+        String response = restTemplate
+                .getForObject("/code/3", String.class);
+        Document doc = Jsoup.parse(response);
+
+        String actualCode = doc.getElementById("code_snippet").text();
+        String actualDate = doc.getElementById("load_date").text();
+
+        assertEquals(expectedCode, actualCode);
+        assertDatesEqual(expectedDate, actualDate);
+    }
+
+    @Test
+    public void apiGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
+        sendNewCodePost("public static final xyz = 0;");
+        List<String> expectedSnippets = getCodeSnippetsFromMapSortedByDateDesc(this.codes);
+
+        ResponseEntity<String> response = restTemplate
+                .getForEntity("/api/code/latest", String.class);
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+
+        JSONArray actualSnippets = documentContext.read("$..code");
+
+        assertEquals(Arrays.toString(expectedSnippets.toArray()),
+                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
+    }
+
+    @Test
+    public void apiGetTenLatestWhenLessThanTenElements() {
+        List<String> expectedSnippets = getCodeSnippetsFromMapSortedByDateDesc(this.codes);
+
+        ResponseEntity<String> response = restTemplate
+                .getForEntity("/api/code/latest", String.class);
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+
+        JSONArray actualSnippets = documentContext.read("$..code");
+
+        assertEquals(Arrays.toString(expectedSnippets.toArray()),
+                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
+    }
+
+    @Test
+    public void htmlGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
+        sendNewCodePost("public static final xyz = 0;");
+        List<String> expectedSnippets = getCodeSnippetsFromMapSortedByDateDesc(this.codes);
+
+        String response = restTemplate
+                .getForObject("/code/latest", String.class);
+        Document doc = Jsoup.parse(response);
+
+        Elements snippetElements = doc.getElementsByTag("pre");
+
+        List<String> actualSnippets = new ArrayList<>();
+        for (Element element : snippetElements) {
+            if (element.id().equals("code_snippet")) {
+                actualSnippets.add(element.text());
+            }
+        }
+
+        assertEquals(expectedSnippets, actualSnippets);
+    }
+
+    private ResponseEntity<String> sendNewCodePost(String code, LocalDateTime date) throws JSONException {
+        TestCode testCode = new TestCode(code, date);
         JSONObject codeDTO = new JSONObject();
         codeDTO.put("code", code);
 
@@ -218,7 +187,12 @@ class CodeSharingPlatformApplicationTests {
         HttpEntity<String> request = new HttpEntity<>(codeDTO.toString(), headers);
         ResponseEntity<String> postRes = restTemplate.
                 postForEntity("/api/code/new", request, String.class);
+        this.codes.put(this.codes.size() + 1, testCode);
         return postRes;
+    }
+
+    private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
+        return sendNewCodePost(code, LocalDateTime.now());
     }
 
     private boolean areDatesEqual(String date1, String date2) {
@@ -234,6 +208,16 @@ class CodeSharingPlatformApplicationTests {
         return false;
     }
 
+    private List<String> getCodeSnippetsFromMapSortedByDateDesc(Map<Integer, TestCode> map) {
+        return map.values().stream()
+                .sorted((code1, code2) -> {
+                    var date1 = code1.getDateObj();
+                    var date2 = code2.getDateObj();
+                    return date2.compareTo(date1);
+                }).map(obj -> obj.getCode())
+                .toList();
+    }
+
     private boolean isDateFormatValid(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         try {
@@ -245,7 +229,146 @@ class CodeSharingPlatformApplicationTests {
     }
 
     private void assertDatesEqual(String expected, String actual) {
+        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss", isDateFormatValid(actual));
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(expected, actual),
                 areDatesEqual(expected, actual));
     }
 }
+
+// below are tests that checked validity of '/api/code' & '/code/' endpoints
+// that are no longer accessible
+
+//    @Test
+//    public void shouldReturnCorrectHeaders() {
+//        ResponseEntity response = restTemplate.getForEntity("/code", String.class);
+//        var contentTypeStr = "%s/%s".formatted(response.getHeaders().getContentType().getType(),
+//                response.getHeaders().getContentType().getSubtype());
+//
+//        Assert.assertEquals(MediaType.TEXT_HTML.toString(), contentTypeStr);
+//    }
+
+//    @Test
+//    public void titleShouldBeCodeTest() {
+//        String response = restTemplate.getForObject("/code", String.class);
+//        Document doc = Jsoup.parse(response);
+//
+//        assertEquals("Code", doc.title());
+//    }
+
+//    @Test
+//    public void preTagShouldNotBeEmpty() {
+//        String response = restTemplate.getForObject("/code", String.class);
+//        Document doc = Jsoup.parse(response);
+//
+//        Elements elements = doc.select("pre");
+//        Assert.assertTrue(elements.hasText());
+//    }
+
+//    @Test
+//    public void apiCorrectGetLatestCodeResponse() {
+//        ResponseEntity<String> response = restTemplate
+//                .getForEntity("/api/code", String.class);
+//
+//        DocumentContext documentContext = JsonPath.parse(response.getBody());
+//        String code = documentContext.read("$.code");
+//        String date = documentContext.read("$.date");
+//
+//        assertEquals("int a = 0;", code);
+//        assertDatesEqual(this.setupTime, date);
+//    }
+
+//    @Test
+//    public void apiCorrectHeaders() {
+//        ResponseEntity<String> response = restTemplate
+//                .getForEntity("/api/code", String.class);
+//        var contentTypeStr = "%s/%s".formatted(response.getHeaders().getContentType().getType(),
+//                response.getHeaders().getContentType().getSubtype());
+//
+//        Assert.assertEquals(MediaType.APPLICATION_JSON.toString(), contentTypeStr);
+//    }
+
+//    @Test
+//    public void apiCodeShouldEqualHTMLCode() {
+//        // get API code
+//        ResponseEntity<String> apiRes = restTemplate
+//                .getForEntity("/api/code", String.class);
+//
+//        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
+//        String apiCode = documentContext.read("$.code");
+//
+//        // get HTML code
+//        String htmlRes = restTemplate.getForObject("/code", String.class);
+//        Document doc = Jsoup.parse(htmlRes);
+//
+//        Element codeSnippet = doc.getElementById("code_snippet");
+//        String htmlCode = codeSnippet.text();
+//
+//        assertEquals(codeSnippet.tagName().toLowerCase(), "pre");
+//        assertEquals(apiCode, htmlCode);
+//    }
+
+//    @Test
+//    public void htmlDateDisplay() {
+//        String htmlRes = restTemplate.getForObject("/code", String.class);
+//        Document doc = Jsoup.parse(htmlRes);
+//
+//        Element date = doc.getElementById("load_date");
+//        String dateStr = date.text();
+//
+//        assertEquals(date.tagName().toLowerCase(), "span");
+//        assertTrue("Date is of wrong format", isDateFormatValid(dateStr));
+//    }
+
+//    @Test
+//    public void htmlDateShouldEqualToApiDate() {
+//        // get API date
+//        ResponseEntity<String> apiRes = restTemplate
+//                .getForEntity("/api/code", String.class);
+//
+//        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
+//        String apiDate = documentContext.read("$.date");
+//
+//        // get HTML date
+//        String htmlRes = restTemplate.getForObject("/code", String.class);
+//        Document doc = Jsoup.parse(htmlRes);
+//
+//        Element date = doc.getElementById("load_date");
+//        String dateStr = date.text();
+//
+//        assertDatesEqual(this.setupTime, dateStr);
+//    }
+//    @Test
+//    @DirtiesContext
+//    public void apiNewCodePostShouldChangeHTMLCode() throws JSONException {
+//        ResponseEntity<String> apiRes = restTemplate
+//                .getForEntity("/api/code", String.class);
+//
+//        DocumentContext documentContext = JsonPath.parse(apiRes.getBody());
+//        String apiCode = documentContext.read("$.code");
+//        StringBuilder newApiCode = new StringBuilder(apiCode)
+//                .append("SOMETHING");
+//
+//        String htmlRes = restTemplate.getForObject("/code", String.class);
+//        Document doc = Jsoup.parse(htmlRes);
+//
+//        String htmlCode = doc.getElementById("code_snippet").text();
+//        assertNotEquals(htmlCode, newApiCode.toString());
+//
+//        sendNewCodePost(newApiCode.toString());
+//
+//        ResponseEntity<String> newApiRes = restTemplate
+//                .getForEntity("/api/code", String.class);
+//
+//        DocumentContext newDocumentContext = JsonPath.parse(newApiRes.getBody());
+//        String newApiCodeRes = newDocumentContext.read("$.code");
+//        String newApiDateRes = newDocumentContext.read("$.date");
+//
+//        String newHtmlRes = restTemplate.getForObject("/code", String.class);
+//        Document newDoc = Jsoup.parse(newHtmlRes);
+//
+//        String newHtmlCode = newDoc.getElementById("code_snippet").text();
+//        String newHtmlDate = newDoc.getElementById("load_date").text();
+//
+//        assertEquals(newApiCodeRes, newHtmlCode);
+//        assertEquals(newApiDateRes, newHtmlDate);
+//    }
