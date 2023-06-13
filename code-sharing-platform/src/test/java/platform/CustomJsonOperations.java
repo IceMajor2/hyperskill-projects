@@ -23,8 +23,10 @@ public class CustomJsonOperations {
     public static JSONObject createJson(Code code) {
         JSONObject json = new JSONObject();
         try {
-            json.put("date", code.getDateFormatted());
             json.put("code", code.getCode());
+            json.put("date", code.getDateFormatted());
+            json.put("time", code.getTime());
+            json.put("views", code.getViews());
         } catch(Exception e) {
             e.printStackTrace();
         }

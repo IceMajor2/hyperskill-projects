@@ -25,6 +25,7 @@ import platform.repositories.CodeRepository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static platform.CustomAssertions.*;
@@ -64,7 +65,10 @@ class CodeSharingPlatformApplicationTests {
     public void apiAccessCodeSnippetsThroughUUID() {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;", 0, 0);
         String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
-        JSONObject expected = createJson(postRes);
+        assertIsUUID(strUUID);
+
+        Code posted = codeRepository.findById(UUID.fromString(strUUID)).get();
+        JSONObject expected = createJson(posted);
 
         ResponseEntity<String> getRes = restTemplate
                 .getForEntity("/api/code/%s".formatted(strUUID), String.class);
