@@ -46,7 +46,7 @@ class CodeSharingPlatformApplicationTests {
     private CodeRepository codeRepository;
 
     @Test
-    public void apiCorrectPostNewCodeResponse() throws JSONException {
+    public void apiCorrectPostNewCodeResponse() {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
         String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
 
@@ -80,7 +80,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void getApiNCodeSnippet() throws JSONException {
+    public void getApiNCodeSnippet() {
         Code expected = this.codeRepository.findByNumId(1L).get();
 
         JSONObject expectedJson = createJson(expected);
@@ -97,7 +97,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void getHtmlNCodeSnippet() throws JSONException {
+    public void getHtmlNCodeSnippet() {
         Code expected = this.codeRepository.findByNumId(3L).get();
         JSONObject expectedJson = createJson(expected);
 
@@ -115,7 +115,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void apiGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
+    public void apiGetTenLatestCodeSnippetsOrderDesc() {
         sendNewCodePost("public static final xyz = 0;");
         List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
                 .stream()
@@ -205,22 +205,30 @@ class CodeSharingPlatformApplicationTests {
         }
     }
 
-    private JSONObject createJson(Code code) throws JSONException {
+    private JSONObject createJson(Code code) {
         JSONObject json = new JSONObject();
-        json.put("date", code.getDateFormatted());
-        json.put("code", code.getCode());
-        return json;
-    }
-
-    private JSONObject createJson(String... pairs) throws JSONException {
-        JSONObject json = new JSONObject();
-        for (int i = 1; i < pairs.length; i += 2) {
-            json.put(pairs[i - 1], pairs[i]);
+        try {
+            json.put("date", code.getDateFormatted());
+            json.put("code", code.getCode());
+        } catch(Exception e) {
+            e.printStackTrace();
         }
         return json;
     }
 
-    private ResponseEntity<String> sendNewCodePost(String code) throws JSONException {
+    private JSONObject createJson(String... pairs) {
+        JSONObject json = new JSONObject();
+        for (int i = 1; i < pairs.length; i += 2) {
+            try {
+                json.put(pairs[i - 1], pairs[i]);
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return json;
+    }
+
+    private ResponseEntity<String> sendNewCodePost(String code) {
         JSONObject codeDTO = createJson("code", code);
 
         HttpHeaders headers = new HttpHeaders();
