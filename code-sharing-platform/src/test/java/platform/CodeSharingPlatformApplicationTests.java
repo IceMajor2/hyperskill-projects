@@ -29,9 +29,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -49,6 +49,8 @@ class CodeSharingPlatformApplicationTests {
     public void apiCorrectPostNewCodeResponse() throws JSONException {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
         String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
+
+        assertIsUUID(strUUID);
 
         JSONObject expected = createJson("id", strUUID);
 
@@ -242,6 +244,14 @@ class CodeSharingPlatformApplicationTests {
             return true;
         }
         return false;
+    }
+
+    private void assertIsUUID(String string) {
+        try {
+            UUID object = UUID.fromString(string);
+        } catch (IllegalArgumentException e) {
+            fail("Value of key 'id' is not of UUID type.");
+        }
     }
 
     private boolean isDateFormatValid(String date) {
