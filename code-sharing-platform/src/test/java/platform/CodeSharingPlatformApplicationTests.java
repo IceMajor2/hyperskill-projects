@@ -114,7 +114,7 @@ class CodeSharingPlatformApplicationTests {
     @Test
     public void apiGetTenLatestCodeSnippetsOrderDesc() {
         sendNewCodePost("public static final xyz = 0;", 1, 1);
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
+        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
                 .toList();
@@ -131,7 +131,7 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void apiGetTenLatestWhenLessThanTenElements() {
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
+        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
                 .toList();
@@ -145,7 +145,7 @@ class CodeSharingPlatformApplicationTests {
         assertEquals(Arrays.toString(expectedSnippets.toArray()),
                 Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
 
-        List<String> expectedDates = this.codeRepository.findFirst10ByOrderByDateDesc()
+        List<String> expectedDates = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getDateFormatted())
                 .toList();
@@ -157,7 +157,7 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void htmlGetTenLatestCodeSnippetsOrderDesc() {
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
+        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
                 .toList();
@@ -176,7 +176,7 @@ class CodeSharingPlatformApplicationTests {
         }
         assertEquals(expectedSnippets, actualSnippets);
 
-        List<String> expectedDates = this.codeRepository.findFirst10ByOrderByDateDesc()
+        List<String> expectedDates = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getDateFormatted())
                 .toList();
@@ -194,9 +194,9 @@ class CodeSharingPlatformApplicationTests {
     @Test
     public void apiLatestShouldNotShowRestrictedSnippets() {
         List<String> expectedSnippets = List.of(
-                        this.codeRepository.findByNumId(2L).get(),
                         this.codeRepository.findByNumId(6L).get(),
-                        this.codeRepository.findByNumId(9L).get())
+                        this.codeRepository.findByNumId(9L).get(),
+                        this.codeRepository.findByNumId(2L).get())
                 .stream()
                 .map(obj -> obj.getCode())
                 .toList();
