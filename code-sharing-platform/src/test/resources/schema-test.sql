@@ -4,5 +4,7 @@ CREATE TABLE IF NOT EXISTS codes (
     id UUID NOT NULL,
     code TEXT NOT NULL,
     date TIMESTAMP NOT NULL,
+    time BIGINT NOT NULL,
+    views BIGINT NOT NULL,
     PRIMARY KEY (id)
 );

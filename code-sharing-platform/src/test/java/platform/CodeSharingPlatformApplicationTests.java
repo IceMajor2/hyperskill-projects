@@ -3,7 +3,6 @@ package platform;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,17 +22,13 @@ import org.springframework.test.context.jdbc.Sql;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static platform.CustomAssertions.*;
-import static platform.CustomJsonOperations.*;
+import static platform.CustomJsonOperations.createJson;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -49,12 +44,18 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void apiCorrectPostNewCodeResponse() {
-        ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
+        ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;", 0, 0);
+
+        DocumentContext documentContext = JsonPath.parse(postRes.getBody());
+
         String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
 
         assertIsUUID(strUUID);
 
-        JSONObject expected = createJson("id", strUUID);
+        long time = Long.valueOf(documentContext.read("$.time").toString());
+        long views = Long.valueOf(documentContext.read("$.views").toString());
+
+        JSONObject expected = createJson("id", strUUID, "time", time, "views", views);
 
         assertEquals(expected.toString(), postRes.getBody());
     }
@@ -84,7 +85,7 @@ class CodeSharingPlatformApplicationTests {
     @Test
     public void getApiNCodeSnippet() {
         Code expected = this.codeRepository.findByNumId(1L).get();
-
+        System.out.println(expected);
         JSONObject expectedJson = createJson(expected);
 
         ResponseEntity<String> response = restTemplate
@@ -118,7 +119,7 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void apiGetTenLatestCodeSnippetsOrderDesc() {
-        sendNewCodePost("public static final xyz = 0;");
+        //sendNewCodePost("public static final xyz = 0;");
         List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
@@ -196,8 +197,8 @@ class CodeSharingPlatformApplicationTests {
         assertEquals(expectedDates, actualDates);
     }
 
-    private ResponseEntity<String> sendNewCodePost(String code) {
-        JSONObject codeDTO = createJson("code", code);
+    private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
+        JSONObject codeDTO = createJson("code", code, "time", time, "views", views);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

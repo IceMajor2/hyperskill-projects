@@ -31,11 +31,11 @@ public class CustomJsonOperations {
         return json;
     }
 
-    public static JSONObject createJson(String... pairs) {
+    public static JSONObject createJson(Object... pairs) {
         JSONObject json = new JSONObject();
         for (int i = 1; i < pairs.length; i += 2) {
             try {
-                json.put(pairs[i - 1], pairs[i]);
+                json.put(pairs[i - 1].toString(), pairs[i]);
             } catch(Exception e) {
                 e.printStackTrace();
             }
