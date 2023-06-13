@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Table(name = "codes")
 @Entity
-@JsonPropertyOrder({"date, code"})
+@JsonPropertyOrder({"code", "date", "time", "views"})
 public class Code {
 
     private static Long AUTO_INCREMENT_NUM_ID = 1L;

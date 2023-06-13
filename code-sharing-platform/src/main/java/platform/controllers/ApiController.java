@@ -14,6 +14,7 @@ import platform.repositories.CodeRepository;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Controller
 public class ApiController {
@@ -35,9 +36,9 @@ public class ApiController {
         return ResponseEntity.ok(codeResponseDTO);
     }
 
-    @GetMapping("/api/code/{N}")
-    public ResponseEntity getNCode(@PathVariable("N") Long id) {
-        Code code = this.codeRepository.findByNumId(id).get();
+    @GetMapping("/api/code/{id}")
+    public ResponseEntity getNCode(@PathVariable String id) {
+        Code code = this.codeRepository.findById(UUID.fromString(id)).get();
         return ResponseEntity.ok(code);
     }
 
