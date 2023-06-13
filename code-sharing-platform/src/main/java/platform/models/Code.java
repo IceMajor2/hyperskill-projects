@@ -34,6 +34,12 @@ public class Code {
     @Nonnull
     private LocalDateTime date;
 
+    @Nonnull
+    private long time;
+
+    @Nonnull
+    private long views;
+
     public Code(String code) {
         this.code = code;
         this.date = LocalDateTime.now();
@@ -53,6 +59,22 @@ public class Code {
     }
 
     public Code() {
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public long getViews() {
+        return views;
+    }
+
+    public void setViews(long views) {
+        this.views = views;
     }
 
     public void setNumId() {
