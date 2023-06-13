@@ -61,6 +61,19 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
+    public void apiAccessCodeSnippetsThroughUUID() {
+        ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;", 0, 0);
+        String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
+        JSONObject expected = createJson(postRes);
+
+        ResponseEntity<String> getRes = restTemplate
+                .getForEntity("/api/code/%s".formatted(strUUID), String.class);
+        JSONObject actual = createJson(getRes);
+
+        assertJsonEqual(expected, actual);
+    }
+
+    @Test
     public void checkCodeNewHtmlEndpoint() {
         String response = restTemplate
                 .getForObject("/code/new", String.class);
