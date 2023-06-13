@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import platform.dtos.CodeDTO;
+import platform.dtos.CodeRequestDTO;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -40,21 +40,11 @@ public class Code {
     @Nonnull
     private long views;
 
-    public Code(String code) {
-        this.code = code;
+    public Code(CodeRequestDTO codeRequestDTO) {
+        this.code = codeRequestDTO.getCode();
+        this.time = codeRequestDTO.getTime();
+        this.views = codeRequestDTO.getViews();
         this.date = LocalDateTime.now();
-        this.setNumId();
-    }
-
-    public Code(CodeDTO codeDTO) {
-        this.code = codeDTO.getCode();
-        this.date = LocalDateTime.now();
-        this.setNumId();
-    }
-
-    public Code(String code, LocalDateTime date) {
-        this.code = code;
-        this.date = date;
         this.setNumId();
     }
 

@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import platform.dtos.CodeDTO;
+import platform.dtos.CodeRequestDTO;
+import platform.dtos.CodeResponseDTO;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Controller
@@ -23,14 +25,14 @@ public class ApiController {
     }
 
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
-    public ResponseEntity postNewCode(@RequestBody @Validated CodeDTO newCode) {
+    public ResponseEntity postNewCode(@RequestBody @Validated CodeRequestDTO newCode) {
         if(codeRepository.existsByCode(newCode.getCode())) {
             return null;
         }
         Code code = new Code(newCode);
         Code savedCode = codeRepository.save(code);
-        System.out.println(savedCode.getId());
-        return ResponseEntity.ok(Map.of("id", savedCode.getId().toString()));
+        CodeResponseDTO codeResponseDTO = new CodeResponseDTO(savedCode);
+        return ResponseEntity.ok(codeResponseDTO);
     }
 
     @GetMapping("/api/code/{N}")

@@ -1,6 +1,6 @@
 package platform.dtos;
 
-public class CodeDTO {
+public class CodeRequestDTO {
 
     private String code;
     private long time;
