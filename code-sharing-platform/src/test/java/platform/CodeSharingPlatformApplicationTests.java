@@ -18,6 +18,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
@@ -35,6 +36,7 @@ import static org.junit.Assert.assertTrue;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Sql({"/schema-test.sql", "/data-test.sql"})
+@TestPropertySource(locations="classpath:application-test.properties")
 class CodeSharingPlatformApplicationTests {
 
     @Autowired
