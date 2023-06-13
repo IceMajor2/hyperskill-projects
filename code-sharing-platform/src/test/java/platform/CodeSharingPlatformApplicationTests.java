@@ -85,11 +85,9 @@ class CodeSharingPlatformApplicationTests {
 
         ResponseEntity<String> response = restTemplate
                 .getForEntity("/api/code/1", String.class);
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
+        String actualDate = JsonPath.parse(response.getBody()).read("$.date");
 
-        String actualCode = documentContext.read("$.code");
-        String actualDate = documentContext.read("$.date");
-        JSONObject actualJson = createJson("date", actualDate, "code", actualCode);
+        JSONObject actualJson = createJson(response);
 
         assertJsonEqual(expectedJson, actualJson);
         assertDateFormat(expected.getDateFormatted());
@@ -192,6 +190,17 @@ class CodeSharingPlatformApplicationTests {
             }
         }
         assertEquals(expectedDates, actualDates);
+    }
+
+    private JSONObject createJson(ResponseEntity<String> response) {
+        DocumentContext documentContext = JsonPath.parse(response.getBody());
+        try {
+            JSONObject actualJson = new JSONObject(documentContext.jsonString());
+            return actualJson;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private JSONObject createJson(Code code) throws JSONException {
