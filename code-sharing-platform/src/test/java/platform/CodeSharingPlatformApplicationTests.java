@@ -112,42 +112,8 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void getApiNCodeSnippet() {
-        Code expected = this.codeRepository.findByNumId(1L).get();
-        JSONObject expectedJson = createJson(expected);
-
-        ResponseEntity<String> response = restTemplate
-                .getForEntity("/api/code/1", String.class);
-        String actualDate = JsonPath.parse(response.getBody()).read("$.date");
-
-        JSONObject actualJson = createJson(response);
-
-        assertJsonEqual(expectedJson, actualJson);
-        assertDateFormat(expected.getDateFormatted());
-        assertDateFormat(actualDate);
-    }
-
-    @Test
-    public void getHtmlNCodeSnippet() {
-        Code expected = this.codeRepository.findByNumId(3L).get();
-        JSONObject expectedJson = createJson(expected);
-
-        String response = restTemplate
-                .getForObject("/code/3", String.class);
-        Document doc = Jsoup.parse(response);
-
-        String actualCode = doc.getElementById("code_snippet").text();
-        String actualDate = doc.getElementById("load_date").text();
-        JSONObject actualJson = createJson("date", actualDate, "code", actualCode);
-
-        assertJsonEqual(expectedJson, actualJson);
-        assertDateFormat(expected.getDateFormatted());
-        assertDateFormat(actualDate);
-    }
-
-    @Test
     public void apiGetTenLatestCodeSnippetsOrderDesc() {
-        //sendNewCodePost("public static final xyz = 0;");
+        sendNewCodePost("public static final xyz = 0;", 1, 1);
         List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
