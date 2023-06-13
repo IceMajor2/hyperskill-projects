@@ -191,6 +191,36 @@ class CodeSharingPlatformApplicationTests {
         assertEquals(expectedDates, actualDates);
     }
 
+    @Test
+    public void apiLatestShouldNotShowRestrictedSnippets() {
+        List<String> expectedSnippets = List.of(
+                        this.codeRepository.findByNumId(2L).get(),
+                        this.codeRepository.findByNumId(6L).get(),
+                        this.codeRepository.findByNumId(9L).get())
+                .stream()
+                .map(obj -> obj.getCode())
+                .toList();
+
+        String response = restTemplate
+                .getForObject("/code/latest", String.class);
+        Document doc = Jsoup.parse(response);
+
+        Elements snippetElements = doc.getElementsByTag("pre");
+
+        List<String> actualSnippets = new ArrayList<>();
+        for (Element element : snippetElements) {
+            if (element.id().equals("code_snippet")) {
+                actualSnippets.add(element.text());
+            }
+        }
+        assertEquals(expectedSnippets, actualSnippets);
+    }
+
+    @Test
+    public void htmlLatestShouldNotShowRestrictedSnippets() {
+
+    }
+
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
         JSONObject codeDTO = createJson("code", code, "time", time, "views", views);
 
