@@ -25,7 +25,7 @@ public class WebController {
 
     @GetMapping("/code/{N}")
     public String getNCode(@PathVariable("N") Long id, Model model) {
-        Code code = codeRepository.findById(id).get();
+        Code code = codeRepository.findByNumId(id).get();
         model.addAttribute("code", code.getCode());
         model.addAttribute("date", code.getDateFormatted());
         return "index";

@@ -29,12 +29,13 @@ public class ApiController {
         }
         Code code = new Code(newCode);
         Code savedCode = codeRepository.save(code);
+        System.out.println(savedCode.getId());
         return ResponseEntity.ok(Map.of("id", savedCode.getId().toString()));
     }
 
     @GetMapping("/api/code/{N}")
     public ResponseEntity getNCode(@PathVariable("N") Long id) {
-        Code code = this.codeRepository.findById(id).get();
+        Code code = this.codeRepository.findByNumId(id).get();
         return ResponseEntity.ok(code);
     }
 
