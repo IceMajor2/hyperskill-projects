@@ -41,6 +41,7 @@ public class Code {
     private long views;
 
     @Nonnull
+    @JsonIgnore
     private boolean restricted;
 
     public Code(CodeRequestDTO codeRequestDTO) {
