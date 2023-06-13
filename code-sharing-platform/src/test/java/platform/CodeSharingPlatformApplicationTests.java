@@ -49,8 +49,10 @@ class CodeSharingPlatformApplicationTests {
     public void apiCorrectPostNewCodeResponse() throws JSONException {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
 
-        String expected = "{\"id\":\"" + codeRepository.count() + "\"}";
-        assertEquals(expected, postRes.getBody());
+        JSONObject expected = new JSONObject();
+        expected.put("id", Long.toString(codeRepository.count()));
+
+        assertEquals(expected.toString(), postRes.getBody());
     }
 
     @Test
@@ -76,10 +78,10 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void getApiNCodeSnippet() {
+    public void getApiNCodeSnippet() throws JSONException {
         Code expected = this.codeRepository.findById(1L).get();
-        String expectedCode = expected.getCode();
-        String expectedDate = expected.getDateFormatted();
+
+        JSONObject expectedJson = createJson(expected);
 
         ResponseEntity<String> response = restTemplate
                 .getForEntity("/api/code/1", String.class);
@@ -87,16 +89,17 @@ class CodeSharingPlatformApplicationTests {
 
         String actualCode = documentContext.read("$.code");
         String actualDate = documentContext.read("$.date");
+        JSONObject actualJson = createJson("date", actualDate, "code", actualCode);
 
-        assertEquals(expectedCode, actualCode);
-        assertDatesEqual(expectedDate, actualDate);
+        assertJsonEqual(expectedJson, actualJson);
+        assertDateFormat(expected.getDateFormatted());
+        assertDateFormat(actualDate);
     }
 
     @Test
-    public void getHtmlNCodeSnippet() {
+    public void getHtmlNCodeSnippet() throws JSONException {
         Code expected = this.codeRepository.findById(3L).get();
-        String expectedCode = expected.getCode();
-        String expectedDate = expected.getDateFormatted();
+        JSONObject expectedJson = createJson(expected);
 
         String response = restTemplate
                 .getForObject("/code/3", String.class);
@@ -104,9 +107,11 @@ class CodeSharingPlatformApplicationTests {
 
         String actualCode = doc.getElementById("code_snippet").text();
         String actualDate = doc.getElementById("load_date").text();
+        JSONObject actualJson = createJson("date", actualDate, "code", actualCode);
 
-        assertEquals(expectedCode, actualCode);
-        assertDatesEqual(expectedDate, actualDate);
+        assertJsonEqual(expectedJson, actualJson);
+        assertDateFormat(expected.getDateFormatted());
+        assertDateFormat(actualDate);
     }
 
     @Test
@@ -154,7 +159,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void htmlGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
+    public void htmlGetTenLatestCodeSnippetsOrderDesc() {
         List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
@@ -187,6 +192,21 @@ class CodeSharingPlatformApplicationTests {
             }
         }
         assertEquals(expectedDates, actualDates);
+    }
+
+    private JSONObject createJson(Code code) throws JSONException {
+        JSONObject json = new JSONObject();
+        json.put("date", code.getDateFormatted());
+        json.put("code", code.getCode());
+        return json;
+    }
+
+    private JSONObject createJson(String... pairs) throws JSONException {
+        JSONObject json = new JSONObject();
+        for(int i = 1; i < pairs.length; i += 2) {
+            json.put(pairs[i - 1], pairs[i]);
+        }
+        return json;
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, LocalDateTime date) throws JSONException {
@@ -231,11 +251,19 @@ class CodeSharingPlatformApplicationTests {
         }
     }
 
+    private void assertDateFormat(String date) {
+        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss. Was [%s]".formatted(date),
+                isDateFormatValid(date));
+    }
+
     private void assertDatesEqual(String expected, String actual) {
-        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss. Was [%s]".formatted(actual),
-                isDateFormatValid(actual));
+        assertDateFormat(actual);
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(expected, actual),
                 areDatesEqual(expected, actual));
+    }
+
+    private void assertJsonEqual(JSONObject expected, JSONObject actual) {
+        assertEquals(expected.toString(), actual.toString());
     }
 }
 
