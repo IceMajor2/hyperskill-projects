@@ -67,9 +67,21 @@ class CodeSharingPlatformApplicationTests {
 
         Document doc = Jsoup.parse(response);
 
+        Element timeRestriction = doc.getElementById("time_restriction");
+        assertEquals("input", timeRestriction.tagName().toLowerCase());
+
+        String timeRestrictionAttribute = timeRestriction.attributes().get("type");
+        assertEquals("text", timeRestrictionAttribute);
+
+        Element viewsRestriction = doc.getElementById("views_restriction");
+        assertEquals("input", viewsRestriction.tagName().toLowerCase());
+
+        String viewsRestrictionAttribute = viewsRestriction.attributes().get("type");
+        assertEquals("text", viewsRestrictionAttribute);
+
         Element codeSnippet = doc.getElementById("code_snippet");
 
-        assertEquals(codeSnippet.tagName().toLowerCase(), "textarea");
+        assertEquals("textarea", codeSnippet.tagName().toLowerCase());
         assertEquals("Create", doc.title());
 
         Element sendSnippetButton = doc.getElementById("send_snippet");
@@ -85,7 +97,6 @@ class CodeSharingPlatformApplicationTests {
     @Test
     public void getApiNCodeSnippet() {
         Code expected = this.codeRepository.findByNumId(1L).get();
-        System.out.println(expected);
         JSONObject expectedJson = createJson(expected);
 
         ResponseEntity<String> response = restTemplate
