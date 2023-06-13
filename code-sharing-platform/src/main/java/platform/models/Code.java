@@ -2,6 +2,7 @@ package platform.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 import platform.dtos.CodeDTO;
 
@@ -10,10 +11,12 @@ import java.time.format.DateTimeFormatter;
 
 @Table(name = "codes")
 @Entity
+@JsonPropertyOrder({"date, code"})
 public class Code {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
     private String code;
     @JsonIgnore
