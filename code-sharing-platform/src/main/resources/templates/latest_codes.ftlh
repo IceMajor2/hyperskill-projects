@@ -9,7 +9,7 @@
 </head>
 <body>
     <#list codes as code>
-        <span id="load_date">${code.date}</span>
+        <span id="load_date">${code.getDateFormatted()}</span>
         <pre id="code_snippet"><code>${code.code}</code></pre>
     </#list>
 </body>

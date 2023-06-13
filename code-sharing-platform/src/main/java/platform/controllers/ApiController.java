@@ -25,18 +25,18 @@ public class ApiController {
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
     public ResponseEntity postNewCode(@RequestBody @Validated CodeDTO newCode) {
         Code code = new Code(newCode);
-        Long id = this.codeRepository.put(code);
-        return ResponseEntity.ok(Map.of("id", id.toString()));
+        Code savedCode = codeRepository.save(code);
+        return ResponseEntity.ok(Map.of("id", savedCode.getId().toString()));
     }
 
     @GetMapping("/api/code/{N}")
     public ResponseEntity getNCode(@PathVariable("N") Long id) {
-        Code code = this.codeRepository.get(id);
+        Code code = this.codeRepository.findById(id).get();
         return ResponseEntity.ok(code);
     }
 
     @GetMapping("/api/code/latest")
     public ResponseEntity getLatestCodes() {
-        return ResponseEntity.ok(codeRepository.getNLatest(10));
+        return ResponseEntity.ok(codeRepository.findFirst10ByOrderByDateDesc());
     }
 }

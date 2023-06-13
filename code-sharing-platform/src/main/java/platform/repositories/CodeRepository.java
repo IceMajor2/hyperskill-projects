@@ -1,47 +1,14 @@
 package platform.repositories;
 
-import org.springframework.context.annotation.Configuration;
+import org.springframework.data.repository.CrudRepository;
 import platform.models.Code;
 
-import java.util.*;
+import java.util.List;
 
-@Configuration
-public class CodeRepository {
+public interface CodeRepository extends CrudRepository<Code, Long> {
 
-    private Map<Long, Code> codeRepository;
+    public List<Code> findFirst10ByOrderByDateDesc();
 
-    public CodeRepository() {
-        this.codeRepository = new LinkedHashMap<>();
-    }
+    public List<Code> findAll();
 
-    public Long put(Long id, Code code) {
-        this.codeRepository.put(id, code);
-        return id;
-    }
-
-    public Long put(Code code) {
-        Long id = this.codeRepository.size() + 1L;
-        this.codeRepository.put(id, code);
-        return id;
-    }
-
-    public int size() {
-        return this.codeRepository.size();
-    }
-
-    public Code get(Long id) {
-        return this.codeRepository.get(id);
-    }
-
-    public List<Code> getNLatest(int n) {
-        int size = this.codeRepository.size();
-        if(n > size) {
-            List<Code> toReturn = new ArrayList<>(this.codeRepository.values().stream().toList());
-            Collections.reverse(toReturn);
-            return toReturn;
-        }
-        List<Code> toReturn = new ArrayList<>(this.codeRepository.values().stream().toList().subList(size - n, size));
-        Collections.reverse(toReturn);
-        return toReturn;
-    }
 }

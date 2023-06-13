@@ -25,15 +25,15 @@ public class WebController {
 
     @GetMapping("/code/{N}")
     public String getNCode(@PathVariable("N") Long id, Model model) {
-        Code code = codeRepository.get(id);
+        Code code = codeRepository.findById(id).get();
         model.addAttribute("code", code.getCode());
-        model.addAttribute("date", code.getDate());
+        model.addAttribute("date", code.getDateFormatted());
         return "index";
     }
 
     @GetMapping("/code/latest")
     public String getLatestCodes(Model model) {
-        List<Code> codes = this.codeRepository.getNLatest(10);
+        List<Code> codes = this.codeRepository.findFirst10ByOrderByDateDesc();
         model.addAttribute("codes", codes);
         return "latest_codes";
     }
