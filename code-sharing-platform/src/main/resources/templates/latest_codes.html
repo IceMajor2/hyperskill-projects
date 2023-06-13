@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Latest</title>
+</head>
+<body>
+    <tr th:each="code : ${codes}">
+        <td><span id="load_date" th:text="${code.date}"></span></td>
+        <td><pre id="code_snippet" th:text="${code.code}"></pre></td>
+    </tr>
+</body>
+</html>
