@@ -9,7 +9,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,53 +18,36 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.jdbc.Sql;
+import platform.models.Code;
+import platform.repositories.CodeRepository;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Sql({"/schema-test.sql", "/data-test.sql"})
 class CodeSharingPlatformApplicationTests {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    private Map<Integer, TestCode> codes;
 
-    @BeforeEach
-    public void setup() throws JSONException {
-        this.codes = new LinkedHashMap<>();
-        LocalDateTime setupTime = Instant.ofEpochMilli(100).atZone(ZoneId.systemDefault()).toLocalDateTime();
-        sendNewCodePost("int a = 0;");
-        setupTime.plusNanos(1);
-        sendNewCodePost("int b = 9;");
-        setupTime.plusNanos(1);
-        sendNewCodePost("class Code { }");
-        setupTime.plusNanos(1);
-        sendNewCodePost("System.out.println(\"Hello world!\");");
-        setupTime.plusNanos(1);
-        sendNewCodePost("interface Shoutable {}");
-        setupTime.plusNanos(1);
-        sendNewCodePost("makeShout();");
-        setupTime.plusNanos(1);
-        sendNewCodePost("return 0;");
-        setupTime.plusNanos(1);
-        sendNewCodePost("import java.time.LocalDateTime;");
-        setupTime.plusNanos(1);
-        sendNewCodePost("sendNewCodePost(this);");
-    }
+    @Autowired
+    private CodeRepository codeRepository;
 
     @Test
     public void apiCorrectPostNewCodeResponse() throws JSONException {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;");
 
-        String expected = "{\"id\":\"" + codes.size() + "\"}";
+        String expected = "{\"id\":\"" + codeRepository.count() + "\"}";
         assertEquals(expected, postRes.getBody());
     }
 
@@ -93,9 +75,9 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void getApiNCodeSnippet() {
-        TestCode expected = this.codes.get(1);
+        Code expected = this.codeRepository.findById(1L).get();
         String expectedCode = expected.getCode();
-        String expectedDate = expected.getDate();
+        String expectedDate = expected.getDateFormatted();
 
         ResponseEntity<String> response = restTemplate
                 .getForEntity("/api/code/1", String.class);
@@ -110,9 +92,9 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void getHtmlNCodeSnippet() {
-        TestCode expected = this.codes.get(3);
+        Code expected = this.codeRepository.findById(3L).get();
         String expectedCode = expected.getCode();
-        String expectedDate = expected.getDate();
+        String expectedDate = expected.getDateFormatted();
 
         String response = restTemplate
                 .getForObject("/code/3", String.class);
@@ -128,7 +110,10 @@ class CodeSharingPlatformApplicationTests {
     @Test
     public void apiGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
         sendNewCodePost("public static final xyz = 0;");
-        List<String> expectedSnippets = getCodeSnippetsFromMapSortedByDateDesc(this.codes);
+        List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
+                .stream()
+                .map(obj -> obj.getCode())
+                .toList();
 
         ResponseEntity<String> response = restTemplate
                 .getForEntity("/api/code/latest", String.class);
@@ -142,7 +127,10 @@ class CodeSharingPlatformApplicationTests {
 
     @Test
     public void apiGetTenLatestWhenLessThanTenElements() {
-        List<String> expectedSnippets = getCodeSnippetsFromMapSortedByDateDesc(this.codes);
+        List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
+                .stream()
+                .map(obj -> obj.getCode())
+                .toList();
 
         ResponseEntity<String> response = restTemplate
                 .getForEntity("/api/code/latest", String.class);
@@ -152,12 +140,23 @@ class CodeSharingPlatformApplicationTests {
 
         assertEquals(Arrays.toString(expectedSnippets.toArray()),
                 Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
+
+        List<String> expectedDates = this.codeRepository.findFirst10ByOrderByDateDesc()
+                .stream()
+                .map(obj -> obj.getDateFormatted())
+                .toList();
+
+        JSONArray actualDates = documentContext.read("$..date");
+        assertEquals(Arrays.toString(expectedDates.toArray()),
+                Arrays.toString(actualDates.subList(0, actualDates.size()).toArray()));
     }
 
     @Test
     public void htmlGetTenLatestCodeSnippetsOrderDesc() throws JSONException {
-        sendNewCodePost("public static final xyz = 0;");
-        List<String> expectedSnippets = getCodeSnippetsFromMapSortedByDateDesc(this.codes);
+        List<String> expectedSnippets = this.codeRepository.findFirst10ByOrderByDateDesc()
+                .stream()
+                .map(obj -> obj.getCode())
+                .toList();
 
         String response = restTemplate
                 .getForObject("/code/latest", String.class);
@@ -171,12 +170,25 @@ class CodeSharingPlatformApplicationTests {
                 actualSnippets.add(element.text());
             }
         }
-
         assertEquals(expectedSnippets, actualSnippets);
+
+        List<String> expectedDates = this.codeRepository.findFirst10ByOrderByDateDesc()
+                .stream()
+                .map(obj -> obj.getDateFormatted())
+                .toList();
+        Elements dateElements = doc.getElementsByTag("span");
+
+        List<String> actualDates = new ArrayList<>();
+        for(Element element : dateElements) {
+            if(element.id().equals("load_date")) {
+                actualDates.add(element.text());
+            }
+        }
+        assertEquals(expectedDates, actualDates);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, LocalDateTime date) throws JSONException {
-        TestCode testCode = new TestCode(code, date);
+        Code testCode = new Code(code, date);
         JSONObject codeDTO = new JSONObject();
         codeDTO.put("code", code);
 
@@ -187,7 +199,6 @@ class CodeSharingPlatformApplicationTests {
         HttpEntity<String> request = new HttpEntity<>(codeDTO.toString(), headers);
         ResponseEntity<String> postRes = restTemplate.
                 postForEntity("/api/code/new", request, String.class);
-        this.codes.put(this.codes.size() + 1, testCode);
         return postRes;
     }
 
@@ -208,16 +219,6 @@ class CodeSharingPlatformApplicationTests {
         return false;
     }
 
-    private List<String> getCodeSnippetsFromMapSortedByDateDesc(Map<Integer, TestCode> map) {
-        return map.values().stream()
-                .sorted((code1, code2) -> {
-                    var date1 = code1.getDateObj();
-                    var date2 = code2.getDateObj();
-                    return date2.compareTo(date1);
-                }).map(obj -> obj.getCode())
-                .toList();
-    }
-
     private boolean isDateFormatValid(String date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         try {
@@ -229,7 +230,8 @@ class CodeSharingPlatformApplicationTests {
     }
 
     private void assertDatesEqual(String expected, String actual) {
-        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss", isDateFormatValid(actual));
+        assertTrue("Date format is not valid. Should be yyyy/MM/dd HH:mm:ss. Was [%s]".formatted(actual),
+                isDateFormatValid(actual));
         assertTrue("Dates are not equal\nExpected: [%s]\nBut was:[%s]".formatted(expected, actual),
                 areDatesEqual(expected, actual));
     }
