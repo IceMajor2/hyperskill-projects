@@ -156,7 +156,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void htmlGetTenLatestCodeSnippetsOrderDesc() {
+    public void htmlLatestShouldNotShowRestrictedSnippets() {
         List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
@@ -214,11 +214,6 @@ class CodeSharingPlatformApplicationTests {
             }
         }
         assertEquals(expectedSnippets, actualSnippets);
-    }
-
-    @Test
-    public void htmlLatestShouldNotShowRestrictedSnippets() {
-
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
