@@ -40,15 +40,34 @@ public class Code {
     @Nonnull
     private long views;
 
+    @Nonnull
+    private boolean restricted;
+
     public Code(CodeRequestDTO codeRequestDTO) {
         this.code = codeRequestDTO.getCode();
         this.time = codeRequestDTO.getTime();
         this.views = codeRequestDTO.getViews();
         this.date = LocalDateTime.now();
         this.setNumId();
+        this.restricted = this.determineRestriction(this.time, this.views);
     }
 
     public Code() {
+    }
+
+    public boolean determineRestriction(long time, long views) {
+        if(time <= 0 && views <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isRestricted() {
+        return restricted;
+    }
+
+    public void setRestricted(boolean restricted) {
+        this.restricted = restricted;
     }
 
     public long getTime() {

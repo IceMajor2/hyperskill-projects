@@ -33,7 +33,7 @@ public class WebController {
 
     @GetMapping("/code/latest")
     public String getLatestCodes(Model model) {
-        List<Code> codes = this.codeRepository.findFirst10ByOrderByDateDesc();
+        List<Code> codes = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
         model.addAttribute("codes", codes);
         return "latest_codes";
     }

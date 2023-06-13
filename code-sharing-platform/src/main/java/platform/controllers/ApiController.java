@@ -44,6 +44,6 @@ public class ApiController {
 
     @GetMapping("/api/code/latest")
     public ResponseEntity getLatestCodes() {
-        return ResponseEntity.ok(codeRepository.findFirst10ByOrderByDateDesc());
+        return ResponseEntity.ok(codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc());
     }
 }

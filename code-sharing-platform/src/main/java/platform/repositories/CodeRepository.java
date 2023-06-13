@@ -9,9 +9,9 @@ import java.util.UUID;
 
 public interface CodeRepository extends CrudRepository<Code, UUID> {
 
-    List<Code> findFirst10ByOrderByDateDesc();
-
     List<Code> findAll();
+
+    List<Code> findFirst10ByRestrictedFalseOrderByDateDesc();
 
     Optional<Code> findByNumId(Long numId);
 
