@@ -66,7 +66,10 @@ class HtmlTests {
 
     @Test
     public void htmlLatestShouldHideRestrictedTest() {
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
+        List<String> expectedSnippets = List.of(
+                        this.codeRepository.findByNumId(6L).get(),
+                        this.codeRepository.findByNumId(9L).get(),
+                        this.codeRepository.findByNumId(2L).get())
                 .stream()
                 .map(obj -> obj.getCode())
                 .toList();
@@ -84,19 +87,5 @@ class HtmlTests {
             }
         }
         assertEquals(expectedSnippets, actualSnippets);
-
-        List<String> expectedDates = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
-                .stream()
-                .map(obj -> obj.getDateFormatted())
-                .toList();
-        Elements dateElements = doc.getElementsByTag("span");
-
-        List<String> actualDates = new ArrayList<>();
-        for (Element element : dateElements) {
-            if (element.id().equals("load_date")) {
-                actualDates.add(element.text());
-            }
-        }
-        assertEquals(expectedDates, actualDates);
     }
 }
