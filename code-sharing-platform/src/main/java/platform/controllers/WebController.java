@@ -26,7 +26,7 @@ public class WebController {
         if(!opSuccessful) {
             return null;
         }
-        return "index";
+        return "code_snippet";
     }
 
     @GetMapping("/code/latest")
