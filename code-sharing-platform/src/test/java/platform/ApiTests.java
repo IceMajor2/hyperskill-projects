@@ -28,14 +28,15 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
-import static platform.CustomAssertions.*;
+import static platform.CustomAssertions.assertIsUUID;
+import static platform.CustomAssertions.assertJsonEqual;
 import static platform.CustomJsonOperations.createJson;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @Sql({"/schema-test.sql", "/data-test.sql"})
 @TestPropertySource(locations = "classpath:application-test.properties")
-class CodeSharingPlatformApplicationTests {
+public class ApiTests {
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -44,7 +45,7 @@ class CodeSharingPlatformApplicationTests {
     private CodeRepository codeRepository;
 
     @Test
-    public void apiCorrectPostNewCodeResponse() {
+    public void apiNewCodeResponseTest() {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;", 0, 0);
 
         DocumentContext documentContext = JsonPath.parse(postRes.getBody());
@@ -62,7 +63,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void apiAccessCodeSnippetsThroughUUID() {
+    public void apiAccessCodeTest() {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;", 0, 0);
         String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
         assertIsUUID(strUUID);
@@ -78,41 +79,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void checkCodeNewHtmlEndpoint() {
-        String response = restTemplate
-                .getForObject("/code/new", String.class);
-
-        Document doc = Jsoup.parse(response);
-
-        Element timeRestriction = doc.getElementById("time_restriction");
-        assertEquals("input", timeRestriction.tagName().toLowerCase());
-
-        String timeRestrictionAttribute = timeRestriction.attributes().get("type");
-        assertEquals("text", timeRestrictionAttribute);
-
-        Element viewsRestriction = doc.getElementById("views_restriction");
-        assertEquals("input", viewsRestriction.tagName().toLowerCase());
-
-        String viewsRestrictionAttribute = viewsRestriction.attributes().get("type");
-        assertEquals("text", viewsRestrictionAttribute);
-
-        Element codeSnippet = doc.getElementById("code_snippet");
-
-        assertEquals("textarea", codeSnippet.tagName().toLowerCase());
-        assertEquals("Create", doc.title());
-
-        Element sendSnippetButton = doc.getElementById("send_snippet");
-        assertEquals("button", sendSnippetButton.tagName());
-
-        String attribute = sendSnippetButton.attributes().get("type");
-        assertEquals("submit", attribute);
-
-        String buttonText = sendSnippetButton.text();
-        assertEquals("Submit", buttonText);
-    }
-
-    @Test
-    public void apiGetTenLatestCodeSnippetsOrderDesc() {
+    public void apiLatestSnippetsInOrderTest() {
         sendNewCodePost("public static final xyz = 0;", 1, 1);
         List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
@@ -130,7 +97,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void apiGetTenLatestWhenLessThanTenElements() {
+    public void apiLatestSnippetsInOrderEdgeCaseTest() {
         List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
                 .stream()
                 .map(obj -> obj.getCode())
@@ -156,43 +123,7 @@ class CodeSharingPlatformApplicationTests {
     }
 
     @Test
-    public void htmlLatestShouldNotShowRestrictedSnippets() {
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
-                .stream()
-                .map(obj -> obj.getCode())
-                .toList();
-
-        String response = restTemplate
-                .getForObject("/code/latest", String.class);
-        Document doc = Jsoup.parse(response);
-
-        Elements snippetElements = doc.getElementsByTag("pre");
-
-        List<String> actualSnippets = new ArrayList<>();
-        for (Element element : snippetElements) {
-            if (element.id().equals("code_snippet")) {
-                actualSnippets.add(element.text());
-            }
-        }
-        assertEquals(expectedSnippets, actualSnippets);
-
-        List<String> expectedDates = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
-                .stream()
-                .map(obj -> obj.getDateFormatted())
-                .toList();
-        Elements dateElements = doc.getElementsByTag("span");
-
-        List<String> actualDates = new ArrayList<>();
-        for (Element element : dateElements) {
-            if (element.id().equals("load_date")) {
-                actualDates.add(element.text());
-            }
-        }
-        assertEquals(expectedDates, actualDates);
-    }
-
-    @Test
-    public void apiLatestShouldNotShowRestrictedSnippets() {
+    public void apiLatestShouldHideRestrictedTest() {
         List<String> expectedSnippets = List.of(
                         this.codeRepository.findByNumId(6L).get(),
                         this.codeRepository.findByNumId(9L).get(),
