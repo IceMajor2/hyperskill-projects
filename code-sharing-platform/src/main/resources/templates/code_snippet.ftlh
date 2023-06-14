@@ -10,9 +10,6 @@
 <body>
     <span id="load_date">${code.getDateFormatted()}</span>
     <br>
-    <#if code.isToBeTimeRestricted()>
-        The code will be available for <u><span id="time_restriction">${code.getTime()}</span></u> seconds
-    </#if>
     <br>
     <#if code.isToBeViewRestricted()>
         <#if code.getViews() != 0>
@@ -20,6 +17,9 @@
         <#else>
             No more views allowed
         </#if>
+    </#if>
+    <#if code.isToBeTimeRestricted()>
+        The code will be available for <u><span id="time_restriction">${code.getTime()}</span></u> seconds
     </#if>
     <pre id="code_snippet"><code>${code}</code></pre>
 </body>
