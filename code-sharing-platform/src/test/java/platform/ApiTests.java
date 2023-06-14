@@ -123,7 +123,7 @@ public class ApiTests {
     }
 
     @Test
-    public void apiRestrictedTimeChangesTest() {
+    public void apiRestrictedTimeChangeTest() {
         ResponseEntity<String> postResponse = sendNewCodePost("public void apiTest() {}", 15, 0);
         String uuid = JsonPath.parse(postResponse.getBody()).read("$.id");
 
@@ -149,6 +149,18 @@ public class ApiTests {
 
         boolean condition = (time == time2 + 2) || (time == time2 + 1);
         assertTrue(condition);
+    }
+
+    @Test
+    public void apiRestrictedViewsChangeTest() {
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/api/code/5dd5fcba-3738-4732-aaa5-631bada1f215", String.class);
+        assertEquals(HttpStatus.OK, getResponse.getStatusCode());
+
+        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+
+        long views = Long.valueOf(documentContext.read("$.views").toString());
+        assertEquals(0L, views);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
