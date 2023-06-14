@@ -115,25 +115,22 @@ public class Code {
                 this.restricted = true;
             }
         }
-//        if (!toBeViewRestricted && !toBeTimeRestricted) {
-//            return;
-//        }
-//        if (restricted) {
-//            return;
-//        }
-//        if(this.time != 0) {
-//            long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
-//            this.time -= secondsDiff;
-//            this.time = this.time < 0 ? 0 : this.time;
-//            this.restricted = this.time == 0 ? true : this.restricted;
-//        }
-//        if(this.views != 0) {
-//            this.views--;
-//            return;
-//        }
-//        if(this.views == 0) {
-//            this.restricted = true;
-//        }
+    }
+
+    public boolean isToBeTimeRestricted() {
+        return toBeTimeRestricted;
+    }
+
+    public void setToBeTimeRestricted(boolean toBeTimeRestricted) {
+        this.toBeTimeRestricted = toBeTimeRestricted;
+    }
+
+    public boolean isToBeViewRestricted() {
+        return toBeViewRestricted;
+    }
+
+    public void setToBeViewRestricted(boolean toBeViewRestricted) {
+        this.toBeViewRestricted = toBeViewRestricted;
     }
 
     public void setTime(long time) {

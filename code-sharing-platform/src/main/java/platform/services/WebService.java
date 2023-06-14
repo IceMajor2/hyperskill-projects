@@ -24,8 +24,9 @@ public class WebService {
         if(code.isRestricted()) {
             return false;
         }
-        model.addAttribute("code", code.getCode());
-        model.addAttribute("date", code.getDateFormatted());
+        model.addAttribute("code", code);
+//        model.addAttribute("code", code.getCode());
+//        model.addAttribute("date", code.getDateFormatted());
         return true;
     }
 
