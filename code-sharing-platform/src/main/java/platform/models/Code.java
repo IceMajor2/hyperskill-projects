@@ -47,37 +47,37 @@ public class Code {
 
     @Nonnull
     @JsonIgnore
-    private boolean toBeRestricted;
+    private boolean toBeTimeRestricted;
+
+    @Nonnull
+    @JsonIgnore
+    private boolean toBeViewRestricted;
 
     public Code(CodeRequestDTO codeRequestDTO) {
         this.code = codeRequestDTO.getCode();
 
-        if (codeRequestDTO.getTime() < 0) {
+        if (codeRequestDTO.getTime() <= 0) {
             this.time = 0;
+            this.toBeTimeRestricted = false;
         } else {
             this.time = codeRequestDTO.getTime();
+            this.toBeTimeRestricted = true;
         }
 
-        if (codeRequestDTO.getViews() < 0) {
+        if (codeRequestDTO.getViews() <= 0) {
             this.views = 0;
+            this.toBeViewRestricted = false;
         } else {
             this.views = codeRequestDTO.getViews();
+            this.toBeViewRestricted = true;
         }
 
         this.date = LocalDateTime.now();
         this.setNumId();
         this.restricted = false;
-        this.toBeRestricted = determineRestriction(this.time, this.views);
     }
 
     public Code() {
-    }
-
-    public boolean determineRestriction(long time, long views) {
-        if (time <= 0 && views <= 0) {
-            return false;
-        }
-        return true;
     }
 
     public boolean isRestricted() {
@@ -93,22 +93,47 @@ public class Code {
     }
 
     public void updateRestrictions() {
-        if (!toBeRestricted) {
+        if(restricted) {
             return;
         }
-        if (restricted) {
-            return;
-        }
-        if(this.time != 0) {
+        if(toBeTimeRestricted) {
             long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
             this.time -= secondsDiff;
             this.time = this.time < 0 ? 0 : this.time;
-            this.restricted = this.time == 0 ? true : false;
+
+            if(this.time == 0) {
+                this.restricted = true;
+            }
         }
-        if(this.views != -1) {
-            this.views--;
-            this.restricted = this.views == -1 ? true : false;
+        if(toBeViewRestricted) {
+            if(this.views != 0) {
+                this.views--;
+                return;
+            }
+
+            if(this.views == 0) {
+                this.restricted = true;
+            }
         }
+//        if (!toBeViewRestricted && !toBeTimeRestricted) {
+//            return;
+//        }
+//        if (restricted) {
+//            return;
+//        }
+//        if(this.time != 0) {
+//            long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
+//            this.time -= secondsDiff;
+//            this.time = this.time < 0 ? 0 : this.time;
+//            this.restricted = this.time == 0 ? true : this.restricted;
+//        }
+//        if(this.views != 0) {
+//            this.views--;
+//            return;
+//        }
+//        if(this.views == 0) {
+//            this.restricted = true;
+//        }
     }
 
     public void setTime(long time) {
@@ -116,9 +141,6 @@ public class Code {
     }
 
     public long getViews() {
-        if(this.views == -1) {
-            return 0;
-        }
         return views;
     }
 
