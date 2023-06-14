@@ -78,6 +78,7 @@ class HtmlTests {
     public void htmlLatestShouldHideRestrictedTest() {
         List<String> expectedSnippets = List.of(
                         this.codeRepository.findByNumId(6L).get(),
+                        this.codeRepository.findByNumId(5L).get(),
                         this.codeRepository.findByNumId(9L).get(),
                         this.codeRepository.findByNumId(2L).get())
                 .stream()

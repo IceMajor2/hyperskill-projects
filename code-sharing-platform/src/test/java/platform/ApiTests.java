@@ -4,11 +4,6 @@ import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import net.minidev.json.JSONArray;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +15,6 @@ import org.springframework.test.context.jdbc.Sql;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -59,7 +53,7 @@ public class ApiTests {
     }
 
     @Test
-    public void apiAccessCodeTest() {
+    public void apiGetCodeTest() {
         ResponseEntity<String> postRes = sendNewCodePost("int b = -4563;", 0, 0);
         String strUUID = JsonPath.parse(postRes.getBody()).read("$.id");
         assertIsUUID(strUUID);
@@ -92,6 +86,7 @@ public class ApiTests {
         List<String> expectedSnippets = List.of(
                         justPosted,
                         this.codeRepository.findByNumId(6L).get(),
+                        this.codeRepository.findByNumId(5L).get(),
                         this.codeRepository.findByNumId(9L).get(),
                         this.codeRepository.findByNumId(2L).get())
                 .stream()
