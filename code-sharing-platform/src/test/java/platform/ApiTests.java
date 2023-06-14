@@ -54,10 +54,7 @@ public class ApiTests {
 
         assertIsUUID(strUUID);
 
-        long time = Long.valueOf(documentContext.read("$.time").toString());
-        long views = Long.valueOf(documentContext.read("$.views").toString());
-
-        JSONObject expected = createJson("id", strUUID, "time", time, "views", views);
+        JSONObject expected = createJson("id", strUUID);
 
         assertEquals(expected.toString(), postRes.getBody());
     }
