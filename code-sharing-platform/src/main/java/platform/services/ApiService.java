@@ -31,6 +31,8 @@ public class ApiService {
         if(code == null) {
             return null;
         }
+        code.updateRestrictions();
+        codeRepository.save(code);
         if(code.isRestricted()) {
             return null;
         }

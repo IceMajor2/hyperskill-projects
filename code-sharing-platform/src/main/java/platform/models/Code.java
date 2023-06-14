@@ -89,17 +89,22 @@ public class Code {
     }
 
     public long getTime() {
-        if (this.time == 0) {
-            return this.time;
-        }
-        updateRestrictedTime();
         return this.time;
     }
 
-    private void updateRestrictedTime() {
+    public void updateRestrictions() {
+        if (!toBeRestricted) {
+            return;
+        }
+        if (restricted) {
+            return;
+        }
+
         long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
         this.time -= secondsDiff;
         this.time = this.time < 0 ? 0 : this.time;
+
+        this.restricted = this.time == 0 ? true : false;
     }
 
     public void setTime(long time) {
