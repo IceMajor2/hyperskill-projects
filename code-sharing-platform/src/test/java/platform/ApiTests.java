@@ -120,6 +120,13 @@ public class ApiTests {
 
     @Test
     public void apiLatestShouldHideRestrictedTest() {
+        ResponseEntity<String> postResponse = sendNewCodePost("JAVA IS BEST", 10, 5);
+        UUID uuid = UUID.fromString(JsonPath.parse(postResponse.getBody()).read("$.id"));
+
+        ResponseEntity<String> getPreviousPostResponse = restTemplate
+                .getForEntity("/api/code/%s".formatted(uuid), String.class);
+        Code justPosted = this.codeRepository.findById(uuid).get();
+
         ResponseEntity<String> getResponse = restTemplate
                 .getForEntity("/api/code/latest", String.class);
         DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
@@ -127,6 +134,7 @@ public class ApiTests {
         JSONArray actualSnippets = documentContext.read("$..code");
 
         List<String> expectedSnippets = List.of(
+                        justPosted,
                         this.codeRepository.findByNumId(6L).get(),
                         this.codeRepository.findByNumId(9L).get(),
                         this.codeRepository.findByNumId(2L).get())
