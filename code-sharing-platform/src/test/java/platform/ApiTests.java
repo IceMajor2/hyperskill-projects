@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static platform.CustomAssertions.assertIsUUID;
 import static platform.CustomAssertions.assertJsonEqual;
 import static platform.CustomJsonOperations.createJson;
@@ -148,7 +149,6 @@ public class ApiTests {
     }
 
     @Test
-    @Order(6)
     public void apiRestrictedTimeIsUpExpectNotFoundTest() {
         try {
             Thread.sleep(1000);
@@ -159,6 +159,32 @@ public class ApiTests {
                 .getForEntity("/api/code/a496f05e-84ed-41c4-89c6-ba266ef917aa", String.class);
 
         assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    public void apiRestrictedTimeChangesTest() {
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/api/code/db3ab7e2-69d2-464e-93fe-1768e25fdd6d", String.class);
+        assertEquals(getResponse.getStatusCode(), HttpStatus.OK);
+
+        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+        long time = documentContext.read("$.time");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        getResponse = restTemplate
+                .getForEntity("/api/code/db3ab7e2-69d2-464e-93fe-1768e25fdd6d", String.class);
+        assertEquals(getResponse.getStatusCode(), HttpStatus.OK);
+
+        documentContext = JsonPath.parse(getResponse.getBody());
+        long time2 = documentContext.read("$.time");
+
+        boolean condition = (time == time2 + 2) || (time == time2 + 1);
+        assertTrue(condition);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
