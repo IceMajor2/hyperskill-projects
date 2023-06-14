@@ -71,7 +71,7 @@ public class Code {
             this.initialTime = codeRequestDTO.getTime();
             this.toBeTimeRestricted = true;
         }
-        System.out.println(initialTime);
+
         if (codeRequestDTO.getViews() <= 0) {
             this.views = 0;
             this.toBeViewRestricted = false;
@@ -114,7 +114,6 @@ public class Code {
         }
         if (toBeTimeRestricted) {
             long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
-            System.out.println(initialTime + " " + secondsDiff);
             this.time = this.initialTime - secondsDiff;
             this.time = this.time < 0 ? 0 : this.time;
 
