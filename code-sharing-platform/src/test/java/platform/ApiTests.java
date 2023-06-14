@@ -68,11 +68,6 @@ public class ApiTests {
     @Test
     public void apiLatestShouldHideRestrictedAndDisplayOrderedTest() {
         ResponseEntity<String> postResponse = sendNewCodePost("JAVA IS BEST", 10, 5);
-        UUID uuid = UUID.fromString(JsonPath.parse(postResponse.getBody()).read("$.id"));
-
-        ResponseEntity<String> getPreviousPostResponse = restTemplate
-                .getForEntity("/api/code/%s".formatted(uuid), String.class);
-        Code justPosted = this.codeRepository.findById(uuid).get();
 
         ResponseEntity<String> getResponse = restTemplate
                 .getForEntity("/api/code/latest", String.class);
@@ -81,9 +76,7 @@ public class ApiTests {
         JSONArray actualSnippets = documentContext.read("$..code");
 
         List<String> expectedSnippets = List.of(
-                        justPosted,
                         this.codeRepository.findByNumId(6L).get(),
-                        this.codeRepository.findByNumId(5L).get(),
                         this.codeRepository.findByNumId(9L).get(),
                         this.codeRepository.findByNumId(2L).get())
                 .stream()
@@ -193,55 +186,57 @@ public class ApiTests {
         }
     }
 
-    @Test
-    public void apiGetLatestShouldAffectRestrictionsTest() {
-        List<Long> expectedViews = new ArrayList<>(List.of(0l, 0l, 0l, 0l));
-        List<Long> notExpectedTime = new ArrayList<>(List.of(
-                        this.codeRepository.findByNumId(6L).get(),
-                        this.codeRepository.findByNumId(5L).get(),
-                        this.codeRepository.findByNumId(9L).get(),
-                        this.codeRepository.findByNumId(2L).get())
-                .stream()
-                .map(obj -> (obj.getTime()))
-                .toList());
-        List<Code> postedCodes = new ArrayList<>();
-
-        String snippet = "xyz";
-        for (int i = 0; i < 3; i++) {
-
-            Random random = new Random();
-            snippet += 'z';
-            long time = random.nextInt(1000) + 60;
-            long views = random.nextInt(5) + 1;
-
-            ResponseEntity<String> postResponse = sendNewCodePost(snippet, time, views);
-            UUID uuid = UUID.fromString(JsonPath.parse(postResponse.getBody()).read("$.id"));
-            Code code = codeRepository.findById(uuid).get();
-
-            postedCodes.add(code);
-            expectedViews.add(0, views - 1);
-            notExpectedTime.add(0, time);
-        }
-
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        ResponseEntity<String> getResponse = restTemplate
-                .getForEntity("/api/code/latest", String.class);
-        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
-
-        JSONArray actualViews = documentContext.read("$..views");
-        JSONArray actualTime = documentContext.read("$..time");
-
-        assertEquals(Arrays.toString(expectedViews.toArray()),
-                Arrays.toString(actualViews.subList(0, actualViews.size()).toArray()));
-
-        assertNotEquals(Arrays.toString(notExpectedTime.toArray()),
-                Arrays.toString(actualTime.subList(0, actualTime.size()).toArray()));
-    }
+    // below test is useless as '/latest' endpoint
+    // should not display any restricted / to-be-restricted snippets
+//    @Test
+//    public void apiGetLatestShouldAffectRestrictionsTest() {
+//        List<Long> expectedViews = new ArrayList<>(List.of(0l, 0l, 0l, 0l));
+//        List<Long> notExpectedTime = new ArrayList<>(List.of(
+//                        this.codeRepository.findByNumId(6L).get(),
+//                        this.codeRepository.findByNumId(5L).get(),
+//                        this.codeRepository.findByNumId(9L).get(),
+//                        this.codeRepository.findByNumId(2L).get())
+//                .stream()
+//                .map(obj -> (obj.getTime()))
+//                .toList());
+//        List<Code> postedCodes = new ArrayList<>();
+//
+//        String snippet = "xyz";
+//        for (int i = 0; i < 3; i++) {
+//
+//            Random random = new Random();
+//            snippet += 'z';
+//            long time = random.nextInt(1000) + 60;
+//            long views = random.nextInt(5) + 1;
+//
+//            ResponseEntity<String> postResponse = sendNewCodePost(snippet, time, views);
+//            UUID uuid = UUID.fromString(JsonPath.parse(postResponse.getBody()).read("$.id"));
+//            Code code = codeRepository.findById(uuid).get();
+//
+//            postedCodes.add(code);
+//            expectedViews.add(0, views - 1);
+//            notExpectedTime.add(0, time);
+//        }
+//
+//        try {
+//            Thread.sleep(1000);
+//        } catch(InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//        ResponseEntity<String> getResponse = restTemplate
+//                .getForEntity("/api/code/latest", String.class);
+//        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+//
+//        JSONArray actualViews = documentContext.read("$..views");
+//        JSONArray actualTime = documentContext.read("$..time");
+//
+//        assertEquals(Arrays.toString(expectedViews.toArray()),
+//                Arrays.toString(actualViews.subList(0, actualViews.size()).toArray()));
+//
+//        assertNotEquals(Arrays.toString(notExpectedTime.toArray()),
+//                Arrays.toString(actualTime.subList(0, actualTime.size()).toArray()));
+//    }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
         JSONObject codeDTO = createJson("code", code, "time", time, "views", views);
