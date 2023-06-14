@@ -75,51 +75,7 @@ public class ApiTests {
     }
 
     @Test
-    public void apiLatestSnippetsInOrderTest() {
-        sendNewCodePost("public static final xyz = 0;", 1, 1);
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
-                .stream()
-                .map(obj -> obj.getCode())
-                .toList();
-
-        ResponseEntity<String> response = restTemplate
-                .getForEntity("/api/code/latest", String.class);
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
-
-        JSONArray actualSnippets = documentContext.read("$..code");
-
-        assertEquals(Arrays.toString(expectedSnippets.toArray()),
-                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
-    }
-
-    @Test
-    public void apiLatestSnippetsInOrderEdgeCaseTest() {
-        List<String> expectedSnippets = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
-                .stream()
-                .map(obj -> obj.getCode())
-                .toList();
-
-        ResponseEntity<String> response = restTemplate
-                .getForEntity("/api/code/latest", String.class);
-        DocumentContext documentContext = JsonPath.parse(response.getBody());
-
-        JSONArray actualSnippets = documentContext.read("$..code");
-
-        assertEquals(Arrays.toString(expectedSnippets.toArray()),
-                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
-
-        List<String> expectedDates = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc()
-                .stream()
-                .map(obj -> obj.getDateFormatted())
-                .toList();
-
-        JSONArray actualDates = documentContext.read("$..date");
-        assertEquals(Arrays.toString(expectedDates.toArray()),
-                Arrays.toString(actualDates.subList(0, actualDates.size()).toArray()));
-    }
-
-    @Test
-    public void apiLatestShouldHideRestrictedTest() {
+    public void apiLatestShouldHideRestrictedAndDisplayOrderedTest() {
         ResponseEntity<String> postResponse = sendNewCodePost("JAVA IS BEST", 10, 5);
         UUID uuid = UUID.fromString(JsonPath.parse(postResponse.getBody()).read("$.id"));
 
