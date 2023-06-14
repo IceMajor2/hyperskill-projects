@@ -2,7 +2,6 @@ package platform.services;
 
 import org.springframework.stereotype.Service;
 import platform.dtos.CodeRequestDTO;
-import platform.dtos.CodeResponseDTO;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
@@ -28,6 +27,15 @@ public class ApiService {
     }
 
     public Code getCode(String id) {
+        UUID uuid = null;
+        try {
+            uuid = UUID.fromString(id);
+        } catch(IllegalArgumentException e) {
+            return null;
+        }
+        if(!this.codeRepository.existsById(uuid)) {
+            return null;
+        }
         return this.codeRepository.findById(UUID.fromString(id)).get();
     }
 

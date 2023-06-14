@@ -31,6 +31,9 @@ public class ApiController {
     @GetMapping("/api/code/{id}")
     public ResponseEntity getCode(@PathVariable String id) {
         Code code = this.apiService.getCode(id);
+        if(code == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(code);
     }
 
