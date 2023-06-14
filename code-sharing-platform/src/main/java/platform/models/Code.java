@@ -105,6 +105,10 @@ public class Code {
             this.time = this.time < 0 ? 0 : this.time;
             this.restricted = this.time == 0 ? true : false;
         }
+        if(this.views != -1) {
+            this.views--;
+            this.restricted = this.views == -1 ? true : false;
+        }
     }
 
     public void setTime(long time) {
@@ -112,6 +116,9 @@ public class Code {
     }
 
     public long getViews() {
+        if(this.views == -1) {
+            return 0;
+        }
         return views;
     }
 

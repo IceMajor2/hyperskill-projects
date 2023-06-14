@@ -163,6 +163,44 @@ public class ApiTests {
         assertEquals(0L, views);
     }
 
+    @Test
+    public void apiRestrictedViewsChangeLoopTest() {
+        ResponseEntity<String> postResponse = sendNewCodePost("sendNewCodePost();", 0, 100);
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
+        String uuid = JsonPath.parse(postResponse.getBody()).read("$.id");
+        postResponse = sendNewCodePost("sendNewCodePost(); // comment", 1000, 5);
+        String uuid2 = JsonPath.parse(postResponse.getBody()).read("$.id");
+
+        for(int i = 0; i < 100; i++) {
+            ResponseEntity<String> getResponse = restTemplate
+                    .getForEntity("/api/code/%s".formatted(uuid), String.class);
+            assertEquals(HttpStatus.OK, getResponse.getStatusCode());
+            DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+            long views = Long.valueOf(documentContext.read("$.views").toString());
+
+            assertEquals(100 - (i + 1), views);
+
+            if(i < 5) {
+                getResponse = restTemplate.getForEntity("/api/code/%s".formatted(uuid2), String.class);
+                assertEquals(HttpStatus.OK, getResponse.getStatusCode());
+
+                documentContext = JsonPath.parse(getResponse.getBody());
+                views = Long.valueOf(documentContext.read("$.views").toString());
+
+                assertEquals(5 - (i + 1), views);
+            }
+        }
+        for(int i = 0; i < 10; i++) {
+            ResponseEntity<String> getResponse = restTemplate
+                    .getForEntity("/api/code/%s".formatted(uuid), String.class);
+            assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
+
+            getResponse = restTemplate
+                    .getForEntity("/api/code/%s".formatted(uuid2), String.class);
+            assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
+        }
+    }
+
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
         JSONObject codeDTO = createJson("code", code, "time", time, "views", views);
 
