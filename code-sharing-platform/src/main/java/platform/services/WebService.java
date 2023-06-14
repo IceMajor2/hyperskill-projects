@@ -24,6 +24,11 @@ public class WebService {
     }
 
     public void getLatestCodes(Model model) {
+        List<Code> database = this.codeRepository.findAll();
+        for(Code code : database) {
+            code.updateRestrictions();
+            this.codeRepository.save(code);
+        }
         List<Code> codes = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
         model.addAttribute("codes", codes);
     }
