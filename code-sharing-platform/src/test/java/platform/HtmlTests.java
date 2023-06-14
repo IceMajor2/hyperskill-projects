@@ -13,6 +13,7 @@ import org.springframework.http.*;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
+import platform.models.Code;
 import platform.repositories.CodeRepository;
 
 import java.util.ArrayList;
@@ -20,9 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+import static org.junit.Assert.*;
 import static platform.CustomJsonOperations.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -105,11 +105,14 @@ class HtmlTests {
 
     @Test
     public void htmlGetViewRestrictedCodeInfoTest() {
-        ResponseEntity<String> getRestrictedResponse = restTemplate
-                .getForEntity("/code/5dd5fcba-3738-4732-aaa5-631bada1f215", String.class);
-        assertEquals(HttpStatus.OK, getRestrictedResponse.getStatusCode());
+        ResponseEntity<String> postResponse = sendNewCodePost("Secret code!", 0, 2);
+        UUID uuid = getUUIDFromJson(postResponse);
 
-        String html = getRestrictedResponse.getBody();
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/code/%s".formatted(uuid.toString()), String.class);
+        assertEquals(HttpStatus.OK, getResponse.getStatusCode());
+
+        String html = getResponse.getBody();
         Document doc = Jsoup.parse(html);
 
         Element viewsRestriction = doc.getElementById("views_restriction");
@@ -136,6 +139,44 @@ class HtmlTests {
 
         Element viewsRestriction = doc.getElementById("views_restriction");
         assertNull("View restriction element should not be present", viewsRestriction);
+    }
+
+    @Test
+    public void htmlTimeRestrictionAndViewRestrictionInfoTest() {
+        var postResponse = sendNewCodePost("private final double PI = 3.14;", 100, 3);
+        UUID uuid = getUUIDFromJson(postResponse);
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        for (int i = 0; i < 3; i++) {
+            ResponseEntity<String> getRestrictedResponse = restTemplate
+                    .getForEntity("/code/%s".formatted(uuid.toString()), String.class);
+            assertEquals(HttpStatus.OK, getRestrictedResponse.getStatusCode());
+
+            Code code = this.codeRepository.findById(uuid).get();
+            String html = getRestrictedResponse.getBody();
+            Document doc = Jsoup.parse(html);
+
+            String timeRestrictionText = doc.getElementById("time_restriction").text();
+            String viewsRestrictionText = doc.getElementById("views_restriction") != null
+                    ? doc.getElementById("views_restriction").text() : null;
+
+            if (i == 2) {
+                assertNull("No views left should contain no number", viewsRestrictionText);
+            } else {
+                assertEquals(Integer.toString(3 - (i + 1)), viewsRestrictionText);
+            }
+            assertEquals((Long.toString(code.getTime())), timeRestrictionText);
+        }
+
+        Code code = this.codeRepository.findById(uuid).get();
+
+        assertEquals(0, code.getViews());
+        assertNotEquals(100, code.getTime());
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
