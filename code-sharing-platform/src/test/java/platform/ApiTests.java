@@ -8,14 +8,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
@@ -121,6 +119,12 @@ public class ApiTests {
 
     @Test
     public void apiLatestShouldHideRestrictedTest() {
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/api/code/latest", String.class);
+        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+
+        JSONArray actualSnippets = documentContext.read("$..code");
+
         List<String> expectedSnippets = List.of(
                         this.codeRepository.findByNumId(6L).get(),
                         this.codeRepository.findByNumId(9L).get(),
@@ -129,19 +133,32 @@ public class ApiTests {
                 .map(obj -> obj.getCode())
                 .toList();
 
-        String response = restTemplate
-                .getForObject("/code/latest", String.class);
-        Document doc = Jsoup.parse(response);
+        assertEquals(Arrays.toString(expectedSnippets.toArray()),
+                Arrays.toString(actualSnippets.subList(0, actualSnippets.size()).toArray()));
+    }
 
-        Elements snippetElements = doc.getElementsByTag("pre");
+    @Test
+    public void apiNoSuchUUIDTest() {
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/api/code/1be36511-3c92-4a57-94d6-a0396c89d5f3", String.class);
+        assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
 
-        List<String> actualSnippets = new ArrayList<>();
-        for (Element element : snippetElements) {
-            if (element.id().equals("code_snippet")) {
-                actualSnippets.add(element.text());
-            }
+        getResponse = restTemplate.getForEntity("/api/code/1", String.class);
+        assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
+    }
+
+    @Test
+    @Order(6)
+    public void apiRestrictedTimeIsUpExpectNotFoundTest() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        assertEquals(expectedSnippets, actualSnippets);
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/api/code/a496f05e-84ed-41c4-89c6-ba266ef917aa", String.class);
+
+        assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
