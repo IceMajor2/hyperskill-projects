@@ -9,13 +9,17 @@
 </head>
 <body>
     <span id="load_date">${code.getDateFormatted()}</span>
+    <br>
     <#if code.isToBeTimeRestricted()>
         The code will be available for <u><span id="time_restriction">${code.getTime()}</span></u> seconds
     </#if>
-    <#if code.isToBeViewRestricted() && code.getViews() != 0>
-        <u><span id="views_restriction">${code.getViews()}</span></u> more views allowed
-    <#else>
-        No more views allowed
+    <br>
+    <#if code.isToBeViewRestricted()>
+        <#if code.getViews() != 0>
+            <u><span id="views_restriction">${code.getViews()}</span></u> more views allowed
+        <#else>
+            No more views allowed
+        </#if>
     </#if>
     <pre id="code_snippet"><code>${code}</code></pre>
 </body>
