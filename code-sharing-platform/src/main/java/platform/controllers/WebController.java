@@ -22,7 +22,10 @@ public class WebController {
 
     @GetMapping("/code/{id}")
     public String getCode(@PathVariable String id, Model model) {
-        this.webService.getCode(id, model);
+        boolean opSuccessful = this.webService.getCode(id, model);
+        if(!opSuccessful) {
+            return null;
+        }
         return "index";
     }
 

@@ -17,10 +17,16 @@ public class WebService {
         this.codeRepository = codeRepository;
     }
 
-    public void getCode(String uuid, Model model) {
+    public boolean getCode(String uuid, Model model) {
         Code code = codeRepository.findById(UUID.fromString(uuid)).get();
+        code.updateRestrictions();
+        codeRepository.save(code);
+        if(code.isRestricted()) {
+            return false;
+        }
         model.addAttribute("code", code.getCode());
         model.addAttribute("date", code.getDateFormatted());
+        return true;
     }
 
     public void getLatestCodes(Model model) {
