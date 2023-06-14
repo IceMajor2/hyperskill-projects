@@ -7,6 +7,8 @@ import org.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import platform.models.Code;
 
+import java.util.UUID;
+
 public class CustomJsonOperations {
 
     public static JSONObject createJson(ResponseEntity<String> response) {
@@ -27,7 +29,7 @@ public class CustomJsonOperations {
             json.put("date", code.getDateFormatted());
             json.put("time", code.getTime());
             json.put("views", code.getViews());
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return json;
@@ -38,10 +40,15 @@ public class CustomJsonOperations {
         for (int i = 1; i < pairs.length; i += 2) {
             try {
                 json.put(pairs[i - 1].toString(), pairs[i]);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         return json;
+    }
+
+    public static UUID getUUIDFromJson(ResponseEntity<String> response) {
+        String uuid = JsonPath.parse(response.getBody()).read("$.id");
+        return UUID.fromString(uuid);
     }
 }

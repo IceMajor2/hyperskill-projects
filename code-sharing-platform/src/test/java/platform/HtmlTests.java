@@ -1,5 +1,6 @@
 package platform;
 
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,16 +9,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.jdbc.Sql;
 import platform.repositories.CodeRepository;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
+import static platform.CustomJsonOperations.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
@@ -101,7 +104,7 @@ class HtmlTests {
     }
 
     @Test
-    public void htmlGetViewRestrictedCodeTest() {
+    public void htmlGetViewRestrictedCodeInfoTest() {
         ResponseEntity<String> getRestrictedResponse = restTemplate
                 .getForEntity("/code/5dd5fcba-3738-4732-aaa5-631bada1f215", String.class);
         assertEquals(HttpStatus.OK, getRestrictedResponse.getStatusCode());
@@ -114,5 +117,37 @@ class HtmlTests {
 
         Element timeRestriction = doc.getElementById("time_restriction");
         assertNull("Time restriction element should not be present", timeRestriction);
+    }
+
+    @Test
+    public void htmlGetTimeRestrictedCodeInfoTest() {
+        var postResponse = sendNewCodePost("private final double PI = 3.14;", 100, 0);
+        UUID uuid = getUUIDFromJson(postResponse);
+
+        ResponseEntity<String> getRestrictedResponse = restTemplate
+                .getForEntity("/code/%s".formatted(uuid.toString()), String.class);
+        assertEquals(HttpStatus.OK, getRestrictedResponse.getStatusCode());
+
+        String html = getRestrictedResponse.getBody();
+        Document doc = Jsoup.parse(html);
+
+        Element timeRestriction = doc.getElementById("time_restriction");
+        assertEquals("span", timeRestriction.tagName().toLowerCase());
+
+        Element viewsRestriction = doc.getElementById("views_restriction");
+        assertNull("View restriction element should not be present", viewsRestriction);
+    }
+
+    private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
+        JSONObject codeDTO = createJson("code", code, "time", time, "views", views);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+
+        HttpEntity<String> request = new HttpEntity<>(codeDTO.toString(), headers);
+        ResponseEntity<String> postRes = restTemplate.
+                postForEntity("/api/code/new", request, String.class);
+        return postRes;
     }
 }
