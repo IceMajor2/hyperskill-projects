@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS codes (
     date TIMESTAMP NOT NULL,
     time BIGINT NOT NULL,
     views BIGINT NOT NULL,
-    restricted BOOLEAN NOT NULL,
+    restricted BOOLEAN DEFAULT false NOT NULL,
     to_be_restricted BOOLEAN NOT NULL,
     PRIMARY KEY (id)
 );
