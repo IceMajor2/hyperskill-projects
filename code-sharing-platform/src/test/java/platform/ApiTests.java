@@ -15,12 +15,9 @@ import org.springframework.test.context.jdbc.Sql;
 import platform.models.Code;
 import platform.repositories.CodeRepository;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static platform.CustomAssertions.assertIsUUID;
 import static platform.CustomAssertions.assertJsonEqual;
 import static platform.CustomJsonOperations.createJson;
@@ -166,7 +163,7 @@ public class ApiTests {
         postResponse = sendNewCodePost("sendNewCodePost(); // comment", 1000, 5);
         String uuid2 = JsonPath.parse(postResponse.getBody()).read("$.id");
 
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             ResponseEntity<String> getResponse = restTemplate
                     .getForEntity("/api/code/%s".formatted(uuid), String.class);
             assertEquals(HttpStatus.OK, getResponse.getStatusCode());
@@ -175,7 +172,7 @@ public class ApiTests {
 
             assertEquals(100 - (i + 1), views);
 
-            if(i < 5) {
+            if (i < 5) {
                 getResponse = restTemplate.getForEntity("/api/code/%s".formatted(uuid2), String.class);
                 assertEquals(HttpStatus.OK, getResponse.getStatusCode());
 
@@ -185,7 +182,7 @@ public class ApiTests {
                 assertEquals(5 - (i + 1), views);
             }
         }
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ResponseEntity<String> getResponse = restTemplate
                     .getForEntity("/api/code/%s".formatted(uuid), String.class);
             assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
@@ -194,6 +191,56 @@ public class ApiTests {
                     .getForEntity("/api/code/%s".formatted(uuid2), String.class);
             assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
         }
+    }
+
+    @Test
+    public void apiGetLatestShouldAffectRestrictionsTest() {
+        List<Long> expectedViews = new ArrayList<>(List.of(0l, 0l, 0l, 0l));
+        List<Long> notExpectedTime = new ArrayList<>(List.of(
+                        this.codeRepository.findByNumId(6L).get(),
+                        this.codeRepository.findByNumId(5L).get(),
+                        this.codeRepository.findByNumId(9L).get(),
+                        this.codeRepository.findByNumId(2L).get())
+                .stream()
+                .map(obj -> (obj.getTime()))
+                .toList());
+        List<Code> postedCodes = new ArrayList<>();
+
+        String snippet = "xyz";
+        for (int i = 0; i < 3; i++) {
+
+            Random random = new Random();
+            snippet += 'z';
+            long time = random.nextInt(1000) + 60;
+            long views = random.nextInt(5) + 1;
+
+            ResponseEntity<String> postResponse = sendNewCodePost(snippet, time, views);
+            UUID uuid = UUID.fromString(JsonPath.parse(postResponse.getBody()).read("$.id"));
+            Code code = codeRepository.findById(uuid).get();
+
+            postedCodes.add(code);
+            expectedViews.add(0, views - 1);
+            notExpectedTime.add(0, time);
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        ResponseEntity<String> getResponse = restTemplate
+                .getForEntity("/api/code/latest", String.class);
+        DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
+
+        JSONArray actualViews = documentContext.read("$..views");
+        JSONArray actualTime = documentContext.read("$..time");
+
+        assertEquals(Arrays.toString(expectedViews.toArray()),
+                Arrays.toString(actualViews.subList(0, actualViews.size()).toArray()));
+
+        assertNotEquals(Arrays.toString(notExpectedTime.toArray()),
+                Arrays.toString(actualTime.subList(0, actualTime.size()).toArray()));
     }
 
     private ResponseEntity<String> sendNewCodePost(String code, long time, long views) {
