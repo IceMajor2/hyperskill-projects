@@ -45,7 +45,7 @@ public class ApiService {
             code.updateRestrictions();
             this.codeRepository.save(code);
         }
-        return this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
+        return this.codeRepository.findFirst10ByToBeTimeRestrictedFalseAndToBeViewRestrictedFalseOrderByDateDesc();
     }
 
     private Code fetchFromRepository(String id) {

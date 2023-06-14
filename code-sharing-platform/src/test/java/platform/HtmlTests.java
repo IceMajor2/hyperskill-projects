@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
@@ -78,7 +79,6 @@ class HtmlTests {
     public void htmlLatestShouldHideRestrictedTest() {
         List<String> expectedSnippets = List.of(
                         this.codeRepository.findByNumId(6L).get(),
-                        this.codeRepository.findByNumId(5L).get(),
                         this.codeRepository.findByNumId(9L).get(),
                         this.codeRepository.findByNumId(2L).get())
                 .stream()
@@ -98,5 +98,21 @@ class HtmlTests {
             }
         }
         assertEquals(expectedSnippets, actualSnippets);
+    }
+
+    @Test
+    public void htmlGetViewRestrictedCodeTest() {
+        ResponseEntity<String> getRestrictedResponse = restTemplate
+                .getForEntity("/code/5dd5fcba-3738-4732-aaa5-631bada1f215", String.class);
+        assertEquals(HttpStatus.OK, getRestrictedResponse.getStatusCode());
+
+        String html = getRestrictedResponse.getBody();
+        Document doc = Jsoup.parse(html);
+
+        Element viewsRestriction = doc.getElementById("views_restriction");
+        assertEquals("span", viewsRestriction.tagName().toLowerCase());
+
+        Element timeRestriction = doc.getElementById("time_restriction");
+        assertNull("Time restriction element should not be present", timeRestriction);
     }
 }
