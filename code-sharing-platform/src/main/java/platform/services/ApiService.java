@@ -27,6 +27,21 @@ public class ApiService {
     }
 
     public Code getCode(String id) {
+        Code code = this.fetchFromRepository(id);
+        if(code == null) {
+            return null;
+        }
+        if(code.isRestricted()) {
+            return null;
+        }
+        return code;
+    }
+
+    public List<Code> getLatestCodes() {
+        return this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
+    }
+
+    private Code fetchFromRepository(String id) {
         UUID uuid = null;
         try {
             uuid = UUID.fromString(id);
@@ -36,10 +51,6 @@ public class ApiService {
         if(!this.codeRepository.existsById(uuid)) {
             return null;
         }
-        return this.codeRepository.findById(UUID.fromString(id)).get();
-    }
-
-    public List<Code> getLatestCodes() {
-        return this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
+        return this.codeRepository.findById(uuid).get();
     }
 }

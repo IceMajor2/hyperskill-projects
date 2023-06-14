@@ -9,6 +9,7 @@ import platform.dtos.CodeRequestDTO;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Table(name = "codes")
@@ -44,20 +45,36 @@ public class Code {
     @JsonIgnore
     private boolean restricted;
 
+    @Nonnull
+    @JsonIgnore
+    private boolean toBeRestricted;
+
     public Code(CodeRequestDTO codeRequestDTO) {
         this.code = codeRequestDTO.getCode();
-        this.time = codeRequestDTO.getTime();
-        this.views = codeRequestDTO.getViews();
+
+        if (codeRequestDTO.getTime() < 0) {
+            this.time = 0;
+        } else {
+            this.time = codeRequestDTO.getTime();
+        }
+
+        if (codeRequestDTO.getViews() < 0) {
+            this.views = 0;
+        } else {
+            this.views = codeRequestDTO.getViews();
+        }
+
         this.date = LocalDateTime.now();
         this.setNumId();
-        this.restricted = this.determineRestriction(this.time, this.views);
+        this.restricted = false;
+        this.toBeRestricted = determineRestriction(this.time, this.views);
     }
 
     public Code() {
     }
 
     public boolean determineRestriction(long time, long views) {
-        if(time <= 0 && views <= 0) {
+        if (time <= 0 && views <= 0) {
             return false;
         }
         return true;
@@ -72,7 +89,17 @@ public class Code {
     }
 
     public long getTime() {
-        return time;
+        if (this.time == 0) {
+            return this.time;
+        }
+        updateRestrictedTime();
+        return this.time;
+    }
+
+    private void updateRestrictedTime() {
+        long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
+        this.time -= secondsDiff;
+        this.time = this.time < 0 ? 0 : this.time;
     }
 
     public void setTime(long time) {
