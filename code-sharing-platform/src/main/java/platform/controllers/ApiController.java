@@ -11,6 +11,8 @@ import platform.dtos.CodeRequestDTO;
 import platform.models.Code;
 import platform.services.ApiService;
 
+import java.util.Map;
+
 @Controller
 public class ApiController {
 
@@ -23,7 +25,7 @@ public class ApiController {
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
     public ResponseEntity postNewCode(@RequestBody @Validated CodeRequestDTO newCode) {
         var response = this.apiService.postNewCode(newCode);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(Map.of("id", response.toString()));
     }
 
     @GetMapping("/api/code/{id}")

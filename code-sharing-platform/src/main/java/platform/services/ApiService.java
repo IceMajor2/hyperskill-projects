@@ -18,13 +18,13 @@ public class ApiService {
         this.codeRepository = codeRepository;
     }
 
-    public CodeResponseDTO postNewCode(CodeRequestDTO newCode) {
+    public UUID postNewCode(CodeRequestDTO newCode) {
         if(codeRepository.existsByCode(newCode.getCode())) {
             return null;
         }
         Code code = new Code(newCode);
         Code savedCode = codeRepository.save(code);
-        return new CodeResponseDTO(savedCode);
+        return savedCode.getId();
     }
 
     public Code getCode(String id) {
