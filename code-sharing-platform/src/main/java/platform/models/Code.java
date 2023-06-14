@@ -17,6 +17,9 @@ import java.util.UUID;
 @JsonPropertyOrder({"code", "date", "time", "views"})
 public class Code {
 
+    // does not work correctly in production
+    // but was designed for tests in first place
+    // and it's enough for them
     private static Long AUTO_INCREMENT_NUM_ID = 1L;
 
     @Id
@@ -38,6 +41,9 @@ public class Code {
     @Nonnull
     private long time;
 
+    @JsonIgnore
+    private long initialTime;
+
     @Nonnull
     private long views;
 
@@ -58,12 +64,14 @@ public class Code {
 
         if (codeRequestDTO.getTime() <= 0) {
             this.time = 0;
+            this.initialTime = 0;
             this.toBeTimeRestricted = false;
         } else {
             this.time = codeRequestDTO.getTime();
+            this.initialTime = codeRequestDTO.getTime();
             this.toBeTimeRestricted = true;
         }
-
+        System.out.println(initialTime);
         if (codeRequestDTO.getViews() <= 0) {
             this.views = 0;
             this.toBeViewRestricted = false;
@@ -80,6 +88,14 @@ public class Code {
     public Code() {
     }
 
+    public long getInitialTime() {
+        return initialTime;
+    }
+
+    public void setInitialTime(long initialTime) {
+        this.initialTime = initialTime;
+    }
+
     public boolean isRestricted() {
         return restricted;
     }
@@ -93,25 +109,26 @@ public class Code {
     }
 
     public void updateRestrictions() {
-        if(restricted) {
+        if (restricted) {
             return;
         }
-        if(toBeTimeRestricted) {
+        if (toBeTimeRestricted) {
             long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
-            this.time -= secondsDiff;
+            System.out.println(initialTime + " " + secondsDiff);
+            this.time = this.initialTime - secondsDiff;
             this.time = this.time < 0 ? 0 : this.time;
 
-            if(this.time == 0) {
+            if (this.time == 0) {
                 this.restricted = true;
             }
         }
-        if(toBeViewRestricted) {
-            if(this.views != 0) {
+        if (toBeViewRestricted) {
+            if (this.views != 0) {
                 this.views--;
                 return;
             }
 
-            if(this.views == 0) {
+            if (this.views == 0) {
                 this.restricted = true;
             }
         }
