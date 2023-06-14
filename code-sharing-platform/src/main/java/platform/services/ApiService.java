@@ -40,6 +40,11 @@ public class ApiService {
     }
 
     public List<Code> getLatestCodes() {
+        List<Code> database = this.codeRepository.findAll();
+        for(Code code : database) {
+            code.updateRestrictions();
+            this.codeRepository.save(code);
+        }
         return this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
     }
 
