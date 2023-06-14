@@ -142,33 +142,33 @@ public class ApiTests {
     public void apiNoSuchUUIDTest() {
         ResponseEntity<String> getResponse = restTemplate
                 .getForEntity("/api/code/1be36511-3c92-4a57-94d6-a0396c89d5f3", String.class);
-        assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
 
         getResponse = restTemplate.getForEntity("/api/code/1", String.class);
-        assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
     }
 
     @Test
     public void apiRestrictedTimeIsUpExpectNotFoundTest() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         ResponseEntity<String> getResponse = restTemplate
-                .getForEntity("/api/code/a496f05e-84ed-41c4-89c6-ba266ef917aa", String.class);
+                .getForEntity("/api/code/02104d9c-0c3c-4526-9fad-5902a4a4a263", String.class);
+        Code expiredCode = codeRepository.findByNumId(8L).get();
 
-        assertEquals(getResponse.getStatusCode(), HttpStatus.NOT_FOUND);
+        assertEquals(HttpStatus.NOT_FOUND, getResponse.getStatusCode());
+        assertEquals(0L, expiredCode.getTime());
     }
 
     @Test
     public void apiRestrictedTimeChangesTest() {
+        ResponseEntity<String> postResponse = sendNewCodePost("public void apiTest() {}", 15, 0);
+        String uuid = JsonPath.parse(postResponse.getBody()).read("$.id");
+
         ResponseEntity<String> getResponse = restTemplate
-                .getForEntity("/api/code/db3ab7e2-69d2-464e-93fe-1768e25fdd6d", String.class);
-        assertEquals(getResponse.getStatusCode(), HttpStatus.OK);
+                .getForEntity("/api/code/%s".formatted(uuid), String.class);
+        assertEquals(HttpStatus.OK, getResponse.getStatusCode());
 
         DocumentContext documentContext = JsonPath.parse(getResponse.getBody());
-        long time = documentContext.read("$.time");
+        long time = Long.valueOf(documentContext.read("$.time").toString());
 
         try {
             Thread.sleep(1000);
@@ -177,11 +177,11 @@ public class ApiTests {
         }
 
         getResponse = restTemplate
-                .getForEntity("/api/code/db3ab7e2-69d2-464e-93fe-1768e25fdd6d", String.class);
-        assertEquals(getResponse.getStatusCode(), HttpStatus.OK);
+                .getForEntity("/api/code/%s".formatted(uuid), String.class);
+        assertEquals(HttpStatus.OK, getResponse.getStatusCode());
 
         documentContext = JsonPath.parse(getResponse.getBody());
-        long time2 = documentContext.read("$.time");
+        long time2 = Long.valueOf(documentContext.read("$.time").toString());
 
         boolean condition = (time == time2 + 2) || (time == time2 + 1);
         assertTrue(condition);
