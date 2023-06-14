@@ -99,12 +99,12 @@ public class Code {
         if (restricted) {
             return;
         }
-
-        long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
-        this.time -= secondsDiff;
-        this.time = this.time < 0 ? 0 : this.time;
-
-        this.restricted = this.time == 0 ? true : false;
+        if(this.time != 0) {
+            long secondsDiff = ChronoUnit.SECONDS.between(this.date, LocalDateTime.now());
+            this.time -= secondsDiff;
+            this.time = this.time < 0 ? 0 : this.time;
+            this.restricted = this.time == 0 ? true : false;
+        }
     }
 
     public void setTime(long time) {
