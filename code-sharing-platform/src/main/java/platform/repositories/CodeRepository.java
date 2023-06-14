@@ -11,7 +11,7 @@ public interface CodeRepository extends CrudRepository<Code, UUID> {
 
     List<Code> findAll();
 
-    List<Code> findFirst10ByRestrictedFalseOrderByDateDesc();
+    List<Code> findFirst10ByToBeTimeRestrictedFalseAndToBeViewRestrictedFalseOrderByDateDesc();
 
     Optional<Code> findByNumId(Long numId);
 

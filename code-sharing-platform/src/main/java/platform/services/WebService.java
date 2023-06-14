@@ -35,7 +35,7 @@ public class WebService {
             code.updateRestrictions();
             this.codeRepository.save(code);
         }
-        List<Code> codes = this.codeRepository.findFirst10ByRestrictedFalseOrderByDateDesc();
+        List<Code> codes = this.codeRepository.findFirst10ByToBeTimeRestrictedFalseAndToBeViewRestrictedFalseOrderByDateDesc();
         model.addAttribute("codes", codes);
     }
 }
