@@ -10,7 +10,7 @@
 <body>
     <#list codes as code>
         <span id="load_date">${code.getDateFormatted()}</span>
-        <pre id="code_snippet"><code>${code.code}</code></pre>
+        <pre id="code_snippet"><code>${code.getCode()}</code></pre>
     </#list>
 </body>
 </html>

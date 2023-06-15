@@ -21,6 +21,6 @@
     <#if code.isToBeTimeRestricted()>
         The code will be available for <u><span id="time_restriction">${code.getTime()}</span></u> seconds
     </#if>
-    <pre id="code_snippet"><code>${code}</code></pre>
+    <pre id="code_snippet"><code>${code.getCode()}</code></pre>
 </body>
 </html>

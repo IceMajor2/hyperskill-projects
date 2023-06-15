@@ -13,6 +13,8 @@ function send() {
     xhr.send(json);
     
     if (xhr.status == 200) {
-      alert("Success!");
+        let response = JSON.parse(xhr.response);
+        let uuid = response["id"];
+        alert(`Success! UUID: "${uuid}"`);
     }
 }
