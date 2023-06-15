@@ -34,6 +34,7 @@ public class ApiService {
         code.updateRestrictions();
         codeRepository.save(code);
         if(code.isRestricted()) {
+            codeRepository.delete(code);
             return null;
         }
         return code;

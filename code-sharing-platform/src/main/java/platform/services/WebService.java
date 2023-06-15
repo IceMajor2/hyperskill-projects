@@ -6,6 +6,7 @@ import platform.models.Code;
 import platform.repositories.CodeRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -18,10 +19,15 @@ public class WebService {
     }
 
     public boolean getCode(String uuid, Model model) {
-        Code code = codeRepository.findById(UUID.fromString(uuid)).get();
+        Optional<Code> optCode = codeRepository.findById(UUID.fromString(uuid));
+        if(optCode.isEmpty()) {
+            return false;
+        }
+        Code code = optCode.get();
         code.updateRestrictions();
         codeRepository.save(code);
         if(code.isRestricted()) {
+            codeRepository.delete(code);
             return false;
         }
         model.addAttribute("code", code);

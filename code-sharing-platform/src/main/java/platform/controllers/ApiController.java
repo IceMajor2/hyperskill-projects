@@ -1,8 +1,8 @@
 package platform.controllers;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +23,9 @@ public class ApiController {
     }
 
     @PostMapping(value = {"/api/code/new", "/api/code/new/"})
-    public ResponseEntity postNewCode(@RequestBody @Validated CodeRequestDTO newCode) {
+    public ResponseEntity postNewCode(@RequestBody @Valid CodeRequestDTO newCode) {
         var response = this.apiService.postNewCode(newCode);
+        System.out.println("[DEBUG] " + newCode);
         return ResponseEntity.ok(Map.of("id", response.toString()));
     }
 
@@ -34,12 +35,16 @@ public class ApiController {
         if(code == null) {
             return ResponseEntity.notFound().build();
         }
+        System.out.println("[DEBUG] " + code);
         return ResponseEntity.ok(code);
     }
 
     @GetMapping("/api/code/latest")
     public ResponseEntity getLatestCodes() {
         var codes = this.apiService.getLatestCodes();
+        for(Code code : codes) {
+            System.out.println("[DEBUG] " + code);
+        }
         return ResponseEntity.ok(codes);
     }
 }

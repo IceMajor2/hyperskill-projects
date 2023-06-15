@@ -3,8 +3,8 @@ package platform.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import platform.dtos.CodeRequestDTO;
 
 import java.time.LocalDateTime;
@@ -28,34 +28,34 @@ public class Code {
     private UUID id;
 
     @JsonIgnore
-    @Nonnull
+    @NotNull
     private Long numId;
 
-    @Nonnull
+    @NotNull
     private String code;
 
     @JsonIgnore
-    @Nonnull
+    @NotNull
     private LocalDateTime date;
 
-    @Nonnull
+    @NotNull
     private long time;
 
     @JsonIgnore
     private long initialTime;
 
-    @Nonnull
+    @NotNull
     private long views;
 
-    @Nonnull
+    @NotNull
     @JsonIgnore
     private boolean restricted;
 
-    @Nonnull
+    @NotNull
     @JsonIgnore
     private boolean toBeTimeRestricted;
 
-    @Nonnull
+    @NotNull
     @JsonIgnore
     private boolean toBeViewRestricted;
 
@@ -203,7 +203,9 @@ public class Code {
         this.id = id;
     }
 
+    @Override
     public String toString() {
-        return this.code;
+        return "{ \"code\": \"%s\", \"time\": %d, \"views\": %d }"
+                .formatted(this.code, this.time, this.views);
     }
 }
