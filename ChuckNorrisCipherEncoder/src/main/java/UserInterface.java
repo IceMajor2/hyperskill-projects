@@ -20,10 +20,17 @@ public class UserInterface {
             }
             if (input.equals("encode")) {
                 System.out.println("Input string:");
-                CipherEncoder encoder = new CipherEncoder(scanner.nextLine());
-                System.out.println("Encoded string:");
-                System.out.println(encoder.encodeMessage());
-                System.out.println("");
+                CipherEncoder encoder = null;
+                try {
+                    encoder = new CipherEncoder(scanner.nextLine());
+                    System.out.println("Encoded string:");
+                    System.out.println(encoder.encodeMessage());
+                    System.out.println("");
+                } catch (StringIndexOutOfBoundsException e) {
+                    System.out.println("No string was provided!");
+                    System.out.println();
+                }
+
                 continue;
             }
             if (input.equals("decode")) {
@@ -33,7 +40,7 @@ public class UserInterface {
                     decoder = new CipherDecoder(scanner.nextLine());
                 } catch (IllegalArgumentException e) {
                     System.out.println("Encoded string is not valid.");
-                    System.out.println("");
+                    System.out.println();
                     continue;
                 }
                 System.out.println("Decoded string:");
