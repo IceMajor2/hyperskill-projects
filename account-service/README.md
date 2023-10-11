@@ -1,4 +1,4 @@
-# AccountService
+# account-service
 
 My implementation of the project 'Account Service' from JetBrains Academy on Hyperskill. It is a simple account management system which emphasizes the importance of structured logs and clear, single responsibility endpoints.
 
