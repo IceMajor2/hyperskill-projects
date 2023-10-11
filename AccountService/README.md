@@ -1,6 +1,6 @@
 # AccountService
 
-My implementation of project 'Account Service' from JetBrains Academy on Hyperskill.
+My implementation of the project 'Account Service' from JetBrains Academy on Hyperskill. It is a simple account management system which emphasizes the importance of structured logs and clear, single responsibility endpoints.
 
 ## What's here?
 - authentication and authorization using Spring Security
