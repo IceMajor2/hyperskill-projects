@@ -1,4 +1,4 @@
-# Anti-Fraud System
+# anti-fraud-system
 Good starting point for beginning your journey with financial technology and security-oriented aspects. This is an oversimplified project that is a good introduction to the **Spring Security** framework.
 
 ## Features
