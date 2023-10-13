@@ -1,5 +1,3 @@
-package machine;
-
 public class Machine {
 
     private int water;
