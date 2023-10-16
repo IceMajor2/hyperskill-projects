@@ -14,8 +14,10 @@ public class UserInterface {
     }
 
     public void run() {
-        //createTestDB();
+        createTestDB();
         while (true) {
+            System.out.println("Options:");
+            printOptions();
             String usrCommand = scanner.nextLine();
             if ("exit".equals(usrCommand)) {
                 System.out.println("Bye!");
@@ -30,12 +32,12 @@ public class UserInterface {
                 continue;
             }
             if ("add students".equals(usrCommand)) {
-                System.out.println("Enter student credentials or 'back' to return:");
+                System.out.println("Enter student credentials [fullname & e-mail] or 'back' to return:");
                 addStudents();
                 continue;
             }
             if ("add points".equals(usrCommand)) {
-                System.out.println("Enter an id and points or 'back' to return:");
+                System.out.println("Enter an id and points [JAVA_PTS & DSA_PTS & DATABASE_PTS & SPRING_PTS] or 'back' to return:");
                 addPoints();
                 continue;
             }
@@ -49,8 +51,6 @@ public class UserInterface {
                 continue;
             }
             if ("statistics".equals(usrCommand)) {
-                System.out.println("Type the name of a course to see details"
-                        + " or 'back' to quit:");
                 statistics();
                 continue;
             }
@@ -62,8 +62,21 @@ public class UserInterface {
         }
     }
 
+    private void printOptions() {
+        System.out.println("# exit");
+        System.out.println("# add students");
+        System.out.println("# add points");
+        System.out.println("# list (student list)");
+        System.out.println("# find (student's course points details)");
+        System.out.println("# statistics (some statistics about courses)");
+        System.out.println("# notify (notifies all recently-graduated students)");
+        System.out.println("# back");
+    }
+
     private void statistics() {
         printStatistics();
+        System.out.println("Type the name of a course to see even more details"
+                + " or 'back' to quit:");
         while (true) {
             String usrCommand = scanner.nextLine();
             usrCommand = usrCommand.toLowerCase();
@@ -88,7 +101,6 @@ public class UserInterface {
             }
             System.out.println("Unknown course.");
         }
-
     }
 
     private void printCourseDetails(String courseName) {
@@ -121,27 +133,27 @@ public class UserInterface {
         var easiest = courses.easiest();
         var hardest = courses.hardest();
 
-        System.out.println("Most popular: " + new StringBuilder(Main.reverse(mostPopular).toString()
-                .substring(1, mostPopular.toString().length() - 1)));
+        System.out.println("Most popular: " + new StringBuilder
+                (Main.reverse(mostPopular).toString().substring(1, mostPopular.toString().length() - 1)));
         if (leastPopular != null) {
-            System.out.println("Least popular: " + new StringBuilder(leastPopular.toString()
-                    .substring(1, leastPopular.toString().length() - 1)));
+            System.out.println("Least popular: " + new StringBuilder
+                    (leastPopular.toString().substring(1, leastPopular.toString().length() - 1)));
         } else {
             System.out.println("Least popular: n/a");
         }
-        System.out.println("Highest activity: " + new StringBuilder(Main.reverse(mostActive).toString()
-                .substring(1, mostActive.toString().length() - 1)));
+        System.out.println("Highest activity: " + new StringBuilder
+                (Main.reverse(mostActive).toString().substring(1, mostActive.toString().length() - 1)));
         if (leastActive != null) {
-            System.out.println("Lowest activity: " + new StringBuilder(leastActive.toString()
-                    .substring(1, leastActive.toString().length() - 1)));
+            System.out.println("Lowest activity: " + new StringBuilder
+                    (leastActive.toString().substring(1, leastActive.toString().length() - 1)));
         } else {
             System.out.println("Least active: n/a");
         }
-        System.out.println("Easiest course: " + new StringBuilder(Main.reverse(easiest).toString()
-                .substring(1, easiest.toString().length() - 1)));
+        System.out.println("Easiest course: " + new StringBuilder
+                (Main.reverse(easiest).toString().substring(1, easiest.toString().length() - 1)));
         if (hardest != null) {
-            System.out.println("Hardest course: " + new StringBuilder(hardest.toString()
-                    .substring(1, hardest.toString().length() - 1)));
+            System.out.println("Hardest course: " + new StringBuilder
+                    (hardest.toString().substring(1, hardest.toString().length() - 1)));
         } else {
             System.out.println("Hardest course: n/a");
         }
@@ -175,7 +187,8 @@ public class UserInterface {
         }
         System.out.println("Students:");
         for (Student student : students.getStudents()) {
-            System.out.println(student.getId());
+            System.out.println(String.format("%d. %s %s %s", student.getId(), student.getFirstName(),
+                    student.getLastName(), student.getEmail()));
         }
     }
 
