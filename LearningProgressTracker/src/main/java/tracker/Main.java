@@ -8,7 +8,9 @@ public class Main {
     public static Courses courses = new Courses();
 
     public static void main(String[] args) {
+        System.out.println("====");
         System.out.println("Learning Progress Tracker");
+        System.out.println("====");
         initializeCourses();
         UserInterface UI = new UserInterface();
         UI.run();
