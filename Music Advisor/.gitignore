@@ -2,3 +2,4 @@
 /app/build
 .gradle
 /app/nb-configuration.xml
+.idea
