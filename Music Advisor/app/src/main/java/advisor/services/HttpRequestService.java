@@ -18,12 +18,12 @@ public class HttpRequestService {
     private String accessToken;
 
     // constants
-    public static final String CLIENT_ID = "b43811db87904f6a99fc4dde9844d12c";
+    public static String CLIENT_ID;
     public static final String REDIRECT_URI = "http://localhost:8080";
     public static final String SERVER_URI = Main.ACCESS_ARGUMENT;
     private static final String RESOURCE_URI = Main.RESOURCE_ARGUMENT;
     private final String GRANT_TYPE = "authorization_code";
-    private final String CLIENT_SECRET = "89b2b199467f440db7b418efed9d5983";
+    private static String CLIENT_SECRET;
 
     private HttpRequestService() {
         this.authCode = "";
@@ -116,5 +116,13 @@ public class HttpRequestService {
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public static void setClientId(String clientId) {
+        CLIENT_ID = clientId;
+    }
+
+    public static void setClientSecret(String clientSecret) {
+        CLIENT_SECRET = clientSecret;
     }
 }
