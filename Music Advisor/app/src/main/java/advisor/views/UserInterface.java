@@ -7,7 +7,7 @@ import advisor.services.HttpRequestService;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
-
+// TODO: display options in console
 public class UserInterface {
 
     private HttpController httpController;
