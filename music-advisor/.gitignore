@@ -3,3 +3,5 @@
 .gradle
 /app/nb-configuration.xml
 .idea
+
+# /app/src/main/resources/application.properties ---> git update-index --skip-worktree filename
