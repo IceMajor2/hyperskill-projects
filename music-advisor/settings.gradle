@@ -1,2 +1,2 @@
-rootProject.name = 'Music Advisor'
+rootProject.name = 'music.advisor'
 include('app')
