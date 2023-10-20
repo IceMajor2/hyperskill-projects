@@ -19,8 +19,7 @@ public class DBLogic {
     // JDBC driver name and database URL
     private final String JDBC_DRIVER = "org.h2.Driver";
     private final String DB_URL
-            = //"jdbc:h2:./src/carsharing/db/carsharing";
-            "jdbc:h2:./src/main/java/carsharing/db/carsharing";
+            = "jdbc:h2:./src/carsharing/db/carsharing";
     private Connection conn;
 
     public DBLogic() throws SQLException {
