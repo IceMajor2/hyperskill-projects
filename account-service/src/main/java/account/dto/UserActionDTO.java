@@ -5,7 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class UserActionDTO {
 
     @NotEmpty
@@ -13,20 +17,4 @@ public class UserActionDTO {
     private String email;
     @Enumerated(EnumType.STRING)
     private AccountAction operation;
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public AccountAction getOperation() {
-        return operation;
-    }
-
-    public void setOperation(AccountAction operation) {
-        this.operation = operation;
-    }
 }

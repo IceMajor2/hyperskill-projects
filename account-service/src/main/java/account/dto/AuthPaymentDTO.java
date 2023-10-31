@@ -1,21 +1,22 @@
 package account.dto;
 
 import account.model.Payment;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+@Data
+@NoArgsConstructor
 public class AuthPaymentDTO {
 
     private String name;
     private String lastname;
     private String period;
     private String salary;
-
-    public AuthPaymentDTO() {
-    }
 
     public AuthPaymentDTO(String name, String lastname, Date period, Long salary) {
         this.name = name;
@@ -29,38 +30,6 @@ public class AuthPaymentDTO {
         this.lastname = payment.getUser().getLastName();
         this.period = this.format(payment.getPeriod());
         this.salary = this.format(payment.getSalary());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getPeriod() {
-        return period;
-    }
-
-    public void setPeriod(String period) {
-        this.period = period;
-    }
-
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
     }
 
     private String format(Long salary) {
