@@ -9,37 +9,37 @@ import account.exception.auth.UserNotFoundException;
 import account.exception.roles.*;
 import account.model.User;
 import account.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class AdminService {
 
-    private UserRepository userRepository;
-    private Map<String, Integer> attempts;
-
-    public AdminService(UserRepository userRepository, Map<String, Integer> attempts) {
-        this.userRepository = userRepository;
-        this.attempts = attempts;
-    }
+    private final UserRepository userRepository;
+    private final SecurityLogService securityLogService;
+    private final Map<String, Integer> attempts;
 
     public List<User> getUsersList() {
         List<User> users = userRepository.findAllByOrderByIdAsc();
         return users;
     }
 
-    public User deleteUser(String email) {
+    public User deleteUser(UserDetails details, String email) {
         User user = getUserOrElseThrow(email);
         if (user.isAdmin()) {
             throw new AdminDeletionException();
         }
         userRepository.delete(user);
+        securityLogService.saveAccountDeletedLog(details, user);
         return user;
     }
 
-    public User changeRole(RoleDTO roleDTO) {
+    public User changeRole(UserDetails details, RoleDTO roleDTO) {
         User user = getUserOrElseThrow(roleDTO.getEmail());
         OperationType op = roleDTO.getOperation();
         Roles role = parseRole(roleDTO.getRole());
@@ -54,18 +54,20 @@ public class AdminService {
 
         user.removeRole(role);
         userRepository.save(user);
+        securityLogService.saveRoleChangedLog(details, user, roleDTO);
         return user;
     }
 
-    public User lockUnlockUser(UserActionDTO userActionDTO) {
+    public User lockUnlockUser(UserDetails details, UserActionDTO userActionDTO) {
         User user = getUserOrElseThrow(userActionDTO.getEmail());
         adminLockCondition(user);
 
         user.setAccountNonLocked(userActionDTO.getOperation().accountShouldBeNonLocked());
-        if(userActionDTO.getOperation().accountShouldBeNonLocked() == true) {
+        if (userActionDTO.getOperation().accountShouldBeNonLocked() == true) {
             attempts.put(user.getEmail(), 0);
         }
         userRepository.save(user);
+        securityLogService.saveAccountLockLog(details, user, userActionDTO);
         return user;
     }
 
@@ -108,7 +110,7 @@ public class AdminService {
     }
 
     private void adminLockCondition(User user) {
-        if(user.isAdmin()) {
+        if (user.isAdmin()) {
             throw new LockAdminException();
         }
     }

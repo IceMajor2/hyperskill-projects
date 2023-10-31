@@ -9,24 +9,20 @@ import account.exception.auth.UserExistsException;
 import account.model.User;
 import account.repository.BreachedPasswordsRepository;
 import account.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthService {
 
-    private UserRepository userRepository;
-    private BreachedPasswordsRepository breachedPasswordsRepository;
-    private PasswordEncoder passwordEncoder;
+    private final SecurityLogService securityLogService;
 
-    public AuthService(UserRepository userRepository,
-                       BreachedPasswordsRepository breachedPasswordsRepository,
-                       PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.breachedPasswordsRepository = breachedPasswordsRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final UserRepository userRepository;
+    private final BreachedPasswordsRepository breachedPasswordsRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public User registerUser(UserDTO userDTO) {
         passwordBreachedCondition(userDTO.getPassword());
@@ -37,6 +33,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);
+        securityLogService.saveCreateUserLog(user);
         return user;
     }
 
@@ -47,6 +44,7 @@ public class AuthService {
 
         user.setPassword(passwordEncoder.encode(newPasswordDTO.getPassword()));
         userRepository.save(user);
+        securityLogService.saveChangePasswordLog(user);
         return user;
     }
 
