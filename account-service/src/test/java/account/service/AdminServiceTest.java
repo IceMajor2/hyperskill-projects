@@ -1,6 +1,7 @@
 package account.service;
 
 import account.enumerated.Roles;
+import account.exception.roles.AdminDeletionException;
 import account.model.User;
 import account.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.*;
 
 class AdminServiceTest {
@@ -65,7 +67,15 @@ class AdminServiceTest {
 
     @Test
     void shouldThrowExceptionOnDeletingAdmin() {
+        // arrange
+        String email = "ADMIN@EMAIL.COM";
+        UserDetails details = mock(UserDetails.class);
+        User adminToDelete = new User(1L, "ADMIN", "ADMINNAME", email, "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_ADMINISTRATOR), true);
+        when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.of(adminToDelete));
 
+        // act & assert
+        assertThatExceptionOfType(AdminDeletionException.class)
+                .isThrownBy(() -> SUT.deleteUser(details, email));
     }
 
     @Test
