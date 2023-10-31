@@ -1,6 +1,7 @@
 package account.service;
 
 import account.enumerated.Roles;
+import account.exception.auth.UserNotFoundException;
 import account.exception.roles.AdminDeletionException;
 import account.model.User;
 import account.repository.UserRepository;
@@ -20,11 +21,14 @@ import static org.mockito.Mockito.*;
 class AdminServiceTest {
 
     private AdminService SUT;
+
     private UserRepository userRepository;
+    private UserDetails userDetails;
 
     @BeforeEach
     void setUp() {
         userRepository = mock(UserRepository.class);
+        userDetails = mock(UserDetails.class);
         SUT = new AdminService(
                 userRepository,
                 mock(SecurityLogService.class),
@@ -54,28 +58,37 @@ class AdminServiceTest {
     void shouldDeleteUser() {
         // arrange
         String email = "EMAIL@EMAIL.EMAIL";
-        UserDetails details = mock(UserDetails.class);
         User userToDelete = new User(1L, "USER_1", "LASTNAME", email, "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_USER), true);
         when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.of(userToDelete));
 
         // act
-        SUT.deleteUser(details, email);
+        SUT.deleteUser(userDetails, email);
 
         // assert
         verify(userRepository, times(1)).delete(userToDelete);
     }
 
     @Test
+    void shouldThrowExceptionOnDeletingNotFoundUser() {
+        // arrange
+        String email = "NO_SUCH_EMAIL@EMAIL.EMAIL";
+        when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.empty());
+
+        // act & assert
+        assertThatExceptionOfType(UserNotFoundException.class)
+                .isThrownBy(() -> SUT.deleteUser(userDetails, email));
+    }
+
+    @Test
     void shouldThrowExceptionOnDeletingAdmin() {
         // arrange
         String email = "ADMIN@EMAIL.COM";
-        UserDetails details = mock(UserDetails.class);
         User adminToDelete = new User(1L, "ADMIN", "ADMINNAME", email, "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_ADMINISTRATOR), true);
         when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.of(adminToDelete));
 
         // act & assert
         assertThatExceptionOfType(AdminDeletionException.class)
-                .isThrownBy(() -> SUT.deleteUser(details, email));
+                .isThrownBy(() -> SUT.deleteUser(userDetails, email));
     }
 
     @Test
