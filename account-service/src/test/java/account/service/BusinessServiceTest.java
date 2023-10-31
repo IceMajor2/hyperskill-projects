@@ -11,10 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -59,7 +56,30 @@ class BusinessServiceTest {
     }
 
     @Test
-    void testGetPayrolls() {
+    void shouldReturnAllSalariesForUser() {
+        // arrange
+        User user = new User(1L, "ANY_NAME", "ANY_LAST_NAME", "email@email.com", "LENGTHY_PASSWORD", new ArrayList<>(List.of(Roles.ROLE_USER)), true);
+        List<Payment> payments = new ArrayList<>(List.of(
+                new Payment(4L, user, new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.APRIL).build().getTime(), 120000L),
+                new Payment(3L, user, new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.FEBRUARY).build().getTime(), 392500L),
+                new Payment(2L, user, new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.JANUARY).build().getTime(), 410535L),
+                new Payment(1L, user, new Calendar.Builder().set(Calendar.YEAR, 2022).set(Calendar.MONTH, Calendar.DECEMBER).build().getTime(), 190090L)
+        ));
+
+        when(userDetails.getUsername()).thenReturn("email@email.com");
+        when(userRepository.findByEmailIgnoreCase("email@email.com")).thenReturn(Optional.of(user));
+        when(paymentRepository.findByUserIdOrderByPeriodDesc(user.getId())).thenReturn(payments);
+
+        // act
+        List<AuthPaymentDTO> actual = SUT.getPayrolls(userDetails);
+
+        // assert
+        assertThat(actual).hasSize(4);
+        assertThat(actual).containsExactly(
+                new AuthPaymentDTO("ANY_NAME", "ANY_LAST_NAME", new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.APRIL).build().getTime(), 120000L),
+                new AuthPaymentDTO("ANY_NAME", "ANY_LAST_NAME", new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.FEBRUARY).build().getTime(), 392500L),
+                new AuthPaymentDTO("ANY_NAME", "ANY_LAST_NAME", new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.JANUARY).build().getTime(), 410535L),
+                new AuthPaymentDTO("ANY_NAME", "ANY_LAST_NAME", new Calendar.Builder().set(Calendar.YEAR, 2022).set(Calendar.MONTH, Calendar.DECEMBER).build().getTime(), 190090L));
     }
 
     @Test
