@@ -3,9 +3,8 @@ package account.model;
 import account.dto.PaymentDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,10 +12,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "payments")
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Payment {
 
     @Id
