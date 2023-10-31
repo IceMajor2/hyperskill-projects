@@ -1,5 +1,6 @@
 package account.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -16,13 +17,10 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
-
-    public SecurityConfig(RestAuthenticationEntryPoint restAuthenticationEntryPoint) {
-        this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
-    }
+    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

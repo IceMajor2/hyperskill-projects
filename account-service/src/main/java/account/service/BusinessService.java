@@ -9,6 +9,7 @@ import account.model.Payment;
 import account.model.User;
 import account.repository.PaymentRepository;
 import account.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,15 +21,11 @@ import java.util.Date;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class BusinessService {
 
-    private PaymentRepository paymentRepository;
-    private UserRepository userRepository;
-
-    public BusinessService(PaymentRepository paymentRepository, UserRepository userRepository) {
-        this.paymentRepository = paymentRepository;
-        this.userRepository = userRepository;
-    }
+    private final PaymentRepository paymentRepository;
+    private final UserRepository userRepository;
 
     public AuthPaymentDTO getPayrolls(UserDetails userDetails, String period) {
         try {

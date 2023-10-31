@@ -10,25 +10,21 @@ import account.model.SecurityLog;
 import account.model.User;
 import account.repository.SecurityLogRepository;
 import account.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class SecurityLogService {
 
-    private SecurityLogRepository securityLogRepository;
-    private UserRepository userRepository;
-
-    public SecurityLogService(SecurityLogRepository securityLogRepository, UserRepository userRepository) {
-        this.securityLogRepository = securityLogRepository;
-        this.userRepository = userRepository;
-    }
+    private final SecurityLogRepository securityLogRepository;
+    private final UserRepository userRepository;
 
     public List<SecurityLog> getLogs() {
-        var logs = securityLogRepository.findAllByOrderByIdAsc();
-        return logs;
+        return securityLogRepository.findAllByOrderByIdAsc();
     }
 
     public void saveCreateUserLog(User user) {
