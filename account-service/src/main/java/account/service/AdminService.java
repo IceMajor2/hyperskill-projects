@@ -25,8 +25,7 @@ public class AdminService {
     private final Map<String, Integer> attempts;
 
     public List<User> getUsersList() {
-        List<User> users = userRepository.findAllByOrderByIdAsc();
-        return users;
+        return userRepository.findAllByOrderByIdAsc();
     }
 
     public User deleteUser(UserDetails details, String email) {
@@ -63,7 +62,7 @@ public class AdminService {
         adminLockCondition(user);
 
         user.setAccountNonLocked(userActionDTO.getOperation().accountShouldBeNonLocked());
-        if (userActionDTO.getOperation().accountShouldBeNonLocked() == true) {
+        if (userActionDTO.getOperation().accountShouldBeNonLocked()) {
             attempts.put(user.getEmail(), 0);
         }
         userRepository.save(user);
