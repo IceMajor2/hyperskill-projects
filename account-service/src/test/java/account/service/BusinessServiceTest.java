@@ -1,6 +1,7 @@
 package account.service;
 
 import account.dto.AuthPaymentDTO;
+import account.dto.PaymentDTO;
 import account.enumerated.Roles;
 import account.model.Payment;
 import account.model.User;
@@ -14,8 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 class BusinessServiceTest {
 
@@ -84,9 +84,24 @@ class BusinessServiceTest {
 
     @Test
     void uploadPayrolls() {
-    }
+        // arrange
+        User user1 = new User(1L, "ANY_NAME", "ANY_LAST_NAME", "email@email.com", "LENGTHY_PASSWORD", new ArrayList<>(List.of(Roles.ROLE_USER)), true);
+        User user2 = new User(1L, "ANY_NAME", "ANY_LAST_NAME", "email2@email.com", "LENGTHY_PASSWORD", new ArrayList<>(List.of(Roles.ROLE_USER)), true);
+        List<PaymentDTO> paymentDTOs = new ArrayList<>(List.of(
+                new PaymentDTO("email@email.com", "02-2023", 300000L),
+                new PaymentDTO("email2@email.com", "01-2022", 999999L)
+        ));
+        Payment payment1 = new Payment(null, user1, new Calendar.Builder().set(Calendar.YEAR, 2023).set(Calendar.MONTH, Calendar.FEBRUARY).build().getTime(), 300000L);
+        Payment payment2 = new Payment(null, user2, new Calendar.Builder().set(Calendar.YEAR, 2022).set(Calendar.MONTH, Calendar.JANUARY).build().getTime(), 999999L);
 
-    @Test
-    void updatePayment() {
+        when(userRepository.findByEmailIgnoreCase(user1.getEmail())).thenReturn(Optional.of(user1));
+        when(userRepository.findByEmailIgnoreCase(user2.getEmail())).thenReturn(Optional.of(user2));
+
+        // act
+        SUT.uploadPayrolls(paymentDTOs);
+
+        // assert
+        verify(paymentRepository, times(1)).save(payment1);
+        verify(paymentRepository, times(1)).save(payment2);
     }
 }
