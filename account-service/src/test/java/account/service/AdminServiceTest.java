@@ -1,8 +1,11 @@
 package account.service;
 
 import account.dto.RoleDTO;
+import account.dto.UserActionDTO;
+import account.enumerated.AccountAction;
 import account.enumerated.OperationType;
 import account.enumerated.Roles;
+import account.exception.auth.LockAdminException;
 import account.exception.auth.UserNotFoundException;
 import account.exception.roles.AdminDeletionException;
 import account.exception.roles.TooLittleRolesException;
@@ -150,6 +153,52 @@ class AdminServiceTest {
     }
 
     @Test
-    void lockUnlockUser() {
+    void shouldLockUser() {
+        // arrange
+        User user = ANY_USER;
+        user.addRole(Roles.ROLE_USER);
+
+        UserActionDTO userActionDTO = new UserActionDTO(user.getEmail(), AccountAction.LOCK);
+
+        when(userRepository.findByEmailIgnoreCase(user.getEmail())).thenReturn(Optional.of(user));
+
+        // act
+        User actual = SUT.lockUnlockUser(userDetails, userActionDTO);
+
+        // assert
+        assertThat(actual.isAccountNonLocked()).isFalse();
+    }
+
+    @Test
+    void shouldUnlockUser() {
+        // arrange
+        User user = ANY_USER;
+        user.addRole(Roles.ROLE_USER);
+        user.setAccountNonLocked(false);
+
+        UserActionDTO userActionDTO = new UserActionDTO(user.getEmail(), AccountAction.UNLOCK);
+
+        when(userRepository.findByEmailIgnoreCase(user.getEmail())).thenReturn(Optional.of(user));
+
+        // act
+        User actual = SUT.lockUnlockUser(userDetails, userActionDTO);
+
+        // assert
+        assertThat(actual.isAccountNonLocked()).isTrue();
+    }
+
+    @Test
+    void shouldThrowExceptionOnAdminLocking() {
+        // arrange
+        User admin = ANY_USER;
+        admin.addRole(Roles.ROLE_ADMINISTRATOR);
+
+        UserActionDTO userActionDTO = new UserActionDTO(admin.getEmail(), AccountAction.LOCK);
+
+        when(userRepository.findByEmailIgnoreCase(admin.getEmail())).thenReturn(Optional.of(admin));
+
+        // act & assert
+        assertThatExceptionOfType(LockAdminException.class)
+                .isThrownBy(() -> SUT.lockUnlockUser(userDetails, userActionDTO));
     }
 }
