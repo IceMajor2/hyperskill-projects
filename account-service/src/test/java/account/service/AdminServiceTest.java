@@ -1,18 +1,18 @@
 package account.service;
 
+import account.dto.RoleDTO;
+import account.enumerated.OperationType;
 import account.enumerated.Roles;
 import account.exception.auth.UserNotFoundException;
 import account.exception.roles.AdminDeletionException;
+import account.exception.roles.TooLittleRolesException;
 import account.model.User;
 import account.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -24,6 +24,14 @@ class AdminServiceTest {
 
     private UserRepository userRepository;
     private UserDetails userDetails;
+
+    private Long ANY_LONG = 1L;
+    private String ANY_USERNAME = "ANY_USERNAME";
+    private String ANY_LASTNAME = "ANY_LASTNAME";
+    private String ANY_EMAIL = "EMAIL@EMAIL.EMAIL";
+    private String ANY_PASSWORD = "LENGTHY_ANY_PASSWORD";
+    private boolean NON_LOCKED = true;
+    private User ANY_USER = new User(ANY_LONG, ANY_USERNAME, ANY_LASTNAME, ANY_EMAIL, ANY_PASSWORD, new ArrayList<>(), NON_LOCKED);
 
     @BeforeEach
     void setUp() {
@@ -39,8 +47,8 @@ class AdminServiceTest {
     @Test
     void shouldReturnListOfUsers() {
         // arrange
-        User user1 = new User(1L, "USER_1", "LASTNAME", "EMAIL@EMAIL.EMAIL", "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_USER), true);
-        User user2 = new User(2L, "USER_2", "LASTNAME", "EMAIL@EMAIL.EMAIL", "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_ACCOUNTANT), true);
+        User user1 = new User(1L, "USER_1", ANY_LASTNAME, "EMAIL1@EMAIL.EMAIL", ANY_PASSWORD, Collections.singletonList(Roles.ROLE_USER), NON_LOCKED);
+        User user2 = new User(2L, "USER_2", ANY_LASTNAME, "EMAIL2@EMAIL.EMAIL", ANY_PASSWORD, Collections.singletonList(Roles.ROLE_ACCOUNTANT), NON_LOCKED);
         List<User> stub = List.of(user1, user2);
         when(userRepository.findAllByOrderByIdAsc()).thenReturn(stub);
 
@@ -49,20 +57,20 @@ class AdminServiceTest {
 
         // assert
         assertThat(actual).hasSize(2).containsExactly(
-                new User(1L, "USER_1", "LASTNAME", "EMAIL@EMAIL.EMAIL", "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_USER), true),
-                new User(2L, "USER_2", "LASTNAME", "EMAIL@EMAIL.EMAIL", "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_ACCOUNTANT), true)
+                new User(1L, "USER_1", new String(ANY_LASTNAME), "EMAIL1@EMAIL.EMAIL", new String(ANY_PASSWORD), Collections.singletonList(Roles.ROLE_USER), NON_LOCKED),
+                new User(2L, "USER_2", new String(ANY_LASTNAME), "EMAIL2@EMAIL.EMAIL", new String(ANY_PASSWORD), Collections.singletonList(Roles.ROLE_ACCOUNTANT), NON_LOCKED)
         );
     }
 
     @Test
     void shouldDeleteUser() {
         // arrange
-        String email = "EMAIL@EMAIL.EMAIL";
-        User userToDelete = new User(1L, "USER_1", "LASTNAME", email, "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_USER), true);
-        when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.of(userToDelete));
+        User userToDelete = ANY_USER;
+        userToDelete.addRole(Roles.ROLE_USER);
+        when(userRepository.findByEmailIgnoreCase(ANY_EMAIL)).thenReturn(Optional.of(userToDelete));
 
         // act
-        SUT.deleteUser(userDetails, email);
+        SUT.deleteUser(userDetails, ANY_EMAIL);
 
         // assert
         verify(userRepository, times(1)).delete(userToDelete);
@@ -71,28 +79,74 @@ class AdminServiceTest {
     @Test
     void shouldThrowExceptionOnDeletingNotFoundUser() {
         // arrange
-        String email = "NO_SUCH_EMAIL@EMAIL.EMAIL";
-        when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.empty());
+        when(userRepository.findByEmailIgnoreCase(ANY_EMAIL)).thenReturn(Optional.empty());
 
         // act & assert
         assertThatExceptionOfType(UserNotFoundException.class)
-                .isThrownBy(() -> SUT.deleteUser(userDetails, email));
+                .isThrownBy(() -> SUT.deleteUser(userDetails, ANY_EMAIL));
     }
 
     @Test
     void shouldThrowExceptionOnDeletingAdmin() {
         // arrange
-        String email = "ADMIN@EMAIL.COM";
-        User adminToDelete = new User(1L, "ADMIN", "ADMINNAME", email, "LENGTHY_PASSWORD", Collections.singletonList(Roles.ROLE_ADMINISTRATOR), true);
-        when(userRepository.findByEmailIgnoreCase(email)).thenReturn(Optional.of(adminToDelete));
+        User adminToDelete = ANY_USER;
+        adminToDelete.addRole(Roles.ROLE_ADMINISTRATOR);
+        when(userRepository.findByEmailIgnoreCase(ANY_EMAIL)).thenReturn(Optional.of(adminToDelete));
 
         // act & assert
         assertThatExceptionOfType(AdminDeletionException.class)
-                .isThrownBy(() -> SUT.deleteUser(userDetails, email));
+                .isThrownBy(() -> SUT.deleteUser(userDetails, ANY_EMAIL));
     }
 
     @Test
-    void changeRole() {
+    void shouldAddRoleToUser() {
+        // arrange
+        User userToModify = ANY_USER;
+        userToModify.addRole(Roles.ROLE_USER);
+
+        String newRole = "ACCOUNTANT";
+        RoleDTO roleDTO = new RoleDTO(ANY_EMAIL, newRole, OperationType.GRANT);
+
+        when(userRepository.findByEmailIgnoreCase(ANY_EMAIL)).thenReturn(Optional.of(userToModify));
+
+        // act
+        User actual = SUT.changeRole(userDetails, roleDTO);
+
+        // assert
+        assertThat(actual.getRoles()).contains(Roles.ROLE_ACCOUNTANT);
+    }
+
+    @Test
+    void shouldRemoveRoleFromUser() {
+        // arrange
+        User userToModify = ANY_USER;
+        userToModify.addRole(Roles.ROLE_USER);
+        userToModify.addRole(Roles.ROLE_AUDITOR);
+
+        String deleteRole = "AUDITOR";
+        RoleDTO roleDTO = new RoleDTO(ANY_EMAIL, deleteRole, OperationType.REMOVE);
+        when(userRepository.findByEmailIgnoreCase(ANY_EMAIL)).thenReturn(Optional.of(userToModify));
+
+        // act
+        User actual = SUT.changeRole(userDetails, roleDTO);
+
+        // assert
+        assertThat(actual.getRoles()).doesNotContain(Roles.ROLE_AUDITOR);
+    }
+
+    @Test
+    void shouldNotLetRemoveRoleWhenCountIsOne() {
+        // arrange
+        User user = ANY_USER;
+        user.addRole(Roles.ROLE_AUDITOR);
+
+        String deleteRole = "AUDITOR";
+        RoleDTO roleDTO = new RoleDTO(ANY_EMAIL, deleteRole, OperationType.REMOVE);
+        when(userRepository.findByEmailIgnoreCase(ANY_EMAIL)).thenReturn(Optional.of(user));
+
+        // act & assert
+        assertThatExceptionOfType(TooLittleRolesException.class)
+                .isThrownBy(() -> SUT.changeRole(userDetails, roleDTO));
     }
 
     @Test
