@@ -1,7 +1,7 @@
 package account.security;
 
-import account.enums.Roles;
-import account.models.User;
+import account.enumerated.Roles;
+import account.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

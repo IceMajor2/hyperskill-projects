@@ -1,6 +1,6 @@
 package account.dto;
 
-import account.enums.OperationType;
+import account.enumerated.OperationType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

@@ -1,8 +1,8 @@
 package account.security;
 
-import account.enums.SecurityAction;
-import account.models.SecurityLog;
-import account.services.SecurityLogService;
+import account.enumerated.SecurityAction;
+import account.model.SecurityLog;
+import account.service.SecurityLogService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;

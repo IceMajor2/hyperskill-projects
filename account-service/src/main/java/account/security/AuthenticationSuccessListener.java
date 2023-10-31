@@ -1,7 +1,6 @@
 package account.security;
 
-import account.services.LoginAttemptService;
-import org.springframework.beans.factory.annotation.Autowired;
+import account.service.LoginAttemptService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;

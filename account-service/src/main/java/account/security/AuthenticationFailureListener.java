@@ -1,8 +1,7 @@
 package account.security;
 
-import account.services.LoginAttemptService;
+import account.service.LoginAttemptService;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AuthenticationFailureBadCredentialsEvent;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package account.dto;
 
-import account.models.Payment;
+import account.model.Payment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
